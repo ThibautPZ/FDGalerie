@@ -81,7 +81,6 @@ class ContactsManager extends AbstractManager {
     let index = 0;
 
     for (const [key, value] of contactData) {
-      console.log(key, value, contactData.size, index);
       queryHead = `${queryHead} ${key} = ?`;
       if (index < contactData.size - 1) {
         queryHead = `${queryHead},`;
