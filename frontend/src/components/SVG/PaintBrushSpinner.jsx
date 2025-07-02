@@ -1,6 +1,6 @@
 import "../../scss/PaintBrushSpinner.scss";
 
-export default function PaintBrushSpinner({ className }) {
+export default function PaintBrushSpinner() {
   return (
     <svg
       className="PaintBrushSpinner"
