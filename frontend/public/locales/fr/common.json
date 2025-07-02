@@ -38,7 +38,10 @@
     "width": "Largeur",
     "height": "Hauteur",
     "spokenLanguage": "Langue parlée",
-    "creationDate": "Date de création"
+    "creationDate": "Date de création",
+    "reservedPaintingsCount": "Tableaux réservés",
+    "soldPaintingsCount": "Tableaux achetés",
+    "giftedPaintingsCount": "Tableaux offerts"
   },
   "spokenLanguage": {
     "000": "Je ne sais pas",

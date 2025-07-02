@@ -10,6 +10,17 @@ const browse = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
+const browseWithPaintingsOwningCount = expressAsyncHandler(
+  async (req, res, next) => {
+    const [rows] = await tables.contacts.findAllWithPaintingsOwnershipCount();
+    if (rows) {
+      res.send(rows);
+    } else {
+      res.sendStatus(400);
+    }
+  }
+);
+
 const readById = expressAsyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
@@ -21,4 +32,4 @@ const readById = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-module.exports = { browse, readById };
+module.exports = { browse, browseWithPaintingsOwningCount, readById };

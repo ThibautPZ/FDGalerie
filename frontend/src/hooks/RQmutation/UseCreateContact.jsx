@@ -9,7 +9,9 @@ const UseCreateContact = (handleModalInstall) => {
   const postContact = async (newContactFormData) => {
     const { formData } = await giveSanitizedFormData(newContactFormData);
 
-    queryclient.invalidateQueries(["contacts"]);
+    queryclient.invalidateQueries({
+      queryKey: ["contacts", { type: "withPaintingsOwningCount" }],
+    });
     const res = await axiosInstance.post(`/api/auth/createContact`, formData);
     return res.data;
   };
