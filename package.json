@@ -1,14 +1,14 @@
 {
-  "name": "template-fullstack",
-  "version": "4.0.1",
-  "description": "project template for the React-Express-MySQL cursus in Wild Code School",
-  "homepage": "https://github.com/wildcodeschool/js-template-fullstack#readme",
+  "name": "FDGalerie",
+  "version": "1.0.0",
+  "description": "An online paintings galerie using ReactJS/NodeJS",
+  "homepage": "https://github.com/ThibautPZ/FDGalerie#readme",
   "bugs": {
-    "url": "https://github.com/wildcodeschool/js-template-fullstack/issues"
+    "url": "https://github.com/ThibautPZ/FDGalerie/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wildcodeschool/js-template-fullstack.git"
+    "url": "git+https://github.com/ThibautPZ/FDGalerie.git"
   },
   "config": {
     "cli": "npm"
