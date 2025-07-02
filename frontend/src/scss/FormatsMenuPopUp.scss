@@ -1,0 +1,38 @@
+@use "reset";
+@use "variables";
+
+.FormatsMenuPopUp {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  z-index: 2;
+  position: fixed;
+  top: 150px;
+  right: 136px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  border: #72797a;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 174px;
+
+  button {
+    padding: 10px;
+    border: 0;
+    margin: 3px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 18px;
+    background: linear-gradient(145deg, #9ea7a9, #cfe1e4);
+    box-shadow:
+      11px 11px 18px #72797a,
+      -11px -11px 18px #ecfbfe;
+  }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  .FormatsMenuPopUp {
+    top: 65px;
+    right: 11%;
+  }
+}

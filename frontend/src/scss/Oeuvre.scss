@@ -1,0 +1,66 @@
+@use "reset";
+@use "variables";
+
+p {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+.Oeuvre {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  background-image: url("../assets/images/atelier2.jpg");
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 80vw;
+  min-height: 1200px;
+  text-shadow:
+    8px 8px 15px #0e0f0f,
+    -8px -8px 15px #ecfbfe;
+  margin-left: 8%;
+  margin-top: 50px;
+  padding-top: 270px;
+
+  div {
+    p {
+      margin-top: 20px;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+  }
+
+  button:hover {
+    cursor: zoom-in;
+  }
+
+  button {
+    max-width: 80vw;
+    border: 0;
+    margin-top: 40px;
+
+    img {
+      max-width: 80vw;
+      padding: 0;
+      animation: fadeIn 3s;
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

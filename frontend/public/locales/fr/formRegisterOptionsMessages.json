@@ -1,0 +1,108 @@
+{
+  "firstname": {
+    "required": "Un prénom doit être renseigné.",
+    "pattern": "Le prénom indiqué contient des caractères invalides.",
+    "minLength": "Un prénom doit avoir au moins 2 caractères.",
+    "maxLength": "Un prénom doit avoir au maximum 64 caractères."
+  },
+  "lastname": {
+    "required": "Un nom de famille doit être renseigné.",
+    "pattern": "Le nom de famille indiqué contient des caractères invalides.",
+    "minLength": "Un nom de famille doit avoir au moins 2 caractères.",
+    "maxLength": "Un nom de famille doit avoir au maximum 64 caractères.",
+    "validate": "Vous devez donner au moins un nom ou prénom à ce contact."
+  },
+  "address": {
+    "required": "Une adresse doit être renseignée.",
+    "pattern": "L'adresse indiquée contient des caractères invalides.",
+    "minLength": "Une adresse doit avoir au moins 2 caractères.",
+    "maxLength": "Une adresse doit contenir au maximum 128 caractères."
+  },
+  "postalCode": {
+    "required": "Un code postal doit être renseigné.",
+    "pattern": "Le code postal indiqué contient des caractères invalides.",
+    "minLength": "Un code postal doit avoir au moins 2 caractères.",
+    "maxLength": "Un code postal doit avoir au maximum 14 caractères."
+  },
+  "city": {
+    "required": "Une ville doit être renseignée.",
+    "pattern": "La ville indiquée contient des caractères invalides.",
+    "minLength": "Une ville doit avoir au moins 2 caractères.",
+    "maxLength": "Un nom de ville doit contenir au maximum 64 caractères."
+  },
+  "phoneNumber": {
+    "required": "Un numéro de téléphone doit être renseignée.",
+    "pattern": "Le numéro de téléphone indiqué contient des caractères invalides.",
+    "minLength": "Un numéro de téléphone doit avoir au moins 6 caractères.",
+    "maxLength": "Un numéro de téléphone doit contenir au maximum 22 caractères."
+  },
+  "email": {
+    "required": "Une adresse email doit être renseignée.",
+    "pattern": "L' email indiqué n' a pas le bon format. Il doit être semblable à ceci : \"micheldupont@exemple.com\".",
+    "maxLength": "Un email doit contenir au maximum 254 caractères."
+  },
+  "spokenLanguage": {
+    "required": "La langue parlée doit être renseignée.",
+    "pattern": "Le langage indiqué contient des caractères invalides.",
+    "maxLength": "Un langage doit contenir au maximum 45 caractères."
+  },
+  "password": {
+    "required": "Un mot de passe doit être renseigné.",
+    "pattern": "Le mot de passe indiqué contient des caractères invalides.",
+    "minLength": "Un mot de passe valide doit contenir au moins 8 caractères.",
+    "maxLength": "Un mot de passe valide doit contenir au maximum 64 caractères."
+  },
+  "passwordConfirmation": {
+    "required": "Vous devez réécrire votre mot de passe pour le confirmer.",
+    "pattern": "Le mot de passe indiqué contient des caractères invalides.",
+    "minLength": "Un mot de passe valide doit contenir au moins 8 caractères.",
+    "maxLength": "Un mot de passe valide doit contenir au maximum 64 caractères.",
+    "validate": "Les mots de passe ne concordent pas."
+  },
+  "userTypesId": {
+    "required": "Un statut doit être renseigné.",
+    "validate": "Le statut est invalide."
+  },
+  "messageToUser": {
+    "pattern": "Le message contient des caractères invalides.",
+    "minLength": "Le message doit avoir au moins 2 caractères.",
+    "maxLength": "Le message peut avoir au maximum 254 caractères."
+  },
+  "notificationToUser": {
+    "required": "Vous devez inclure un message d'avertissement."
+  },
+  "oeuvreTitle": {
+    "required": "Vous devez indiquer le titre de cette oeuvre.",
+    "pattern": "Le titre contient des caractères invalides.",
+    "maxLength": "Le message peut avoir au maximum 128 caractères."
+  },
+  "oeuvreTechnique": {
+    "required": "Vous devez indiquer au moins une technique employée pour cette oeuvre."
+  },
+  "oeuvreAvailability": {
+    "required": "Vous devez indiquer la disponibilité de cette oeuvre."
+  },
+  "oeuvreFormat": {
+    "required": "Vous devez indiquer le format de cette oeuvre."
+  },
+  "oeuvreSupport": {
+    "required": "Vous devez indiquer le support de cette oeuvre."
+  },
+  "oeuvreWidth": {
+    "required": "Vous devez indiquer les dimensions de cette oeuvre.",
+    "pattern": "La largeur contient des caractères invalides.",
+    "maxLength": "La largeur ne peut dépasser les 10000 mètres"
+  },
+  "oeuvreHeight": {
+    "required": "Vous devez indiquer les dimensions de cette oeuvre.",
+    "pattern": "La hauteur contient des caractères invalides.",
+    "maxLength": "La hauteur ne peut dépasser les 10000 mètres"
+  },
+  "oeuvreGivenToWho": {
+    "pattern": "Le nom de la personne qui a reçu ce tableau contient des caractères invalides.",
+    "maxLength": "Le nom de la personne qui a reçu ce tableau ne peut excéder les 30 caractères."
+  },
+  "oeuvreGivenToUserId": {
+    "pattern": "Il y a une erreur avec la personne sélectionnée comme ayant reçu le tableau."
+  }
+}

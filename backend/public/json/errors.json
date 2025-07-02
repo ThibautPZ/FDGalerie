@@ -1,0 +1,55 @@
+{
+  "00001": {
+    "name": "notFound",
+    "statusCode": 404,
+    "type": "error"
+  },
+  "00002": {
+    "name": "banMessageExists",
+    "statusCode": 401,
+    "type": "warn"
+  },
+
+  "00003": {
+    "name": "emptyRequestBody",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "00005": {
+    "name": "validationErrors",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "00100": {
+    "name": "takenPaintingTitle",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "01000": {
+    "name": "wrongFileExtension",
+    "statusCode": 401,
+    "type": "error"
+  },
+  "01100": {
+    "name": "fileFormFieldNameNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "00200": {
+    "name": "wrongUserPassword",
+    "statusCode": 401,
+    "type": "error"
+  },
+  "04001": { "name": "contactExists", "statusCode": 400, "type": "error" },
+  "05001": {
+    "name": "noContactName",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
+  "06002": {
+    "name": "cannotUpdateContact",
+    "statusCode": 500,
+    "type": "error"
+  }
+}

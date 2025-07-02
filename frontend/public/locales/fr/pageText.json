@@ -1,0 +1,144 @@
+{
+  "inputPlaceHolder": {
+    "messageToUser": "Votre message...",
+    "firstname": "Prénom... ",
+    "lastname": "Nom de famille...",
+    "notificationToUser": "Votre message...",
+    "oeuvreTechnique": "Choisissez la/les techniques employées",
+    "oeuvreSupport": "Choisissez le support du tableau",
+    "oeuvreFormat": "Choisissez le format du tableau",
+    "oeuvreAvailability": "Indiquez la disponibilité du tableau",
+    "oeuvreGivenToWho": "Nom...",
+    "choosePerson": "Choisissez une personne",
+    "spokenLanguage": "Sélectionnez la langue"
+  },
+  "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
+  "UtilisateurManagement": {
+    "UM": {
+      "newUser": "Créer un nouveau compte",
+      "genericBanMsg": "En raison de violations des termes de service de ce site internet par l'utilisateur identifié sous ce compte utilisateur, les accès aux fonctionnalités de celui-ci ont été momentanément suspendus. ",
+      "genericUnbanMsg": "La modération a décidé que la suspension des droits d'accès à votre compte utilisateur n'a plus lieu d'être, par conséquent vous pouvez reprendre votre activité sur ce compte. ",
+      "genericDeleteMsg": "La modération a décidé de supprimer votre compte sur le site. Toutes les données que vous avez fournies ont été supprimées à l'exception de votre addresse mail."
+    },
+    "UMCreateUser": {
+      "return": "Retour",
+      "firstname": "Prénom... ",
+      "lastname": "Nom de famille...",
+      "email": "Adresse email...",
+      "phoneNumber": "Numéro de téléphone...",
+      "address": "Adresse...",
+      "postalCode": "Code postal...",
+      "city": "Ville...",
+      "status": "Sélectionnez le statut ",
+      "password": "Choisissez un mot de passe...",
+      "passwordConfirmation": "Confirmez le mot de passe...",
+      "register": "Enregistrer",
+      "language": "Sélectionnez la langue "
+    },
+    "UMList": {
+      "displayed": "Information affichée :"
+    },
+    "UMUserInfo": {
+      "warnUser": "Envoyer un avertissement",
+      "unwarnUser": "Annuler l'avertissement",
+      "banUser": "Suspendre le compte",
+      "unbanUser": "Rétablir l'accès au compte",
+      "deleteUser": "Supprimer le compte"
+    },
+    "UMWarnUser": {
+      "return": "Retour à la liste",
+      "textIntro": "Vous êtes sur le point d'envoyer un avertissement à l'utilisateur {{firstname}} {{lastname}} enregistré à l'adresse {{mail}}. Vous pourrez par la suite modifier ce message en cas de besoin.",
+      "instruction": "Inscrivez ici le message d'avertissement qui sera envoyé à l'utilisateur. Il devra en notifier la lecture pour pouvoir se connecter à son compte sur le site.",
+      "remainingCharacters_one": "{{count}} caractère restant.",
+      "remainingCharacters_other": "{{count}} caractères restants.",
+      "remainingCharacters_zero": "Longueur de texte maximale atteinte.",
+      "msgPlaceholder": "Votre message...",
+      "submitBtnText": "Envoyer la notification"
+    },
+    "UMBanUser": {
+      "return": "Retour à la liste",
+      "textIntro": "Vous êtes sur le point de suspendre les droits de l'utilisateur {{firstname}} {{lastname}} enregistré à l'adresse {{mail}}. Vous pourrez par la suite rétablir ses droits, ou bien supprimer le compte.",
+      "instruction": "Vous pouvez ici inscrire un texte qui informe l'utilisateur des raisons de la suspension. Cette étape est facultative, si vous n'y écrivez rien l'utilisateur sera simplement informé de sa suspension en raison de la violation des termes de service du site.",
+      "remainingCharacters_one": "{{count}} caractère restant.",
+      "remainingCharacters_other": "{{count}} caractères restants.",
+      "remainingCharacters_zero": "Longueur de texte maximale atteinte.",
+      "msgPlaceholder": "Votre message...",
+      "submitBtnText": "Suspendre le compte"
+    },
+    "UMUnbanUser": {
+      "return": "Retour à la liste",
+      "textIntro": "Vous êtes sur le point de rétablir les droits de l'utilisateur {{firstname}} {{lastname}} enregistré à l'adresse {{mail}}. En cas de besoin, il vous sera toujours possible de procéder à une autre suspension.",
+      "instruction": "Vous pouvez ici inscrire un texte qui informe l'utilisateur de la fin de la suspension. Cette étape est facultative, si vous n'y écrivez rien l'utilisateur sera simplement informé de la fin de sa suspension.",
+      "remainingCharacters_one": "{{count}} caractère restant.",
+      "remainingCharacters_other": "{{count}} caractères restants.",
+      "remainingCharacters_zero": "Longueur de texte maximale atteinte.",
+      "msgPlaceholder": "Votre message...",
+      "submitBtnText": "Rétablir les droits"
+    },
+    "UMDeleteUser": {
+      "return": "Retour à la liste",
+      "textIntro": "Vous êtes sur le point de supprimer le compte de l'utilisateur {{firstname}} {{lastname}} enregistré à l'adresse {{mail}}. Toutes les données fournies par l'utilisateur, à l'exception de l'adresse mail du compte, seront supprimées.",
+      "instruction": "Vous pouvez ici inscrire un texte qui informe l'utilisateur de la fin de la suspension. Cette étape est facultative, si vous n'y écrivez rien l'utilisateur sera simplement informé de la suppression de son compte.",
+      "remainingCharacters_one": "{{count}} caractère restant.",
+      "remainingCharacters_other": "{{count}} caractères restants.",
+      "remainingCharacters_zero": "Longueur de texte maximale atteinte.",
+      "msgPlaceholder": "Votre message...",
+      "submitBtnText": "Supprimer le compte"
+    }
+  },
+  "OeuvresManagement": {
+    "OM": { "newOeuvre": "Ajouter une nouvelle peinture" },
+    "OMOeuvrePanel": {
+      "picture": "Aperçu",
+      "title": "Titre",
+      "id": "Id",
+      "techniques": "Techniques",
+      "support": "Support",
+      "format": "Dimensions",
+      "family": "Famille",
+      "sold": "Vendu",
+      "hasComment": "Note"
+    },
+    "OMCreateOeuvre": {
+      "return": "Retour à la liste",
+      "widthheight": "Largeur x hauteur",
+      "file": "Fichier image de l'oeuvre. Formats acceptés : .png, .jpeg, .jpg, .webp",
+      "available": "Disponible à l'acquisition ",
+      "format": "Format",
+      "title": "Titre...",
+      "submitBtnText": "Enregistrer le nouveau tableau",
+      "oeuvreGivenToWho": "Offert à ",
+      "oeuvreSoldToWho": "Vendu à ",
+      "oeuvreReservedToWho": "Réservé par ",
+      "oeuvreGivenToSelection": "Suggestions de personnes connues (utilisateurs et contacts)",
+      "noUserMatch": "Aucun utilisateur ni contact enregistré à ce nom.",
+      "createNewContact": "Créer un nouveau contact ?",
+      "newContactSubmitBtnText": "Enregistrer ce nouveau contact"
+    }
+  },
+  "ContactManagement": {
+    "CM": {
+      "newContact": "Ajouter un nouveau contact",
+      "return": "Retour à la liste"
+    },
+    "CMContactInfo": {
+      "header": "Informations du contact {{firstname}} {{lastname}}",
+      "modifyBtnModify": "Modifier les informations",
+      "modifyBtnReturn": "Arrêter la modification"
+    }
+  },
+  "Connexion": {
+    "Inscription": {
+      "firstname": "Votre prénom... ",
+      "lastname": "Votre nom de famille...",
+      "email": "Votre adresse email...",
+      "phoneNumber": "Votre numéro de téléphone...",
+      "address": "Votre adresse...",
+      "postalCode": "Code postal...",
+      "city": "Ville...",
+      "password": "Choisissez votre mot de passe...",
+      "passwordConfirmation": "Confirmez votre mot de passe...",
+      "register": "S'inscrire"
+    }
+  }
+}

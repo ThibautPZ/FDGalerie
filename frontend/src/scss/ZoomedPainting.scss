@@ -1,0 +1,60 @@
+@use "variables";
+@use "reset";
+
+.ZoomedPainting {
+  top: 10px;
+  left: 10px;
+  background-color: variables.$myWhite;
+  width: 95vw;
+  max-width: 95vw;
+  height: 95vh;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  button {
+    background-color: variables.$myWhite;
+    min-width: 90%;
+
+    min-height: 90%;
+    border: none;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+
+    img {
+      margin: 7%;
+      object-fit: contain;
+      width: 97%;
+      max-width: 340px;
+      max-height: 97%;
+      align-self: center;
+    }
+  }
+  // }
+
+  .ZoomedPainting:hover {
+    cursor: zoom-out;
+  }
+
+  button:hover {
+    cursor: zoom-out;
+  }
+
+  img:hover {
+    cursor: zoom-out;
+  }
+}
+
+@media (min-width: variables.$breakpoint-small) {
+  .ZoomedPainting {
+    button {
+      img {
+        max-width: 97%;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@use "reset";
+@use "variables";
+
+div.Oeuvres {
+  background-image: url("../assets/images/atelier2.jpg");
+  background-repeat: no-repeat;
+
+  h1 {
+    padding-top: 280px;
+  }
+}

@@ -1,0 +1,190 @@
+@use "reset";
+@use "variables";
+
+.ContactsManagement {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  background-image: url("../assets/images/atelier2.jpg");
+  background-repeat: no-repeat;
+  margin-top: 100px;
+  input {
+    appearance: auto;
+  }
+  // .ConnexionSwitch {
+  //   padding-top: 300px;
+  // }
+  p:first-child {
+    margin-top: 10px;
+  }
+
+  // input {
+  //   min-width: 20px;
+  //   min-height: 20px;
+  // }
+  //   label {
+  //     padding: 0 0 0 2rem;
+  //     position: relative;
+  //   }
+
+  //   input[type="radio"] {
+  //     position: absolute;
+  //     opacity: 0;
+  //   }
+
+  //   input[type="radio"] + label::before,
+  //   input[type="radio"] + label::after {
+  //     content: "";
+  //     position: absolute;
+  //     border-radius: 50%;
+  //   }
+
+  //   input[type="radio"] + label::before {
+  //     left: 0.5rem;
+  //     top: 0.2rem;
+  //     display: inline-block;
+  //     width: 0.8rem;
+  //     height: 0.8rem;
+  //     border: 0.05rem solid black;
+  //     background: white;
+  //   }
+
+  //   input[type="radio"]:checked + label::after {
+  //     left: 0.67rem;
+  //     top: 0.35rem;
+  //     border: 0.25rem solid black;
+  //   }
+
+  //   input[type="radio"]:focus + label::before {
+  //     outline: 0.2rem solid;
+  //     outline-offset: 0.2rem;
+  //   }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  .OeuvresManagement {
+    margin-top: 160px;
+  }
+}
+
+.OeuvresManagementList {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  background-repeat: no-repeat;
+  margin-top: 60px;
+  .OMLInfosLegend {
+    display: flex;
+    margin: 5px;
+    margin-left: 10px;
+    padding: 0;
+    border: 1px solid;
+    max-width: 1vw;
+    min-width: 800px;
+    #pictureSpacer {
+      width: 30px;
+    }
+  }
+
+  input {
+    appearance: auto;
+  }
+  // .ConnexionSwitch {
+  //   padding-top: 300px;
+  // }
+  p:first-child {
+    margin-top: 10px;
+  }
+}
+div#OeuvrePanelpicture {
+  display: flex;
+  height: 60px;
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+#OeuvrePaneltitle {
+  width: 20%;
+}
+#OeuvrePaneltechniques {
+  width: 20%;
+}
+#OeuvrePanelsupport {
+  width: 10%;
+}
+#OeuvrePanelformat {
+  width: 12%;
+}
+#OeuvrePanelfamily {
+  width: 12%;
+}
+#OeuvrePanelsold {
+  width: 10%;
+}
+#OeuvrePanelhasComment {
+  width: 10%;
+}
+#OeuvrePanelid {
+  width: 6%;
+}
+.OeuvresManagementOeuvrePanel {
+  button {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    margin-left: 10px;
+    max-width: 1vw;
+    min-width: 800px;
+    padding: 0;
+    input {
+      appearance: auto;
+    }
+  }
+}
+
+// input[type="radio"] {
+//   display: none;
+// }
+// input[type="radio"] + label {
+//   position: relative;
+//   padding-left: 1.3rem;
+// }
+// input[type="radio"] + label::before,
+// input[type="radio"] + label::after {
+//   display: block;
+//   position: absolute;
+//   box-sizing: border-box;
+//   content: "";
+//   border-radius: 1rem;
+// }
+// input[type="radio"] + label::before {
+//   bottom: 0;
+//   left: 0;
+//   border: 1px solid #ccc;
+//   background-color: #eee;
+//   width: 1rem;
+//   height: 1rem;
+// }
+// input[type="radio"] + label::after {
+//   bottom: 3px;
+//   left: 3px;
+//   width: calc(1rem - 6px);
+//   height: calc(1rem - 6px);
+// }
+// input[type="radio"]:checked + label::after {
+//   background-color: variables.$myAnthracite;
+// }
+
+.OeuvresManagementCreateOeuvre {
+  .OeuvresManagementCreateOeuvreForm {
+    .oeuvreTechniqueOption_selected {
+      border: solid;
+    }
+    .oeuvreGivenToUserIdText_highlight {
+      text-decoration: line-through;
+      color: red;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@use "reset";
+@use "variables";
+
+div.Accueil {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  font-family: variables.$catamaran;
+  min-height: 100vh;
+
+  p,
+  a {
+    align-self: center;
+  }
+  background-image: url("../assets/images/atelier.jpg");
+  background-repeat: no-repeat;
+
+  p {
+    margin-bottom: 60px;
+    font-size: 1.5rem;
+    text-shadow:
+      8px 8px 15px #0e0f0f,
+      -8px -8px 15px #ecfbfe;
+  }
+
+  a {
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #9ea7a9, #cfe1e4);
+    box-shadow:
+      11px 11px 18px #72797a,
+      -11px -11px 18px #ecfbfe;
+  }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  p,
+  a {
+    max-width: 1024px;
+  }
+}
+p:first-child {
+  margin-top: 570px;
+}

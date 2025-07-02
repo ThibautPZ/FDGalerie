@@ -1,0 +1,22 @@
+{
+    "procedureSuccess": {
+        "type": "info",
+"title": "Lien envoyé",
+"message": "Le lien permettant la réinitialisation du mot de passe vient d'être envoyé vers votre boîte mail. Il sera valide pendant une heure.",
+"button": {
+    "onValidation": "navigateHome",
+    "text": "OK"
+},
+"hasCloseBtn": false
+},
+"procedureFail":{
+     "type": "error",
+"title": "Erreur",
+"message": "La procédure a rencontré une erreur inattendue. La réinitialisation du mot de passe n'a pas pu être effectuée. Veuillez réessayer"
+},
+"notRegistered":{
+    "type": "warn",
+"title": "Pas de compte",
+"message": "L'adresse email renseignée ne correspond à aucun compte enregistré sur ce site."
+}
+}

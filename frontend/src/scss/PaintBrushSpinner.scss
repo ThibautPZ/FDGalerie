@@ -1,0 +1,14 @@
+@use "reset";
+@use "variables";
+
+.PaintBrushSpinner {
+  fill: red;
+
+  .brushCarrier {
+    width: 20px;
+    height: 20px;
+    fill: red;
+  }
+}
+@media (min-width: variables.$breakpoint-large) {
+}

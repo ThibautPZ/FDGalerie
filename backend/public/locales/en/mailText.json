@@ -1,0 +1,17 @@
+{
+  "common": {
+    "signature": "L'équipe FannyDeglave.com",
+    "dontAnswer": "Ceci est un email automatique, prière de ne pas y répondre.",
+    "buttonNotWorking": "Si vous ne parvenez pas à cliquer sur le bouton ci-dessus, copiez/collez l'adresse URL ci-dessous dans la barre d'adresse de votre navigateur."
+  },
+  "banMail": {
+    "subject": "Notification de suspension du compte",
+    "message": {
+      "1": "Votre compte enregistré sur le site FannyDeglave a fait l'objet d'une suspension pour atteinte aux règles des termes de service. Par conséquent, vous ne pourrez plus accéder aux fonctionnalités liées à ce compte.",
+      "2": "Vous pouvez obtenir plus d'informations au sujet de cette suspension auprès d'un membre de l'équipe de modération en suivant ce lien :"
+    },
+    "button": {
+      "moderationLink": "Contacter l'équipe de modération"
+    }
+  }
+}

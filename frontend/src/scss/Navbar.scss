@@ -1,0 +1,176 @@
+@use "reset";
+@use "variables";
+
+.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 50px;
+  z-index: 1;
+  background: linear-gradient(90deg, #3c4b4e, #c9dee2, #3c4b4e);
+}
+
+.NavbarDiapoHidden {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(-100px);
+  z-index: 3;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 50px;
+  z-index: 1;
+  background: linear-gradient(90deg, #3c4b4e, #c9dee2, #3c4b4e);
+  animation: MoveOut 2s linear;
+}
+
+.NavbarDiapoShown {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(0);
+  z-index: 3;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 50px;
+  z-index: 1;
+  background: linear-gradient(90deg, #3c4b4e, #c9dee2, #3c4b4e);
+  animation: MoveIn 2s linear;
+}
+
+.NavbarMobile {
+  justify-self: flex-end;
+  margin-left: 90%;
+  margin: 4px;
+  margin-right: 30px;
+  width: 40px;
+  height: 40px;
+  z-index: 3;
+}
+
+#burger {
+  width: 100%;
+  height: 100%;
+}
+
+.ProfileButton {
+  justify-self: flex-end;
+  display: flex;
+  align-content: center;
+  margin-top: 4px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 18px;
+  background: linear-gradient(145deg, #9ea7a9, #cfe1e4);
+  box-shadow:
+    11px 11px 18px #72797a,
+    -11px -11px 18px #ecfbfe;
+  #profile {
+    height: 100%;
+  }
+  p {
+    visibility: hidden;
+    align-self: center;
+    text-align: center;
+    text-wrap: wrap;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  p:first-letter {
+    visibility: visible;
+  }
+}
+
+.NavbarDesktop {
+  display: none;
+  // display: flex;
+  margin-top: 8px;
+  height: 40px;
+  justify-content: space-around;
+  flex-grow: 1;
+  z-index: 3;
+  button {
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    background: linear-gradient(145deg, #9ea7a9, #cfe1e4);
+    box-shadow:
+      11px 11px 18px #72797a,
+      -11px -11px 18px #ecfbfe;
+    image {
+      width: 100px;
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  .Navbar {
+    height: 60px;
+    justify-content: space-around;
+  }
+  .NavbarMobile {
+    visibility: hidden;
+  }
+
+  .NavbarDesktop {
+    display: flex;
+    visibility: visible;
+  }
+
+  .ProfileButton {
+    justify-self: flex-end;
+    display: flex;
+    margin-top: 8px;
+    margin-left: 10px;
+    margin-right: 35px;
+    // padding-right: 30px;
+    width: 140px;
+    height: 40px;
+    // z-index: 3;
+
+    #profile {
+      height: 100%;
+    }
+    p {
+      visibility: visible;
+    }
+  }
+}
+
+@keyframes MoveOut {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-70px);
+  }
+}
+
+@keyframes MoveIn {
+  from {
+    transform: translateY(-70px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

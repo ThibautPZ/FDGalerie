@@ -1,0 +1,17 @@
+@use "fonts";
+
+// colors
+$myWhite: #e9e4e4;
+$myBlack: #070707;
+$myAnthracite: #5c6f6b;
+$myLightGray: #afbabc;
+
+// fonts
+$zhi-mang-xing: "Zhi Mang Xing", Verdana, Geneva, Tahoma, sans-serif;
+$catamaran: "Catamaran", Verdana, Geneva, Tahoma, sans-serif;
+$mr-dafoe: "Mr Dafoe", Verdana, Geneva, Tahoma, sans-serif;
+
+// Breakpoints:
+$breakpoint-small: 340px;
+$breakpoint-medium: 760px;
+$breakpoint-large: 1024px;

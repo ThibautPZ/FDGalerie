@@ -1,0 +1,42 @@
+@use "reset";
+@use "variables";
+
+p {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+.OeuvreDisplay {
+  background-color: variables.$myWhite;
+  animation: fadeIn 3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80vw;
+  text-shadow:
+    8px 8px 15px #0e0f0f,
+    -8px -8px 15px #ecfbfe;
+  border: 0;
+  margin-top: 40px;
+  margin-left: 9%;
+
+  a {
+    img {
+      max-width: 80vw;
+      padding: 5%;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

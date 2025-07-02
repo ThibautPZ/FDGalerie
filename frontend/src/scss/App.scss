@@ -1,0 +1,37 @@
+@use "reset";
+@use "variables";
+
+body {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  color: variables.$myBlack;
+}
+
+.App {
+  width: 98vw;
+
+  h1 {
+    font-family: variables.$mr-dafoe;
+    font-size: 4rem;
+    text-align: center;
+    margin: 30px;
+  }
+  h2 {
+    font-size: 4rem;
+  }
+
+  h1,
+  h2,
+  p {
+    text-shadow:
+      8px 8px 15px #0e0f0fa6,
+      -8px -8px 15px #ecfbfe;
+  }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  .banner {
+    margin-left: 50%;
+    max-width: 1024px;
+  }
+}

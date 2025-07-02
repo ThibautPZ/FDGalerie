@@ -1,0 +1,6 @@
+{
+  "authController": {
+    "createOneContact": { "type": "info", "message": "contactCreated" },
+    "updateContact": { "type": "info", "message": "contactModified" }
+  }
+}

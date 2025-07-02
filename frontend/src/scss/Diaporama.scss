@@ -1,0 +1,119 @@
+@use "reset";
+@use "variables";
+
+.DiapoParent {
+  position: inherit;
+  z-index: -10;
+}
+
+.FadeInDiapo {
+  z-index: 0;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  img {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%;
+    animation: FadeIn 3s linear;
+  }
+}
+
+.FadeOutDiapo {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 10px;
+  img {
+    object-fit: contain;
+    width: 100%;
+    max-height: 100%;
+    animation: FadeOut 3s linear;
+    opacity: 0;
+  }
+}
+
+.DiapoButtonsHidden {
+  position: absolute;
+  opacity: 0;
+  font-family: variables.$catamaran;
+  font-size: 1rem;
+  animation: FadeOut 2s linear;
+}
+
+.DiapoButtonsShown {
+  position: absolute;
+  font-family: variables.$catamaran;
+  font-size: 1rem;
+  animation: FadeIn 2s linear;
+}
+
+#DiapoDuration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 60px;
+  width: 200px;
+
+  top: 76%;
+  left: calc(50% - 100px);
+  background-color: rgba(128, 128, 128, 0.575);
+  p {
+    margin-top: 0;
+    margin-left: 20%;
+    align-self: baseline;
+  }
+
+  input {
+    background-color: transparent;
+    border: solid;
+    border-radius: 50px;
+    border-color: variables.$myWhite;
+    border-width: 2px;
+  }
+}
+
+#DiapoStop {
+  top: 86%;
+  left: calc(50% - 75px);
+  width: 150px;
+}
+
+#DiapoStart {
+  top: 86%;
+  left: calc(50% - 100px);
+  width: 200px;
+}
+
+#DiapoLink {
+  top: 92%;
+  left: calc(50% - 75px);
+  width: 150px;
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes FadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

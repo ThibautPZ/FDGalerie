@@ -1,0 +1,38 @@
+{
+  "common": {
+    "signature": "L'équipe FannyDeglave.com",
+    "dontAnswer": "Ceci est un email automatique, prière de ne pas y répondre.",
+    "buttonNotWorking": "Si vous ne parvenez pas à cliquer sur le bouton ci-dessus, copiez/collez l'adresse URL ci-dessous dans la barre d'adresse de votre navigateur."
+  },
+  "banMail": {
+    "subject": "Notification de suspension du compte",
+    "message": {
+      "1": "Votre compte enregistré sur le site FannyDeglave a fait l'objet d'une suspension pour atteinte aux règles des termes de service. Par conséquent, vous ne pourrez plus accéder aux fonctionnalités liées à ce compte.",
+      "2": "Vous pouvez obtenir plus d'informations au sujet de cette suspension auprès d'un membre de l'équipe de modération en suivant ce lien :"
+    },
+    "button": {
+      "moderationLink": "Contacter l'équipe de modération"
+    }
+  },
+  "unbanMail": {
+    "subject": "Notification de rétablissement des droits du compte",
+    "message": {
+      "1": "Votre compte enregistré sur le site FannyDeglave faisait l'objet d'une suspension pour atteinte aux règles des termes de service. Après décision de l'équipe de modération, nous avons pris la décision de rétablir les droits. Vous pouvez dès a présent reprendre l'activité du compte concerné.",
+      "2": "Vous pouvez vous connecter à votre compte en suivant ce lien :"
+    },
+    "button": {
+      "connexionLink": "Se connecter"
+    }
+  },
+  "deleteAccountMail": {
+    "subject": "Notification de suppression du compte",
+    "message": "Votre compte enregistré sur le site FannyDeglave faisait l'objet d'une suspension pour atteinte aux règles des termes de service. Après décision de l'équipe de modération, nous avons pris la décision de rétablir les droits. Vous pouvez dès a présent reprendre l'activité du compte concerné."
+  },
+  "warnMail": {
+    "subject": "Vous avez reçu une notification de la part de l'équipe de modération",
+    "message": "L'équipe de modération vous fait part du message suivant: ",
+    "button": {
+      "connexionLink": "Se connecter"
+    }
+  }
+}

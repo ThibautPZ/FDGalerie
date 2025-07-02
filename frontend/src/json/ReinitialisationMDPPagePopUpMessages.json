@@ -1,0 +1,17 @@
+{
+    "procedureSuccess": {
+        "type": "info",
+"title": "Nouveau mot de passe enregistré",
+"message": "Le mot de passe a été modifié. Vous allez être redirigé vers la page d'accueil.",
+"button": {
+    "onValidation": "navigateHome",
+    "text": "OK"
+},
+"hasCloseBtn": false
+},
+"procedureFail":{
+     "type": "error",
+"title": "Erreur",
+"message": "La procédure a rencontré une erreur inattendue. La modification du mot de passe n'a pas pu être effectuée. Veuillez réessayer."
+}
+}

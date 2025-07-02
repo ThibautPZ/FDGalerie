@@ -1,0 +1,39 @@
+{
+    "modifError": {
+        "type": "error",
+        "title": "Erreur lors de la modification",
+        "message": "Erreur lors de l'enregistrement des modifications."  
+    },
+    "modifConfirm": {
+        "type": "info",
+        "title": "Modification effectuée",
+        "message": "Les modifications ont été enregistrées.",
+        "button": {
+            "onValidation": "setProfileDisplay",
+            "text": "OK"
+        },
+        "hasCloseBtn": false
+    },
+    "noModifToSave": {
+        "type": "warn",
+        "title": "Pas de modification",
+        "message": "Vous n'avez modifié aucune information."
+    },
+    "wrongPassword": {
+        "type": "error",
+        "title": "Erreur lors de la modification",
+        "message":"Erreur lors de l'enregistrement des modifications."
+    },
+    "signUpConfirm" : {
+        "type": "info",
+        "title": "Inscription réussie",
+        "message": "Votre compte a été créé. Vous allez être envoyé vers la page principale.",
+        "button": {"onValidation": "navigateHome", "text": "OK"},
+        "hasCloseBtn" : false
+    },
+    "signUpError" : {
+        "type" : "error",
+        "title" : "Erreur lors de l'inscription",
+        "message" : "Erreur lors de l'enregistrement de vos informations."
+    }
+}

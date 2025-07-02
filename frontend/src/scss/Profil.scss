@@ -1,0 +1,75 @@
+@use "reset";
+@use "variables";
+
+.Profil {
+  background-color: variables.$myWhite;
+  font-family: variables.$catamaran;
+  background-image: url("../assets/images/atelier2.jpg");
+  background-repeat: no-repeat;
+  margin-top: 50px;
+
+  // .ConnexionSwitch {
+  //   padding-top: 300px;
+  // }
+  p:first-child {
+    margin-top: 10px;
+  }
+
+  // input {
+  //   min-width: 20px;
+  //   min-height: 20px;
+  // }
+  //   label {
+  //     padding: 0 0 0 2rem;
+  //     position: relative;
+  //   }
+
+  //   input[type="radio"] {
+  //     position: absolute;
+  //     opacity: 0;
+  //   }
+
+  //   input[type="radio"] + label::before,
+  //   input[type="radio"] + label::after {
+  //     content: "";
+  //     position: absolute;
+  //     border-radius: 50%;
+  //   }
+
+  //   input[type="radio"] + label::before {
+  //     left: 0.5rem;
+  //     top: 0.2rem;
+  //     display: inline-block;
+  //     width: 0.8rem;
+  //     height: 0.8rem;
+  //     border: 0.05rem solid black;
+  //     background: white;
+  //   }
+
+  //   input[type="radio"]:checked + label::after {
+  //     left: 0.67rem;
+  //     top: 0.35rem;
+  //     border: 0.25rem solid black;
+  //   }
+
+  //   input[type="radio"]:focus + label::before {
+  //     outline: 0.2rem solid;
+  //     outline-offset: 0.2rem;
+  //   }
+}
+
+@media (min-width: variables.$breakpoint-large) {
+  .UtilisateurManagement {
+    margin-top: 60px;
+  }
+}
+
+.UtilisateurManagementList {
+  button {
+    display: flex;
+    flex-direction: column;
+    min-width: 20px;
+    min-height: 20px;
+    margin: 10px;
+  }
+}
