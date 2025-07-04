@@ -56,6 +56,17 @@ const isNegativeNumber = (checked) => {
   return checked < 0;
 };
 
+const isFunction = (checked) => {
+  return checked && {}.toString.call(checked) === "[object Function]";
+};
+
+const isPromise = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return Promise.resolve(checked) === checked;
+};
+
 export {
   isArray,
   isArrayNotEmpty,
@@ -66,4 +77,6 @@ export {
   isNumber,
   isPositiveNumber,
   isNegativeNumber,
+  isFunction,
+  isPromise,
 };
