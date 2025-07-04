@@ -95,7 +95,7 @@ const sendPasswordResetLink = asyncHandler(async (req, res, next) => {
   if (req.body.userId) {
     const token = crypto.randomBytes(20).toString("hex");
     const resetToken = crypto.createHash("sha256").update(token).digest("hex");
-    const [result] = await tables.password_reset_tokens.createToken(
+    const [result] = await tables.passwordResetTokens.createToken(
       req.body.userId,
       resetToken
     );

@@ -3,7 +3,7 @@ const tables = require("../../tables");
 
 const checkPasswordResetToken = asyncHandler(async (req, res, next) => {
   const { token, userId } = req.body;
-  const [userToken] = await tables.password_reset_tokens.readPasswordResetToken(
+  const [userToken] = await tables.passwordResetTokens.readPasswordResetToken(
     userId
   );
 

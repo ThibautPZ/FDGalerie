@@ -3,7 +3,7 @@ const tables = require("../../tables");
 
 const createBanMessage = asyncHandler(async (req, res, next) => {
   const { userId, messageToUser } = req.body;
-  const [result] = await tables.ban_messages.createMessage(
+  const [result] = await tables.banMessages.createMessage(
     userId,
     messageToUser
   );
