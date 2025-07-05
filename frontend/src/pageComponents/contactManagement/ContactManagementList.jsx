@@ -125,7 +125,6 @@ function ContactManagementList({ contactList, setIsModifying }) {
               {headerGroup.headers.map((header) => (
                 <th key={header.id}>
                   {header.isPlaceholder ? null : (
-                    // <HeaderButton headerData={header} />
                     <div
                       className={
                         header.column.getCanSort()
