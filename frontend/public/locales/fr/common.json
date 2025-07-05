@@ -26,6 +26,7 @@
     "passwordConfirmation": "Confirmation du mot de passe ",
     "accountStatesId": "Compte autorisé ?",
     "registeredLanguagesId": "Langue utilisée ",
+    "paintingId": "Oeuvre n°",
     "oeuvreTitle": "Nom du tableau",
     "oeuvreSupport": "Support",
     "oeuvreTechnique": "Technique(s)",
@@ -41,7 +42,8 @@
     "creationDate": "Date de création",
     "reservedPaintingsCount": "Tableaux réservés",
     "soldPaintingsCount": "Tableaux achetés",
-    "giftedPaintingsCount": "Tableaux offerts"
+    "giftedPaintingsCount": "Tableaux offerts",
+    "priceEur": "Prix (€)"
   },
   "spokenLanguage": {
     "000": "Je ne sais pas",
@@ -90,5 +92,8 @@
     "sortAscending": "Tri croissant",
     "sortDescending": "Tri décroissant",
     "clearSort": "Ne plus trier"
+  },
+  "images": {
+    "miniPaintingAlt": "Image du tableau"
   }
 }
