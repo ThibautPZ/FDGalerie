@@ -67,7 +67,15 @@ function ContactManagementList({ contactList, setIsModifying }) {
     giveAccessor("phoneNumber1", ["phoneNumber", { number: 1 }]),
     giveAccessor("phoneNumber2", ["phoneNumber", { number: 2 }]),
     giveAccessor("language", ["spokenLanguage"], { sorting: true }),
-
+    giveAccessor("reservedPaintingsCount", ["reservedPaintingsCount"], {
+      sorting: true,
+    }),
+    giveAccessor("soldPaintingsCount", ["soldPaintingsCount"], {
+      sorting: true,
+    }),
+    giveAccessor("giftedPaintingsCount", ["giftedPaintingsCount"], {
+      sorting: true,
+    }),
     giveAccessor("creationDate", ["creationDate"], { sorting: true }),
   ];
 
@@ -117,7 +125,6 @@ function ContactManagementList({ contactList, setIsModifying }) {
               {headerGroup.headers.map((header) => (
                 <th key={header.id}>
                   {header.isPlaceholder ? null : (
-                    // <HeaderButton headerData={header} />
                     <div
                       className={
                         header.column.getCanSort()

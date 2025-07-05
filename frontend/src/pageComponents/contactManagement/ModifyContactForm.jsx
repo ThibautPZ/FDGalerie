@@ -4,12 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import FormCore from "../../components/FormCore";
 import UseModifyContact from "../../hooks/RQmutation/UseModifyContact";
 
-function ModifyContactForm({
-  contactId,
-
-  formMethods,
-  onSubmit,
-}) {
+function ModifyContactForm({ contactId, formMethods, onSubmit }) {
   const { t } = useTranslation(["common", "pageText"]);
 
   const { handleModalInstall } = useOutletContext();

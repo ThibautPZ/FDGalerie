@@ -12,26 +12,32 @@ const UsersManager = require("./models/usersManager");
 const ContactsManager = require("./models/ContactsManager");
 const PasswordResetTokensManager = require("./models/PasswordResetTokensManager");
 const BanMessagesManager = require("./models/BanMessagesManager");
+const PaintingGiftsManager = require("./models/PaintingGiftsManager");
+const PaintingSalesManager = require("./models/PaintingSalesManager");
+const PaintingReservationsManager = require("./models/PaintingReservationsManager");
 
-const managers = [
-  PaintingsManager,
-  TechniquesManager,
-  SupportsManager,
-  PaintingSizesManager,
-  UsersManager,
-  ContactsManager,
-  PasswordResetTokensManager,
-  BanMessagesManager,
-];
+const managers = new Map([
+  [PaintingsManager, "paintings"],
+  [TechniquesManager, "techniques"],
+  [SupportsManager, "supports"],
+  [PaintingSizesManager, "paintingSizes"],
+  [UsersManager, "users"],
+  [ContactsManager, "contacts"],
+  [PasswordResetTokensManager, "passwordResetTokens"],
+  [BanMessagesManager, "banMessages"],
+  [PaintingGiftsManager, "paintingGifts"],
+  [PaintingSalesManager, "paintingSales"],
+  [PaintingReservationsManager, "paintingReservations"],
+]);
 
 // Create an empty object to hold data managers for different tables
 const tables = {};
 
 // Register each manager as data access point for its table
-managers.forEach((ManagerClass) => {
+managers.forEach((key, ManagerClass) => {
   const manager = new ManagerClass();
 
-  tables[manager.table] = manager;
+  tables[key] = manager;
 });
 
 /* ************************************************************************* */

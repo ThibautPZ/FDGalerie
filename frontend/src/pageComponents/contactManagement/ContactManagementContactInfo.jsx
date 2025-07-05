@@ -20,7 +20,7 @@ function ContactManagementContactInfo() {
   const getContactFromDb = async () => {
     const url = `api/contacts/${contactId}`;
     const res = await axiosInstance.get(url);
-    return res.data[0];
+    return res.data.queryResults;
   };
 
   const { data } = useSuspenseQuery({
@@ -39,7 +39,7 @@ function ContactManagementContactInfo() {
     phoneNumber2,
     email,
     language,
-  } = data;
+  } = data.contactInfo;
 
   const defaultValues = {
     optionalDependantLastname: lastname,
@@ -85,7 +85,6 @@ function ContactManagementContactInfo() {
         ) : (
           <ModifyContactForm
             contactId={contactId}
-            contactDefaultValues={data}
             formMethods={formMethods}
             onSubmit={handleSubmitForm}
           />

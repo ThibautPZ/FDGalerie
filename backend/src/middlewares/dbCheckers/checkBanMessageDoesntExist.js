@@ -4,7 +4,7 @@ const CustomErrorClass = require("../../services/ErrorClasses");
 
 const checkBanMessageDoesntExist = asyncHandler(async (req, res, next) => {
   const { userId } = req.body;
-  const [result] = await tables.ban_messages.findOneById(userId);
+  const [result] = await tables.banMessages.findOneById(userId);
 
   if (result.length) {
     return next(new CustomErrorClass("00002"));

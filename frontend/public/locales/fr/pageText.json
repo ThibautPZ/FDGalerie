@@ -124,7 +124,28 @@
     "CMContactInfo": {
       "header": "Informations du contact {{firstname}} {{lastname}}",
       "modifyBtnModify": "Modifier les informations",
-      "modifyBtnReturn": "Arrêter la modification"
+      "modifyBtnReturn": "Arrêter la modification",
+      "noGivenPaintings": "Aucun tableau donné",
+      "noSoldPaintings": "Aucun tableau acheté",
+      "noReservedPaintings": "Aucun tableau réservé",
+      "givenPaintings_one": "{{count}} tableau donné",
+      "givenPaintings_other": "{{count}} tableaux donnés",
+      "soldPaintings_one": "{{count}} tableau acheté",
+      "soldPaintings_other": "{{count}} tableaux achetés",
+      "reservedPaintings_one": "{{count}} tableau réservé",
+      "reservedPaintings_other": "{{count}} tableaux reservés"
+    },
+    "GivenPaintingsTable": {
+      "giftDate": "Date du don",
+      "giftNumber": "Don n°"
+    },
+    "ReservedPaintingsTable": {
+      "reservationDate": "Date de la réservation",
+      "reservationNumber": "Réservation n°"
+    },
+    "SoldPaintingsTable": {
+      "saleDate": "Date de la vente",
+      "saleNumber": "Vente n°"
     }
   },
   "Connexion": {

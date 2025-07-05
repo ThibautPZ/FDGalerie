@@ -56,14 +56,14 @@ class PaintingsManager extends AbstractManager {
 
   async readPaintingByTech(technique) {
     return this.database.query(
-      `SELECT p.id, p.title, p.pathname  FROM paintings_has_techniques AS pht LEFT JOIN paintings AS p ON pht.paintings_id = p.id LEFT JOIN techniques AS t ON pht.techniques_id = t.id WHERE t.name = ?`,
+      `SELECT p.id, p.title, p.pathname FROM paintings_has_techniques AS pht LEFT JOIN paintings AS p ON pht.paintings_id = p.id LEFT JOIN techniques AS t ON pht.techniques_id = t.id WHERE t.name = ?`,
       [technique]
     );
   }
 
   async readPaintingBySize(format) {
     return this.database.query(
-      `SELECT p.id, p.title, p.pathname  FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id WHERE ps.name = ?`,
+      `SELECT p.id, p.title, p.pathname FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id WHERE ps.name = ?`,
       [format]
     );
   }

@@ -11,6 +11,16 @@ class ContactsManager extends AbstractManager {
     );
   }
 
+  async findAllWithPaintingsOwnershipCount() {
+    return this.database.query(
+      `select c.contacts_id AS contactId, firstname, lastname, address, postal_code AS postalCode, city, phone_number1 AS phoneNumber1, phone_number2 AS phoneNumber2, email, creation_date AS creationDate, language, COUNT(pg.paintings_id) AS giftedPaintingsCount, COUNT(ps.paintings_id) AS soldPaintingsCount, COUNT(pr.paintings_id) AS reservedPaintingsCount FROM ${this.table} AS c
+      LEFT JOIN painting_gifts AS pg ON c.contacts_id = pg.contacts_id
+      LEFT JOIN painting_sales AS ps ON c.contacts_id = ps.contacts_id
+      LEFT JOIN painting_reservations AS pr ON c.contacts_id = pr.contacts_id
+      GROUP BY c.contacts_id; `
+    );
+  }
+
   async findByOneParam(paramName, paramValue) {
     const query = `SELECT contacts_id AS contactId, firstname, lastname FROM ${this.table} WHERE ${paramName} = ?`;
     return this.database.query(query, [paramValue]);

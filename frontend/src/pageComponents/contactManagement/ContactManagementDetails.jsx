@@ -1,8 +1,12 @@
 import tranlationInstance from "../../services/translationInstance";
-import PaintBrushSpinner from "../../components/SVG/PaintBrushSpinner";
 import DateWithElapsedTime from "../../components/customComponents/DateWithElapsedTime";
+import GivenPaintingsTable from "./GivenPaintingsTable";
+import SoldPaintingsTable from "./SoldPaintingsTable";
+import ReservedPaintingsTable from "./ReservedPaintingsTable";
 
 export default function ContactManagementDetails({ contactData }) {
+  const { contactInfo, giftedPaintings, soldPaintings, reservedPaintings } =
+    contactData;
   const {
     contactId,
     firstname,
@@ -15,7 +19,7 @@ export default function ContactManagementDetails({ contactData }) {
     email,
     language,
     creationDate,
-  } = contactData;
+  } = contactInfo;
 
   const [tCommonInfo, tPageText] = tranlationInstance(
     "common:info",
@@ -75,7 +79,15 @@ export default function ContactManagementDetails({ contactData }) {
         <span>{tCommonInfo("contactId")}</span>
         <span>{contactId}</span>
       </div>
-      <PaintBrushSpinner />
+      <div>
+        <GivenPaintingsTable paintingsList={giftedPaintings} />
+      </div>
+      <div>
+        <SoldPaintingsTable paintingsList={soldPaintings} />
+      </div>
+      <div>
+        <ReservedPaintingsTable paintingsList={reservedPaintings} />
+      </div>
     </div>
   );
 }

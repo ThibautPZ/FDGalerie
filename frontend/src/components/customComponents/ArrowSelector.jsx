@@ -1,17 +1,14 @@
-import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import ArrowDownCircle from "../SVG/ArrowDownCircle";
 import ArrowUpCircle from "../SVG/ArrowUpCircle";
 
-function ArrowSelector({
-  labelNS,
+export default function ArrowSelector({
+  labelText,
   whenLabel,
   isFolded,
   setIsFolded,
   onOpen,
   onClose,
 }) {
-  const { t } = useTranslation(["common", "pageText"]);
   const handleSelectorClick = () => {
     if (!isFolded && onClose) {
       if (onClose.condition) {
@@ -27,7 +24,7 @@ function ArrowSelector({
   };
 
   const shouldRenderLabel = () => {
-    if (!labelNS || !whenLabel) {
+    if (!labelText || !whenLabel) {
       return false;
     }
     if (whenLabel === "always") {
@@ -43,7 +40,7 @@ function ArrowSelector({
   };
   return (
     <>
-      {shouldRenderLabel() && <span>{t(labelNS)}</span>}
+      {shouldRenderLabel() && <span>{labelText}</span>}
 
       <button type="button" onClick={handleSelectorClick}>
         {isFolded ? <ArrowDownCircle /> : <ArrowUpCircle />}
@@ -51,15 +48,3 @@ function ArrowSelector({
     </>
   );
 }
-
-ArrowSelector.propTypes = {
-  labelNS: PropTypes.string,
-  isFolded: PropTypes.bool.isRequired,
-  setIsFolded: PropTypes.func.isRequired,
-};
-
-ArrowSelector.defaultProps = {
-  labelNS: null,
-};
-
-export default ArrowSelector;

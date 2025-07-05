@@ -4,7 +4,7 @@ const CustomErrorClass = require("../../services/ErrorClasses");
 
 const createWarnMessage = asyncHandler(async (req, res, next) => {
   const { userId, notificationToUser } = req.body;
-  const [result] = await tables.ban_messages.createMessage(
+  const [result] = await tables.banMessages.createMessage(
     userId,
     notificationToUser
   );

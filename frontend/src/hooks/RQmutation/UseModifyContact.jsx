@@ -8,7 +8,10 @@ const UseModifyContact = (contactId, handleModalInstall) => {
 
   const updateContact = async (modifiedContactFormData) => {
     const { formData } = await giveSanitizedFormData(modifiedContactFormData);
-    queryclient.invalidateQueries(["contact", contactId]);
+    queryclient.invalidateQueries({
+      queryKey: ["contacts", { type: "withPaintingsOwningCount" }],
+    });
+    queryclient.invalidateQueries({ queryKey: ["contact", contactId] });
     const url = `/api/auth/updateContact/${contactId}`;
 
     const res = await axiosInstance.put(url, formData);
@@ -23,7 +26,10 @@ const UseModifyContact = (contactId, handleModalInstall) => {
       handleModalInstall(error.response.data.errorObj, translationPrefix);
     },
     onSuccess: (data) => {
-      queryclient.refetchQueries(["contact", contactId]);
+      queryclient.refetchQueries({ queryKey: ["contact", contactId] });
+      queryclient.refetchQueries({
+        queryKey: ["contacts", { type: "withPaintingsOwningCount" }],
+      });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
