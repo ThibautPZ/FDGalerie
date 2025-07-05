@@ -51,5 +51,15 @@
     "name": "cannotUpdateContact",
     "statusCode": 500,
     "type": "error"
+  },
+  "07001": {
+    "name": "cannotGetContactById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07002": {
+    "name": "cannotGetContactsWithPaintingOwningCount",
+    "statusCode": 400,
+    "type": "error"
   }
 }
