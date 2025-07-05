@@ -35,7 +35,7 @@ function ContactManagement() {
   const getContactListFromDb = async () => {
     const url = "api/contacts/browseWithPaintingsOwningCount";
     const res = await axiosInstance.get(url);
-    return res.data;
+    return res.data.queryResults;
   };
 
   const contactsQuery = useSuspenseQuery({
