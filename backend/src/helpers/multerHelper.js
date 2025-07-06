@@ -42,6 +42,8 @@ const multerInstance = (
       if (fileType === "video") {
         savedFileExtension = VIDEO_MIME_TYPE[file.mimetype];
       }
+      req.body.rawFileName = savedFileName;
+      req.body.rawFileExtension = savedFileExtension;
 
       callback(null, `${savedFileName}.${savedFileExtension}`);
     },
@@ -95,6 +97,7 @@ const multerInstance = (
         return callback(validationsErr, false);
       }
     }
+
     return callback(null, true);
   };
 

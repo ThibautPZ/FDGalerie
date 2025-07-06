@@ -40,6 +40,7 @@
     "statusCode": 401,
     "type": "error"
   },
+  "03001": { "name": "thumbCreateFail", "statusCode": 400, "type": "error" },
   "04001": { "name": "contactExists", "statusCode": 400, "type": "error" },
   "05001": {
     "name": "noContactName",
