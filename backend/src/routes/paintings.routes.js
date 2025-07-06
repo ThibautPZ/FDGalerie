@@ -8,8 +8,7 @@ const handleMulterParsing = require("../middlewares/handleMulterParsing");
 const handleVerificationsOnReqIfNoFiles = require("../middlewares/handleVerificationsOnReqIfNoFiles");
 const createPaintingSchema = require("../Validators/createPainting.validator");
 const checkPaintingTitleDoesntExist = require("../services/checkFunctions/checkPaintingTitleDoesntExist");
-
-const createContact = require("../middlewares/dbWriters/createContact");
+const createThumbnail = require("../middlewares/createThumbnail");
 
 router.get("/sizes", paintingsControllers.readAllSizes);
 
@@ -41,7 +40,7 @@ router.post(
     createPaintingSchema,
     checkPaintingTitleDoesntExist
   ),
-  createContact,
+  createThumbnail("paintings", { medium: true, large: true }),
   paintingsControllers.createPainting,
   errorHandler
 );
