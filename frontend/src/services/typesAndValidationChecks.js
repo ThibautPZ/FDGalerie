@@ -57,7 +57,10 @@ const isNegativeNumber = (checked) => {
 };
 
 const isFunction = (checked) => {
-  return checked && {}.toString.call(checked) === "[object Function]";
+  if (!checked) {
+    return false;
+  }
+  return {}.toString.call(checked) === "[object Function]";
 };
 
 const isPromise = (checked) => {
@@ -65,6 +68,14 @@ const isPromise = (checked) => {
     return false;
   }
   return Promise.resolve(checked) === checked;
+};
+
+const isDate = (checked) => {
+  if (!checked) {
+    return false;
+  }
+
+  return {}.toString.call(checked) === "[object Date]";
 };
 
 export {
@@ -79,4 +90,5 @@ export {
   isNegativeNumber,
   isFunction,
   isPromise,
+  isDate,
 };
