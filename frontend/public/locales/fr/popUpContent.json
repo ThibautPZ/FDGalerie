@@ -120,6 +120,14 @@
       "validationBtnReturnedStr": "doCreateContact",
       "validationBtnText": "Il s'agit de quelqu'un d'autre, je valide la création de ce contact.",
       "closeBtnText": "Annuler l'enregistrement"
+    },
+    "backWhileCreatingOeuvre": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un tableau. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
     }
   },
   "ContactManagement": {

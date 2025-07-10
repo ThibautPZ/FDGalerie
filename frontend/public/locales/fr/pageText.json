@@ -87,7 +87,10 @@
     }
   },
   "OeuvresManagement": {
-    "OM": { "newOeuvre": "Ajouter une nouvelle peinture" },
+    "OM": {
+      "newOeuvre": "Ajouter une nouvelle peinture",
+      "return": "Retour à la liste"
+    },
     "OMOeuvrePanel": {
       "picture": "Aperçu",
       "title": "Titre",
@@ -100,7 +103,6 @@
       "hasComment": "Note"
     },
     "OMCreateOeuvre": {
-      "return": "Retour à la liste",
       "widthheight": "Largeur x hauteur",
       "file": "Fichier image de l'oeuvre. Formats acceptés : .png, .jpeg, .jpg, .webp",
       "available": "Disponible à l'acquisition ",
@@ -113,7 +115,8 @@
       "oeuvreGivenToSelection": "Suggestions de personnes connues (utilisateurs et contacts)",
       "noUserMatch": "Aucun utilisateur ni contact enregistré à ce nom.",
       "createNewContact": "Créer un nouveau contact ?",
-      "newContactSubmitBtnText": "Enregistrer ce nouveau contact"
+      "newContactSubmitBtnText": "Enregistrer ce nouveau contact",
+      "visibility": "Visible par les visiteurs ?"
     }
   },
   "ContactManagement": {

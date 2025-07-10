@@ -50,6 +50,18 @@
     "fr": "Français",
     "en": "Anglais"
   },
+  "date": {
+    "today": "Aujourd' hui",
+    "year": "année",
+    "month": "mois",
+    "day": "jour",
+    "hour": "heure",
+    "minute": "minute",
+    "second": "seconde",
+    "millisecond": "seconde",
+    "date": "date",
+    "time": "heure"
+  },
   "pageNames": {
     "home": "Accueil",
     "diaporama": "Diaporama",
