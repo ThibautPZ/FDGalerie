@@ -19,15 +19,12 @@ import giveRemainingCharacters from "../../services/giveRemainingCharacters";
 function TextInput({
   fieldName,
   label,
-
   isHidden,
   inputMode,
   registerOptions,
-
   error,
   t,
 }) {
-  // const { onChange, name, ref, maxLength } = register;
   const { watch, register, getValues, setValue } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
@@ -86,51 +83,20 @@ function TextInput({
     });
   }
   const registeredField = register(fieldName, registerOptions);
-  // const registeredField = inputMode
-  //   ? register(fieldName, {
-  //       ...registerOptions,
-  //       onChange: () => {
-  //         setValueFilter(fieldName, inputMode);
-  //       },
-  //     })
-  //   : register(fieldName, registerOptions);
 
   const giveInputMode = (inputModeStr) => {
+    if (!inputModeStr) {
+      return "text";
+    }
     if (inputModeStr === "price") {
       return "decimal";
     }
-    // if (inputModeStr === "text") {
-    //   return "text";
-    // }
-    // if (inputModeStr === "numeric") {
-    //   return "numeric";
-    // }
-    // if (inputModeStr === "tel") {
-    //   return "tel";
-    // }
-    // if (inputModeStr === "search") {
-    //   return "search";
-    // }
-    // if (inputModeStr === "email") {
-    //   return "email";
-    // }
-    // if (inputModeStr === "url") {
-    //   return "url";
-    // }
+
     return inputModeStr;
   };
+
   return (
     <div hidden={isHidden} className={fieldName}>
-      {/* {label?.count ? (
-        <label htmlFor={fieldName}>
-          {t(`${labelNs}`, {
-            count: giveRemainingCharacters(
-              watch(label.count),
-              registerOptions.maxLength.value
-            ),
-          })}
-        </label>
-      ) : ( */}
       <label htmlFor={fieldName}>
         {t(
           `${labelNs}`,
