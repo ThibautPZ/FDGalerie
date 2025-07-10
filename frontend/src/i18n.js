@@ -6,7 +6,11 @@ import LanguageDetector from "i18next-browser-languagedetector";
 // have a look at the Quick start guide
 // for passing in lng and translations on init
 
-export const supportedLngs = { fr: "Français", en: "English" };
+export const supportedLngs = {
+  fr: "Français",
+  enUS: "English (US)",
+  enGB: "English (GB)",
+};
 
 const HttpApiOptions = {
   // path where resources get loaded from, or a function
