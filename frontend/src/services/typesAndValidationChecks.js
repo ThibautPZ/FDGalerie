@@ -74,8 +74,11 @@ const isDate = (checked) => {
   if (!checked) {
     return false;
   }
-
   return {}.toString.call(checked) === "[object Date]";
+};
+
+const isBoolean = (checked) => {
+  return checked === false || checked === true;
 };
 
 export {
@@ -91,4 +94,5 @@ export {
   isFunction,
   isPromise,
   isDate,
+  isBoolean,
 };
