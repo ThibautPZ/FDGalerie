@@ -40,7 +40,7 @@ export default function giveTimeUnitsFromDate(date) {
   const strDay = numToStr(numDay);
   const idxWeekday = date.getDay();
   const numWeekday = idxWeekday + 1;
-  const strFulltime = date.toISOString().substring(11, 23);
+  const strFulltime = date.toTimeString().substring(0, 8);
   const numHour = date.getHours();
   const strHour = numToStr(numHour);
   const numMinute = date.getMinutes();
