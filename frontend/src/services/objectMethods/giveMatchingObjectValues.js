@@ -1,6 +1,6 @@
 /**
  * Returns an array containing all inputed object values whose key match inputed array string elements
- * @param {Object.<{string, Object}>} obj - Searched object
+ * @param {Object.<string, Object>} obj - Searched object
  * @param {Array.<string>} arrOfKeys - Array listing strings to be compared to obj keys
  * @returns {Array.<Object>}  Object containing two arrays
  * @function
