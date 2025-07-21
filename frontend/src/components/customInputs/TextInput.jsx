@@ -21,7 +21,7 @@ function TextInput({
   label,
   isHidden,
   inputMode,
-  registerOptions,
+  registerOptions = {},
   error,
   t,
 }) {
@@ -60,20 +60,12 @@ function TextInput({
   const setValueFilter = (name, inputmode) => {
     const originText = getValues(name);
     let filteredText = "";
-    if (inputmode === "price") {
+    if (inputmode === "price" || inputmode === "decimal") {
       filteredText = filterStringToPrice(originText);
     }
     setValue(name, filteredText);
   };
 
-  if (inputMode) {
-    const onInputModeChange = () => {
-      setValueFilter(fieldName, inputMode);
-    };
-    Object.assign(registerOptions, {
-      onChange: onInputModeChange,
-    });
-  }
   if (inputMode) {
     const onInputModeChange = () => {
       setValueFilter(fieldName, inputMode);
@@ -117,6 +109,8 @@ function TextInput({
         aria-invalid={error ? "true" : "false"}
         maxLength={registerOptions?.maxLength?.value}
       />
+
+      {inputMode === "price" && <label htmlFor={fieldName}> € </label>}
     </div>
   );
 }
