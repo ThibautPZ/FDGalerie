@@ -10,12 +10,14 @@ const giveTransformationObject = (fieldTransformationsObj) => {
     return null;
   }
   const returnedObj = {};
+
   const assignFieldToReturnedObj = (transformation, fieldName) => {
     if (!isStringNotEmpty(fieldName)) {
       return null;
     }
     return Object.assign(returnedObj, { [fieldName]: transformation });
   };
+
   for (const [key, value] of Object.entries(fieldTransformationsObj)) {
     if (isStringNotEmpty(value)) {
       assignFieldToReturnedObj(key, value);
@@ -24,9 +26,18 @@ const giveTransformationObject = (fieldTransformationsObj) => {
       value.forEach((fieldName) => assignFieldToReturnedObj(key, fieldName));
     }
   }
+
   return returnedObj;
 };
 
+/**
+ * Returns an array containing all inputed object values whose key match inputed array string elements
+ * @param {Object< string, (number|string|Object|Array) >} initialData - Submited form fields data
+ * @param {Object.< string, function >} [fieldTransformations] - Object containing callback functions to be called on fields whose name match object key
+ * @param {Array.<string>}  [filteredKeys] - Array listing fieldnames to exclude from form data
+ * @returns {{formData: Object, fileFields: string, files: Object}}  Object containing two arrays
+ * @function
+ */
 function giveSanitizedFormData(
   initialData,
   fieldTransformations,
@@ -40,7 +51,6 @@ function giveSanitizedFormData(
   const initialDataArray = Object.entries(initialData);
 
   const transformations = giveTransformationObject(fieldTransformations);
-  console.log(transformations);
 
   const updateFileTracker = (fileListContent, fieldName) => {
     const fileTrackerObj = { type: fileListContent, name: fieldName };
@@ -60,8 +70,6 @@ function giveSanitizedFormData(
   };
 
   const isObjectWithValueAndLabelKeys = (supposedObj) => {
-    console.log("iowvalk", supposedObj);
-
     if (!isObjectNotEmpty(supposedObj)) {
       return false;
     }
@@ -78,21 +86,24 @@ function giveSanitizedFormData(
   };
 
   const giveSanitizedData = (initialValue, key) => {
-    console.log("gsv");
+    const giveTransformedValue = (value) => {
+      if (!isObjectNotEmpty(transformations)) {
+        return value;
+      }
+      if (transformations[key] === "toInteger") {
+        return parseInt(value, 10);
+      }
+      if (transformations[key] === "toFloat") {
+        return parseFloat(value);
+      }
+      return value;
+    };
 
-    // const giveTransformedValue = (value) => {
-    //   if (transformations[key] === "toInteger") {
-    //     return parseInt(value, 10);
-    //   }
-    //   if (transformations[key] === "toFloat") {
-    //     return parseFloat(value);
-    //   }
-    //   return value;
-    // };
     const giveKeyValueWithInfo = (value, isFileField = false) => {
-      // const transformedValue = giveTransformedValue(value);
+      const transformedValue = giveTransformedValue(value);
+
       const returnedObj = {
-        sanitizedValue: { [key]: value },
+        sanitizedValue: { [key]: transformedValue },
         isFileField,
       };
       return returnedObj;
@@ -118,6 +129,7 @@ function giveSanitizedFormData(
     if (isObjectWithValueAndLabelKeys(initialValue)) {
       return giveKeyValueWithInfo(initialValue.value);
     }
+
     if (
       isArrayNotEmpty(initialValue) &&
       isObjectWithValueAndLabelKeys(initialValue[0])
@@ -125,23 +137,25 @@ function giveSanitizedFormData(
       const values = giveValuesOfArray(initialValue);
       return giveKeyValueWithInfo(values);
     }
+
     if (initialValue instanceof FileList) {
       const fileValue = updateFileTrackerThenGiveFile(initialValue);
 
       return giveKeyValueWithInfo(fileValue, true);
     }
+
     if (isString(initialValue)) {
       const value = initialValue.trim();
       return giveKeyValueWithInfo(value);
     }
+
     return giveKeyValueWithInfo(initialValue);
   };
-  console.log(initialData);
 
   const populateReturnedData = () => {
-    console.log("prd", initialDataArray);
     const notFileFieldsObj = {};
     const fileFieldsObj = {};
+
     for (const [key, value] of initialDataArray) {
       if (!isKeyFiltered(key)) {
         const { sanitizedValue, isFileField } = giveSanitizedData(value, key);
