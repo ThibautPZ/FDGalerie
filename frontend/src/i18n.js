@@ -124,7 +124,13 @@ i18n
     fallbackLng: "fr",
     supportedLngs: Object.keys(supportedLngs),
     debug: true,
-    ns: ["common", "pageText", "popUpContent"],
+    ns: [
+      "common",
+      "pageText",
+      "popUpContent",
+      "formRegisterOptionsMessages",
+      "errors",
+    ],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
