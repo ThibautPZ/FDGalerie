@@ -19,6 +19,14 @@ VALUES ('Acrylique'),
 INSERT INTO `supports` (`name`) VALUES ('Papier'), ('Toile');
 
 INSERT INTO
+    `paintings_availabilities` (`name`)
+VALUES ('given'),
+    ('sold'),
+    ('reserved'),
+    ('available'),
+    ('unavailable');
+
+INSERT INTO
     `user_types` (`name`)
 VALUES ('User'),
     ('Administrator');
@@ -119,399 +127,536 @@ VALUES ('Trio De Petites Sirènes'),
 INSERT INTO
     `paintings` (
         `title`,
-        `pathname`,
-        `comment`,
+        -- `pathname`,
+        -- `comment`,
         `width`,
         `height`,
-        `sold`,
+        -- `sold`,
         `family_member`,
         `families_id`,
         `painting_sizes_id`,
-        `supports_id`
+        `supports_id`,
+        `publicly_visible`,
+        `paintings_availabilities_id`
     )
 VALUES (
         'Coeur',
-        'IMG_20201105_170131.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         NULL,
         NULL,
         3,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Peter Pan',
-        'IMG_20201105_170209.jpg',
-        NULL,
         25,
         31,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Fillette De Profil',
-        'IMG_20201105_170214.jpg',
-        NULL,
         15,
         20,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Sainte',
-        'IMG_20201105_170229.jpg',
-        NULL,
         10,
         15,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'La Petite Cycliste',
-        'IMG_20201105_170302.jpg',
-        NULL,
         14,
         14,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Petite Fée',
-        'IMG_20201105_170330.jpg',
-        NULL,
         20,
         26,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Fleur de Cristal',
-        'IMG_20210311_075425.jpg',
-        NULL,
         50,
         70,
-        TRUE,
         NULL,
         NULL,
         3,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         "Winnie l'Ourson",
-        'IMG_20210521_104729.jpg',
-        NULL,
         50,
         70,
-        TRUE,
         NULL,
         NULL,
         3,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Le Petit Chaperon Rouge Et Le Loup',
-        'IMG_20210523_110619.jpg',
-        NULL,
         15,
         20,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'La Boudeuse',
-        'IMG_20210913_173411.jpg',
-        NULL,
         17,
         22,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Cigale White Ghost',
-        'IMG_20211009_182603.jpg',
-        null,
         60,
         40,
-        TRUE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Entraînement De Natation',
-        'IMG_20211127_123027.jpg',
-        NULL,
         24,
         30,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'La Petite Marquise',
-        'IMG_20220205_185328.jpg',
-        NULL,
         17,
         22,
-        TRUE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Low/High Binding',
-        'IMG_20220307_095839.jpg',
-        NULL,
         55,
         45,
-        TRUE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Petite Sirène Bleue',
-        'IMG_20220325_154300.jpg',
-        NULL,
         9,
         12,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Broyer Du Noir',
-        'IMG_20220325_154356.jpg',
-        'Inspirée par l\'oeuvre de Guillaume Bianco "Billy Brouillard".',
         15,
         22,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Le Poulpe',
-        'IMG_20220819_182819~2.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         NULL,
         NULL,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         'Maman Baleine Et Son Petit',
-        'IMG_20220827_115914~2.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         NULL,
         NULL,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         'Coccinelle',
-        'IMG_20221005_115339~2.jpg',
-        NULL,
         14,
         18,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Ours Blanc Qui Baille',
-        'IMG_20221009_171709~3.jpg',
-        NULL,
         20,
         28,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Pivoine',
-        'IMG_20221010_204428~2.jpg',
-        NULL,
         15,
         17,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Petit Chien Sur Fond Rose',
-        'IMG_20230103_110624~2.jpg',
-        NULL,
         20,
         30,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Face Au Vent',
-        'IMG_20230226_101355~2.jpg',
-        NULL,
         50,
         50,
-        FALSE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Petit Nageur',
-        'IMG_20230401_180823~2.jpg',
-        NULL,
         40,
         40,
-        TRUE,
         NULL,
         NULL,
         2,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'La Famille Dragon',
-        'IMG_20230725_193138~2.jpg',
-        NULL,
         70,
         50,
-        TRUE,
         NULL,
         NULL,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         'Trio De Petites Sirènes 1',
-        'IMG_20230728_183456.jpg',
-        NULL,
         9,
         15,
+        1,
+        1,
+        1,
+        1,
         TRUE,
-        1,
-        1,
-        1,
-        1
+        4
     ),
     (
         'Trio De Petites Sirènes 2',
-        'IMG_20230728_183532.jpg',
-        NULL,
         9,
         15,
-        TRUE,
         2,
         1,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Trio De Petites Sirènes 3',
-        'IMG_20230728_183548.jpg',
-        NULL,
         9,
         15,
-        TRUE,
         3,
         1,
         1,
-        1
+        1,
+        TRUE,
+        4
     ),
     (
         'Les Grenouilles',
-        'IMG_20230923_174804.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         1,
         2,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         'Les Canaris',
-        'IMG_20230923_174732.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         2,
         2,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         'Homme Se Baignant',
-        'IMG_20230923_231539~2.jpg',
-        NULL,
         50,
         70,
-        FALSE,
         NULL,
         NULL,
         3,
-        2
+        2,
+        TRUE,
+        4
     ),
     (
         "La Transformation d'Ariel",
-        'IMG_20230926_192303.jpg',
-        NULL,
         19,
         19,
-        FALSE,
         NULL,
         NULL,
         1,
-        1
+        1,
+        TRUE,
+        4
+    );
+
+INSERT INTO
+    `paintings_storages` (
+        `paintings_id`,
+        `file_name`,
+        `file_extension`
+    )
+VALUES (
+        1,
+        'IMG_20201105_170131',
+        'jpg'
+    ),
+    (
+        2,
+        'IMG_20201105_170209',
+        'jpg'
+    ),
+    (
+        3,
+        'IMG_20201105_170214',
+        'jpg'
+    ),
+    (
+        4,
+        'IMG_20201105_170229',
+        'jpg'
+    ),
+    (
+        5,
+        'IMG_20201105_170302',
+        'jpg'
+    ),
+    (
+        6,
+        'IMG_20201105_170330',
+        'jpg'
+    ),
+    (
+        7,
+        'IMG_20210311_075425',
+        'jpg'
+    ),
+    (
+        8,
+        'IMG_20210521_104729',
+        'jpg'
+    ),
+    (
+        9,
+        'IMG_20210523_110619',
+        'jpg'
+    ),
+    (
+        10,
+        'IMG_20210913_173411',
+        'jpg'
+    ),
+    (
+        11,
+        'IMG_20211009_182603',
+        'jpg'
+    ),
+    (
+        12,
+        'IMG_20211127_123027',
+        'jpg'
+    ),
+    (
+        13,
+        'IMG_20220205_185328',
+        'jpg'
+    ),
+    (
+        14,
+        'IMG_20220307_095839',
+        'jpg'
+    ),
+    (
+        15,
+        'IMG_20220325_154300',
+        'jpg'
+    ),
+    (
+        16,
+        'IMG_20220325_154356',
+        'jpg'
+    ),
+    (
+        17,
+        'IMG_20220819_182819~2',
+        'jpg'
+    ),
+    (
+        18,
+        'IMG_20221005_115339~2',
+        'jpg'
+    ),
+    (
+        19,
+        'IMG_20220827_115914~2',
+        'jpg'
+    ),
+    (
+        20,
+        'IMG_20221009_171709~3',
+        'jpg'
+    ),
+    (
+        21,
+        'IMG_20221010_204428~2',
+        'jpg'
+    ),
+    (
+        22,
+        'IMG_20230103_110624~2',
+        'jpg'
+    ),
+    (
+        23,
+        'IMG_20230226_101355~2',
+        'jpg'
+    ),
+    (
+        24,
+        'IMG_20230401_180823~2',
+        'jpg'
+    ),
+    (
+        25,
+        'IMG_20230725_193138~2',
+        'jpg'
+    ),
+    (
+        26,
+        'IMG_20230728_183456',
+        'jpg'
+    ),
+    (
+        27,
+        'IMG_20230728_183532',
+        'jpg'
+    ),
+    (
+        28,
+        'IMG_20230728_183548',
+        'jpg'
+    ),
+    (
+        29,
+        'IMG_20230923_174804',
+        'jpg'
+    ),
+    (
+        30,
+        'IMG_20230923_174732',
+        'jpg'
+    ),
+    (
+        31,
+        'IMG_20230923_231539~2',
+        'jpg'
+    ),
+    (
+        32,
+        'IMG_20230926_192303',
+        'jpg'
     );
 
 INSERT INTO
@@ -569,3 +714,10 @@ VALUES (1, 2),
     (30, 1),
     (31, 1),
     (32, 2);
+
+INSERT INTO
+    `paintings_artist_comments` (`paintings_id`, `comment`)
+VALUES (
+        16,
+        'Inspirée par l\'oeuvre de Guillaume Bianco "Billy Brouillard".'
+    )

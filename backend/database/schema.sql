@@ -42,28 +42,30 @@ CREATE TABLE IF NOT EXISTS `account_states` (
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
--- CREATE TABLE IF NOT EXISTS `ban_messages` (
---     `id` INT NOT NULL AUTO_INCREMENT,
---     `message` TEXT NOT NULL,
---     PRIMARY KEY (`id`)
--- ) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `paintings_availabilities` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(64) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `paintings` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(128) NOT NULL,
-    `pathname` VARCHAR(128) NOT NULL,
-    `comment` TEXT NULL,
+    -- `pathname` VARCHAR(128) NOT NULL,
+    -- `comment` TEXT NULL,
     `width` INT NOT NULL,
     `height` INT NOT NULL,
-    `sold` TINYINT NOT NULL,
     `family_member` INT NULL,
     `families_id` INT NULL,
     `painting_sizes_id` INT NOT NULL,
     `supports_id` INT NOT NULL,
+    `publicly_visible` TINYINT NOT NULL,
+    `paintings_availabilities_id` INT NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_paintings_families` FOREIGN KEY (`families_id`) REFERENCES `families` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_paintings_painting_sizes` FOREIGN KEY (`painting_sizes_id`) REFERENCES `painting_sizes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `fk_paintings_supports` FOREIGN KEY (`supports_id`) REFERENCES `supports` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    CONSTRAINT `fk_paintings_supports` FOREIGN KEY (`supports_id`) REFERENCES `supports` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT `fk_paintings_availabilities` FOREIGN KEY (`paintings_availabilities_id`) REFERENCES `paintings_availabilities` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `paintings_has_techniques` (
@@ -73,6 +75,14 @@ CREATE TABLE IF NOT EXISTS `paintings_has_techniques` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_paintings_has_techniques_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_paintings_has_techniques_techniques` FOREIGN KEY (`techniques_id`) REFERENCES `techniques` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `paintings_storages` (
+    `paintings_id` INT NOT NULL,
+    `file_name` VARCHAR(64) NOT NULL,
+    `file_extension` VARCHAR(45) NOT NULL,
+    PRIMARY KEY (`paintings_id`),
+    CONSTRAINT `fk_paintings_storages_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -120,7 +130,9 @@ CREATE TABLE IF NOT EXISTS `painting_gifts` (
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`),
+    FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`contacts_id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `painting_sales` (
@@ -130,7 +142,9 @@ CREATE TABLE IF NOT EXISTS `painting_sales` (
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`),
+    FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`contacts_id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `painting_reservations` (
@@ -140,7 +154,9 @@ CREATE TABLE IF NOT EXISTS `painting_reservations` (
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`),
+    FOREIGN KEY (`contacts_id`) REFERENCES `contacts` (`contacts_id`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `ban_messages` (
@@ -159,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `favorite_paintings` (
     CONSTRAINT `fk_paintings_has_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `painting_comments` (
+CREATE TABLE IF NOT EXISTS `painting_user_comments` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `comment` TEXT NOT NULL,
     `date` VARCHAR(64) NOT NULL,
@@ -168,6 +184,13 @@ CREATE TABLE IF NOT EXISTS `painting_comments` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_paintings_has_users_paintings2` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
     CONSTRAINT `fk_paintings_has_users2` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `paintings_artist_comments` (
+    `paintings_id` INT NOT NULL,
+    `comment` TEXT NOT NULL,
+    PRIMARY KEY (`paintings_id`),
+    CONSTRAINT `fk_artist_comments_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
