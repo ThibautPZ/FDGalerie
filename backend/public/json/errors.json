@@ -1,4 +1,9 @@
 {
+  "00000": {
+    "name": "generic",
+    "statusCode": 500,
+    "type": "error"
+  },
   "00001": {
     "name": "notFound",
     "statusCode": 404,
@@ -20,11 +25,6 @@
     "statusCode": 400,
     "type": "error"
   },
-  "00100": {
-    "name": "takenPaintingTitle",
-    "statusCode": 400,
-    "type": "error"
-  },
   "01000": {
     "name": "wrongFileExtension",
     "statusCode": 401,
@@ -32,6 +32,11 @@
   },
   "01100": {
     "name": "fileFormFieldNameNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "02001": {
+    "name": "paintingMaxFamilyMemberNotFound",
     "statusCode": 400,
     "type": "error"
   },
@@ -47,9 +52,34 @@
     "statusCode": 400,
     "type": "error"
   },
+  "05002": {
+    "name": "tooManyPaintingOwners",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05003": {
+    "name": "takenPaintingTitle",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05004": {
+    "name": "publicWhenNoImgFile",
+    "statusCode": 400,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06003": {
+    "name": "cannotWriteNewPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06004": {
+    "name": "cannotWritePaintingRelatedData",
     "statusCode": 500,
     "type": "error"
   },

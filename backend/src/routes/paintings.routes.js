@@ -9,24 +9,49 @@ const handleVerificationsOnReqIfNoFiles = require("../middlewares/handleVerifica
 const createPaintingSchema = require("../Validators/createPainting.validator");
 const checkPaintingTitleDoesntExist = require("../services/checkFunctions/checkPaintingTitleDoesntExist");
 const createThumbnail = require("../middlewares/createThumbnail");
+const addFamilyMemberNumber = require("../middlewares/reqAdders/addFamiliyMemberNumber");
+const checkBodyKeyValuesFuncProvider = require("../services/checkFunctionsProvider/checkBodyKeyValuesFuncProvider");
+
+const checkPaintingNotPublic = checkBodyKeyValuesFuncProvider([
+  {
+    fieldName: "oeuvreVisibility",
+    values: [true],
+    errorNum: "05004",
+    isMatchInvalid: true,
+  },
+]);
 
 router.get("/sizes", paintingsControllers.readAllSizes);
 
 router.get("/techniques", paintingsControllers.readAllTechniques);
 
-router.get("/technique/:id", paintingsControllers.readByTechnique);
+router.get(
+  "/publicTechnique/:techniqueName",
+  paintingsControllers.readPublicByTechnique
+);
 
-router.get("/format/:id", paintingsControllers.readByFormat);
+router.get(
+  "/publicFormat/:formatName",
+  paintingsControllers.readPublicByFormat
+);
 
-router.get("/details", paintingsControllers.browseWithDetails, errorHandler);
+router.get(
+  "/adminDetailed",
+  paintingsControllers.browseAdminWithDetails,
+  errorHandler
+);
 
-router.get("/:id", paintingsControllers.readByTitle);
+router.get(
+  "/allPublicMinimalInfos",
+  paintingsControllers.readAllPublicMinimalInfos
+);
+
+router.get("/:id", paintingsControllers.readPublicByTitle);
 
 router.get("/", paintingsControllers.browse);
 
 router.post(
   "/createPainting",
-
   handleMulterParsing(
     {
       folderName: "paintings",
@@ -38,9 +63,12 @@ router.post(
   ),
   handleVerificationsOnReqIfNoFiles(
     createPaintingSchema,
-    checkPaintingTitleDoesntExist
+    checkPaintingTitleDoesntExist,
+    checkPaintingNotPublic
   ),
   createThumbnail("paintings", { medium: true, large: true }),
+  addFamilyMemberNumber,
+
   paintingsControllers.createPainting,
   errorHandler
 );

@@ -1,4 +1,4 @@
-const { checkSchema } = require("express-validator");
+const { checkSchema, body } = require("express-validator");
 const {
   requiredStr,
   requiredArr,
@@ -6,9 +6,18 @@ const {
   requiredFloat,
   nullableStr,
   nullableInt,
+  requiredBool,
 } = require("./schemaOptions");
 const { uppercaseFirstChar } = require("../services/stringFunctions");
 const { hasValue } = require("../services/typesAndValidationChecks");
+
+const paintingAvailability = {
+  oeuvreGivenToKnownPerson: 1,
+  oeuvreSoldToKnownPerson: 2,
+  oeuvreReservedToKnownPerson: 3,
+};
+
+const errorMsgPrefix = "crePai_val_";
 
 const objectFieldValidation = (req, objectFieldName) => {
   const { userId, contactId } = req.body[objectFieldName];
@@ -22,82 +31,129 @@ const objectFieldValidation = (req, objectFieldName) => {
 };
 
 const giveKnownPersonObjOptions = (fieldName) => {
+  const paintingAvailabilityRegex = new RegExp(
+    `${paintingAvailability[fieldName]}`,
+    "g"
+  );
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   const returnedObj = {
-    optional: { options: { values: "falsy" } },
-    isObject: { errorMessage: `wrong${uppercasedFieldName}` },
+    exists: {
+      if: body("oeuvreAvailability").matches(paintingAvailabilityRegex),
+      errorMessage: `${errorMsgPrefix}${uppercasedFieldName}_exi`,
+    },
+    isObject: { errorMessage: `${errorMsgPrefix}${uppercasedFieldName}_isObj` },
     custom: {
       options: (value, { req }) => objectFieldValidation(req, fieldName),
-      errorMessage: `wrong${uppercasedFieldName}`,
+      errorMessage: `${errorMsgPrefix}${uppercasedFieldName}_ids`,
     },
   };
   return returnedObj;
 };
 
 const createPaintingSchema = () => {
-  const oeuvreTitleOptions = requiredStr("oeuvreTitle");
-  const oeuvreTechniqueOptions = requiredArr("oeuvreTechnique");
-  const oeuvreTechniqueElementOptions = requiredInt("oeuvreTechnique");
-  const oeuvreSupportOptions = requiredInt("oeuvreSupport");
-  const oeuvreFormatOptions = requiredInt("oeuvreFormat");
-  const oeuvreHeightOptions = requiredFloat("oeuvreHeight");
-  const oeuvreWidthOptions = requiredFloat("oeuvreWidth");
-  const oeuvreAvailabilityOptions = requiredInt("oeuvreAvailability");
-  const oeuvreGivenToFirstnameOptions = nullableStr("oeuvreGivenToFirstname");
-  const oeuvreGivenToLastnameOptions = nullableStr("oeuvreGivenToLastname");
+  const oeuvreTitleOptions = requiredStr("oeuvreTitle", errorMsgPrefix);
+  const oeuvreTechniqueOptions = requiredArr("oeuvreTechnique", errorMsgPrefix);
+  const oeuvreTechniqueElementOptions = requiredInt(
+    "oeuvreTechnique",
+    errorMsgPrefix
+  );
+  const oeuvreSupportOptions = requiredInt("oeuvreSupport", errorMsgPrefix);
+  const oeuvreFormatOptions = requiredInt("oeuvreFormat", errorMsgPrefix);
+  const oeuvreHeightOptions = requiredFloat("oeuvreHeight", errorMsgPrefix);
+  const oeuvreWidthOptions = requiredFloat("oeuvreWidth", errorMsgPrefix);
+  const oeuvreAvailabilityOptions = requiredInt(
+    "oeuvreAvailability",
+    errorMsgPrefix
+  );
+  const oeuvreVisibilityOptions = requiredBool(
+    "oeuvreVisibility",
+    errorMsgPrefix
+  );
+  const oeuvreFamilyOptions = nullableInt("oeuvreFamily", errorMsgPrefix);
+  const oeuvreGivenToFirstnameOptions = nullableStr(
+    "oeuvreGivenToFirstname",
+    errorMsgPrefix
+  );
+  const oeuvreGivenToLastnameOptions = nullableStr(
+    "oeuvreGivenToLastname",
+    errorMsgPrefix
+  );
   const oeuvreGivenToKnownPersonOptions = giveKnownPersonObjOptions(
     "oeuvreGivenToKnownPerson"
   );
   const oeuvreGivenToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreGivenToKnownPersonUserId"
+    "oeuvreGivenToKnownPersonUserId",
+    errorMsgPrefix
   );
   const oeuvreGivenToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreGivenToKnownPersonContactId"
+    "oeuvreGivenToKnownPersonContactId",
+    errorMsgPrefix
   );
   const oeuvreGivenToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreGivenToKnownPersonFirstname"
+    "oeuvreGivenToKnownPersonFirstname",
+    errorMsgPrefix
   );
   const oeuvreGivenToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreGivenToKnownPersonLastname"
+    "oeuvreGivenToKnownPersonLastname",
+    errorMsgPrefix
   );
-  const oeuvreSoldToFirstnameOptions = nullableStr("oeuvreSoldToFirstname");
-  const oeuvreSoldToLastnameOptions = nullableStr("oeuvreSoldToLastname");
+  const oeuvreSoldToFirstnameOptions = nullableStr(
+    "oeuvreSoldToFirstname",
+    errorMsgPrefix
+  );
+  const oeuvreSoldToLastnameOptions = nullableStr(
+    "oeuvreSoldToLastname",
+    errorMsgPrefix
+  );
   const oeuvreSoldToKnownPersonOptions = giveKnownPersonObjOptions(
     "oeuvreSoldToKnownPerson"
   );
   const oeuvreSoldToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreSoldToKnownPersonUserId"
+    "oeuvreSoldToKnownPersonUserId",
+    errorMsgPrefix
   );
   const oeuvreSoldToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreSoldToKnownPersonContactId"
+    "oeuvreSoldToKnownPersonContactId",
+    errorMsgPrefix
   );
   const oeuvreSoldToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreSoldToKnownPersonFirstname"
+    "oeuvreSoldToKnownPersonFirstname",
+    errorMsgPrefix
   );
   const oeuvreSoldToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreSoldToKnownPersonLastname"
+    "oeuvreSoldToKnownPersonLastname",
+    errorMsgPrefix
   );
   const oeuvreReservedToFirstnameOptions = nullableStr(
-    "oeuvreReservedToFirstname"
+    "oeuvreReservedToFirstname",
+    errorMsgPrefix
   );
   const oeuvreReservedToLastnameOptions = nullableStr(
-    "oeuvreReservedToLastname"
+    "oeuvreReservedToLastname",
+    errorMsgPrefix
   );
   const oeuvreReservedToKnownPersonOptions = giveKnownPersonObjOptions(
     "oeuvreReservedToKnownPerson"
   );
   const oeuvreReservedToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreReservedToKnownPersonUserId"
+    "oeuvreReservedToKnownPersonUserId",
+    errorMsgPrefix
   );
   const oeuvreReservedToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreReservedToKnownPersonContactId"
+    "oeuvreReservedToKnownPersonContactId",
+    errorMsgPrefix
   );
   const oeuvreReservedToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreReservedToKnownPersonFirstname"
+    "oeuvreReservedToKnownPersonFirstname",
+    errorMsgPrefix
   );
   const oeuvreReservedToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreReservedToKnownPersonLastname"
+    "oeuvreReservedToKnownPersonLastname",
+    errorMsgPrefix
   );
+  const artistCommentOptions = nullableStr("artistComment", errorMsgPrefix, {
+    maxLength: 254,
+  });
 
   return checkSchema({
     oeuvreTitle: oeuvreTitleOptions,
@@ -108,6 +164,8 @@ const createPaintingSchema = () => {
     oeuvreWidth: oeuvreWidthOptions,
     oeuvreHeight: oeuvreHeightOptions,
     oeuvreAvailability: oeuvreAvailabilityOptions,
+    oeuvreVisibility: oeuvreVisibilityOptions,
+    oeuvreFamily: oeuvreFamilyOptions,
     oeuvreGivenToFirstname: oeuvreGivenToFirstnameOptions,
     oeuvreGivenToLastname: oeuvreGivenToLastnameOptions,
     oeuvreGivenToKnownPerson: oeuvreGivenToKnownPersonOptions,
@@ -138,6 +196,7 @@ const createPaintingSchema = () => {
       oeuvreReservedToKnownPersonFirstnameOptions,
     "oeuvreReservedToKnownPerson.lastname":
       oeuvreReservedToKnownPersonLastnameOptions,
+    artistComment: artistCommentOptions,
   });
 };
 

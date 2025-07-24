@@ -2,5 +2,11 @@
   "authController": {
     "createOneContact": { "type": "info", "message": "contactCreated" },
     "updateContact": { "type": "info", "message": "contactModified" }
+  },
+  "paintingsController": {
+    "createPainting": {
+      "type": "info",
+      "message": "paintingCreated"
+    }
   }
 }

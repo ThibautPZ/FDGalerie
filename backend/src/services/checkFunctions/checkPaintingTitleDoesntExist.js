@@ -6,7 +6,7 @@ const checkPaintingTitleDoesntExist = async (req) => {
   const [result] = await tables.paintings.findByTitle(paintingTitle);
 
   if (result.length) {
-    const takenPaintingTitleErr = new CustomErrorClass("00100");
+    const takenPaintingTitleErr = new CustomErrorClass("05003");
     return takenPaintingTitleErr;
   }
   return null;

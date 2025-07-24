@@ -9,6 +9,7 @@ const techniquesRoutes = require("./routes/techniques.routes");
 const supportsRoutes = require("./routes/supports.routes");
 const paintingSizesRoutes = require("./routes/paintingSizes.routes");
 const contactsRoutes = require("./routes/contacts.routes");
+const familiesRoutes = require("./routes/families.routes");
 
 router.use("/paintings", paintingsRoutes);
 router.use("/auth", authRoutes);
@@ -17,5 +18,6 @@ router.use("/techniques", techniquesRoutes);
 router.use("/supports", supportsRoutes);
 router.use("/paintingSizes", paintingSizesRoutes);
 router.use("/contacts", contactsRoutes);
+router.use("/families", familiesRoutes);
 
 module.exports = router;

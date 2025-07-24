@@ -1,16 +1,30 @@
 const { uppercaseFirstChar } = require("../services/stringFunctions");
+const { isNumber } = require("../services/typesAndValidationChecks");
 
-const requiredStr = (fieldName) => {
+const giveLengthOptions = (isFieldRequired, options = {}) => {
+  const { minLength, maxLength } = options;
+  const lengthOptions = {};
+  const min = isFieldRequired && !minLength ? 1 : minLength;
+  if (isNumber(min)) {
+    Object.assign(lengthOptions, { min });
+  }
+  if (isNumber(maxLength)) {
+    Object.assign(lengthOptions, { max: maxLength });
+  }
+  return lengthOptions;
+};
+
+const requiredStr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
-    exists: { errorMessage: `missing${uppercasedFieldName}` },
+    exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
 
     isString: {
-      errorMessage: `wrong${uppercasedFieldName}`,
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isStr`,
     },
     isLength: {
-      errorMessage: `missing${uppercasedFieldName}`,
-      options: { min: 1 },
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isLen`,
+      options: giveLengthOptions(true, options),
     },
     trim: true,
     escape: true,
@@ -21,68 +35,83 @@ const requiredStr = (fieldName) => {
   };
 };
 
-const requiredArr = (fieldName) => {
+const requiredArr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
-    exists: { errorMessage: `missing${uppercasedFieldName}` },
+    exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
     isArray: {
-      errorMessage: `wrong${uppercasedFieldName}`,
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isArr`,
     },
     isLength: {
-      errorMessage: `wrong${uppercasedFieldName}`,
-      options: { min: 1 },
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isLen`,
+      options: giveLengthOptions(true, options),
     },
   };
 };
 
-const requiredInt = (fieldName) => {
+const requiredInt = (fieldName, errMsgPrefix) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
-    exists: { errorMessage: `missing${uppercasedFieldName}` },
+    exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
     isInt: {
-      errorMessage: `wrong${uppercasedFieldName}`,
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isInt`,
     },
     toInt: true,
   };
 };
 
-const requiredFloat = (fieldName) => {
+const requiredFloat = (fieldName, errMsgPrefix) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
-    exists: { errorMessage: `missing${uppercasedFieldName}` },
+    exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
     isFloat: {
-      errorMessage: `wrong${uppercasedFieldName}`,
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isFlo`,
     },
     toFloat: true,
   };
 };
 
-const nullableStr = (fieldName) => {
+const nullableStr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
     optional: { options: { values: null } },
-    isString: { errorMessage: `wrong${uppercasedFieldName}` },
+    isString: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isStr` },
+    isLength: {
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isLen`,
+      options: giveLengthOptions(false, options),
+    },
     trim: true,
     escape: true,
   };
 };
 
-const nullableInt = (fieldName) => {
+const nullableInt = (fieldName, errMsgPrefix) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
     optional: { options: { values: null } },
-    isInt: { errorMessage: `wrong${uppercasedFieldName}` },
+    isInt: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isInt` },
     toInt: true,
   };
 };
 
-const undefinableObj = (fieldName) => {
+const undefinableObj = (fieldName, errMsgPrefix) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   const returnedObj = {
     optional: { options: { values: undefined } },
-    isObject: { errorMessage: `wrong${uppercasedFieldName}` },
+    isObject: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isObj` },
   };
   return returnedObj;
+};
+
+const requiredBool = (fieldName, errMsgPrefix) => {
+  const uppercasedFieldName = uppercaseFirstChar(fieldName);
+  return {
+    exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
+    isBoolean: {
+      errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isBoo`,
+    },
+    toBoolean: true,
+  };
 };
 
 module.exports = {
@@ -93,4 +122,5 @@ module.exports = {
   nullableStr,
   nullableInt,
   undefinableObj,
+  requiredBool,
 };
