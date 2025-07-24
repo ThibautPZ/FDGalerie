@@ -13,6 +13,11 @@ const createThumbnail = (rawFileFolderName, options) => {
   return asyncHandler(async (req, res, next) => {
     const { rawFileName, rawFileExtension } = req.body;
     const { medium = false, large = false } = options;
+    const filesFieldsQuery = req.query.fileFields;
+
+    if (filesFieldsQuery === "none") {
+      return next();
+    }
     const thumbFileExtension = ".jpg";
 
     const rawFilePath = path.join(
