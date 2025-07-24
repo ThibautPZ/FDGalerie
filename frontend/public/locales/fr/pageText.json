@@ -10,7 +10,8 @@
     "oeuvreAvailability": "Indiquez la disponibilité du tableau",
     "oeuvreGivenToWho": "Nom...",
     "choosePerson": "Choisissez une personne",
-    "spokenLanguage": "Sélectionnez la langue"
+    "spokenLanguage": "Sélectionnez la langue",
+    "oeuvreFamily": "Choisissez la famille à laquelle appartient le tableau"
   },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
   "UtilisateurManagement": {
@@ -110,13 +111,20 @@
       "title": "Titre...",
       "submitBtnText": "Enregistrer le nouveau tableau",
       "oeuvreGivenToWho": "Offert à ",
+      "oeuvreGivenDate": "Date du don",
       "oeuvreSoldToWho": "Vendu à ",
+      "oeuvreSoldDate": "Date de la vente ",
+      "oeuvreSoldPrice": "Prix de vente ",
       "oeuvreReservedToWho": "Réservé par ",
+      "oeuvreReservedDate": "Date de la demande de réservation ",
+      "oeuvreReservedPrice": "Prix prévu ou convenu (ne rien entrer si vous prévoyez d'en faire don) ",
       "oeuvreGivenToSelection": "Suggestions de personnes connues (utilisateurs et contacts)",
       "noUserMatch": "Aucun utilisateur ni contact enregistré à ce nom.",
       "createNewContact": "Créer un nouveau contact ?",
       "newContactSubmitBtnText": "Enregistrer ce nouveau contact",
-      "visibility": "Visible par les visiteurs ?"
+      "visibility": "Visible par les visiteurs ?",
+      "artistComment": "Votre commentaire sur l'oeuvre ",
+      "artistCommentPlaceHolder": "Ecrivez votre commentaire (254 caractères max)"
     }
   },
   "ContactManagement": {

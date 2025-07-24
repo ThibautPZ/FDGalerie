@@ -102,7 +102,39 @@
     "pattern": "Le nom de la personne qui a reçu ce tableau contient des caractères invalides.",
     "maxLength": "Le nom de la personne qui a reçu ce tableau ne peut excéder les 30 caractères."
   },
-  "oeuvreGivenToUserId": {
+  "oeuvreGivenToKnownPerson": {
+    "required": "Vous devez indiquer la personne ayant reçu le tableau.",
     "pattern": "Il y a une erreur avec la personne sélectionnée comme ayant reçu le tableau."
+  },
+  "oeuvreSoldToKnownPerson": {
+    "required": "Vous devez indiquer la personne ayant acheté le tableau.",
+    "pattern": "Il y a une erreur avec la personne sélectionnée comme ayant acheté le tableau."
+  },
+  "oeuvreReservedToKnownPerson": {
+    "required": "Vous devez indiquer la personne ayant réservé le tableau.",
+    "pattern": "Il y a une erreur avec la personne sélectionnée comme ayant réservé le tableau."
+  },
+  "reservationDate": {
+    "required": "Vous devez indiquer la date de réservation.",
+    "pattern": "La date de réservation sélectionnée est invalide."
+  },
+  "saleDate": {
+    "required": "Vous devez indiquer la date de vente.",
+    "pattern": "La date de vente sélectionnée est invalide."
+  },
+  "salePrice": {
+    "required": "Vous devez indiquer le prix de vente.",
+    "pattern": "Le prix de vente indiqué est invalide."
+  },
+  "giftDate": {
+    "required": "Vous devez indiquer la date du don.",
+    "pattern": "La date de don sélectionnée est invalide."
+  },
+  "artistComment": {
+    "pattern": "Votre commentaire contient des caractères invalides.",
+    "maxLength": "Le commentaire ne peut excéder les 254 caractères."
+  },
+  "oeuvreVisibility": {
+    "validate": "Un tableau sans fichier image ne peut être rendu public."
   }
 }
