@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /**
  * Renders a option input in a SelectInput component.
  * @component
@@ -11,6 +12,7 @@
  * @param {function} props.t - Function i18n which returns a string in specified language
  * @returns {JSX.Element} Rendered radio container with a label with each radio input.
  */
+
 function TextWithHighlights({
   // parentName,
   fullText,
@@ -60,10 +62,12 @@ function TextWithHighlights({
   return (
     <span>
       {textContent?.length
-        ? textContent.map((textObj) => (
-            <span className={textObj.className}>{textObj.text}</span>
+        ? textContent.map((textObj, index) => (
+            <span key={`${fullText}${index}`} className={textObj.className}>
+              {textObj.text}
+            </span>
           ))
-        : ""}{" "}
+        : ""}
     </span>
   );
 }

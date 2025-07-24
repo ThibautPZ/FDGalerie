@@ -1,7 +1,7 @@
 import { ErrorBoundary } from "react-error-boundary";
+
 import ReactImage from "../../components/image/ReactImage";
 import TableCell from "../../components/reactTable/TableCell";
-
 import FallbackImg from "../../components/image/FallbackImg";
 
 export default function OwningPaintingTableCell({ cellValue, colName }) {

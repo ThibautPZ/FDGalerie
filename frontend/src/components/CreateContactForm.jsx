@@ -10,7 +10,7 @@ function CreateContactForm({
   const { t } = useTranslation(["common", "pageText"]);
   const outletContext = useOutletContext();
   // const { mutation, createContactFormMethods } = useOutletContext();
-  const mutation = createContactMutation || outletContext.mutation;
+  const mutation = createContactMutation || outletContext.createContactMutation;
   const formMethods =
     createContactFormMethods || outletContext.createContactFormMethods;
 

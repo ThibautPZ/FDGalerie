@@ -1,72 +1,34 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState, Suspense } from "react";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import "../scss/OeuvresManagement.scss";
 
 import axiosInstance from "../services/axiosInstance";
 import OeuvresManagementList from "../pageComponents/oeuvresManagement/OeuvresManagementList";
-import OeuvresManagementDetailedOeuvre from "../pageComponents/oeuvresManagement/OeuvresManagementDetailedOeuvre";
-import OeuvresManagementCreateOeuvre from "../pageComponents/oeuvresManagement/OeuvresManagementCreateOeuvre";
 import PopUp from "../components/modals/PopUp";
 import UseCreateContact from "../hooks/RQmutation/UseCreateContact";
-import { isObjectNotEmpty } from "../services/typesAndValidationChecks";
+import UseCreateOeuvre from "../hooks/RQmutation/UseCreateOeuvre";
+import UseModal from "../hooks/UseModal";
+import createContactDefaultValues from "../json/formDefaultValues/createContactDefaultValues.json";
+import createOeuvreDefaultValues from "../json/formDefaultValues/createOeuvreDefaultValues.json";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [selectedOeuvre, setSelectedOeuvre] = useState({});
-  const [displayedComponents, setDisplayedComponents] = useState("default");
-  const [popUpState, setPopUpState] = useState({
-    modalOpen: false,
-    content: {},
+  const [isModifying, setIsModifying] = useState(false);
+
+  const createContactFormMethods = useForm({
+    defaultValues: createContactDefaultValues,
+    shouldUnregister: false,
   });
-
-  /**
-   * Set modal content then displays it.
-   * @param {string} title - Title text displayed.
-   * @param {string} message - Message text displayed.
-   * @param {string} [validationBtnReturnedStr] - String read by the parent, leading to a callback.
-   * @param {string} [validationBtnText] - Text displayed in confirmation button. No text equals to no button.
-   * @param {boolean} [hasCloseBtn] - True if close button is rendered
-   * @param {string} [closeBtnText=OK] - Text displayed in cancel/close button.
-   * @function
-   */
-
-  const handleModalInstall = (responseDataObj, translationPrefix) => {
-    console.warn(responseDataObj, translationPrefix);
-
-    setPopUpState({
-      modalOpen: true,
-      content: {
-        responseDataObj,
-        translationPrefix,
-      },
-    });
-  };
-  const createContactMutation = UseCreateContact(handleModalInstall);
-  /**
-   * Executed at modal closing: executes instruction if status is defined, then resets popUpState to undisplay modal
-   * @param {string} [status] - String that indicates which function get used
-   * @function
-   */
-  const handleCloseModal = (status, data) => {
-    if (status === "backToOeuvresList") {
-      setDisplayedComponents("oeuvresList");
-    }
-    if (status === "doCreateContact" && isObjectNotEmpty(data)) {
-      const formData = {
-        ...data,
-        verificationBypass: "checkContactOrUserDoesntExist",
-      };
-      createContactMutation.mutate({
-        formData,
-      });
-    }
-    return setPopUpState({ modalOpen: false, content: {} });
-  };
-
-  const handleReturnClick = () => {
-    return setDisplayedComponents("oeuvresList");
-  };
+  const createOeuvreFormMethods = useForm({
+    defaultValues: createOeuvreDefaultValues,
+    shouldUnregister: false,
+  });
 
   const separateTechniques = (oeuvreObj) => {
     const techArr = oeuvreObj.techniques.split("|");
@@ -81,47 +43,105 @@ function OeuvresManagement() {
   };
 
   const getOeuvresListFromDb = async () => {
-    const url = "api/paintings/details";
+    const url = "api/paintings/adminDetailed";
     const res = await axiosInstance.get(url);
     return updateOeuvresWithSeparateTechniques(res.data);
   };
 
-  const oeuvresQuery = useQuery({
-    queryKey: ["oeuvres"],
+  const oeuvresQuery = useSuspenseQuery({
+    queryKey: ["oeuvresWithDetails"],
     queryFn: getOeuvresListFromDb,
     // meta: {}
     throwOnError: true,
   });
 
-  const handleNewOeuvreClick = () => {
-    return setDisplayedComponents("newOeuvre");
+  // const handleOeuvreSelected = (oeuvreId) => {
+  //   setDisplayedComponents("detailedOeuvre");
+  //   const oeuvresList = oeuvresQuery.data;
+  //   const arr = [];
+  //   oeuvresList.forEach((oeuvre) => oeuvre.id === oeuvreId && arr.push(oeuvre));
+  //   return setSelectedOeuvre(arr[0]);
+  // };
+  const { popUpState, giveOnClose, handleModalInstall } = UseModal();
+  const createContactMutation = UseCreateContact(handleModalInstall);
+  const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
+
+  const backToPrev = () => {
+    navigate("./");
   };
 
-  const handleOeuvreSelected = (oeuvreId) => {
-    setDisplayedComponents("detailedOeuvre");
-    const oeuvresList = oeuvresQuery.data;
-    const arr = [];
-    oeuvresList.forEach((oeuvre) => oeuvre.id === oeuvreId && arr.push(oeuvre));
-    return setSelectedOeuvre(arr[0]);
+  const setIsModifyingFalse = () => {
+    setIsModifying(false);
+  };
+
+  const confirmedContactCreation = (data) => {
+    const formData = {
+      ...data,
+      verificationBypass: "checkContactOrUserDoesntExist",
+    };
+    createContactMutation.mutate(formData);
+  };
+
+  const handleCloseModal = giveOnClose(
+    {
+      status: "backToPreviousPage",
+      cb: backToPrev,
+    },
+    {
+      status: "setIsModifyingFalse",
+      cb: setIsModifyingFalse,
+    },
+    {
+      status: "doCreateContact",
+      cb: confirmedContactCreation,
+    }
+  );
+
+  const handleReturnClick = () => {
+    if (createContactFormMethods.formState.isDirty) {
+      return handleModalInstall(
+        { type: "info", message: "backWhileCreatingContact" },
+        "popUpContent:ContactManagement."
+      );
+    }
+    if (createOeuvreFormMethods.formState.isDirty) {
+      return handleModalInstall(
+        { type: "info", message: "backWhileCreatingOeuvre" },
+        "popUpContent:OeuvreManagement."
+      );
+    }
+    return navigate("./");
+  };
+
+  const handleOeuvreSelected = (oeuvre) => {
+    return setSelectedOeuvre(oeuvre);
   };
 
   return (
     <div className="OeuvresManagement">
-      {displayedComponents !== "newOeuvre" ? (
-        <>
-          <button type="button" onClick={() => handleNewOeuvreClick()}>
-            {t("pageText:OeuvresManagement.OM.newOeuvre")}
-          </button>
-          <OeuvresManagementList
-            oeuvresList={oeuvresQuery.data}
-            selectedOeuvre={selectedOeuvre}
-            handleOeuvreSelected={handleOeuvreSelected}
-          />
-        </>
+      {/* {displayedComponents !== "newOeuvre" ? ( */}
+      {pathname !== "/management/oeuvres/new" ? (
+        <div>
+          <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <OeuvresManagementList
+              oeuvresList={oeuvresQuery.data}
+              selectedOeuvre={selectedOeuvre}
+              handleOeuvreSelected={handleOeuvreSelected}
+              setIsModifying={setIsModifying}
+            />
+          </Suspense>
+        </div>
       ) : (
-        ""
+        <button type="button" onClick={() => handleReturnClick()}>
+          {t("pageText:OeuvresManagement.OM.return")}
+        </button>
       )}
-      {displayedComponents === "detailedOeuvre" ? (
+
+      {/* ) : (
+        ""
+      )} */}
+      {/* {displayedComponents === "detailedOeuvre" ? (
         <OeuvresManagementDetailedOeuvre oeuvre={selectedOeuvre} />
       ) : (
         ""
@@ -134,7 +154,7 @@ function OeuvresManagement() {
         />
       ) : (
         ""
-      )}
+      )} */}
       {popUpState.modalOpen ? (
         <PopUp
           isOpen={popUpState.modalOpen}
@@ -142,6 +162,18 @@ function OeuvresManagement() {
           onClose={handleCloseModal}
         />
       ) : null}
+      <Outlet
+        context={{
+          oeuvresQuery,
+          createContactMutation,
+          createContactFormMethods,
+          createOeuvreMutation,
+          createOeuvreFormMethods,
+          handleModalInstall,
+          isModifying,
+          setIsModifying,
+        }}
+      />
     </div>
   );
 }

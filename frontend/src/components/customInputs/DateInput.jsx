@@ -37,12 +37,15 @@ export default function DateInput({
   label,
   fieldName,
   isHidden,
-  registerOptions,
+  registerOptions = {},
   dateRestrictions,
   error,
   t,
 }) {
-  const tCommonD = translationInstance("common:date");
+  const [tCommonD, tformMsg] = translationInstance(
+    "common:date",
+    "formRegisterOptionsMessages"
+  );
   const { getValues, setValue, control } = useFormContext();
 
   const { resolvedLanguage } = translationInstance();
@@ -99,6 +102,27 @@ export default function DateInput({
   };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
+
+  const checkInputAndCalendarSameValue = (calendarValue) => {
+    const calendarValues = giveTimeUnitsFromDate(calendarValue);
+    const inputValues = new Map([
+      ["strYear", year],
+      ["strMonth", month],
+      ["strDay", day],
+    ]);
+    for (const [key, value] of inputValues) {
+      if (calendarValues[key] !== value) {
+        return tformMsg(`${fieldName}.pattern`);
+      }
+    }
+    return true;
+  };
+
+  Object.assign(registerOptions, {
+    validate: {
+      inputDate: checkInputAndCalendarSameValue,
+    },
+  });
 
   return (
     <div

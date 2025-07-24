@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-import { isArray } from "./typesAndValidationChecks";
+import { isArray, isDate, isObjectNotEmpty } from "./typesAndValidationChecks";
+import { hasKeysWithTruthyValue } from "./objectMethods/objectValidation";
 
+// todo: validate fields if availability is not available
 function FormRegisterOptions(watch) {
   const { t } = useTranslation([
     "common",
@@ -10,6 +12,9 @@ function FormRegisterOptions(watch) {
     "popUpContent",
     "formRegisterOptionsMessages",
   ]);
+
+  const priceRegex =
+    /(USD|EUR|€|\$|£)\s?(\d{1,}(?:[.,]*\d{3})*(?:[.,]*\d*))|(\d{1,3}(?:[.,]*\d*)*(?:[.,]*\d*)?)\s?(USD|EUR)/;
 
   const tWithPrefix = (keyStr) => {
     return t(`formRegisterOptionsMessages:${keyStr}`);
@@ -342,7 +347,7 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("oeuvreWidth.pattern"),
       },
       maxLength: {
-        value: 5,
+        value: 7,
         message: tWithPrefix("oeuvreWidth.maxLength"),
       },
       deps: ["oeuvreHeight"],
@@ -353,7 +358,7 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("oeuvreHeight.pattern"),
       },
       maxLength: {
-        value: 5,
+        value: 7,
         message: tWithPrefix("oeuvreHeight.maxLength"),
       },
       validate: (value) =>
@@ -380,11 +385,52 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("oeuvreGivenToWho.maxLength"),
       },
     },
-    oeuvreGivenToUserId: {
+    oeuvreGivenToKnownPerson: {
+      required: tWithPrefix("oeuvreGivenToKnownPerson.required"),
+      validate: (value) =>
+        hasKeysWithTruthyValue(value, ["userId", "contactId"]) ||
+        tWithPrefix("oeuvreGivenToKnownPerson.pattern"),
+    },
+    oeuvreSoldToKnownPerson: {
+      required: tWithPrefix("oeuvreSoldToKnownPerson.required"),
+      validate: (value) =>
+        hasKeysWithTruthyValue(value, ["userId", "contactId"]) ||
+        tWithPrefix("oeuvreSoldToKnownPerson.pattern"),
+    },
+    oeuvreReservedToKnownPerson: {
+      required: tWithPrefix("oeuvreReservedToKnownPerson.required"),
+      validate: (value) =>
+        hasKeysWithTruthyValue(value, ["userId", "contactId"]) ||
+        tWithPrefix("oeuvreReservedToKnownPerson.pattern"),
+    },
+    reservationDate: {
+      required: tWithPrefix("reservationDate.required"),
+    },
+    saleDate: {
+      required: tWithPrefix("saleDate.required"),
+    },
+    salePrice: {
+      required: tWithPrefix("salePrice.required"),
+      pattern: priceRegex,
+    },
+    giftDate: {
+      required: tWithPrefix("giftDate.required"),
+    },
+    artistComment: {
       pattern: {
-        value: /[0-9]/gi,
-        message: tWithPrefix("oeuvreGivenToUserId.pattern"),
+        value: /[a-z0-9éèàëñçù;,.!?%µ*§£$€"'&:()/+-]/gi,
+        message: tWithPrefix("artistComment.pattern"),
       },
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("artistComment.maxLength"),
+      },
+    },
+    oeuvreVisibility: {
+      validate: (value) =>
+        !value ||
+        watch("oeuvreFile").length ||
+        tWithPrefix("oeuvreVisibility.validate"),
     },
   };
 }

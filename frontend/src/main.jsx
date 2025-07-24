@@ -34,6 +34,8 @@ import ProtectedNonUserRoute from "./components/reactrouterdom/ProtectedNonUserR
 import ContactManagementContactInfo from "./pageComponents/contactManagement/ContactManagementContactInfo";
 import CreateContact from "./pageComponents/contactManagement/CreateContact";
 import GlobalErrorBoundary from "./services/errorElements/GlobalErrorBoundary";
+import OeuvresManagementDetailedOeuvre from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedOeuvre";
+import OeuvresManagementCreateOeuvre from "./pageComponents/oeuvresManagement/OeuvresManagementCreateOeuvre";
 
 const router = createBrowserRouter([
   {
@@ -124,10 +126,28 @@ const router = createBrowserRouter([
           {
             path: "oeuvres",
             element: (
-              // <Suspense fallback="loading">
-              <OeuvresManagement />
-              // </Suspense>
+              <Suspense fallback={<p>"loading"</p>}>
+                <OeuvresManagement />
+              </Suspense>
             ),
+            children: [
+              {
+                path: ":id",
+                element: (
+                  // <Suspense fallback="loading">
+                  <OeuvresManagementDetailedOeuvre />
+                  // </Suspense>
+                ),
+              },
+              {
+                path: "new",
+                element: (
+                  // <Suspense fallback="loading">
+                  <OeuvresManagementCreateOeuvre />
+                  // </Suspense>
+                ),
+              },
+            ],
           },
           { path: "bio", element: <BioManagement /> },
           { path: "carousel", element: <CarouselManagement /> },

@@ -1,6 +1,26 @@
 import { useFormContext } from "react-hook-form";
 
 import giveRemainingCharacters from "../../services/giveRemainingCharacters";
+import {
+  civilNameRegExp,
+  priceEurRegExp,
+  integerRegExp,
+  positiveIntegerRegExp,
+  floatPrec2RegExp,
+  floatPrec3RegExp,
+  exponentialRegExp,
+} from "../../services/regularExpressions";
+
+const inputModeRegistrationInfo = {
+  text: { regex: null, inputMode: "text" },
+  priceEur: { regex: priceEurRegExp, inputMode: "decimal" },
+  integer: { regex: integerRegExp, inputMode: "decimal" },
+  positiveInteger: { regex: positiveIntegerRegExp, inputMode: "numeric" },
+  decimalPrec2: { regex: floatPrec2RegExp, inputMode: "decimal" },
+  decimalPrec3: { regex: floatPrec3RegExp, inputMode: "decimal" },
+  civilName: { regex: civilNameRegExp, inputMode: "text" },
+  exponential: { regex: exponentialRegExp, inputMode: "text" },
+};
 
 /**
  * Renders a text input component with its label to display in a FormCore form.
@@ -25,66 +45,28 @@ function TextInput({
   error,
   t,
 }) {
-  const { watch, register, getValues, setValue } = useFormContext();
+  const { watch, register, setValue } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
-  const filterStringToPrice = (str) => {
-    const numRegex = /[0-9]/g;
-    const punctRegex = /[.,]/g;
-    let punctuationIndex = 0;
-    if (!str) {
-      return "";
-    }
-    if (!str[0].match(numRegex)) {
-      return "";
-    }
-    let [returnedStr] = str;
-    for (let i = 1; i < str.length; i += 1) {
-      if (str[i].match(numRegex)) {
-        if (punctuationIndex === 1 || punctuationIndex === 2) {
-          punctuationIndex += 1;
-          returnedStr = `${returnedStr}${str[i]}`;
-        }
-        if (punctuationIndex === 0) {
-          returnedStr = `${returnedStr}${str[i]}`;
-        }
-      }
-      if (str[i].match(punctRegex) && punctuationIndex === 0) {
-        punctuationIndex = 1;
-        returnedStr = `${returnedStr}${str[i]}`;
-      }
-    }
-    return returnedStr;
-  };
-
-  const setValueFilter = (name, inputmode) => {
-    const originText = getValues(name);
-    let filteredText = "";
-    if (inputmode === "price" || inputmode === "decimal") {
-      filteredText = filterStringToPrice(originText);
-    }
-    setValue(name, filteredText);
-  };
-
-  if (inputMode) {
-    const onInputModeChange = () => {
-      setValueFilter(fieldName, inputMode);
-    };
-    Object.assign(registerOptions, {
-      onChange: onInputModeChange,
-    });
-  }
   const registeredField = register(fieldName, registerOptions);
 
-  const giveInputMode = (inputModeStr) => {
-    if (!inputModeStr) {
-      return "text";
+  const giveOnChange = () => {
+    const regex = inputModeRegistrationInfo[inputMode]?.regex;
+    if (!regex) {
+      return registeredField.onChange;
     }
-    if (inputModeStr === "price") {
-      return "decimal";
-    }
+    const onChange = (event) => {
+      const { value } = event.target;
+      return setValue(fieldName, value.match(regex)?.[0] || "");
+    };
+    return onChange;
+  };
 
-    return inputModeStr;
+  const giveInputMode = () => {
+    return (
+      inputModeRegistrationInfo[inputMode]?.inputMode ||
+      inputModeRegistrationInfo.text.inputMode
+    );
   };
 
   return (
@@ -101,16 +83,16 @@ function TextInput({
 
       <input
         type="text"
-        inputMode={giveInputMode(inputMode)}
+        inputMode={giveInputMode()}
         placeholder={label?.placeHolder}
-        onChange={registeredField.onChange}
+        onChange={giveOnChange()}
         name={registeredField.name}
         ref={registeredField.ref}
         aria-invalid={error ? "true" : "false"}
         maxLength={registerOptions?.maxLength?.value}
       />
 
-      {inputMode === "price" && <label htmlFor={fieldName}> € </label>}
+      {inputMode === "priceEur" && <label htmlFor={fieldName}> € </label>}
     </div>
   );
 }

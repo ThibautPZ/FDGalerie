@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+
 import {
   isArrayNotEmpty,
   isStringNotEmpty,
@@ -29,7 +30,7 @@ function FileInput({
   t,
 }) {
   const { fileTypes } = uploadOptions;
-  const { register } = useFormContext();
+  const { register, watch } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
   const acceptedImageExtensions =
@@ -60,11 +61,11 @@ function FileInput({
   const accept = giveInputAccept();
 
   const registeredField = register(fieldName, registerOptions);
+  const fileValue = watch(fieldName);
 
   return (
     <div hidden={isHidden} className={fieldName}>
       <label htmlFor={fieldName}>{t(`${labelNs}`)}</label>
-
       <input
         type="file"
         accept={accept}
@@ -74,6 +75,9 @@ function FileInput({
         ref={registeredField.ref}
         aria-invalid={error ? "true" : "false"}
       />
+      {fileValue.length ? (
+        <img src={URL.createObjectURL(fileValue[0])} alt="preview" />
+      ) : null}
     </div>
   );
 }

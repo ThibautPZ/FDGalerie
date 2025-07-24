@@ -74,11 +74,11 @@ export default function OwningPaintingsTableBase({ paintingsList, columns }) {
     enableMultiRowSelection: false,
     onRowSelectionChange,
   });
-  // todo: navigate to oeuvremanagement/:paintingID on row click
+
   useEffect(() => {
     if (Object.keys(rowSelection)[0]) {
       navigate(
-        `id:${table.getRow(Object.keys(rowSelection)[0]).original.contactId}`
+        `../../oeuvres/id:${table.getRow(Object.keys(rowSelection)[0]).original.paintingId}`
       );
     }
   }, [Object.keys(rowSelection)[0]]);

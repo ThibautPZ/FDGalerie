@@ -3,7 +3,8 @@ function UseFormInputConditionalRendering(watch, conditions) {
     return false;
   }
 
-  const hideInput = conditions.hiddenWhenNoMatch || false;
+  const hideInput =
+    conditions.hiddenWhenNoMatch || conditions.disbledWhenNoMatch || false;
 
   const isWatchedValueEqualToTargetedValue = (
     watchedValueStrOrArr,
@@ -28,8 +29,6 @@ function UseFormInputConditionalRendering(watch, conditions) {
     }
 
     return watchedValueStrOrArr.value === targetedValue;
-
-    // return watchedValueStrOrArr === targetedValue;
   };
 
   const hasFieldTargetedValues = (fieldObj) => {

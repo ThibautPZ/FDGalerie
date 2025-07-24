@@ -26,6 +26,10 @@ const UseCreateContact = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn("suc", data.successObj);
+      queryclient.refetchQueries([
+        "contacts",
+        { type: "withPaintingsOwningCount" },
+      ]);
       handleModalInstall(data.successObj, translationPrefix);
     },
   });

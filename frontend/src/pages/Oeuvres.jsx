@@ -9,7 +9,9 @@ function Oeuvres() {
 
   const fetchAllOeuvres = async () => {
     try {
-      const paintingsList = await axiosInstance.get(`/api/paintings/`);
+      const paintingsList = await axiosInstance.get(
+        `/api/paintings/allPublicMinimalInfos`
+      );
 
       setOeuvresList(paintingsList.data);
     } catch (error) {

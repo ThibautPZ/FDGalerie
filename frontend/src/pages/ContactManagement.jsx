@@ -98,20 +98,23 @@ function ContactManagement() {
   return (
     <div className="ContactsManagement">
       {pathname !== "/management/contacts/new" ? (
-        <Link to="new">{t("pageText:ContactManagement.CM.newContact")}</Link>
+        <div>
+          <Link to="new">{t("pageText:ContactManagement.CM.newContact")}</Link>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <ContactManagementList
+              contactList={contactsQuery.data}
+              selectedContact={selectedContact}
+              handleContactSelected={handleContactSelected}
+              setIsModifying={setIsModifying}
+            />
+          </Suspense>
+        </div>
       ) : (
         <button type="button" onClick={() => handleReturnClick()}>
           {t("pageText:ContactManagement.CM.return")}
         </button>
       )}
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <ContactManagementList
-          contactList={contactsQuery.data}
-          selectedContact={selectedContact}
-          handleContactSelected={handleContactSelected}
-          setIsModifying={setIsModifying}
-        />
-      </Suspense>
+
       {popUpState.modalOpen ? (
         <PopUp
           isOpen={popUpState.modalOpen}
@@ -121,8 +124,8 @@ function ContactManagement() {
       ) : null}
       <Outlet
         context={{
-          mutation: createContactMutation,
           contactsQuery,
+          createContactMutation,
           createContactFormMethods,
           handleModalInstall,
           isModifying,

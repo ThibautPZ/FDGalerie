@@ -22,6 +22,7 @@ function GroupWrapper({
   specialGroup,
   fields,
   conditionalRendering,
+  conditionalDisabling,
   asyncValues,
   registerOptions,
   errors,
@@ -30,6 +31,7 @@ function GroupWrapper({
   const { control } = useFormContext();
 
   let isGroupHidden = false;
+  let isGroupDisabled = false;
 
   const useWatchWithControl = (inputName) => {
     return useWatch({ control, name: inputName });
@@ -39,6 +41,13 @@ function GroupWrapper({
     isGroupHidden = UseFormInputConditionalRendering(
       useWatchWithControl,
       conditionalRendering
+    );
+  }
+  // todo : conditionalDisabling in inputConstructor
+  if (conditionalDisabling) {
+    isGroupDisabled = UseFormInputConditionalRendering(
+      useWatchWithControl,
+      conditionalDisabling
     );
   }
 

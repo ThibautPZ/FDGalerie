@@ -8,6 +8,7 @@ function OeuvresManagementList({
   handleOeuvreSelected,
 }) {
   const { t } = useTranslation(["common", "pageText"]);
+  console.log(oeuvresList);
 
   // todo: figure out why setDisplayedInfos isn't used (it's send currently as props to OMOP to trick eslint, but unused whatsoever)
   const [displayedInfos, setDisplayedInfos] = useState({

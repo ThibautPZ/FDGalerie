@@ -21,9 +21,8 @@ function DualSearchbarSetByResultSelectGroup({
   t,
 }) {
   const { textField1, textField2, selectField, selectedValueField } = fields;
-  // console.log(registerOptions);
 
-  const { register, setValue, getValues } = useFormContext();
+  const { register, setValue, getValues, trigger } = useFormContext();
   const [isSelectNeeded, setIsSelectNeeded] = useState(false);
 
   const textField1RegisterOptions = giveFieldRegisterOptions(
@@ -73,6 +72,7 @@ function DualSearchbarSetByResultSelectGroup({
       setValue(textField1.name, valueForTextField1);
       setValue(textField2.name, valueForTextField2);
       setValue(selectedValueField.name, value.value);
+      trigger(selectedValueField.name);
     }
     return setIsSelectNeeded(false);
   };
@@ -91,9 +91,10 @@ function DualSearchbarSetByResultSelectGroup({
     },
   });
 
-  const registeredHidden = register(selectedValueField.name, {
-    ...registerOptions,
-  });
+  const registeredHidden = register(
+    selectedValueField.name,
+    registerOptions[selectedValueField.name]
+  );
 
   const watchedInputs = {
     watchedInputNames: [textField1.name, textField2.name],

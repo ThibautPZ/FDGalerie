@@ -51,49 +51,6 @@ function FormCore({
     mutate(mutatedData);
   };
 
-  // const fetchQueryFunction = async (url, labelData, valuesData) => {
-  //   const urlWithPrefix = `api/${url}`;
-  //   const res = await axiosInstance.get(urlWithPrefix);
-  //   if (!res) {
-  //     return Error;
-  //   }
-  //   const returnedArr = res.data.map((obj) => {
-  //     return { label: obj[labelData], value: obj[valuesData] };
-  //   });
-  //   return returnedArr;
-  // };
-
-  // const fetchValues = ({ name, url, labelData, valuesData }) => {
-  //   const returnedQuery = useQuery({
-  //     queryKey: [name],
-  //     queryFn: () => fetchQueryFunction(url, labelData, valuesData),
-  //     throwOnError: true,
-  //   });
-  //   return returnedQuery;
-  // };
-
-  // const fetchAsyncValues = (fieldsArr) => {
-  //   const returnedObj = {};
-  //   if (fieldsArr.length) {
-  //     fieldsArr.forEach((field) => {
-  //       return Object.assign(returnedObj, {
-  //         [field.name]: fetchValues(field).data,
-  //       });
-  //     });
-  //   }
-  //   return returnedObj;
-  // };
-
-  // const asyncFormValues = fetchAsyncValues(asyncValues);
-
-  // const removeTextFollowingUnderscore = (str) => {
-  //   const index = str.search("_");
-  //   if (index !== -1) {
-  //     return str.slice(0, index);
-  //   }
-  //   return str;
-  // };
-
   const assignAddedValues = (addedValuesObj) => {
     for (const [key, value] of Object.entries(addedValuesObj)) {
       methods.register(key, { value });
@@ -112,7 +69,6 @@ function FormCore({
   return (
     <>
       <FormProvider {...methods}>
-        {/* <form onSubmit={methods.handleSubmit(mutate)}> */}
         <form onSubmit={methods.handleSubmit(handleFormSubmition)}>
           <GroupWrapper
             groupClassname={className}

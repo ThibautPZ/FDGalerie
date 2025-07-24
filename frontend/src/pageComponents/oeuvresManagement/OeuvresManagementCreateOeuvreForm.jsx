@@ -4,8 +4,11 @@ import "../../scss/Oeuvre.scss";
 import FormCore from "../../components/FormCore";
 import { isArrayNotEmpty } from "../../services/typesAndValidationChecks";
 import axiosInstance from "../../services/axiosInstance";
+import createOeuvreDefaultValues from "../../json/formDefaultValues/createOeuvreDefaultValues.json";
 
-function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
+// todo: create big text box collapsable on unfocus to leave comment, create conditional deactivating
+
+function OeuvresManagementCreateOeuvreForm({ mutation }) {
   const { t } = useTranslation(["common", "pageText"]);
 
   const fetchUsersAndContactsMatchingSearch = async (searchedArrOfStr) => {
@@ -16,17 +19,6 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
     const searchedStr = `${searchedArrOfStr[0] || "!null"}&${
       searchedArrOfStr[1] || "!null"
     }`;
-    // let searchedStr = "";
-    // if (isStringNotEmpty(searchedArrOfStr[0])) {
-    //   searchedStr = searchedArrOfStr[0];
-    // } else {
-    //   searchedStr = "!firstname";
-    // }
-    // if (isStringNotEmpty(searchedArrOfStr[1])) {
-    //   searchedStr = searchedArrOfStr[1];
-    // } else {
-    //   searchedStr = "!lastname";
-    // }
 
     const url = `api/users/searchUsersAndContactsByName/${searchedStr}`;
     const res = await axiosInstance.get(url);
@@ -80,7 +72,7 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
             {
               name: "oeuvreWidth",
               input: "text",
-              inputmode: "price",
+              inputmode: "decimalPrec2",
               label: {
                 namespace: "common:info.cm",
                 placeHolder: t(`common:info.width`),
@@ -93,7 +85,7 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
             {
               name: "oeuvreHeight",
               input: "text",
-              inputmode: "price",
+              inputmode: "decimalPrec2",
               label: {
                 namespace: `common:info.cm`,
                 placeHolder: t(`common:info.height`),
@@ -103,6 +95,18 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
         },
       ],
     },
+    { name: "oeuvreFamily", input: "select" },
+    {
+      name: "artistComment",
+      input: "text",
+      label: {
+        namespace: `pageText:OeuvresManagement.OMCreateOeuvre.artistComment`,
+        placeHolder: t(
+          `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentPlaceHolder`
+        ),
+        count: "artistComment",
+      },
+    },
     {
       name: "oeuvreAvailability",
       label: {
@@ -110,66 +114,83 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
       },
       input: "select",
       options: [
-        { value: 0 },
+        { value: 4 },
         { value: 1 },
         { value: 2 },
         { value: 3 },
-        { value: 4 },
+        { value: 5 },
       ],
     },
     {
       groupClassname: "oeuvreGivenInfos",
-      specialGroup: {
-        type: "DualSearchbarSetByResultSelectGroup",
-        fields: {
-          textField1: {
-            name: "oeuvreGivenToFirstname",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToWho",
-              placeHolder: t("pageText:inputPlaceHolder.firstname"),
+      includedComponents: [
+        {
+          groupClassname: "oeuvreGivenToKnownPerson",
+          specialGroup: {
+            type: "DualSearchbarSetByResultSelectGroup",
+            fields: {
+              textField1: {
+                name: "oeuvreGivenToFirstname",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToWho",
+                  placeHolder: t("pageText:inputPlaceHolder.firstname"),
+                },
+                valueKeysToSetWhenSelect: ["firstname"],
+              },
+              textField2: {
+                name: "oeuvreGivenToLastname",
+                label: {
+                  placeHolder: t("pageText:inputPlaceHolder.lastname"),
+                },
+                valueKeysToSetWhenSelect: ["lastname"],
+              },
+              selectField: {
+                name: "oeuvreGivenToSelection",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToSelection",
+                  placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
+                },
+              },
+              selectedValueField: { name: "oeuvreGivenToKnownPerson" },
             },
-            valueKeysToSetWhenSelect: ["firstname"],
-          },
-          textField2: {
-            name: "oeuvreGivenToLastname",
-            label: {
-              placeHolder: t("pageText:inputPlaceHolder.lastname"),
+            querySpecs: {
+              queryType: "fetchDependsOnWatched",
+              queryFunction: fetchUsersAndContactsMatchingSearch,
+              responseKeysToBeOptionValues: [
+                "userId",
+                "contactId",
+                "firstname",
+                "lastname",
+              ],
+              responseKeysToBeOptionContent: ["firstname", "lastname"],
+              additionalLabelInfo: {
+                infoOfInterestType: "keyHasValue",
+                infosOfInterest: [
+                  {
+                    searchedValue: "contactId",
+                    namespace: "common:info.contact",
+                  },
+                  { searchedValue: "userId", namespace: "common:userTypes.1" },
+                ],
+                displayedInfo: "namespace",
+              },
+              queryResponseEmptyLabel:
+                "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
             },
-            valueKeysToSetWhenSelect: ["lastname"],
           },
-          selectField: {
-            name: "oeuvreGivenToSelection",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToSelection",
-              placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
-            },
-          },
-          selectedValueField: { name: "oeuvreGivenToKnownPerson" },
         },
-        querySpecs: {
-          queryType: "fetchDependsOnWatched",
-          queryFunction: fetchUsersAndContactsMatchingSearch,
-          responseKeysToBeOptionValues: [
-            "userId",
-            "contactId",
-            "firstname",
-            "lastname",
-          ],
-          responseKeysToBeOptionContent: ["firstname", "lastname"],
-          additionalLabelInfo: {
-            infoOfInterestType: "keyHasValue",
-            infosOfInterest: [
-              { searchedValue: "contactId", namespace: "common:info.contact" },
-              { searchedValue: "userId", namespace: "common:userTypes.1" },
-            ],
-            displayedInfo: "namespace",
+        {
+          name: "giftDate",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenDate",
           },
-          queryResponseEmptyLabel:
-            "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
+          input: "date",
         },
-      },
+      ],
+
       conditionalRendering: {
         hiddenWhenNoMatch: true,
         behaviour: "default",
@@ -186,57 +207,82 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
     },
     {
       groupClassname: "oeuvreSoldInfos",
-      specialGroup: {
-        type: "DualSearchbarSetByResultSelectGroup",
-        fields: {
-          textField1: {
-            name: "oeuvreSoldToFirstname",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreSoldToWho",
-              placeHolder: t("pageText:inputPlaceHolder.firstname"),
+      includedComponents: [
+        {
+          groupClassname: "oeuvreSoldPerson",
+          specialGroup: {
+            type: "DualSearchbarSetByResultSelectGroup",
+            fields: {
+              textField1: {
+                name: "oeuvreSoldToFirstname",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreSoldToWho",
+                  placeHolder: t("pageText:inputPlaceHolder.firstname"),
+                },
+                valueKeysToSetWhenSelect: ["firstname"],
+              },
+              textField2: {
+                name: "oeuvreSoldToLastname",
+                label: {
+                  placeHolder: t("pageText:inputPlaceHolder.lastname"),
+                },
+                valueKeysToSetWhenSelect: ["lastname"],
+              },
+              selectField: {
+                name: "oeuvreSoldToSelection",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToKnownSelection",
+                  placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
+                },
+              },
+              selectedValueField: { name: "oeuvreSoldToKnownPerson" },
             },
-            valueKeysToSetWhenSelect: ["firstname"],
-          },
-          textField2: {
-            name: "oeuvreSoldToLastname",
-            label: {
-              placeHolder: t("pageText:inputPlaceHolder.lastname"),
+            querySpecs: {
+              queryType: "fetchDependsOnWatched",
+              queryFunction: fetchUsersAndContactsMatchingSearch,
+              responseKeysToBeOptionValues: [
+                "userId",
+                "contactId",
+                "firstname",
+                "lastname",
+              ],
+              responseKeysToBeOptionContent: ["firstname", "lastname"],
+              additionalLabelInfo: {
+                infoOfInterestType: "keyHasValue",
+                infosOfInterest: [
+                  {
+                    searchedValue: "contactId",
+                    namespace: "common:info.contact",
+                  },
+                  { searchedValue: "userId", namespace: "common:userTypes.1" },
+                ],
+                displayedInfo: "namespace",
+              },
+              queryResponseEmptyLabel:
+                "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
             },
-            valueKeysToSetWhenSelect: ["lastname"],
           },
-          selectField: {
-            name: "oeuvreSoldToSelection",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToKnownSelection",
-              placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
-            },
-          },
-          selectedValueField: { name: "oeuvreSoldToKnownPerson" },
         },
-        querySpecs: {
-          queryType: "fetchDependsOnWatched",
-          queryFunction: fetchUsersAndContactsMatchingSearch,
-          responseKeysToBeOptionValues: [
-            "userId",
-            "contactId",
-            "firstname",
-            "lastname",
-          ],
-          responseKeysToBeOptionContent: ["firstname", "lastname"],
-          additionalLabelInfo: {
-            infoOfInterestType: "keyHasValue",
-            infosOfInterest: [
-              { searchedValue: "contactId", namespace: "common:info.contact" },
-              { searchedValue: "userId", namespace: "common:userTypes.1" },
-            ],
-            displayedInfo: "namespace",
+        {
+          name: "saleDate",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreSoldDate",
           },
-          queryResponseEmptyLabel:
-            "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
+          input: "date",
         },
-      },
+        {
+          name: "salePrice",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreSoldPrice",
+          },
+          input: "text",
+          inputmode: "priceEur",
+        },
+      ],
       conditionalRendering: {
         hiddenWhenNoMatch: true,
         behaviour: "default",
@@ -249,58 +295,83 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
       },
     },
     {
-      groupClassname: "oeuvreReservedInfos",
-      specialGroup: {
-        type: "DualSearchbarSetByResultSelectGroup",
-        fields: {
-          textField1: {
-            name: "oeuvreReservedToFirstname",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreReservedToWho",
-              placeHolder: t("pageText:inputPlaceHolder.firstname"),
+      groupClassname: "oeuvreReservationInfos",
+      includedComponents: [
+        {
+          groupClassname: "oeuvreReservedPerson",
+          specialGroup: {
+            type: "DualSearchbarSetByResultSelectGroup",
+            fields: {
+              textField1: {
+                name: "oeuvreReservedToFirstname",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreReservedToWho",
+                  placeHolder: t("pageText:inputPlaceHolder.firstname"),
+                },
+                valueKeysToSetWhenSelect: ["firstname"],
+              },
+              textField2: {
+                name: "oeuvreReservedToLastname",
+                label: {
+                  placeHolder: t("pageText:inputPlaceHolder.lastname"),
+                },
+                valueKeysToSetWhenSelect: ["lastname"],
+              },
+              selectField: {
+                name: "oeuvreReservedToSelection",
+                label: {
+                  namespace:
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToSelection",
+                  placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
+                },
+              },
+              selectedValueField: { name: "oeuvreReservedToKnownPerson" },
             },
-            valueKeysToSetWhenSelect: ["firstname"],
-          },
-          textField2: {
-            name: "oeuvreReservedToLastname",
-            label: {
-              placeHolder: t("pageText:inputPlaceHolder.lastname"),
+            querySpecs: {
+              queryType: "fetchDependsOnWatched",
+              queryFunction: fetchUsersAndContactsMatchingSearch,
+              responseKeysToBeOptionValues: [
+                "userId",
+                "contactId",
+                "firstname",
+                "lastname",
+              ],
+              responseKeysToBeOptionContent: ["firstname", "lastname"],
+              additionalLabelInfo: {
+                infoOfInterestType: "keyHasValue",
+                infosOfInterest: [
+                  {
+                    searchedValue: "contactId",
+                    namespace: "common:info.contact",
+                  },
+                  { searchedValue: "userId", namespace: "common:userTypes.1" },
+                ],
+                displayedInfo: "namespace",
+              },
+              queryResponseEmptyLabel:
+                "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
             },
-            valueKeysToSetWhenSelect: ["lastname"],
           },
-          selectField: {
-            name: "oeuvreReservedToSelection",
-            label: {
-              namespace:
-                "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToSelection",
-              placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
-            },
-          },
-          selectedValueField: { name: "oeuvreReservedToKnownPerson" },
         },
-        querySpecs: {
-          queryType: "fetchDependsOnWatched",
-          queryFunction: fetchUsersAndContactsMatchingSearch,
-          responseKeysToBeOptionValues: [
-            "userId",
-            "contactId",
-            "firstname",
-            "lastname",
-          ],
-          responseKeysToBeOptionContent: ["firstname", "lastname"],
-          additionalLabelInfo: {
-            infoOfInterestType: "keyHasValue",
-            infosOfInterest: [
-              { searchedValue: "contactId", namespace: "common:info.contact" },
-              { searchedValue: "userId", namespace: "common:userTypes.1" },
-            ],
-            displayedInfo: "namespace",
+        {
+          name: "reservationDate",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreReservedDate",
           },
-          queryResponseEmptyLabel:
-            "pageText:OeuvresManagement.OMCreateOeuvre.noUserMatch",
+          input: "date",
         },
-      },
+        {
+          name: "reservationPrice",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreReservedPrice",
+          },
+          input: "text",
+          inputmode: "priceEur",
+        },
+      ],
       conditionalRendering: {
         hiddenWhenNoMatch: true,
         behaviour: "default",
@@ -321,31 +392,8 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
     },
   ];
 
-  const defaultValues = {
-    oeuvreFile: {},
-    oeuvreTitle: "",
-    oeuvreTechnique: [],
-    oeuvreSupport: "",
-    oeuvreFormat: "",
-    oeuvreWidth: "",
-    oeuvreHeight: "",
-    oeuvreAvailability: "",
-    oeuvreGivenToFirstname: "",
-    oeuvreGivenToLastname: "",
-    oeuvreGivenToSelection: "",
-    oeuvreGivenToKnownPerson: "",
-    oeuvreSoldToFirstname: "",
-    oeuvreSoldToLastname: "",
-    oeuvreSoldToSelection: "",
-    oeuvreSoldToKnownPerson: "",
-    oeuvreReservedToFirstname: "",
-    oeuvreReservedToLastname: "",
-    oeuvreReservedToSelection: "",
-    oeuvreReservedToKnownPerson: "",
-    contactLastname: "",
-    oeuvreVisibility: "",
-  };
   const addedValues = {};
+
   const asyncVal = {
     oeuvreFormat: {
       key: "oeuvreFormat",
@@ -365,17 +413,20 @@ function OeuvresManagementCreateOeuvreForm({ mutation, handleReturnClick }) {
       labelData: "name",
       valuesData: "id",
     },
+    oeuvreFamily: {
+      key: "oeuvreFamily",
+      url: "families",
+      labelData: "name",
+      valuesData: "id",
+    },
   };
 
   return (
     <div className="OeuvresManagementCreateOeuvreForm">
-      <button type="button" onClick={() => handleReturnClick()}>
-        {t("pageText:OeuvresManagement.OMCreateOeuvre.return")}
-      </button>
       <FormCore
         className="CreateOeuvreForm"
         mutation={mutation}
-        defaultValues={defaultValues}
+        defaultValues={createOeuvreDefaultValues}
         addedValues={addedValues}
         asyncValues={asyncVal}
         fields={formFields}
