@@ -37,6 +37,7 @@ export default function DateInput({
   label,
   fieldName,
   isHidden,
+  isDisabled,
   registerOptions = {},
   dateRestrictions,
   error,
@@ -138,6 +139,7 @@ export default function DateInput({
         rules={registerOptions}
         render={({ field: { name, ref } }) => (
           <DatePicker
+            disabled={isDisabled}
             selected={selectedDate}
             openToDate={selectedDate}
             todayButton={tCommonD("today")}

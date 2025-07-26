@@ -4,6 +4,7 @@ import {
   isArrayNotEmpty,
   isStringNotEmpty,
 } from "../../services/typesAndValidationChecks";
+import Eraser from "../SVG/Eraser";
 
 /**
  * Renders a text input component with its label to display in a FormCore form.
@@ -22,6 +23,7 @@ import {
 function FileInput({
   label,
   isHidden,
+  isDisabled,
   fieldName,
   registerOptions,
   // asyncValues,
@@ -30,7 +32,7 @@ function FileInput({
   t,
 }) {
   const { fileTypes } = uploadOptions;
-  const { register, watch } = useFormContext();
+  const { register, watch, resetField } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
   const acceptedImageExtensions =
@@ -68,6 +70,7 @@ function FileInput({
       <label htmlFor={fieldName}>{t(`${labelNs}`)}</label>
       <input
         type="file"
+        disabled={isDisabled}
         accept={accept}
         placeholder={label?.placeHolder}
         onChange={registeredField.onChange}
@@ -75,8 +78,13 @@ function FileInput({
         ref={registeredField.ref}
         aria-invalid={error ? "true" : "false"}
       />
-      {fileValue.length ? (
-        <img src={URL.createObjectURL(fileValue[0])} alt="preview" />
+      {fileValue?.length ? (
+        <>
+          <button type="button" onClick={() => resetField(fieldName)}>
+            <Eraser />
+          </button>
+          <img src={URL.createObjectURL(fileValue[0])} alt="preview" />
+        </>
       ) : null}
     </div>
   );

@@ -21,6 +21,7 @@ function GroupWrapper({
   groupClassname,
   specialGroup,
   fields,
+  isDisabled,
   conditionalRendering,
   conditionalDisabling,
   asyncValues,
@@ -29,27 +30,19 @@ function GroupWrapper({
   t,
 }) {
   const { control } = useFormContext();
-
-  let isGroupHidden = false;
-  let isGroupDisabled = false;
-
+  // todo : replace div by fieldset for disaable
   const useWatchWithControl = (inputName) => {
     return useWatch({ control, name: inputName });
   };
 
-  if (conditionalRendering) {
-    isGroupHidden = UseFormInputConditionalRendering(
-      useWatchWithControl,
-      conditionalRendering
-    );
-  }
-  // todo : conditionalDisabling in inputConstructor
-  if (conditionalDisabling) {
-    isGroupDisabled = UseFormInputConditionalRendering(
-      useWatchWithControl,
-      conditionalDisabling
-    );
-  }
+  const isGroupHidden = UseFormInputConditionalRendering(
+    useWatchWithControl,
+    conditionalRendering
+  );
+
+  const isGroupDisabled =
+    isDisabled ||
+    UseFormInputConditionalRendering(useWatchWithControl, conditionalDisabling);
 
   if (!isGroupHidden) {
     if (specialGroup) {
@@ -57,6 +50,7 @@ function GroupWrapper({
         <SpecialGroupConstructor
           groupClassname={groupClassname}
           specialGroupSpecs={specialGroup}
+          isDisabled={isGroupDisabled}
           asyncValues={asyncValues}
           registerOptions={registerOptions}
           errors={errors}
@@ -73,7 +67,9 @@ function GroupWrapper({
           return field.groupClassname ? (
             <GroupWrapper
               key={field.groupClassname}
+              isDisabled={isGroupDisabled}
               conditionalRendering={field.conditionalRendering || null}
+              conditionalDisabling={field.conditionalDisabling || null}
               specialGroup={field.specialGroup}
               groupClassname={field.groupClassname}
               fields={field.includedComponents}
@@ -85,9 +81,11 @@ function GroupWrapper({
           ) : (
             <InputConstructor
               key={field.name || field.label.namespace}
+              isDisabled={isGroupDisabled}
               field={field}
               asyncValues={asyncValues}
               registerOptions={registerOptions}
+              useWatchWithControl={useWatchWithControl}
               errors={errors}
               t={t}
             />

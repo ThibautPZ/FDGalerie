@@ -17,6 +17,7 @@ function RadioContainer({
   fieldName,
   label,
   isHidden,
+  isDisabled,
   options,
   defaultValue,
   register,
@@ -47,6 +48,7 @@ function RadioContainer({
         <div>
           <RadioInput
             key={giveFieldKey(option)}
+            isDisabled={isDisabled}
             fieldName={giveFieldKey(option)}
             optionValue={option.value}
             defaultValue={defaultValue}

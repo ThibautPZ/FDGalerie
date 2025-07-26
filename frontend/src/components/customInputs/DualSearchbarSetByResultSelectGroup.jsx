@@ -14,6 +14,7 @@ import { giveFieldRegisterOptions } from "../../services/formFunctions";
 function DualSearchbarSetByResultSelectGroup({
   groupClassname,
   fields,
+  isDisabled,
   querySpecs,
   // asyncValues,
   registerOptions,
@@ -107,6 +108,7 @@ function DualSearchbarSetByResultSelectGroup({
       {textField1.label.namespace ? <p>{t(textField1.label.namespace)}</p> : ""}
       <input
         type="text"
+        disabled={isDisabled}
         className={textField1.name}
         placeholder={textField1.label?.placeHolder}
         onChange={registeredText1.onChange}
@@ -118,6 +120,7 @@ function DualSearchbarSetByResultSelectGroup({
       {textField2.label.namespace ? <p>{t(textField2.label.namespace)}</p> : ""}
       <input
         type="text"
+        disabled={isDisabled}
         className={textField2.name}
         placeholder={textField2.label?.placeHolder}
         onChange={registeredText2.onChange}
@@ -131,6 +134,7 @@ function DualSearchbarSetByResultSelectGroup({
           fieldName={selectField.name}
           label={selectField.label}
           isHidden={!isSelectNeeded}
+          disabled={isDisabled}
           multipleSelection={false}
           watchedInputs={watchedInputs}
           query={querySpecs}

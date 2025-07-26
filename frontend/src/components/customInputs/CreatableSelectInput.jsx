@@ -17,6 +17,7 @@ import Creatable from "react-select/creatable";
 function CreatableSelectInput({
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   fieldName,
   options,
@@ -27,9 +28,6 @@ function CreatableSelectInput({
 }) {
   const { control } = useFormContext();
   const placeholder = t(`pageText:inputPlaceHolder.${fieldName}`);
-  // const giveFieldValue = (option) => {
-  //   return `${fieldName}${option.value}`;
-  // };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
@@ -69,12 +67,12 @@ function CreatableSelectInput({
         rules={registerOptions}
         render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Creatable
+            isDisabled={isDisabled}
             formatCreateLabel={(val) =>
               t("pageText:selectInput.creatableNewAdd", { new: val })
             }
             options={selectOptions}
             placeholder={placeholder}
-            // onChange={(val) => giveValue(onChange, val)}
             onChange={onChange}
             onBlur={onBlur}
             name={name}

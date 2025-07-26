@@ -17,6 +17,7 @@ import Select from "react-select";
 function SelectInput({
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   fieldName,
   options,
@@ -66,6 +67,8 @@ function SelectInput({
         rules={registerOptions}
         render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Select
+            isDisabled={isDisabled}
+            isClearable
             options={selectOptions}
             placeholder={placeholder}
             onChange={onChange}

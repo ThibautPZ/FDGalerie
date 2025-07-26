@@ -1,3 +1,5 @@
+import { isArrayNotEmpty } from "../services/typesAndValidationChecks";
+
 function UseFormInputConditionalRendering(watch, conditions) {
   if (!conditions) {
     return false;
@@ -24,7 +26,7 @@ function UseFormInputConditionalRendering(watch, conditions) {
       return true;
     }
 
-    if (typeof watchedValueStrOrArr !== "object") {
+    if (typeof watchedValueStrOrArr !== "object" || !watchedValueStrOrArr) {
       return watchedValueStrOrArr === targetedValue;
     }
 
@@ -32,7 +34,7 @@ function UseFormInputConditionalRendering(watch, conditions) {
   };
 
   const hasFieldTargetedValues = (fieldObj) => {
-    if (!fieldObj.values || !fieldObj.values[0]) {
+    if (!fieldObj.values || !isArrayNotEmpty(fieldObj.values)) {
       return false;
     }
 
@@ -41,15 +43,12 @@ function UseFormInputConditionalRendering(watch, conditions) {
     const matchingFieldValues = fieldObj.values.filter((value) =>
       isWatchedValueEqualToTargetedValue(watchedValue, value)
     );
-    if (!matchingFieldValues[0]) {
-      return false;
-    }
 
-    return true;
+    return isArrayNotEmpty(matchingFieldValues);
   };
 
   const haveFieldsTargetedValues = (fieldsArr) => {
-    if (!fieldsArr || !fieldsArr[0]) {
+    if (!isArrayNotEmpty(fieldsArr)) {
       return false;
     }
     const matchingFieldsValues = fieldsArr.filter((fieldToBeWatched) =>

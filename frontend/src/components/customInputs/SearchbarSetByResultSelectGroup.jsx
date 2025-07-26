@@ -10,6 +10,7 @@ import { giveFieldRegisterOptions } from "../../services/formFunctions";
 function SearchbarSetByResultSelectGroup({
   groupClassname,
   fields,
+  isDisabled,
   querySpecs,
   // asyncValues,
   registerOptions,
@@ -63,6 +64,7 @@ function SearchbarSetByResultSelectGroup({
     <div className={groupClassname}>
       <input
         type="text"
+        disabled={isDisabled}
         className={name}
         placeholder={label?.placeHolder}
         onChange={registeredText.onChange}
@@ -76,6 +78,7 @@ function SearchbarSetByResultSelectGroup({
           fieldName={selectField.name}
           label={selectField.label}
           isHidden={!isSelectNeeded}
+          isDisabled={isDisabled}
           multipleSelection={false}
           watchedInputs={watchedInputs}
           query={querySpecs}

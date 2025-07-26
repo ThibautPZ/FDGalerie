@@ -17,6 +17,7 @@ import { useFormContext } from "react-hook-form";
 function CheckboxInput({
   label,
   isHidden,
+  isDisabled,
   fieldName,
   registerOptions,
   // asyncValues,
@@ -28,7 +29,7 @@ function CheckboxInput({
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
   return (
-    <div hidden={isHidden} className={fieldName}>
+    <fieldset hidden={isHidden} disabled={isDisabled} className={fieldName}>
       {label ? <label htmlFor={fieldName}>{t(`${labelNs}`)}</label> : ""}
 
       <input
@@ -36,10 +37,9 @@ function CheckboxInput({
         onChange={onChange}
         name={name}
         ref={ref}
-        value
         aria-invalid={error ? "true" : "false"}
       />
-    </div>
+    </fieldset>
   );
 }
 

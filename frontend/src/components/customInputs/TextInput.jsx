@@ -40,6 +40,7 @@ function TextInput({
   fieldName,
   label,
   isHidden,
+  isDisabled,
   inputMode,
   registerOptions = {},
   error,
@@ -83,6 +84,7 @@ function TextInput({
 
       <input
         type="text"
+        disabled={isDisabled}
         inputMode={giveInputMode()}
         placeholder={label?.placeHolder}
         onChange={giveOnChange()}

@@ -21,6 +21,7 @@ function FetchedDataSelect({
   fieldName,
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   watchedInputs,
   query,
@@ -133,6 +134,7 @@ function FetchedDataSelect({
           rules={registerOptions}
           render={({ field: { onChange, onBlur, name, ref, value } }) => (
             <Select
+              isDisabled={isDisabled}
               options={options}
               placeholder={placeholder}
               onChange={(e) => handleChange(e, onChange)}
