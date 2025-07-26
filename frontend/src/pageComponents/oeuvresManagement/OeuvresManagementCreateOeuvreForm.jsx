@@ -389,6 +389,38 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
         namespace: "pageText:OeuvresManagement.OMCreateOeuvre.visibility",
       },
       input: "checkbox",
+      conditionalDisabling: {
+        disbledWhenNoMatch: false,
+        behaviour: "default",
+        hatedFields: [
+          {
+            name: "oeuvreFile",
+            values: [null],
+          },
+        ],
+      },
+    },
+    {
+      groupClassname: "noVisibilityCuzNoFile",
+      includedComponents: [
+        {
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.noVisibilityCuzNoFile",
+          },
+          input: "label",
+        },
+      ],
+      conditionalRendering: {
+        hiddenWhenNoMatch: true,
+        behaviour: "default",
+        lovedFields: [
+          {
+            name: "oeuvreFile",
+            values: [null],
+          },
+        ],
+      },
     },
   ];
 
