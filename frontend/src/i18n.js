@@ -33,7 +33,8 @@ const HttpApiOptions = {
   //     ...etc
   //    }
   //   }
-  loadPath: "/locales/{{lng}}/{{ns}}.json",
+  // loadPath: "/locales/{{lng}}/{{ns}}.json",
+  loadPath: `${import.meta.env.VITE_BACKEND_URL}/locales/{{lng}}/{{ns}}.json`,
 
   // path to post missing resources, or a function
   // function(lng, namespace) { return customPath; }
@@ -41,7 +42,9 @@ const HttpApiOptions = {
   //
   // note that this only works when initialized with { saveMissing: true }
   // (see https://www.i18next.com/overview/configuration-options)
-  addPath: "/locales/add/{{lng}}/{{ns}}",
+
+  // todo: "addPath is not used in this file, but it is used in i18n.js",
+  // addPath: "/locales/add/{{lng}}/{{ns}}",
 
   // parse data after it has been fetched
   // in example use https://www.npmjs.com/package/json5

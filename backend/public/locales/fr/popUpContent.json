@@ -1,0 +1,190 @@
+{
+  "httpErrors": {
+    "notFound": {
+      "title": "La requête a échoué",
+      "message": "Une erreur est survenue lors de la communication avec le serveur.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    }
+  },
+  "UtilisateurManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "backWhileCreatingUser": {
+      "title": "Modifications en cours",
+      "message": "Vous avez commencé à enregistrer un nouvel utilisateur, si vous continuez les informations que vous avez inscrites ne seront pas gardées.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingBanMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingUnbanMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message d'annulation de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingDeleteMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message concernant la suppression de ce compte, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "closeBtnText": "Rester sur cette page"
+    },
+    "banWithMessage": {
+      "title": "Compte suspendu",
+      "message": "Le compte a été suspendu. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à chaque tentative de connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "closeBtnText": ""
+    },
+    "warnWithMessage": {
+      "title": "Notification envoyée",
+      "message": "Le message a été envoyé. L'utilisateur concerné va en recevoir une copie par mail, et pourra lire le message envoyé à la prochaine tentative de connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "closeBtnText": ""
+    },
+    "unbanWithMessage": {
+      "title": "Droits rétablis",
+      "message": "Le compte est de nouveau utilisable. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à la prochaine connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "closeBtnText": ""
+    },
+    "banMessageExists": {
+      "title": "Message existant",
+      "message": "Le compte est déjà suspendu, et un message est présent. Vous pouvez consulter celui-ci et le modifier en cliquant sur le bouton : ",
+      "validationBtnReturnedStr": "banMessageUpdate",
+      "validationBtnText": "Consulter le message de suspension",
+      "closeBtnText": "OK"
+    },
+    "createdUser": {
+      "title": "Compte créé",
+      "message": "Le nouveau compte a été créé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Retour à la liste",
+      "closeBtnText": ""
+    },
+    "unbanUser": {
+      "title": "Lever le ban sur le compte",
+      "message": "Vous êtes sur le point de lever la suspension du compte choisi, permettant ainsi à l'utlilisateur de reprendre son activité sur le compte. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "unbanUser",
+      "validationBtnText": "Oui",
+      "closeBtnText": "Non"
+    },
+    "unwarnUser": {
+      "title": "Annulation de l'avertissement",
+      "message": "Vous êtes sur le point de supprimer le message d'avertissement précédemment envoyé à cet utilisateur. Ce message n'a pas encore été confirmé comme lu par l'utilisateur concerné. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "unwarnUser",
+      "validationBtnText": "Oui",
+      "closeBtnText": "Non"
+    },
+    "unwarned": {
+      "title": "Avertissement effacé",
+      "message": "La notification a été effacée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "userHasNotif": {
+      "title": "Utilisateur notifié",
+      "message": "Cet utilisateur fait déjà l'objet d'une notification dont il n'a pas confirmé la lecture. Une nouvelle notification remplacera celle déjà envoyée. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "warnUser",
+      "validationBtnText": "Continuer",
+      "closeBtnText": "Annuler"
+    }
+  },
+  "OeuvresManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "takenPaintingTitle": {
+      "title": "Titre du tableau déjà pris",
+      "message": "Un autre tableau enregistré possède le même titre. Veuillez modifier le titre du nouveau tableau.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "backWhileCreatingOeuvre": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un tableau. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "publicWhenNoImgFile": {
+      "title": "Impossible de rendre le tableau public",
+      "message": "Ce tableau n'a pas de fichier image, il ne peut donc pas être rendu visible au public. Veuillez ajouter une image ou rendre le tableau privé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingCreated": {
+      "title": "Tableau créé",
+      "message": "{{insertText1}} a été ajouté à vos tableaux.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    }
+  },
+  "ContactManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "matchingPerson": {
+      "title": "Personnes enregistrées correspondantes",
+      "message": "Certaines personnes enregistrées sur le site (utilisateurs et/ou contacts) correspondent au nouveau contact en cours de création. Vérifiez s'il ne s'agit pas de la même personne, afin d'éviter de créer des doublons.",
+      "validationBtnReturnedStr": "doCreateContact",
+      "validationBtnText": "Ce nouveau contact n'est aucune de ces personnes, je valide sa création.",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler l'enregistrement"
+    },
+    "contactCreated": {
+      "title": "Contact créé",
+      "message": "{{insertText1}} a été ajouté à la liste de vos contacts.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "contactModified": {
+      "title": "Contact modifié",
+      "message": "Les modifications ont bien été enregistrées.",
+      "validationBtnReturnedStr": "setIsModifyingFalse",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "backWhileCreatingContact": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un contact. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    }
+  }
+}

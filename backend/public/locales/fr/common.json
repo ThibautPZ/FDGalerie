@@ -1,6 +1,113 @@
-{"info": {
-    "id": "id",
-    "email": "email", 
-    "firstname": "Prénom",
-    "lastname": "Nom de famille"
-}}
+{
+  "yes": "Oui",
+  "no": "Non",
+  "intlDate": "{{val, datetime}}",
+  "intlCurrency": "{{val, currency}}",
+  "intlCurrencies": "{{val, currency}} ou {{val2, currency}} ou {{val3, currency}}",
+  "intlNumber": "{{val, number}}",
+  "intlNumbers": "{{val, number}} ou {{val2, number}} ou {{val3, number}} ",
+  "intlRelativeTime": "{{val, relativeTime}}",
+  "intlRelativeTimeNoText": "{{val, relativeTimeNoText}}",
+  "intlRelativeTimes": "{{val, relativeTime}} et {{other}} ",
+  "info": {
+    "id": "id ",
+    "userId": "Utilisateur n° ",
+    "email": "Email ",
+    "firstname": "Prénom ",
+    "lastname": "Nom de famille ",
+    "address": "Adresse ",
+    "postalCode": "Code postal ",
+    "city": "Ville ",
+    "phoneNumber": "Numéro de téléphone {{number}} ",
+    "accountDate": "Date d'inscription ",
+    "userTypesId": "Statut ",
+    "unregistered": "Non renseigné ",
+    "password": "Mot de passe",
+    "passwordConfirmation": "Confirmation du mot de passe ",
+    "accountStatesId": "Compte autorisé ?",
+    "registeredLanguagesId": "Langue utilisée ",
+    "paintingId": "Oeuvre n°",
+    "oeuvreTitle": "Nom du tableau",
+    "oeuvreSupport": "Support",
+    "oeuvreTechnique": "Technique(s)",
+    "oeuvreFormat": "Format",
+    "dimensions": "Dimensions",
+    "contact": "Contact",
+    "contactId": "Contact n°",
+    "x": "x",
+    "cm": "cm",
+    "width": "Largeur",
+    "height": "Hauteur",
+    "spokenLanguage": "Langue parlée",
+    "creationDate": "Date de création",
+    "reservedPaintingsCount": "Tableaux réservés",
+    "soldPaintingsCount": "Tableaux achetés",
+    "giftedPaintingsCount": "Tableaux offerts",
+    "priceEur": "Prix (€)",
+    "oeuvreFamily": "Famille"
+  },
+  "spokenLanguage": {
+    "000": "Je ne sais pas",
+    "fr": "Français",
+    "en": "Anglais"
+  },
+  "date": {
+    "error": "La date renseignée n'est pas valide",
+    "today": "Aujourd' hui",
+    "year": "année",
+    "month": "mois",
+    "day": "jour",
+    "hour": "heure",
+    "minute": "minute",
+    "second": "seconde",
+    "millisecond": "seconde",
+    "date": "date",
+    "time": "heure"
+  },
+  "pageNames": {
+    "home": "Accueil",
+    "diaporama": "Diaporama",
+    "paintings": "Oeuvres",
+    "techniques": "Techniques",
+    "formats": "Formats",
+    "management": "Management",
+    "users": "Utilisateurs",
+    "contacts": "Contacts",
+    "bio": "Bio",
+    "mesProjets": "Mes projets",
+    "aLAtelier": "A l'atelier"
+  },
+  "oeuvreAvailability": {
+    "1": "Offert",
+    "2": "Vendu",
+    "3": "Réservé",
+    "4": "Disponible",
+    "5": "Pas à vendre"
+  },
+
+  "userTypes": {
+    "1": "Utilisateur ",
+    "2": "Administrateur "
+  },
+  "accountStates": {
+    "1": "Autorisé",
+    "2": "Averti",
+    "3": "Suspendu",
+    "4": "Supprimé",
+    "5": "Désabonné"
+  },
+  "languages": {
+    "fr": "Français",
+    "en": "Anglais",
+    "null": "Non renseigné",
+    "0": "Non renseigné"
+  },
+  "table": {
+    "sortAscending": "Tri croissant",
+    "sortDescending": "Tri décroissant",
+    "clearSort": "Ne plus trier"
+  },
+  "images": {
+    "miniPaintingAlt": "Image du tableau"
+  }
+}

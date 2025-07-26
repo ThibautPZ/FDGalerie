@@ -1,0 +1,60 @@
+{
+  "UtilisateurManagement": {
+    "UMCreateUser": {
+      "firstname": "Firstname... ",
+      "lastname": "Lastname...",
+      "email": "Email address...",
+      "phoneNumber": "Phone number...",
+      "address": "Address...",
+      "postalCode": "Postal code...",
+      "city": "City...",
+      "status": "Select the status",
+      "password": "Choose a password...",
+      "passwordConfirmation": "Confirm the password...",
+      "register": "Register"
+    },
+    "UMList": {
+      "displayed": "Displayed information:"
+    }
+  },
+  "OeuvresManagement": {
+    "OM": { "newOeuvre": "Add a new painting" },
+    "OMOeuvrePanel": {
+      "picture": "Preview",
+      "title": "Title",
+      "id": "Id",
+      "techniques": "Techniques",
+      "support": "Support",
+      "format": "Dimensions",
+      "family": "Family",
+      "sold": "Sold",
+      "hasComment": "Comment"
+    },
+    "OMCreateOeuvre": {
+      "return": "Return to the list",
+      "widthheight": "Width x Height",
+      "available": "Available to acquisition ",
+      "format": "Format",
+      "title": "Title...",
+      "submitBtnText": "Save new painting",
+      "oeuvreGivenToWho": "Gifted to ",
+      "oeuvreSoldToWho": "Sold to ",
+      "oeuvreReservedToWho": "Reserved by ",
+      "oeuvreGivenToKnownPerson": "Known persons suggestions (users and contacts)"
+    }
+  },
+  "Connexion": {
+    "Inscription": {
+      "firstname": "Your firstname... ",
+      "lastname": "Your lastname...",
+      "email": "Your email address...",
+      "phoneNumber": "Your phone number...",
+      "address": "Your address...",
+      "postalCode": "Your postal code...",
+      "city": "Your city...",
+      "password": "Choose your password...",
+      "passwordConfirmation": "Confirm your password...",
+      "register": "Sign in"
+    }
+  }
+}
