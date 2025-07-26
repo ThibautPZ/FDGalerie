@@ -2,8 +2,6 @@ const civilNameRegExp =
   /^[\p{L}'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/u;
 
 const priceEurRegExp = /(\d*(?:[.,]\d{0,2})|\d+)/g;
-// /\d*(?:[.,]\d{1,2})?/g;
-//   /(\d{1,}(?:[.,]*\d{3})*(?:[.,]*\d*))|(\d{1,3}(?:[.,]*\d*)*(?:[.,]*\d*)?)/g;
 
 const integerRegExp = /([+-]?\d*)/g;
 
@@ -15,6 +13,14 @@ const floatPrec3RegExp = /([+-]?\d*(?:[.,]\d{0,3}))|([+-]?\d+)/g;
 
 const exponentialRegExp = /[+-]?(\d*\.)?\d+([eE][-+]?\d+)?/;
 
+const characterNotLowerCharRegExp = /[^a-zß-öø-ÿ]/g;
+
+const punctuationRegExp = /[.,;:!?\-_'"`~\t\n\r ]/g;
+
+const digitRegExp = /\d/g;
+
+const minOneNonSpaceCharRegExp = /.*\S.*/gi;
+
 export {
   civilNameRegExp,
   priceEurRegExp,
@@ -23,4 +29,8 @@ export {
   floatPrec2RegExp,
   floatPrec3RegExp,
   exponentialRegExp,
+  characterNotLowerCharRegExp,
+  punctuationRegExp,
+  digitRegExp,
+  minOneNonSpaceCharRegExp,
 };
