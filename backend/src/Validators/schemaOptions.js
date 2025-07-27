@@ -1,5 +1,6 @@
 const { uppercaseFirstChar } = require("../services/stringFunctions");
 const { isNumber } = require("../services/typesAndValidationChecks");
+const regularExpressions = require("../services/regularExpressions");
 
 const giveLengthOptions = (isFieldRequired, options = {}) => {
   const { minLength, maxLength } = options;
@@ -16,7 +17,7 @@ const giveLengthOptions = (isFieldRequired, options = {}) => {
 
 const requiredStr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
-  return {
+  const returnedObj = {
     exists: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_exi` },
 
     isString: {
@@ -28,11 +29,20 @@ const requiredStr = (fieldName, errMsgPrefix, options) => {
     },
     trim: true,
     escape: true,
-    // matches: {
-    //   pattern: /^([^\p{N}\p{S}\p{C}\\\/]{2,20})$/,
-    //   errorMessage: "wrongTextPattern",
-    // },
   };
+  if (options?.matches) {
+    const regex =
+      regularExpressions[options.matches.regexName] ||
+      regularExpressions.minOneNonSpaceCharRegExp;
+    Object.assign(returnedObj, {
+      matches: {
+        options: regex,
+        errorMessage: `${errMsgPrefix}${uppercasedFieldName}_pat`,
+      },
+    });
+  }
+
+  return returnedObj;
 };
 
 const requiredArr = (fieldName, errMsgPrefix, options) => {
@@ -73,7 +83,7 @@ const requiredFloat = (fieldName, errMsgPrefix) => {
 
 const nullableStr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
-  return {
+  const returnedObj = {
     optional: { options: { values: null } },
     isString: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isStr` },
     isLength: {
@@ -83,6 +93,18 @@ const nullableStr = (fieldName, errMsgPrefix, options) => {
     trim: true,
     escape: true,
   };
+  if (options?.matches) {
+    const regex =
+      regularExpressions[options.matches.regexName] ||
+      regularExpressions.minOneNonSpaceCharRegExp;
+    Object.assign(returnedObj, {
+      matches: {
+        pattern: regex,
+        errorMessage: `${errMsgPrefix}${uppercasedFieldName}_pat`,
+      },
+    });
+  }
+  return returnedObj;
 };
 
 const nullableInt = (fieldName, errMsgPrefix) => {
