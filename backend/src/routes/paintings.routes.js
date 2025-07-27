@@ -78,7 +78,7 @@ router.post(
     },
     {
       manager: "techniques",
-      method: "readByIds",
+      method: "countByIds",
       bodyKeyParams: { ids: "techniqueId" },
       errorNumber: "02004",
       count: {
