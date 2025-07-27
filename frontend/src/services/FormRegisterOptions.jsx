@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { isArray, isDate, isObjectNotEmpty } from "./typesAndValidationChecks";
+import { isArray } from "./typesAndValidationChecks";
 import { hasKeysWithTruthyValue } from "./objectMethods/objectValidation";
+import { minOneNonSpaceCharRegExp } from "./regularExpressions";
 
 // todo: validate fields if availability is not available
 function FormRegisterOptions(watch) {
@@ -431,6 +432,39 @@ function FormRegisterOptions(watch) {
         !value ||
         watch("oeuvreFile").length ||
         tWithPrefix("oeuvreVisibility.validate"),
+    },
+    techniqueNameFr: {
+      required: tWithPrefix("techniqueNameFr.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("techniqueNameFr.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("techniqueNameFr.maxLength"),
+      },
+    },
+    techniqueNameEnUS: {
+      required: tWithPrefix("techniqueNameEnUS.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("techniqueNameEnUS.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("techniqueNameEnUS.maxLength"),
+      },
+    },
+    techniqueNameEnGB: {
+      required: tWithPrefix("techniqueNameEnGB.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("techniqueNameEnGB.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("techniqueNameEnGB.maxLength"),
+      },
     },
   };
 }
