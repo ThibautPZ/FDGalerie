@@ -23,6 +23,7 @@ const PaintingsGiftsManager = require("./models/PaintingsGiftsManager");
 const PaintingsSalesManager = require("./models/PaintingsSalesManager");
 const PaintingsReservationsManager = require("./models/PaintingsReservationsManager");
 const FormatsManager = require("./models/FormatsManager");
+const PaintingsAvailabilitiesManager = require("./models/PaintingsAvailabilitiesManager");
 
 const managers = new Map([
   [PaintingsManager, "paintings"],
@@ -44,6 +45,7 @@ const managers = new Map([
   [PaintingsGiftsManager, "paintingsGifts"],
   [PaintingsSalesManager, "paintingsSales"],
   [PaintingsReservationsManager, "paintingsReservations"],
+  [PaintingsAvailabilitiesManager, "paintingsAvailabilities"],
 ]);
 
 // Create an empty object to hold data managers for different tables
