@@ -131,10 +131,29 @@
     "pattern": "La date de don sélectionnée est invalide."
   },
   "artistComment": {
-    "pattern": "Votre commentaire contient des caractères invalides.",
+    "pattern": "Votre commentaire contient des caractères invalide.",
     "maxLength": "Le commentaire ne peut excéder les 254 caractères."
   },
   "oeuvreVisibility": {
     "validate": "Un tableau sans fichier image ne peut être rendu public."
+  },
+  "oeuvreFamily": {
+    "pattern": "La famille indiquée est invalide.",
+    "maxLength": "Le nom de la famille ne peut excéder les 64 caractères."
+  },
+  "techniqueNameFr": {
+    "required": "Le nom de la technique en français doit être renseigné.",
+    "pattern": "Le nom de la technique en français est invalide.",
+    "maxLength": "Le nom de la technique en français doit avoir au maximum 64 caractères."
+  },
+  "techniqueNameEnUS": {
+    "required": "Le nom de la technique en anglais (US) doit être renseigné.",
+    "pattern": "Le nom de la technique en anglais (US) est invalide.",
+    "maxLength": "Le nom de la technique en anglais (US) doit avoir au maximum 64 caractères."
+  },
+  "techniqueNameEnGB": {
+    "required": "Le nom de la technique en anglais (GB) doit être renseigné.",
+    "pattern": "Le nom de la technique en anglais (GB) est invalide.",
+    "maxLength": "Le nom de la technique en anglais (GB) doit avoir au maximum 64 caractères."
   }
 }

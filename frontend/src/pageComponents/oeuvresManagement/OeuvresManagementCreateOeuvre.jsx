@@ -6,6 +6,7 @@ import OeuvresManagementCreateOeuvreForm from "./OeuvresManagementCreateOeuvreFo
 import FoldableComponent from "../../components/FoldableComponent";
 import CreateContactForm from "../../components/CreateContactForm";
 import translationInstance from "../../services/translationInstance";
+import CreateTechniqueForm from "../shared/CreateTechniqueForm";
 
 function OeuvresManagementCreateOeuvre() {
   const tPageText = translationInstance(
@@ -33,6 +34,16 @@ function OeuvresManagementCreateOeuvre() {
           onClose={onFoldClose}
         >
           <CreateContactForm />
+        </FoldableComponent>
+        <FoldableComponent
+          className=""
+          labelText={tPageText("createNewTechnique")}
+          isOpen={false}
+          whenLabel="always"
+          onOpen={null}
+          onClose={onFoldClose}
+        >
+          <CreateTechniqueForm />
         </FoldableComponent>
       </div>
     </div>

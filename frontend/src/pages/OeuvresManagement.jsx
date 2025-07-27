@@ -13,6 +13,8 @@ import UseCreateOeuvre from "../hooks/RQmutation/UseCreateOeuvre";
 import UseModal from "../hooks/UseModal";
 import createContactDefaultValues from "../json/formDefaultValues/createContactDefaultValues.json";
 import createOeuvreDefaultValues from "../json/formDefaultValues/createOeuvreDefaultValues.json";
+import createTechniqueDefaultValues from "../json/formDefaultValues/createTechniqueDefaultValues.json";
+import UseCreateTechnique from "../hooks/RQmutation/UseCreateTechnique";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
@@ -27,6 +29,10 @@ function OeuvresManagement() {
   });
   const createOeuvreFormMethods = useForm({
     defaultValues: createOeuvreDefaultValues,
+    shouldUnregister: false,
+  });
+  const createTechniqueFormMethods = useForm({
+    defaultValues: createTechniqueDefaultValues,
     shouldUnregister: false,
   });
 
@@ -55,16 +61,10 @@ function OeuvresManagement() {
     throwOnError: true,
   });
 
-  // const handleOeuvreSelected = (oeuvreId) => {
-  //   setDisplayedComponents("detailedOeuvre");
-  //   const oeuvresList = oeuvresQuery.data;
-  //   const arr = [];
-  //   oeuvresList.forEach((oeuvre) => oeuvre.id === oeuvreId && arr.push(oeuvre));
-  //   return setSelectedOeuvre(arr[0]);
-  // };
   const { popUpState, giveOnClose, handleModalInstall } = UseModal();
   const createContactMutation = UseCreateContact(handleModalInstall);
   const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
+  const createTechniqueMutation = UseCreateTechnique(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -169,6 +169,8 @@ function OeuvresManagement() {
           createContactFormMethods,
           createOeuvreMutation,
           createOeuvreFormMethods,
+          createTechniqueMutation,
+          createTechniqueFormMethods,
           handleModalInstall,
           isModifying,
           setIsModifying,
