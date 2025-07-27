@@ -85,6 +85,7 @@ const checkPresenceInDb = (...options) => {
         addedParams,
         errorNumber,
         rejectWhenTrue = false,
+        count,
       } = option;
 
       if (!manager || !method) {
@@ -92,8 +93,16 @@ const checkPresenceInDb = (...options) => {
         return next(err);
       }
       const name = `${manager}${method}`;
+      const conditions = {
+        errorNumber,
+        rejectWhenTrue,
+      };
+      if (count) {
+        Object.assign(conditions, { count });
+      }
+
       Object.assign(errorConditions, {
-        [name]: { errorNumber, rejectWhenTrue },
+        [name]: conditions,
       });
       const params = giveParams(req.body, bodyKeyParams, addedParams);
 
@@ -106,6 +115,7 @@ const checkPresenceInDb = (...options) => {
     });
 
     const results = await giveParallelQueriesPromise(queriesSpecs, 5);
+
     const errors = [];
     for (const [name, result] of Object.entries(results)) {
       const { errorNumber, rejectWhenTrue, count } = errorConditions[name];
@@ -116,9 +126,10 @@ const checkPresenceInDb = (...options) => {
         let doesExist = result.length > 0;
 
         if (count) {
+          const resCount = Object.values(result[0])[0] || 0;
           const { param, value } = count;
           const expectedCount = value || giveParamCount(req.body, param);
-          doesExist = result === expectedCount;
+          doesExist = resCount === expectedCount;
         }
 
         if (doesExist === rejectWhenTrue) {
