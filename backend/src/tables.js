@@ -22,11 +22,13 @@ const PaintingsArtistCommentsManager = require("./models/PaintingsArtistComments
 const PaintingsGiftsManager = require("./models/PaintingsGiftsManager");
 const PaintingsSalesManager = require("./models/PaintingsSalesManager");
 const PaintingsReservationsManager = require("./models/PaintingsReservationsManager");
+const FormatsManager = require("./models/FormatsManager");
 
 const managers = new Map([
   [PaintingsManager, "paintings"],
   [TechniquesManager, "techniques"],
   [SupportsManager, "supports"],
+  [FormatsManager, "formats"],
   [PaintingSizesManager, "paintingSizes"],
   [UsersManager, "users"],
   [ContactsManager, "contacts"],
