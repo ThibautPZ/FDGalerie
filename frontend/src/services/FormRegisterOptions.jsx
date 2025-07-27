@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { isArray } from "./typesAndValidationChecks";
 import { hasKeysWithTruthyValue } from "./objectMethods/objectValidation";
-import { minOneNonSpaceCharRegExp } from "./regularExpressions";
+import { minOneNonSpaceCharRegExp, priceEurRegExp } from "./regularExpressions";
 
 // todo: validate fields if availability is not available
 function FormRegisterOptions(watch) {
@@ -13,9 +13,6 @@ function FormRegisterOptions(watch) {
     "popUpContent",
     "formRegisterOptionsMessages",
   ]);
-
-  const priceRegex =
-    /(USD|EUR|€|\$|£)\s?(\d{1,}(?:[.,]*\d{3})*(?:[.,]*\d*))|(\d{1,3}(?:[.,]*\d*)*(?:[.,]*\d*)?)\s?(USD|EUR)/;
 
   const tWithPrefix = (keyStr) => {
     return t(`formRegisterOptionsMessages:${keyStr}`);
@@ -407,12 +404,21 @@ function FormRegisterOptions(watch) {
     reservationDate: {
       required: tWithPrefix("reservationDate.required"),
     },
+    reservationPrice: {
+      pattern: {
+        value: priceEurRegExp,
+        message: tWithPrefix("reservationPrice.pattern"),
+      },
+    },
     saleDate: {
       required: tWithPrefix("saleDate.required"),
     },
     salePrice: {
       required: tWithPrefix("salePrice.required"),
-      pattern: priceRegex,
+      pattern: {
+        value: priceEurRegExp,
+        message: tWithPrefix("salePrice.pattern"),
+      },
     },
     giftDate: {
       required: tWithPrefix("giftDate.required"),
