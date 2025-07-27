@@ -50,21 +50,6 @@
     "statusCode": 400,
     "type": "error"
   },
-  "02002": {
-    "name": "supportIdNotFound",
-    "statusCode": 400,
-    "type": "error"
-  },
-  "02003": {
-    "name": "formatIdNotFound",
-    "statusCode": 400,
-    "type": "error"
-  },
-  "02004": {
-    "name": "techniqueIdNotFound",
-    "statusCode": 400,
-    "type": "error"
-  },
   "00200": {
     "name": "wrongUserPassword",
     "statusCode": 401,
@@ -94,6 +79,26 @@
   },
   "05005": {
     "name": "techniqueAlreadyExists",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05006": {
+    "name": "supportIdNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05007": {
+    "name": "paintingSizeIdNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05008": {
+    "name": "techniqueIdNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05009": {
+    "name": "paintingAvailabilityIdNotFound",
     "statusCode": 400,
     "type": "error"
   },

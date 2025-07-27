@@ -68,24 +68,36 @@ router.post(
     checkPaintingNotPublic
   ),
   createThumbnail("paintings", { medium: true, large: true }),
-  addFamilyMemberNumber,
   checkPresenceInDb(
     {
       manager: "supports",
       method: "readById",
-      bodyKeyParams: { id: "supportId" },
-      errorNumber: "02002",
+      bodyKeyParams: { id: "oeuvreSupport" },
+      errorNumber: "05006",
+    },
+    {
+      manager: "paintingSizes",
+      method: "readById",
+      bodyKeyParams: { id: "oeuvreFormat" },
+      errorNumber: "05007",
     },
     {
       manager: "techniques",
       method: "countByIds",
-      bodyKeyParams: { ids: "techniqueId" },
-      errorNumber: "02004",
+      bodyKeyParams: { ids: "oeuvreTechnique" },
+      errorNumber: "05008",
       count: {
-        param: "techniqueId",
+        param: "oeuvreTechnique",
       },
+    },
+    {
+      manager: "paintingsAvailabilities",
+      method: "readById",
+      bodyKeyParams: { id: "oeuvreAvailability" },
+      errorNumber: "05009",
     }
   ),
+  addFamilyMemberNumber,
   paintingsControllers.createPainting,
   errorHandler
 );
