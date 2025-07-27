@@ -12,9 +12,9 @@ const { uppercaseFirstChar } = require("../services/stringFunctions");
 const { hasValue } = require("../services/typesAndValidationChecks");
 
 const paintingAvailability = {
-  oeuvreGivenToKnownPerson: 1,
-  oeuvreSoldToKnownPerson: 2,
-  oeuvreReservedToKnownPerson: 3,
+  oeuvreGivenToKnownPerson: "1",
+  oeuvreSoldToKnownPerson: "2",
+  oeuvreReservedToKnownPerson: "3",
 };
 
 const errorMsgPrefix = "crePai_val_";
@@ -32,9 +32,11 @@ const objectFieldValidation = (req, objectFieldName) => {
 
 const giveKnownPersonObjOptions = (fieldName) => {
   const paintingAvailabilityRegex = new RegExp(
-    `${paintingAvailability[fieldName]}`,
+    `^${paintingAvailability[fieldName]}$`,
     "g"
   );
+  // const fieldAvailabilityId = paintingAvailability[fieldName];
+
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   const returnedObj = {
     exists: {
