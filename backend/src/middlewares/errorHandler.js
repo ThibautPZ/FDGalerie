@@ -4,10 +4,10 @@ const errorHandler = (err, req, res, next) => {
   console.error("errorHandler", err);
   let errorClass = err;
 
-  if (errorClass.name === "validationErrors") {
-    const [validationError] = errorClass.errors;
-    errorClass = validationError;
-  }
+  // if (errorClass.name === "validationErrors") {
+  //   const [validationError] = errorClass.errors;
+  //   errorClass = validationError;
+  // }
 
   if (errorClass.name === "generic" && errorClass.errors) {
     const [specificError] = errorClass.errors;

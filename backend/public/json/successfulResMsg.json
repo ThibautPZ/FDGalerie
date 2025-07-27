@@ -8,5 +8,11 @@
       "type": "info",
       "message": "paintingCreated"
     }
+  },
+  "techniquesController": {
+    "createTechnique": {
+      "type": "info",
+      "message": "techniqueCreated"
+    }
   }
 }

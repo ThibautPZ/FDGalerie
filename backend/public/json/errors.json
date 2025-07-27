@@ -20,6 +20,11 @@
     "statusCode": 400,
     "type": "error"
   },
+  "00004": {
+    "name": "processingError",
+    "statusCode": 500,
+    "type": "error"
+  },
   "00005": {
     "name": "validationErrors",
     "statusCode": 400,
@@ -30,6 +35,11 @@
     "statusCode": 401,
     "type": "error"
   },
+  "01001": {
+    "name": "presenceInDb",
+    "statusCode": 400,
+    "type": "error"
+  },
   "01100": {
     "name": "fileFormFieldNameNotFound",
     "statusCode": 400,
@@ -37,6 +47,21 @@
   },
   "02001": {
     "name": "paintingMaxFamilyMemberNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "02002": {
+    "name": "supportIdNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "02003": {
+    "name": "formatIdNotFound",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "02004": {
+    "name": "techniqueIdNotFound",
     "statusCode": 400,
     "type": "error"
   },
@@ -67,6 +92,11 @@
     "statusCode": 400,
     "type": "error"
   },
+  "05005": {
+    "name": "techniqueAlreadyExists",
+    "statusCode": 400,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
@@ -80,6 +110,16 @@
   },
   "06004": {
     "name": "cannotWritePaintingRelatedData",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06005": {
+    "name": "cannotWriteNewPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06006": {
+    "name": "cannotWriteNewTechnique",
     "statusCode": 500,
     "type": "error"
   },

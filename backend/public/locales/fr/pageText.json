@@ -13,6 +13,18 @@
     "spokenLanguage": "Sélectionnez la langue",
     "oeuvreFamily": "Choisissez la famille à laquelle appartient le tableau"
   },
+  "shared": {
+    "CreateTechnique": {
+      "techniqueNameFrPH": "Nom en français...",
+      "techniqueNameEnUSPH": "Nom en anglais (US)...",
+      "techniqueNameEnGBPH": "Nom en anglais (GB)...",
+      "techniqueNameFr": "Nom de la technique en français",
+      "techniqueNameEnUS": "Nom de la technique en anglais (US)",
+      "techniqueNameEnGB": "Nom de la technique en anglais (GB)",
+      "createNewTechnique": "Créer une nouvelle technique",
+      "createNewTechniqueBtnText": "Enregistrer la nouvelle technique"
+    }
+  },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
   "UtilisateurManagement": {
     "UM": {
@@ -125,7 +137,8 @@
       "visibility": "Visible par les visiteurs ?",
       "artistComment": "Votre commentaire sur l'oeuvre ",
       "artistCommentPlaceHolder": "Ecrivez votre commentaire (254 caractères max)",
-      "noVisibilityCuzNoFile": "Il n'est pas possible de rendre visible une oeuvre sans fichier image."
+      "noVisibilityCuzNoFile": "Il n'est pas possible de rendre visible une oeuvre sans fichier image.",
+      "createNewTechnique": "Créer une nouvelle technique ?"
     }
   },
   "ContactManagement": {

@@ -8,6 +8,17 @@
       "closeBtnText": "OK"
     }
   },
+  "shared": {
+    "CreateTechnique": {
+      "techniqueCreated": {
+        "title": "Technique créée",
+        "message": "{{insertText1}} a été ajoutée à la liste des techniques.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      }
+    }
+  },
   "UtilisateurManagement": {
     "generic": {
       "close": "Fermer",
