@@ -11,6 +11,7 @@ const checkPaintingTitleDoesntExist = require("../services/checkFunctions/checkP
 const createThumbnail = require("../middlewares/createThumbnail");
 const addFamilyMemberNumber = require("../middlewares/reqAdders/addFamiliyMemberNumber");
 const checkBodyKeyValuesFuncProvider = require("../services/checkFunctionsProvider/checkBodyKeyValuesFuncProvider");
+const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 
 const checkPaintingNotPublic = checkBodyKeyValuesFuncProvider([
   {
@@ -68,9 +69,26 @@ router.post(
   ),
   createThumbnail("paintings", { medium: true, large: true }),
   addFamilyMemberNumber,
-
+  checkPresenceInDb(
+    {
+      manager: "supports",
+      method: "readById",
+      bodyKeyParams: { id: "supportId" },
+      errorNumber: "02002",
+    },
+    {
+      manager: "techniques",
+      method: "readByIds",
+      bodyKeyParams: { ids: "techniqueId" },
+      errorNumber: "02004",
+      count: {
+        param: "techniqueId",
+      },
+    }
+  ),
   paintingsControllers.createPainting,
   errorHandler
 );
 
 module.exports = router;
+// oeuvreAvailabilityid, formatid, supportid, techniquesidss
