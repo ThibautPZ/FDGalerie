@@ -120,9 +120,9 @@ VALUES (
     );
 
 INSERT INTO
-    `families` (`name`)
-VALUES ('Trio De Petites Sirènes'),
-    ('Grenouilles Et Canaris');
+    `families` (`name`, `description`)
+VALUES ('Trio De Petites Sirènes', null),
+    ('Grenouilles Et Canaris', "description de la famille Grenouilles Et Canaris");
 
 INSERT INTO
     `paintings` (
