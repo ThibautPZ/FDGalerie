@@ -17,9 +17,10 @@ class TechniquesManager extends AbstractManager {
   }
 
   async readByName({ name }) {
-    return this.database.query(`SELECT * FROM ${this.table} WHERE name = ?`, [
-      name,
-    ]);
+    return this.database.query(
+      `SELECT id, name FROM ${this.table} WHERE name = ?`,
+      [name]
+    );
   }
 
   async countByIds({ ids }) {
