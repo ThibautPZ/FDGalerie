@@ -102,6 +102,11 @@
     "statusCode": 400,
     "type": "error"
   },
+  "05010": {
+    "name": "familyNameAlreadyExists",
+    "statusCode": 400,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
@@ -125,6 +130,11 @@
   },
   "06006": {
     "name": "cannotWriteNewTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06007": {
+    "name": "cannotWriteNewFamily",
     "statusCode": 500,
     "type": "error"
   },

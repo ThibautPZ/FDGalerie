@@ -17,6 +17,24 @@ class FamiliesManager extends AbstractManager {
       [familyId]
     );
   }
+
+  async readByName({ name }) {
+    return this.database.query(
+      `SELECT id, name FROM ${this.table} WHERE name = ?`,
+      [name]
+    );
+  }
+
+  async createOne(familyName, familyDescription) {
+    return this.database.query(
+      `INSERT INTO ${this.table} (name, description) VALUES (?, ?)`,
+      [familyName, familyDescription]
+    );
+  }
+
+  async deleteById(id) {
+    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+  }
 }
 
 module.exports = FamiliesManager;

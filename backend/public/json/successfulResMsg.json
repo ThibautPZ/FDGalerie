@@ -9,10 +9,16 @@
       "message": "paintingCreated"
     }
   },
-  "techniquesController": {
+  "techniquesControllers": {
     "createTechnique": {
       "type": "info",
       "message": "techniqueCreated"
+    }
+  },
+  "familiesControllers": {
+    "createFamily": {
+      "type": "info",
+      "message": "familyCreated"
     }
   }
 }

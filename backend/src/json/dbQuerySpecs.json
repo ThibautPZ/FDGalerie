@@ -33,5 +33,10 @@
     "manager": "paintingsStorages",
     "method": "createNewPaintingStorage",
     "undo": "deleteByPaintingId"
+  },
+  "createFamily": {
+    "manager": "families",
+    "method": "createOne",
+    "undo": "deleteById"
   }
 }
