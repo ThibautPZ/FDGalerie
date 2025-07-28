@@ -19,7 +19,7 @@ const addTechniqueKey = expressAsyncHandler(async (req, res, next) => {
   const giveTechniqueKeyOrErr = () => {
     for (const [key, { file, name }] of Object.entries(languages)) {
       const techniqueKey = caseToUpperCase(name);
-      if (file[techniqueKey] === name) {
+      if (file[techniqueKey]?.name === name) {
         const err = new CustomErrorClass("05005", key);
         return { techniqueKey: "", error: err };
       }

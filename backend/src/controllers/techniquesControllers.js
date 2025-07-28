@@ -78,7 +78,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
         "../../public/locales/fr",
         "techniques",
         techniqueKey,
-        techniqueNameFr
+        { name: techniqueNameFr }
       )
     ),
     enUS: async.retryable(5, async () =>
@@ -87,7 +87,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
         "../../public/locales/enUS",
         "techniques",
         techniqueKey,
-        techniqueNameEnUS
+        { name: techniqueNameEnUS }
       )
     ),
     enGB: async.retryable(5, async () =>
@@ -96,7 +96,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
         "../../public/locales/enGB",
         "techniques",
         techniqueKey,
-        techniqueNameEnGB
+        { name: techniqueNameEnGB }
       )
     ),
   });
@@ -136,7 +136,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
   }
 
   const successObj = {
-    ...successfulResMsg.techniquesController.createTechnique,
+    ...successfulResMsg.techniquesControllers.createTechnique,
     infoData: {
       insertText1: techniqueNameFr,
     },

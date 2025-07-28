@@ -1,14 +1,23 @@
 {
-  "ACRYLIQUE": "Acrylique",
-  "AQUARELLE": "Aquarelle",
-  "HUILE": "Huile",
-  "CRAYON_À_PAPIER": "Crayon à papier",
-  "ENCRE": "Encre",
-  "COLLAGE": "Collage",
-  "CRAYONS_GRAS": "Crayons gras",
-  "LA_DFQSFL": "gsgs",
-  "LA_DFQSQL": "gsgs",
-  "LA_DFQSFLL": "gsgs",
-  "LA_DFQSFLLJ": "gsgs",
-  "A": "gsgs"
+  "ACRYLIQUE": {
+    "name": "Acrylique"
+  },
+  "AQUARELLE": {
+    "name": "Aquarelle"
+  },
+  "HUILE": {
+    "name": "Huile"
+  },
+  "CRAYON_À_PAPIER": {
+    "name": "Crayon à papier"
+  },
+  "ENCRE": {
+    "name": "Encre"
+  },
+  "COLLAGE": {
+    "name": "Collage"
+  },
+  "CRAYONS_GRAS": {
+    "name": "Crayons gras"
+  }
 }
