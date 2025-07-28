@@ -120,7 +120,7 @@ VALUES (
     );
 
 INSERT INTO
-    `families` (`name`, `description`)
+    `families` (`name`)
 VALUES ('Trio De Petites Sirènes'),
     ('Grenouilles Et Canaris');
 
