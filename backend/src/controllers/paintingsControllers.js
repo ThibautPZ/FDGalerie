@@ -164,8 +164,6 @@ const browseAdminWithDetails = asyncHandler(async (req, res, next) => {
   return res.status(200).json(result);
 });
 
-// todo: add check oeuvreAvailabilityid, formatid, supportid, techniquesidss with helper
-
 const createPainting = asyncHandler(async (req, res, next) => {
   const { body } = req;
   const {
@@ -296,7 +294,7 @@ const createPainting = asyncHandler(async (req, res, next) => {
   }
 
   const successObj = {
-    ...successfulResMsg.paintingsController.createPainting,
+    ...successfulResMsg.paintingsControllers.createPainting,
     infoData: {
       insertText1: oeuvreTitle,
     },
