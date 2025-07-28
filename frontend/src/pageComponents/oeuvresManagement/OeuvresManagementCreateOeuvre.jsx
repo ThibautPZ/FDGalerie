@@ -8,6 +8,7 @@ import CreateContactForm from "../../components/CreateContactForm";
 import translationInstance from "../../services/translationInstance";
 import CreateTechniqueForm from "../shared/CreateTechniqueForm";
 import CreateFamilyForm from "../shared/CreateFamilyForm";
+import CreateFormatForm from "../shared/CreateFormatForm";
 
 function OeuvresManagementCreateOeuvre() {
   const tPageText = translationInstance(
@@ -55,6 +56,17 @@ function OeuvresManagementCreateOeuvre() {
           onClose={onFoldClose}
         >
           <CreateFamilyForm />
+        </FoldableComponent>
+
+        <FoldableComponent
+          className=""
+          labelText={tPageText("createNewFormat")}
+          isOpen={false}
+          whenLabel="always"
+          onOpen={null}
+          onClose={onFoldClose}
+        >
+          <CreateFormatForm />
         </FoldableComponent>
       </div>
     </div>

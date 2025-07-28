@@ -33,6 +33,21 @@
       "familyDescriptionEnUSPH": "Description en anglais (US)...",
       "familyDescriptionEnGBPH": "Description en anglais (GB)...",
       "createNewFamilyBtnText": "Enregistrer la nouvelle famille"
+    },
+    "CreateFormat": {
+      "paintingSizeNameFrPH": "Nom en français...",
+      "paintingSizeNameEnUSPH": "Nom en anglais (US)...",
+      "paintingSizeNameEnGBPH": "Nom en anglais (GB)...",
+      "paintingSizeDescriptionFrPH": "Description en français...",
+      "paintingSizeDescriptionEnUSPH": "Description en anglais (US)...",
+      "paintingSizeDescriptionEnGBPH": "Description en anglais (GB)...",
+      "paintingSizeNameFr": "Nom du format en français",
+      "paintingSizeNameEnUS": "Nom du format en anglais (US)",
+      "paintingSizeNameEnGB": "Nom du format en anglais (GB)",
+      "paintingSizeDescriptionFr": "Description du format en français",
+      "paintingSizeDescriptionEnUS": "Description du format en anglais (US)",
+      "paintingSizeDescriptionEnGB": "Description du format en anglais (GB)",
+      "createNewFormatBtnText": "Enregistrer le nouveau format"
     }
   },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
@@ -149,7 +164,8 @@
       "artistCommentPlaceHolder": "Ecrivez votre commentaire (254 caractères max)",
       "noVisibilityCuzNoFile": "Il n'est pas possible de rendre visible une oeuvre sans fichier image.",
       "createNewTechnique": "Créer une nouvelle technique ?",
-      "createNewFamily": "Créer une nouvelle famille ?"
+      "createNewFamily": "Créer une nouvelle famille ?",
+      "createNewFormat": "Créer un nouveau format ?"
     }
   },
   "ContactManagement": {
