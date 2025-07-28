@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `techniques` (
 CREATE TABLE IF NOT EXISTS `families` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(128) NOT NULL,
-    `description` TEXT NULL,
+    `description` VARCHAR(10000) NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `paintings` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(128) NOT NULL,
     -- `pathname` VARCHAR(128) NOT NULL,
-    -- `comment` TEXT NULL,
+    -- `comment` VARCHAR(10000) NULL,
     `width` INT NOT NULL,
     `height` INT NOT NULL,
     `family_member` INT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `painting_reservations` (
 
 CREATE TABLE IF NOT EXISTS `ban_messages` (
     `users_id` INT NOT NULL,
-    `message` TEXT NOT NULL,
+    `message` VARCHAR(10000) NOT NULL,
     PRIMARY KEY (`users_id`),
     CONSTRAINT `users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `favorite_paintings` (
 
 CREATE TABLE IF NOT EXISTS `painting_user_comments` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `comment` TEXT NOT NULL,
+    `comment` VARCHAR(10000) NOT NULL,
     `date` VARCHAR(64) NOT NULL,
     `paintings_id` INT NOT NULL,
     `users_id` INT NOT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `painting_user_comments` (
 
 CREATE TABLE IF NOT EXISTS `paintings_artist_comments` (
     `paintings_id` INT NOT NULL,
-    `comment` TEXT NOT NULL,
+    `comment` VARCHAR(10000) NOT NULL,
     PRIMARY KEY (`paintings_id`),
     CONSTRAINT `fk_artist_comments_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
