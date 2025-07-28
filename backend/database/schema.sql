@@ -14,8 +14,7 @@ CREATE TABLE IF NOT EXISTS `techniques` (
 
 CREATE TABLE IF NOT EXISTS `families` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(128) NOT NULL,
-    `description` VARCHAR(10000) NULL,
+    `name` VARCHAR(64) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
