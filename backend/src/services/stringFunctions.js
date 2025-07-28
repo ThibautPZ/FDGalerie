@@ -26,39 +26,46 @@ const caseToUpperCase = (str) => {
   for (let i = 0; i < trimmedStr.length; i += 1) {
     const char = trimmedStr[i];
     if (punctuationRegExp.test(char)) {
+      const matchType = prevMatchType;
+      const matchIndex = prevMatchIndex;
+      prevMatchType = "punctuation";
+      prevMatchIndex = i;
       if (
         i !== 0 &&
-        (prevMatchIndex !== i - 1 ||
-          (prevMatchType !== "punctuation" && prevMatchIndex === i - 1))
+        (matchIndex !== i - 1 ||
+          (matchType !== "punctuation" && matchIndex === i - 1))
       ) {
         returnedStr = `${returnedStr}_`;
       }
-      prevMatchIndex = i;
-      prevMatchType = "punctuation";
     } else if (digitRegExp.test(char)) {
-      if (
-        i !== 0 &&
-        (prevMatchIndex !== i - 1 ||
-          (prevMatchType !== "number" && prevMatchIndex === i - 1))
-      ) {
-        returnedStr = `${returnedStr}_${char}`;
-      } else {
-        returnedStr = `${returnedStr}${char}`;
-      }
+      const matchType = prevMatchType;
+      const matchIndex = prevMatchIndex;
       prevMatchIndex = i;
       prevMatchType = "number";
-    } else if (characterNotLowerCharRegExp.test(char)) {
+
       if (
         i !== 0 &&
-        (prevMatchIndex !== i - 1 ||
-          (prevMatchType !== "other" && prevMatchIndex === i - 1))
+        (matchIndex !== i - 1 ||
+          (matchType !== "number" && matchIndex === i - 1))
       ) {
         returnedStr = `${returnedStr}_${char}`;
       } else {
         returnedStr = `${returnedStr}${char}`;
       }
+    } else if (characterNotLowerCharRegExp.test(char)) {
+      const matchType = prevMatchType;
+      const matchIndex = prevMatchIndex;
       prevMatchIndex = i;
       prevMatchType = "other";
+      if (
+        i !== 0 &&
+        (matchIndex !== i - 1 ||
+          (matchType !== "other" && matchIndex === i - 1))
+      ) {
+        returnedStr = `${returnedStr}_${char}`;
+      } else {
+        returnedStr = `${returnedStr}${char}`;
+      }
     } else {
       returnedStr = `${returnedStr}${char}`;
     }
