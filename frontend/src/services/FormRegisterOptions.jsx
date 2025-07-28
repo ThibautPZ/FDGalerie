@@ -483,14 +483,34 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("familyName.maxLength"),
       },
     },
-    familyDescription: {
+    familyDescriptionFr: {
       pattern: {
         value: minOneNonSpaceCharRegExp,
-        message: tWithPrefix("familyDescription.pattern"),
+        message: tWithPrefix("familyDescriptionFr.pattern"),
       },
       maxLength: {
         value: 8000,
-        message: tWithPrefix("familyDescription.maxLength"),
+        message: tWithPrefix("familyDescriptionFr.maxLength"),
+      },
+    },
+    familyDescriptionEnUS: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("familyDescriptionEnUS.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("familyDescriptionEnUS.maxLength"),
+      },
+    },
+    familyDescriptionEnGB: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("familyDescriptionEnGB.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("familyDescriptionEnGB.maxLength"),
       },
     },
   };

@@ -25,10 +25,26 @@ export default function CreateFamilyForm({
       input: "text",
     },
     {
-      name: "familyDescription",
+      name: "familyDescriptionFr",
       label: {
-        namespace: "pageText:shared.CreateFamily.familyDescription",
-        placeHolder: t("pageText:shared.CreateFamily.familyDescriptionPH"),
+        namespace: "pageText:shared.CreateFamily.familyDescriptionFr",
+        placeHolder: t("pageText:shared.CreateFamily.familyDescriptionFrPH"),
+      },
+      input: "text",
+    },
+    {
+      name: "familyDescriptionEnUS",
+      label: {
+        namespace: "pageText:shared.CreateFamily.familyDescriptionEnUS",
+        placeHolder: t("pageText:shared.CreateFamily.familyDescriptionEnUSPH"),
+      },
+      input: "text",
+    },
+    {
+      name: "familyDescriptionEnGB",
+      label: {
+        namespace: "pageText:shared.CreateFamily.familyDescriptionEnGB",
+        placeHolder: t("pageText:shared.CreateFamily.familyDescriptionEnGBPH"),
       },
       input: "text",
     },

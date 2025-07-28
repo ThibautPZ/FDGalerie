@@ -161,8 +161,16 @@
     "pattern": "Le nom de la famille est invalide.",
     "maxLength": "Le nom de la famille doit avoir au maximum 64 caractères."
   },
-  "familyDescription": {
-    "pattern": "La description de la famille est invalide.",
-    "maxLength": "La description de la famille doit avoir au maximum 254 caractères."
+  "familyDescriptionFr": {
+    "pattern": "La description en français est invalide.",
+    "maxLength": "La description en français doit avoir au maximum 8000 caractères."
+  },
+  "familyDescriptionEnUS": {
+    "pattern": "La description en anglais (US) est invalide.",
+    "maxLength": "La description en anglais (US) doit avoir au maximum 8000 caractères."
+  },
+  "familyDescriptionEnGB": {
+    "pattern": "La description en anglais (GB) est invalide.",
+    "maxLength": "La description en anglais (GB) doit avoir au maximum 8000 caractères."
   }
 }

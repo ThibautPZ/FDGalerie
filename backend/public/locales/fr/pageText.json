@@ -25,9 +25,13 @@
     },
     "CreateFamily": {
       "familyNamePH": "Nom de la famille...",
-      "familyDescriptionPH": "Description de la famille...",
+      "familyDescriptionFrPH": "Description en français..",
       "familyName": "Nom de la famille",
-      "familyDescription": "Description de la famille",
+      "familyDescriptionFr": "Description de la famille en français",
+      "familyDescriptionEnUS": "Description de la famille en anglais (US)",
+      "familyDescriptionEnGB": "Description de la famille en anglais (GB)",
+      "familyDescriptionEnUSPH": "Description en anglais (US)...",
+      "familyDescriptionEnGBPH": "Description en anglais (GB)...",
       "createNewFamilyBtnText": "Enregistrer la nouvelle famille"
     }
   },
