@@ -15,11 +15,11 @@ const addTechniqueKey = expressAsyncHandler(async (req, res, next) => {
     enGB: { file: techniquesFileEnGB, name: techniqueNameEnGB },
   };
 
-  const { techniqueKey, error } = giveJsonNewKeyOrError(languages, "05005");
+  const { jsonKey, error } = giveJsonNewKeyOrError(languages, "05005");
   if (error) {
     return next(error);
   }
-  body.techniqueKey = techniqueKey;
+  body.techniqueKey = jsonKey;
   return next();
 });
 module.exports = addTechniqueKey;
