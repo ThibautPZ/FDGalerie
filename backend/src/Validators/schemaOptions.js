@@ -99,7 +99,7 @@ const nullableStr = (fieldName, errMsgPrefix, options) => {
       regularExpressions.minOneNonSpaceCharRegExp;
     Object.assign(returnedObj, {
       matches: {
-        pattern: regex,
+        options: regex,
         errorMessage: `${errMsgPrefix}${uppercasedFieldName}_pat`,
       },
     });
