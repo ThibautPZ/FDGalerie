@@ -2,19 +2,19 @@
 
 INSERT INTO
     `painting_sizes` (`name`)
-VALUES ('Mini'),
-    ('Medium'),
-    ('Maxi');
+VALUES ('MINI'),
+    ('MEDIUM'),
+    ('MAXI');
 
 INSERT INTO
     `techniques` (`name`)
-VALUES ('Acrylique'),
-    ('Aquarelle'),
-    ('Huile'),
-    ('Crayon à papier'),
-    ('Encre'),
-    ('Collage'),
-    ('Crayons gras');
+VALUES ('ACRYLIQUE'),
+    ('AQUARELLE'),
+    ('HUILE'),
+    ('CRAYON_À_PAPIER'),
+    ('ENCRE'),
+    ('COLLAGE'),
+    ('CRAYONS_GRAS');
 
 INSERT INTO `supports` (`name`) VALUES ('Papier'), ('Toile');
 
@@ -121,8 +121,8 @@ VALUES (
 
 INSERT INTO
     `families` (`name`)
-VALUES ('Trio De Petites Sirènes'),
-    ('Grenouilles Et Canaris');
+VALUES ('TRIO_DE_PETITES_SIRÈNES'),
+    ('GRENOUILLES_ET_CANARIS');
 
 INSERT INTO
     `paintings` (
