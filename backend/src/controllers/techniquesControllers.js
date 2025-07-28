@@ -1,5 +1,3 @@
-const { readFile, writeFile } = require("fs").promises;
-const path = require("path");
 const async = require("async");
 const asyncHandler = require("express-async-handler");
 
@@ -10,6 +8,7 @@ const {
   giveSuccesfulAndFailedQueryNames,
 } = require("../helpers/dbAsyncQueriesHelper");
 const CustomErrorClass = require("../services/ErrorClasses");
+const updateJsonFile = require("../services/updateJsonFile");
 
 const browse = asyncHandler(async (req, res, next) => {
   const [rows] = await tables.techniques.readAll();
@@ -42,38 +41,9 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  async function updateJSONFile(
-    operation,
-    fileFolderPath,
-    fileName,
-    key,
-    value
-  ) {
-    try {
-      const filePath = path.join(
-        __dirname,
-        `${fileFolderPath}/${fileName}.json`
-      );
-      const data = await readFile(filePath);
-      const jsonData = JSON.parse(data);
-      if (operation === "add") {
-        jsonData[key] = value;
-      }
-      if (operation === "remove") {
-        delete jsonData[key];
-      }
-      await writeFile(filePath, JSON.stringify(jsonData, null, 2));
-
-      return true;
-    } catch (err) {
-      console.error(`Error updating JSON file: ${err.message}`);
-      return err;
-    }
-  }
-
   const filesResults = await async.parallel({
     fr: async.retryable(5, async () =>
-      updateJSONFile(
+      updateJsonFile(
         "add",
         "../../public/locales/fr",
         "techniques",
@@ -82,7 +52,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
       )
     ),
     enUS: async.retryable(5, async () =>
-      updateJSONFile(
+      updateJsonFile(
         "add",
         "../../public/locales/enUS",
         "techniques",
@@ -91,7 +61,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
       )
     ),
     enGB: async.retryable(5, async () =>
-      updateJSONFile(
+      updateJsonFile(
         "add",
         "../../public/locales/enGB",
         "techniques",
@@ -112,7 +82,7 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
     success.forEach((lang) => {
       undoPromises[lang] = async.retryable(
         5,
-        updateJSONFile(
+        updateJsonFile(
           "remove",
           `../../public/locales/${lang}`,
           "techniques",
