@@ -7,15 +7,27 @@ const familyNameOptions = requiredStr("familyName", errorMsgPrefix, {
   matches: { regexName: "minOneNonSpaceCharRegExp" },
   maxLength: 64,
 });
-const familyDescriptionOptions = nullableStr(
-  "familyDescription",
+const familyDescriptionFrOptions = nullableStr(
+  "familyDescriptionFr",
+  errorMsgPrefix,
+  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+);
+const familyDescriptionEnUSOptions = nullableStr(
+  "familyDescriptionEnUS",
+  errorMsgPrefix,
+  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+);
+const familyDescriptionEnGBOptions = nullableStr(
+  "familyDescriptionEnGB",
   errorMsgPrefix,
   { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 
 const createFamilySchema = checkSchema({
   familyName: familyNameOptions,
-  familyDescription: familyDescriptionOptions,
+  familyDescriptionFr: familyDescriptionFrOptions,
+  familyDescriptionEnUS: familyDescriptionEnUSOptions,
+  familyDescriptionEnGB: familyDescriptionEnGBOptions,
 });
 
 module.exports = createFamilySchema;
