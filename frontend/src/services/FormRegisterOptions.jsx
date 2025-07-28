@@ -472,6 +472,27 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("techniqueNameEnGB.maxLength"),
       },
     },
+    familyName: {
+      required: tWithPrefix("familyName.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("familyName.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("familyName.maxLength"),
+      },
+    },
+    familyDescription: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("familyDescription.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("familyDescription.maxLength"),
+      },
+    },
   };
 }
 export default FormRegisterOptions;

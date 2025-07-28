@@ -15,6 +15,8 @@ import createContactDefaultValues from "../json/formDefaultValues/createContactD
 import createOeuvreDefaultValues from "../json/formDefaultValues/createOeuvreDefaultValues.json";
 import createTechniqueDefaultValues from "../json/formDefaultValues/createTechniqueDefaultValues.json";
 import UseCreateTechnique from "../hooks/RQmutation/UseCreateTechnique";
+import UseCreateFamily from "../hooks/RQmutation/UseCreateFamily";
+import createFamilyDefaultValues from "../json/formDefaultValues/createFamilyDefaultValues.json";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
@@ -33,6 +35,11 @@ function OeuvresManagement() {
   });
   const createTechniqueFormMethods = useForm({
     defaultValues: createTechniqueDefaultValues,
+    shouldUnregister: false,
+  });
+
+  const createFamilyFormMethods = useForm({
+    defaultValues: createFamilyDefaultValues,
     shouldUnregister: false,
   });
 
@@ -65,6 +72,7 @@ function OeuvresManagement() {
   const createContactMutation = UseCreateContact(handleModalInstall);
   const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
   const createTechniqueMutation = UseCreateTechnique(handleModalInstall);
+  const createFamilyMutation = UseCreateFamily(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -138,23 +146,6 @@ function OeuvresManagement() {
         </button>
       )}
 
-      {/* ) : (
-        ""
-      )} */}
-      {/* {displayedComponents === "detailedOeuvre" ? (
-        <OeuvresManagementDetailedOeuvre oeuvre={selectedOeuvre} />
-      ) : (
-        ""
-      )}
-      {displayedComponents === "newOeuvre" ? (
-        <OeuvresManagementCreateOeuvre
-          handleReturnClick={handleReturnClick}
-          handleModalInstall={handleModalInstall}
-          createContactMutation={createContactMutation}
-        />
-      ) : (
-        ""
-      )} */}
       {popUpState.modalOpen ? (
         <PopUp
           isOpen={popUpState.modalOpen}
@@ -171,6 +162,8 @@ function OeuvresManagement() {
           createOeuvreFormMethods,
           createTechniqueMutation,
           createTechniqueFormMethods,
+          createFamilyMutation,
+          createFamilyFormMethods,
           handleModalInstall,
           isModifying,
           setIsModifying,

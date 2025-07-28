@@ -155,5 +155,14 @@
     "required": "Le nom de la technique en anglais (GB) doit être renseigné.",
     "pattern": "Le nom de la technique en anglais (GB) est invalide.",
     "maxLength": "Le nom de la technique en anglais (GB) doit avoir au maximum 64 caractères."
+  },
+  "familyName": {
+    "required": "Le nom de la famille doit être renseigné.",
+    "pattern": "Le nom de la famille est invalide.",
+    "maxLength": "Le nom de la famille doit avoir au maximum 64 caractères."
+  },
+  "familyDescription": {
+    "pattern": "La description de la famille est invalide.",
+    "maxLength": "La description de la famille doit avoir au maximum 254 caractères."
   }
 }
