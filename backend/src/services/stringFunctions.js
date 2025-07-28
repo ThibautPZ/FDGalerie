@@ -1,9 +1,4 @@
 const { isStringNotEmpty } = require("./typesAndValidationChecks");
-const {
-  characterNotLowerCharRegExp,
-  punctuationRegExp,
-  digitRegExp,
-} = require("./regularExpressions");
 
 const uppercaseFirstChar = (str) => {
   if (!isStringNotEmpty(str)) {
@@ -14,64 +9,22 @@ const uppercaseFirstChar = (str) => {
   return `${uppercasedChar}${remainingChars}`;
 };
 
-const caseToUpperCase = (str) => {
+const toScreamingSnakeCase = (str) => {
   if (!isStringNotEmpty(str)) {
     return "";
   }
-  const trimmedStr = str.trim();
-  let returnedStr = "";
-  let prevMatchIndex = -1;
-  let prevMatchType = "";
-
-  for (let i = 0; i < trimmedStr.length; i += 1) {
-    const char = trimmedStr[i];
-    if (punctuationRegExp.test(char)) {
-      const matchType = prevMatchType;
-      const matchIndex = prevMatchIndex;
-      prevMatchType = "punctuation";
-      prevMatchIndex = i;
-      if (
-        i !== 0 &&
-        (matchIndex !== i - 1 ||
-          (matchType !== "punctuation" && matchIndex === i - 1))
-      ) {
-        returnedStr = `${returnedStr}_`;
+  return str
+    .replace(
+      /([a-z])(?=[A-Z])|([A-Za-z])(?=\d)|(\d)(?=[A-Za-z])|[\s\-_]+/g,
+      (match, lowerToUpper, letterToDigit, digitToLetter) => {
+        if (lowerToUpper) return `${lowerToUpper}_`;
+        if (letterToDigit) return `${letterToDigit}_`;
+        if (digitToLetter) return `${digitToLetter}_`;
+        return "_";
       }
-    } else if (digitRegExp.test(char)) {
-      const matchType = prevMatchType;
-      const matchIndex = prevMatchIndex;
-      prevMatchIndex = i;
-      prevMatchType = "number";
-
-      if (
-        i !== 0 &&
-        (matchIndex !== i - 1 ||
-          (matchType !== "number" && matchIndex === i - 1))
-      ) {
-        returnedStr = `${returnedStr}_${char}`;
-      } else {
-        returnedStr = `${returnedStr}${char}`;
-      }
-    } else if (characterNotLowerCharRegExp.test(char)) {
-      const matchType = prevMatchType;
-      const matchIndex = prevMatchIndex;
-      prevMatchIndex = i;
-      prevMatchType = "other";
-      if (
-        i !== 0 &&
-        (matchIndex !== i - 1 ||
-          (matchType !== "other" && matchIndex === i - 1))
-      ) {
-        returnedStr = `${returnedStr}_${char}`;
-      } else {
-        returnedStr = `${returnedStr}${char}`;
-      }
-    } else {
-      returnedStr = `${returnedStr}${char}`;
-    }
-  }
-
-  return returnedStr.toLocaleUpperCase();
+    )
+    .replace(/_+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .toUpperCase();
 };
-
-module.exports = { uppercaseFirstChar, caseToUpperCase };
+module.exports = { uppercaseFirstChar, toScreamingSnakeCase };
