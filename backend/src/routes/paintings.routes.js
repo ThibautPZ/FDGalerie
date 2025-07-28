@@ -103,4 +103,3 @@ router.post(
 );
 
 module.exports = router;
-// oeuvreAvailabilityid, formatid, supportid, techniquesidss

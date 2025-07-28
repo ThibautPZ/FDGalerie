@@ -38,5 +38,10 @@
     "manager": "families",
     "method": "createOne",
     "undo": "deleteById"
+  },
+  "createPaintingSize": {
+    "manager": "paintingSizes",
+    "method": "createOne",
+    "undo": "deleteById"
   }
 }

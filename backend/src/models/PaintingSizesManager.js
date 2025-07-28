@@ -15,6 +15,19 @@ class PaintingSizesManager extends AbstractManager {
       [id]
     );
   }
+
+  async readByName({ name }) {
+    return this.database.query(
+      `SELECT id, name FROM ${this.table} WHERE name = ?`,
+      [name]
+    );
+  }
+
+  async createOne(name) {
+    return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?);`, [
+      name,
+    ]);
+  }
 }
 
 module.exports = PaintingSizesManager;

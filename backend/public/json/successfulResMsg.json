@@ -20,5 +20,11 @@
       "type": "info",
       "message": "familyCreated"
     }
+  },
+  "paintingSizesControllers": {
+    "createPaintingSize": {
+      "type": "info",
+      "message": "paintingSizeCreated"
+    }
   }
 }
