@@ -1,6 +1,6 @@
 const AbstractManager = require("./AbstractManager");
 
-class supportsManager extends AbstractManager {
+class SupportsManager extends AbstractManager {
   constructor() {
     super({ table: "supports" });
   }
@@ -23,15 +23,15 @@ class supportsManager extends AbstractManager {
     );
   }
 
-  async createOne({ name }) {
+  async createOne(name) {
     return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
       name,
     ]);
   }
 
-  async deleteById({ id }) {
+  async deleteById(id) {
     return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
   }
 }
 
-module.exports = supportsManager;
+module.exports = SupportsManager;
