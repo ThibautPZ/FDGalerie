@@ -16,10 +16,9 @@ VALUES ('ACRYLIQUE'),
     ('COLLAGE'),
     ('CRAYONS_GRAS');
 
-INSERT INTO `supports` (`name`) VALUES ('PAPIER') ('TOILE');
+INSERT INTO `supports` (`name`) VALUES ('PAPIER'), ('TOILE');
 
-INSERT INTO
-    `paintings_availabilities` (`name`)
+INSERT INTO `paintings_availabilities` (`name`)
 VALUES ('given'),
     ('sold'),
     ('reserved'),
