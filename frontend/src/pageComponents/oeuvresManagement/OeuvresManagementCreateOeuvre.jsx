@@ -9,6 +9,7 @@ import translationInstance from "../../services/translationInstance";
 import CreateTechniqueForm from "../shared/CreateTechniqueForm";
 import CreateFamilyForm from "../shared/CreateFamilyForm";
 import CreateFormatForm from "../shared/CreateFormatForm";
+import CreateSupportForm from "../shared/CreateSupportForm";
 
 function OeuvresManagementCreateOeuvre() {
   const tPageText = translationInstance(
@@ -67,6 +68,16 @@ function OeuvresManagementCreateOeuvre() {
           onClose={onFoldClose}
         >
           <CreateFormatForm />
+        </FoldableComponent>
+        <FoldableComponent
+          className=""
+          labelText={tPageText("createNewSupport")}
+          isOpen={false}
+          whenLabel="always"
+          onOpen={null}
+          onClose={onFoldClose}
+        >
+          <CreateSupportForm />
         </FoldableComponent>
       </div>
     </div>

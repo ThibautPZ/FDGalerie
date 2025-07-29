@@ -17,6 +17,33 @@
         "validationBtnText": "",
         "closeBtnText": "OK"
       }
+    },
+    "CreateFamily": {
+      "familyCreated": {
+        "title": "Famille créée",
+        "message": "{{insertText1}} a été ajoutée à la liste des familles.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      }
+    },
+    "CreateFormat": {
+      "formatCreated": {
+        "title": "Format créé",
+        "message": "{{insertText1}} a été ajouté à la liste des formats.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      }
+    },
+    "CreateSupport": {
+      "supportCreated": {
+        "title": "Support créé",
+        "message": "{{insertText1}} a été ajouté à la liste des supports.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      }
     }
   },
   "UtilisateurManagement": {

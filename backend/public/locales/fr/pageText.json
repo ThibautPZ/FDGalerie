@@ -48,6 +48,21 @@
       "paintingSizeDescriptionEnUS": "Description du format en anglais (US)",
       "paintingSizeDescriptionEnGB": "Description du format en anglais (GB)",
       "createNewFormatBtnText": "Enregistrer le nouveau format"
+    },
+    "CreateSupport": {
+      "supportNameFrPH": "Nom en français...",
+      "supportNameEnUSPH": "Nom en anglais (US)...",
+      "supportNameEnGBPH": "Nom en anglais (GB)...",
+      "supportNameFr": "Nom du support en français",
+      "supportNameEnUS": "Nom du support en anglais (US)",
+      "supportNameEnGB": "Nom du support en anglais (GB)",
+      "supportDescriptionFrPH": "Description en français...",
+      "supportDescriptionEnUSPH": "Description en anglais (US)...",
+      "supportDescriptionEnGBPH": "Description en anglais (GB)...",
+      "supportDescriptionFr": "Description du support en français",
+      "supportDescriptionEnUS": "Description du support en anglais (US)",
+      "supportDescriptionEnGB": "Description du support en anglais (GB)",
+      "createNewSupportBtnText": "Enregistrer le nouveau support"
     }
   },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
@@ -165,7 +180,8 @@
       "noVisibilityCuzNoFile": "Il n'est pas possible de rendre visible une oeuvre sans fichier image.",
       "createNewTechnique": "Créer une nouvelle technique ?",
       "createNewFamily": "Créer une nouvelle famille ?",
-      "createNewFormat": "Créer un nouveau format ?"
+      "createNewFormat": "Créer un nouveau format ?",
+      "createNewSupport": "Créer un nouveau support ?"
     }
   },
   "ContactManagement": {

@@ -19,6 +19,8 @@ import UseCreateFamily from "../hooks/RQmutation/UseCreateFamily";
 import createFamilyDefaultValues from "../json/formDefaultValues/createFamilyDefaultValues.json";
 import createFormatDefaultValues from "../json/formDefaultValues/createFormatDefaultValues.json";
 import UseCreateFormat from "../hooks/RQmutation/UseCreateFormat";
+import UseCreateSupport from "../hooks/RQmutation/UseCreateSupport";
+import createSupportDefaultValues from "../json/formDefaultValues/createSupportDefaultValues.json";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
@@ -47,6 +49,11 @@ function OeuvresManagement() {
 
   const createFormatFormMethods = useForm({
     defaultValues: createFormatDefaultValues,
+    shouldUnregister: false,
+  });
+
+  const createSupportFormMethods = useForm({
+    defaultValues: createSupportDefaultValues,
     shouldUnregister: false,
   });
 
@@ -81,6 +88,7 @@ function OeuvresManagement() {
   const createTechniqueMutation = UseCreateTechnique(handleModalInstall);
   const createFamilyMutation = UseCreateFamily(handleModalInstall);
   const createFormatMutation = UseCreateFormat(handleModalInstall);
+  const createSupportMutation = UseCreateSupport(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -174,6 +182,8 @@ function OeuvresManagement() {
           createFamilyFormMethods,
           createFormatMutation,
           createFormatFormMethods,
+          createSupportMutation,
+          createSupportFormMethods,
           handleModalInstall,
           isModifying,
           setIsModifying,

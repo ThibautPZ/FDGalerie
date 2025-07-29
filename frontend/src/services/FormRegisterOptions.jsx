@@ -513,6 +513,132 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("familyDescriptionEnGB.maxLength"),
       },
     },
+    paintingSizeNameFr: {
+      required: tWithPrefix("paintingSizeNameFr.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeNameFr.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("paintingSizeNameFr.maxLength"),
+      },
+    },
+    paintingSizeNameEnUS: {
+      required: tWithPrefix("paintingSizeNameEnUS.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeNameEnUS.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("paintingSizeNameEnUS.maxLength"),
+      },
+    },
+    paintingSizeNameEnGB: {
+      required: tWithPrefix("paintingSizeNameEnGB.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeNameEnGB.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("paintingSizeNameEnGB.maxLength"),
+      },
+    },
+    paintingSizeDescriptionFr: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeDescriptionFr.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("paintingSizeDescriptionFr.maxLength"),
+      },
+    },
+    paintingSizeDescriptionEnUS: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeDescriptionEnUS.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("paintingSizeDescriptionEnUS.maxLength"),
+      },
+    },
+    paintingSizeDescriptionEnGB: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("paintingSizeDescriptionEnGB.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("paintingSizeDescriptionEnGB.maxLength"),
+      },
+    },
+    supportNameFr: {
+      required: tWithPrefix("supportNameFr.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportNameFr.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("supportNameFr.maxLength"),
+      },
+    },
+    supportNameEnUS: {
+      required: tWithPrefix("supportNameEnUS.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportNameEnUS.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("supportNameEnUS.maxLength"),
+      },
+    },
+    supportNameEnGB: {
+      required: tWithPrefix("supportNameEnGB.required"),
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportNameEnGB.pattern"),
+      },
+      maxLength: {
+        value: 64,
+        message: tWithPrefix("supportNameEnGB.maxLength"),
+      },
+    },
+    supportDescriptionFr: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportDescriptionFr.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("supportDescriptionFr.maxLength"),
+      },
+    },
+    supportDescriptionEnUS: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportDescriptionEnUS.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("supportDescriptionEnUS.maxLength"),
+      },
+    },
+    supportDescriptionEnGB: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("supportDescriptionEnGB.pattern"),
+      },
+      maxLength: {
+        value: 8000,
+        message: tWithPrefix("supportDescriptionEnGB.maxLength"),
+      },
+    },
   };
 }
 export default FormRegisterOptions;
