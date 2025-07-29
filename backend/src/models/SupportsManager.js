@@ -15,6 +15,23 @@ class supportsManager extends AbstractManager {
       [id]
     );
   }
+
+  async readByName({ name }) {
+    return this.database.query(
+      `SELECT name, id FROM ${this.table} WHERE name = ?`,
+      [name]
+    );
+  }
+
+  async createOne({ name }) {
+    return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
+      name,
+    ]);
+  }
+
+  async deleteById({ id }) {
+    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
+  }
 }
 
 module.exports = supportsManager;

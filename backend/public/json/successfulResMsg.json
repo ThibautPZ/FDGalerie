@@ -26,5 +26,11 @@
       "type": "info",
       "message": "paintingSizeCreated"
     }
+  },
+  "supportsControllers": {
+    "createSupport": {
+      "type": "info",
+      "message": "supportCreated"
+    }
   }
 }

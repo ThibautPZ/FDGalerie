@@ -43,5 +43,10 @@
     "manager": "paintingSizes",
     "method": "createOne",
     "undo": "deleteById"
+  },
+  "createSupport": {
+    "manager": "supports",
+    "method": "createOne",
+    "undo": "deleteById"
   }
 }

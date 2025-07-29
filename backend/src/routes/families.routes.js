@@ -23,7 +23,6 @@ router.post(
     errorNumber: "05010",
     rejectWhenTrue: true,
   }),
-
   familiesControllers.createFamily,
   errorHandler
 );
