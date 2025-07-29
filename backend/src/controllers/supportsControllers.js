@@ -82,8 +82,7 @@ const createSupport = asyncHandler(async (req, res, next) => {
   if (failures.length) {
     const undoPromises = {};
     success.forEach((lang) => {
-      undoPromises[lang] = async.retryable(
-        5,
+      undoPromises[lang] = async.retryable(5, async () =>
         updateJsonFile(
           "remove",
           `../../public/locales/${lang}`,
@@ -98,9 +97,9 @@ const createSupport = asyncHandler(async (req, res, next) => {
       undoQueryArgs: [result.insertId],
     });
 
-    const undoNewSupportQuerySpecs = giveDbQueryUndoSpecs([
-      createSupportQuerySpecs,
-    ]);
+    const undoNewSupportQuerySpecs = giveDbQueryUndoSpecs(
+      createSupportQuerySpecs
+    );
 
     await giveQueryPromise(undoNewSupportQuerySpecs);
     const err = await new CustomErrorClass("06009", failures);
