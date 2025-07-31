@@ -21,6 +21,8 @@ const digitRegExp = /\d/g;
 
 const minOneNonSpaceCharRegExp = /.*\S.*/gi;
 
+const emptyOrMinOneNonSpaceCharRegExp = /(^$)|(.*\S.*)/gi;
+
 export {
   civilNameRegExp,
   priceEurRegExp,
@@ -33,4 +35,5 @@ export {
   punctuationRegExp,
   digitRegExp,
   minOneNonSpaceCharRegExp,
+  emptyOrMinOneNonSpaceCharRegExp,
 };
