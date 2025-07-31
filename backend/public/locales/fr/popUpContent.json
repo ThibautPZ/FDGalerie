@@ -8,11 +8,174 @@
       "closeBtnText": "OK"
     }
   },
+  "errors": {
+    "00000": {
+      "title": "Erreur",
+      "message": "Une erreur est survenue lors de la communication avec le serveur. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "00001": {
+      "title": "Erreur",
+      "message": "L'opération demandée est indisponible. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "00004": {
+      "title": "Erreur",
+      "message": "Une erreur inattendue s'est produite durant l'opération demandée. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "00200": {
+      "title": "Identifiants incorrects",
+      "message": "Les identifiants que vous avez saisis ne correspondent pas à nos enregistrements.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "05001": {
+      "title": "Pas de nom de contact",
+      "message": "Le nom du contact doit être renseigné.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "05004": {
+      "title": "Pas d'image du tableau",
+      "message": "Une image de tableau doit être fournie pour rendre ce tableau public.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06001": {
+      "title": "Impossible d'enregistrer le nouveau contact",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06002": {
+      "title": "Impossible de mettre à jour le contact",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06003": {
+      "title": "Impossible d'enregistrer le nouveau tableau",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau tableau. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06006": {
+      "title": "Impossible d'enregistrer la nouvelle technique",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06007": {
+      "title": "Impossible d'enregistrer la nouvelle famille",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle famille. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06008": {
+      "title": "Impossible d'enregistrer la nouvelle format",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle format. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "06009": {
+      "title": "Impossible d'enregistrer la nouvelle support",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle support. Veauillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    },
+    "07003": {
+      "title": "Impossible de trouver le contact",
+      "message": "Le contact demandé n'a pas été trouvé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    }
+  },
+  "warnings": {
+    "00002": {
+      "title": "Message existant",
+      "message": "Le compte est déjà suspendu, et un message est présent. Vous pouvez consulter celui-ci et le modifier en cliquant sur le bouton : ",
+      "validationBtnReturnedStr": "banMessageUpdate",
+      "validationBtnText": "Consulter le message de suspension",
+      "closeBtnText": "OK"
+    },
+    "04001": {
+      "title": "Personnes enregistrées correspondantes",
+      "message": "Certaines personnes enregistrées sur le site (utilisateurs et/ou contacts) correspondent au nouveau contact en cours de création. Vérifiez s'il ne s'agit pas de la même personne, afin d'éviter de créer des doublons.",
+      "validationBtnReturnedStr": "doCreateContact",
+      "validationBtnText": "Ce nouveau contact n'est aucune de ces personnes, je valide sa création.",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler l'enregistrement"
+    },
+    "05003": {
+      "title": "Titre déjà pris",
+      "message": "Un autre tableau enregistré possède le même titre. Veuillez modifier le titre du nouveau tableau.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05005": {
+      "title": "Technique existante",
+      "message": "Une autre technique enregistrée possède le même nom. Veuillez modifier le nom de la nouvelle technique.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05011": {
+      "title": "Format existant",
+      "message": "Un autre format enregistré possède le même nom. Veuillez modifier le nom du nouveau format.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05012": {
+      "title": "Support existant",
+      "message": "Un autre support enregistré possède le même nom. Veuillez modifier le nom du nouveau support.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    }
+  },
   "shared": {
     "CreateTechnique": {
       "techniqueCreated": {
         "title": "Technique créée",
         "message": "{{insertText1}} a été ajoutée à la liste des techniques.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      },
+      "techniqueAlreadyExists": {
+        "title": "Technique déjà existante",
+        "message": "Une technique avec ce nom existe déjà.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "closeBtnText": "OK"
+      },
+      "cannotWriteNewTechnique": {
+        "title": "Impossible d'enregistrer la nouvelle technique",
+        "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
         "closeBtnText": "OK"
@@ -28,7 +191,7 @@
       }
     },
     "CreateFormat": {
-      "formatCreated": {
+      "paintingSizeCreated": {
         "title": "Format créé",
         "message": "{{insertText1}} a été ajouté à la liste des formats.",
         "validationBtnReturnedStr": "",
@@ -102,13 +265,7 @@
       "validationBtnText": "OK",
       "closeBtnText": ""
     },
-    "banMessageExists": {
-      "title": "Message existant",
-      "message": "Le compte est déjà suspendu, et un message est présent. Vous pouvez consulter celui-ci et le modifier en cliquant sur le bouton : ",
-      "validationBtnReturnedStr": "banMessageUpdate",
-      "validationBtnText": "Consulter le message de suspension",
-      "closeBtnText": "OK"
-    },
+
     "createdUser": {
       "title": "Compte créé",
       "message": "Le nouveau compte a été créé.",
