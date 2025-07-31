@@ -1,4 +1,24 @@
 const CustomErrorClass = require("../services/ErrorClasses");
+const {
+  isString,
+  isArrayNotEmpty,
+} = require("../services/typesAndValidationChecks");
+
+const giveInfoData = (errorContent) => {
+  if (!errorContent) {
+    return null;
+  }
+  const infoData = {};
+  if (isString(errorContent)) {
+    infoData.insertText1 = errorContent;
+  }
+  if (isArrayNotEmpty(errorContent)) {
+    errorContent.forEach((element, index) => {
+      infoData[`insertText${index + 1}`] = element;
+    });
+  }
+  return infoData;
+};
 
 const errorHandler = (err, req, res, next) => {
   console.error("errorHandler", err);
@@ -23,8 +43,9 @@ const errorHandler = (err, req, res, next) => {
     errorObj: {
       type: errorClass.type,
       message: errorClass.name,
-      code: errorClass.code,
-      errors: errorClass.errors,
+      code: errorClass.publicCode,
+      errors: null,
+      infoData: giveInfoData(errorClass.content),
     },
   });
 };
