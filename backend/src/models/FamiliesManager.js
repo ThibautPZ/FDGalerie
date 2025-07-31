@@ -25,11 +25,10 @@ class FamiliesManager extends AbstractManager {
     );
   }
 
-  async createOne(familyName, familyDescription) {
-    return this.database.query(
-      `INSERT INTO ${this.table} (name, description) VALUES (?, ?)`,
-      [familyName, familyDescription]
-    );
+  async createOne(familyName) {
+    return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
+      familyName,
+    ]);
   }
 
   async deleteById(id) {
