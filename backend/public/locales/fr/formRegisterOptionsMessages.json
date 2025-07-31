@@ -118,6 +118,9 @@
     "required": "Vous devez indiquer la date de réservation.",
     "pattern": "La date de réservation sélectionnée est invalide."
   },
+  "reservationPrice": {
+    "pattern": "Le prix indiqué est invalide."
+  },
   "saleDate": {
     "required": "Vous devez indiquer la date de vente.",
     "pattern": "La date de vente sélectionnée est invalide."
