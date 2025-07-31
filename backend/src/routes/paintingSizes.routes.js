@@ -5,7 +5,6 @@ const router = express.Router();
 const validateSchema = require("../middlewares/validateSchema");
 const paintingSizesControllers = require("../controllers/paintingSizesControllers");
 const createPaintingSizeSchema = require("../Validators/createPaintingSize.validator");
-const errorHandler = require("../middlewares/errorHandler");
 const addPaintingSizeKey = require("../middlewares/reqAdders/addPaintingSizeKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 
@@ -22,8 +21,7 @@ router.post(
     errorNumber: "05011",
     rejectWhenTrue: true,
   }),
-  paintingSizesControllers.createPaintingSize,
-  errorHandler
+  paintingSizesControllers.createPaintingSize
 );
 
 module.exports = router;

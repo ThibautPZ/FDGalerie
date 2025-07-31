@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 const paintingsControllers = require("../controllers/paintingsControllers");
-const errorHandler = require("../middlewares/errorHandler");
 const handleMulterParsing = require("../middlewares/handleMulterParsing");
 const handleVerificationsOnReqIfNoFiles = require("../middlewares/handleVerificationsOnReqIfNoFiles");
 const createPaintingSchema = require("../Validators/createPainting.validator");
@@ -36,11 +35,7 @@ router.get(
   paintingsControllers.readPublicByFormat
 );
 
-router.get(
-  "/adminDetailed",
-  paintingsControllers.browseAdminWithDetails,
-  errorHandler
-);
+router.get("/adminDetailed", paintingsControllers.browseAdminWithDetails);
 
 router.get(
   "/allPublicMinimalInfos",
@@ -98,8 +93,7 @@ router.post(
     }
   ),
   addFamilyMemberNumber,
-  paintingsControllers.createPainting,
-  errorHandler
+  paintingsControllers.createPainting
 );
 
 module.exports = router;

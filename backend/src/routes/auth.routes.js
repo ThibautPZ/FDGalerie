@@ -14,8 +14,6 @@ const forgottenPasswordSchema = require("../Validators/forgottenPasswordvalidato
 const resetPasswordSchema = require("../Validators/resetPassword.validator");
 const updateContactSchema = require("../Validators/updateContact.validator");
 
-const errorHandler = require("../middlewares/errorHandler");
-
 const {
   checkContactExists,
 } = require("../middlewares/dbCheckers/existInDbCheckers");
@@ -46,8 +44,7 @@ router.post(
   checkUserExistsByEmailWithPassword,
   checkUserPassword,
   checkAndUpdateLanguage,
-  authControllers.login,
-  errorHandler
+  authControllers.login
 );
 
 router.post(
@@ -65,8 +62,7 @@ router.post(
   validateSchema(createUserSchema),
   checkUserDoesntExist,
   hashPassword,
-  authControllers.signUp2,
-  errorHandler
+  authControllers.signUp2
 );
 
 router.post(
@@ -78,8 +74,7 @@ router.post(
     "optionalDependantLastname",
   ]),
   checkContactOrUserDoesntExist,
-  authControllers.createOneContact,
-  errorHandler
+  authControllers.createOneContact
 );
 
 router.post(

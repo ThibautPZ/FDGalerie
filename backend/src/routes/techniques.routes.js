@@ -6,7 +6,6 @@ const techniquesControllers = require("../controllers/techniquesControllers");
 const createTechniqueSchema = require("../Validators/createTechnique.validator");
 const addTechniqueKey = require("../middlewares/reqAdders/addTechniqueKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
-const errorHandler = require("../middlewares/errorHandler");
 const validateSchema = require("../middlewares/validateSchema");
 
 router.get("/", techniquesControllers.browse);
@@ -23,8 +22,7 @@ router.post(
     errorNumber: "05005",
     rejectWhenTrue: true,
   }),
-  techniquesControllers.createOneTechnique,
-  errorHandler
+  techniquesControllers.createOneTechnique
 );
 
 module.exports = router;
