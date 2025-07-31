@@ -24,6 +24,7 @@ const UseModal = () => {
    * @param {Object} responseDataObj.confirmationData.matchingPeople[].personInfos - Object that contains values to be used by confirmationPopUp
    * @param {string} translationPrefix - String to provide to i18n as namespace
    */
+
   const handleModalInstall = (responseDataObj, translationPrefix) => {
     setPopUpState({
       modalOpen: true,
