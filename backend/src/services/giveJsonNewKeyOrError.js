@@ -11,8 +11,8 @@ const { toScreamingSnakeCase } = require("./stringFunctions");
 const giveJsonNewKeyOrError = (languages, errorNumber = "00001") => {
   for (const [key, { file, name }] of Object.entries(languages)) {
     const jsonKey = toScreamingSnakeCase(name);
-    if (file[jsonKey]?.name === name) {
-      const err = new CustomErrorClass(errorNumber, key);
+    if (file[jsonKey]?.name.toLowerCase() === name.toLowerCase()) {
+      const err = new CustomErrorClass(errorNumber, key, name);
       return { jsonKey: "", error: err };
     }
     if (!file[jsonKey]) {
