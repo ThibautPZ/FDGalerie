@@ -1,6 +1,6 @@
 {
   "00000": {
-    "name": "generic",
+    "name": "unexpectedError",
     "statusCode": 500,
     "type": "error"
   },
@@ -14,11 +14,11 @@
     "statusCode": 401,
     "type": "warn"
   },
-
   "00003": {
     "name": "emptyRequestBody",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "00004": {
     "name": "processingError",
@@ -28,35 +28,45 @@
   "00005": {
     "name": "validationErrors",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "01000": {
     "name": "wrongFileExtension",
     "statusCode": 401,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "01001": {
     "name": "presenceInDb",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "01100": {
     "name": "fileFormFieldNameNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "02001": {
     "name": "paintingMaxFamilyMemberNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "00200": {
     "name": "wrongUserPassword",
     "statusCode": 401,
     "type": "error"
   },
-  "03001": { "name": "thumbCreateFail", "statusCode": 400, "type": "error" },
-  "04001": { "name": "contactExists", "statusCode": 400, "type": "error" },
+  "03001": {
+    "name": "thumbCreateFail",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "04001": { "name": "contactExists", "statusCode": 400, "type": "warn" },
   "05001": {
     "name": "noContactName",
     "statusCode": 400,
@@ -65,12 +75,13 @@
   "05002": {
     "name": "tooManyPaintingOwners",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "05003": {
     "name": "takenPaintingTitle",
     "statusCode": 400,
-    "type": "error"
+    "type": "warn"
   },
   "05004": {
     "name": "publicWhenNoImgFile",
@@ -80,27 +91,31 @@
   "05005": {
     "name": "techniqueAlreadyExists",
     "statusCode": 400,
-    "type": "error"
+    "type": "warn"
   },
   "05006": {
     "name": "supportIdNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "05007": {
     "name": "paintingSizeIdNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "05008": {
     "name": "techniqueIdNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "05009": {
     "name": "paintingAvailabilityIdNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "05010": {
     "name": "familyNameAlreadyExists",
@@ -110,12 +125,12 @@
   "05011": {
     "name": "paintingSizeNameAlreadyExists",
     "statusCode": 400,
-    "type": "error"
+    "type": "warn"
   },
   "05012": {
     "name": "supportNameAlreadyExists",
     "statusCode": 400,
-    "type": "error"
+    "type": "warn"
   },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
@@ -131,12 +146,8 @@
   "06004": {
     "name": "cannotWritePaintingRelatedData",
     "statusCode": 500,
-    "type": "error"
-  },
-  "06005": {
-    "name": "cannotWriteNewPainting",
-    "statusCode": 500,
-    "type": "error"
+    "type": "error",
+    "publicCode": "06003"
   },
   "06006": {
     "name": "cannotWriteNewTechnique",
@@ -161,10 +172,17 @@
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "07003"
   },
   "07002": {
     "name": "cannotGetContactsWithPaintingOwningCount",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "07003"
+  },
+  "07003": {
+    "name": "cannotGetContact",
     "statusCode": 400,
     "type": "error"
   }
