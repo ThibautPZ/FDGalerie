@@ -17,7 +17,7 @@ const UseCreateFormat = (handleModalInstall) => {
     return res.data;
   };
 
-  const translationPrefix = `popUpContent:popUpContent:shared.CreateFormat.`;
+  const translationPrefix = `popUpContent:shared.CreateFormat.`;
 
   return useMutation({
     mutationFn: (values) => postFormat(values),
