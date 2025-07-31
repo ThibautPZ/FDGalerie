@@ -1,12 +1,13 @@
 // Load the express module to create a web application
 const fs = require("node:fs");
 const path = require("node:path");
-
 const express = require("express");
-
 const cors = require("cors");
-
 const cookieParser = require("cookie-parser");
+const router = require("./router");
+
+const errorHandler = require("./middlewares/errorHandler");
+const invalidPathHandler = require("./middlewares/invalidPathHandler ");
 
 const app = express();
 
@@ -67,8 +68,6 @@ app.use(cookieParser());
 
 // Import and mount API routes
 
-const router = require("./router");
-
 app.use("/api", router);
 
 /* ************************************************************************* */
@@ -118,5 +117,9 @@ if (fs.existsSync(reactIndexFile)) {
     res.sendFile(reactIndexFile);
   });
 }
+
+app.use(errorHandler);
+
+app.use(invalidPathHandler);
 
 module.exports = app;
