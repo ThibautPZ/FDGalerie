@@ -24,17 +24,17 @@ const paintingSizeNameEnGBOptions = requiredStr(
 const paintingSizeDescriptionFrOptions = nullableStr(
   "paintingSizeDescriptionFr",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const paintingSizeDescriptionEnUSOptions = nullableStr(
   "paintingSizeDescriptionEnUS",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const paintingSizeDescriptionEnGBOptions = nullableStr(
   "paintingSizeDescriptionEnGB",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 
 const createPaintingSizeSchema = checkSchema({

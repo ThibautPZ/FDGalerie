@@ -18,17 +18,17 @@ const supportNameEnGBOptions = requiredStr("supportNameEnGB", errorMsgPrefix, {
 const supportDescriptionFrOptions = nullableStr(
   "supportDescriptionFr",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const supportDescriptionEnUSOptions = nullableStr(
   "supportDescriptionEnUS",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const supportDescriptionEnGBOptions = nullableStr(
   "supportDescriptionEnGB",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 
 const createSupportSchema = checkSchema({

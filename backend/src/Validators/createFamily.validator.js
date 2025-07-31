@@ -10,17 +10,17 @@ const familyNameOptions = requiredStr("familyName", errorMsgPrefix, {
 const familyDescriptionFrOptions = nullableStr(
   "familyDescriptionFr",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const familyDescriptionEnUSOptions = nullableStr(
   "familyDescriptionEnUS",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 const familyDescriptionEnGBOptions = nullableStr(
   "familyDescriptionEnGB",
   errorMsgPrefix,
-  { matches: { regexName: "minOneNonSpaceCharRegExp" }, maxLength: 8000 }
+  { matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" }, maxLength: 8000 }
 );
 
 const createFamilySchema = checkSchema({

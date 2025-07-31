@@ -96,7 +96,7 @@ const nullableStr = (fieldName, errMsgPrefix, options) => {
   if (options?.matches) {
     const regex =
       regularExpressions[options.matches.regexName] ||
-      regularExpressions.minOneNonSpaceCharRegExp;
+      regularExpressions.emptyOrMinOneNonSpaceCharRegExp;
     Object.assign(returnedObj, {
       matches: {
         options: regex,
