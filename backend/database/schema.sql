@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `painting_reservations` (
 
 CREATE TABLE IF NOT EXISTS `ban_messages` (
     `users_id` INT NOT NULL,
-    `message` VARCHAR(10000) NOT NULL,
+    `message` VARCHAR(1000) NOT NULL,
     PRIMARY KEY (`users_id`),
     CONSTRAINT `users_id` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `favorite_paintings` (
 
 CREATE TABLE IF NOT EXISTS `painting_user_comments` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `comment` VARCHAR(10000) NOT NULL,
+    `comment` VARCHAR(1000) NOT NULL,
     `date` VARCHAR(64) NOT NULL,
     `paintings_id` INT NOT NULL,
     `users_id` INT NOT NULL,
@@ -188,7 +188,9 @@ CREATE TABLE IF NOT EXISTS `painting_user_comments` (
 
 CREATE TABLE IF NOT EXISTS `paintings_artist_comments` (
     `paintings_id` INT NOT NULL,
-    `comment` VARCHAR(10000) NOT NULL,
+    `fr_comment` VARCHAR(1000) NOT NULL,
+    `en_US_comment` VARCHAR(1000) NULL,
+    `en_GB_comment` VARCHAR(1000) NULL,
     PRIMARY KEY (`paintings_id`),
     CONSTRAINT `fk_artist_comments_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
@@ -201,3 +203,5 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
     `user_id` INT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
+
+
