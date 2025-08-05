@@ -4,22 +4,14 @@ const router = express.Router();
 
 const paintingsControllers = require("../controllers/paintingsControllers");
 const handleMulterParsing = require("../middlewares/handleMulterParsing");
-const handleVerificationsOnReqIfNoFiles = require("../middlewares/handleVerificationsOnReqIfNoFiles");
 const createPaintingSchema = require("../Validators/createPainting.validator");
-const checkPaintingTitleDoesntExist = require("../services/checkFunctions/checkPaintingTitleDoesntExist");
 const createThumbnail = require("../middlewares/createThumbnail");
 const addFamilyMemberNumber = require("../middlewares/reqAdders/addFamiliyMemberNumber");
-const checkBodyKeyValuesFuncProvider = require("../services/checkFunctionsProvider/checkBodyKeyValuesFuncProvider");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
-
-const checkPaintingNotPublic = checkBodyKeyValuesFuncProvider([
-  {
-    fieldName: "oeuvreVisibility",
-    values: [true],
-    errorNum: "05004",
-    isMatchInvalid: true,
-  },
-]);
+const checkFile = require("../middlewares/reqCheckers/checkFile");
+const writeFile = require("../middlewares/fsWriters/writeFile");
+const validateSchema = require("../middlewares/validateSchema");
+const checkPaintingVisibility = require("../middlewares/reqCheckers/checkPaintingVisibility");
 
 router.get("/sizes", paintingsControllers.readAllSizes);
 
@@ -38,6 +30,11 @@ router.get(
 router.get("/adminDetailed", paintingsControllers.browseAdminWithDetails);
 
 router.get(
+  "/adminOneDetailed/:id",
+  paintingsControllers.readOneAdminWithDetails
+);
+
+router.get(
   "/allPublicMinimalInfos",
   paintingsControllers.readAllPublicMinimalInfos
 );
@@ -48,22 +45,17 @@ router.get("/", paintingsControllers.browse);
 
 router.post(
   "/createPainting",
-  handleMulterParsing(
-    {
-      folderName: "paintings",
-      fileType: "image",
-    },
-    { maxCount: { oeuvreFile: 1 }, fileSize: 100000000 },
-    createPaintingSchema,
-    checkPaintingTitleDoesntExist
-  ),
-  handleVerificationsOnReqIfNoFiles(
-    createPaintingSchema,
-    checkPaintingTitleDoesntExist,
-    checkPaintingNotPublic
-  ),
-  createThumbnail("paintings", { medium: true, large: true }),
+  handleMulterParsing({ maxCount: { oeuvreFile: 1 }, fileSize: 100000000 }),
+  validateSchema(createPaintingSchema),
+  checkPaintingVisibility,
   checkPresenceInDb(
+    {
+      manager: "paintings",
+      method: "findByTitle",
+      bodyKeyParams: { title: "oeuvreTitle" },
+      errorNumber: "05003",
+      rejectWhenTrue: true,
+    },
     {
       manager: "supports",
       method: "readById",
@@ -92,6 +84,9 @@ router.post(
       errorNumber: "05009",
     }
   ),
+  checkFile("image"),
+  writeFile("paintings"),
+  createThumbnail("paintings", { medium: true, large: true }),
   addFamilyMemberNumber,
   paintingsControllers.createPainting
 );

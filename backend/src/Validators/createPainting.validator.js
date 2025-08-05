@@ -52,154 +52,226 @@ const giveKnownPersonObjOptions = (fieldName) => {
   return returnedObj;
 };
 
-const createPaintingSchema = () => {
-  const oeuvreTitleOptions = requiredStr("oeuvreTitle", errorMsgPrefix);
-  const oeuvreTechniqueOptions = requiredArr("oeuvreTechnique", errorMsgPrefix);
-  const oeuvreTechniqueElementOptions = requiredInt(
-    "oeuvreTechnique",
-    errorMsgPrefix
-  );
-  const oeuvreSupportOptions = requiredInt("oeuvreSupport", errorMsgPrefix);
-  const oeuvreFormatOptions = requiredInt("oeuvreFormat", errorMsgPrefix);
-  const oeuvreHeightOptions = requiredFloat("oeuvreHeight", errorMsgPrefix);
-  const oeuvreWidthOptions = requiredFloat("oeuvreWidth", errorMsgPrefix);
-  const oeuvreAvailabilityOptions = requiredInt(
-    "oeuvreAvailability",
-    errorMsgPrefix
-  );
-  const oeuvreVisibilityOptions = requiredBool(
-    "oeuvreVisibility",
-    errorMsgPrefix
-  );
-  const oeuvreFamilyOptions = nullableInt("oeuvreFamily", errorMsgPrefix);
-  const oeuvreGivenToFirstnameOptions = nullableStr(
-    "oeuvreGivenToFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreGivenToLastnameOptions = nullableStr(
-    "oeuvreGivenToLastname",
-    errorMsgPrefix
-  );
-  const oeuvreGivenToKnownPersonOptions = giveKnownPersonObjOptions(
-    "oeuvreGivenToKnownPerson"
-  );
-  const oeuvreGivenToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreGivenToKnownPersonUserId",
-    errorMsgPrefix
-  );
-  const oeuvreGivenToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreGivenToKnownPersonContactId",
-    errorMsgPrefix
-  );
-  const oeuvreGivenToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreGivenToKnownPersonFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreGivenToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreGivenToKnownPersonLastname",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToFirstnameOptions = nullableStr(
-    "oeuvreSoldToFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToLastnameOptions = nullableStr(
-    "oeuvreSoldToLastname",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToKnownPersonOptions = giveKnownPersonObjOptions(
-    "oeuvreSoldToKnownPerson"
-  );
-  const oeuvreSoldToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreSoldToKnownPersonUserId",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreSoldToKnownPersonContactId",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreSoldToKnownPersonFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreSoldToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreSoldToKnownPersonLastname",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToFirstnameOptions = nullableStr(
-    "oeuvreReservedToFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToLastnameOptions = nullableStr(
-    "oeuvreReservedToLastname",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToKnownPersonOptions = giveKnownPersonObjOptions(
-    "oeuvreReservedToKnownPerson"
-  );
-  const oeuvreReservedToKnownPersonUserIdOptions = nullableInt(
-    "oeuvreReservedToKnownPersonUserId",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToKnownPersonContactIdOptions = nullableInt(
-    "oeuvreReservedToKnownPersonContactId",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToKnownPersonFirstnameOptions = nullableStr(
-    "oeuvreReservedToKnownPersonFirstname",
-    errorMsgPrefix
-  );
-  const oeuvreReservedToKnownPersonLastnameOptions = nullableStr(
-    "oeuvreReservedToKnownPersonLastname",
-    errorMsgPrefix
-  );
-  const artistCommentOptions = nullableStr("artistComment", errorMsgPrefix, {
-    maxLength: 254,
-  });
+const oeuvreTitleOptions = requiredStr("oeuvreTitle", errorMsgPrefix, {
+  matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+  maxLength: 128,
+});
+const oeuvreTechniqueOptions = requiredArr("oeuvreTechnique", errorMsgPrefix);
+const oeuvreTechniqueElementOptions = requiredInt(
+  "oeuvreTechnique",
+  errorMsgPrefix
+);
+const oeuvreSupportOptions = requiredInt("oeuvreSupport", errorMsgPrefix);
+const oeuvreFormatOptions = requiredInt("oeuvreFormat", errorMsgPrefix);
+const oeuvreHeightOptions = requiredFloat("oeuvreHeight", errorMsgPrefix);
+const oeuvreWidthOptions = requiredFloat("oeuvreWidth", errorMsgPrefix);
+const oeuvreAvailabilityOptions = requiredInt(
+  "oeuvreAvailability",
+  errorMsgPrefix
+);
+const oeuvreVisibilityOptions = requiredBool(
+  "oeuvreVisibility",
+  errorMsgPrefix
+);
+const oeuvreFamilyOptions = nullableInt("oeuvreFamily", errorMsgPrefix);
+const oeuvreGivenToFirstnameOptions = nullableStr(
+  "oeuvreGivenToFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreGivenToLastnameOptions = nullableStr(
+  "oeuvreGivenToLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreGivenToKnownPersonOptions = giveKnownPersonObjOptions(
+  "oeuvreGivenToKnownPerson"
+);
+const oeuvreGivenToKnownPersonUserIdOptions = nullableInt(
+  "oeuvreGivenToKnownPersonUserId",
+  errorMsgPrefix
+);
+const oeuvreGivenToKnownPersonContactIdOptions = nullableInt(
+  "oeuvreGivenToKnownPersonContactId",
+  errorMsgPrefix
+);
+const oeuvreGivenToKnownPersonFirstnameOptions = nullableStr(
+  "oeuvreGivenToKnownPersonFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreGivenToKnownPersonLastnameOptions = nullableStr(
+  "oeuvreGivenToKnownPersonLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreSoldToFirstnameOptions = nullableStr(
+  "oeuvreSoldToFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreSoldToLastnameOptions = nullableStr(
+  "oeuvreSoldToLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreSoldToKnownPersonOptions = giveKnownPersonObjOptions(
+  "oeuvreSoldToKnownPerson"
+);
+const oeuvreSoldToKnownPersonUserIdOptions = nullableInt(
+  "oeuvreSoldToKnownPersonUserId",
+  errorMsgPrefix
+);
+const oeuvreSoldToKnownPersonContactIdOptions = nullableInt(
+  "oeuvreSoldToKnownPersonContactId",
+  errorMsgPrefix
+);
+const oeuvreSoldToKnownPersonFirstnameOptions = nullableStr(
+  "oeuvreSoldToKnownPersonFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreSoldToKnownPersonLastnameOptions = nullableStr(
+  "oeuvreSoldToKnownPersonLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreReservedToFirstnameOptions = nullableStr(
+  "oeuvreReservedToFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreReservedToLastnameOptions = nullableStr(
+  "oeuvreReservedToLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreReservedToKnownPersonOptions = giveKnownPersonObjOptions(
+  "oeuvreReservedToKnownPerson"
+);
+const oeuvreReservedToKnownPersonUserIdOptions = nullableInt(
+  "oeuvreReservedToKnownPersonUserId",
+  errorMsgPrefix
+);
+const oeuvreReservedToKnownPersonContactIdOptions = nullableInt(
+  "oeuvreReservedToKnownPersonContactId",
+  errorMsgPrefix
+);
+const oeuvreReservedToKnownPersonFirstnameOptions = nullableStr(
+  "oeuvreReservedToKnownPersonFirstname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const oeuvreReservedToKnownPersonLastnameOptions = nullableStr(
+  "oeuvreReservedToKnownPersonLastname",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 64,
+  }
+);
+const artistCommentFrOptions = nullableStr("artistCommentFr", errorMsgPrefix, {
+  matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+  maxLength: 254,
+});
 
-  return checkSchema({
-    oeuvreTitle: oeuvreTitleOptions,
-    oeuvreTechnique: oeuvreTechniqueOptions,
-    "oeuvreTechnique.*": oeuvreTechniqueElementOptions,
-    oeuvreSupport: oeuvreSupportOptions,
-    oeuvreFormat: oeuvreFormatOptions,
-    oeuvreWidth: oeuvreWidthOptions,
-    oeuvreHeight: oeuvreHeightOptions,
-    oeuvreAvailability: oeuvreAvailabilityOptions,
-    oeuvreVisibility: oeuvreVisibilityOptions,
-    oeuvreFamily: oeuvreFamilyOptions,
-    oeuvreGivenToFirstname: oeuvreGivenToFirstnameOptions,
-    oeuvreGivenToLastname: oeuvreGivenToLastnameOptions,
-    oeuvreGivenToKnownPerson: oeuvreGivenToKnownPersonOptions,
-    "oeuvreGivenToKnownPerson.userId": oeuvreGivenToKnownPersonUserIdOptions,
-    "oeuvreGivenToKnownPerson.contactId":
-      oeuvreGivenToKnownPersonContactIdOptions,
-    "oeuvreGivenToKnownPerson.firstname":
-      oeuvreGivenToKnownPersonFirstnameOptions,
-    "oeuvreGivenToKnownPerson.lastname":
-      oeuvreGivenToKnownPersonLastnameOptions,
-    oeuvreSoldToFirstname: oeuvreSoldToFirstnameOptions,
-    oeuvreSoldToLastname: oeuvreSoldToLastnameOptions,
-    oeuvreSoldToKnownPerson: oeuvreSoldToKnownPersonOptions,
-    "oeuvreSoldToKnownPerson.userId": oeuvreSoldToKnownPersonUserIdOptions,
-    "oeuvreSoldToKnownPerson.contactId":
-      oeuvreSoldToKnownPersonContactIdOptions,
-    "oeuvreSoldToKnownPerson.firstname":
-      oeuvreSoldToKnownPersonFirstnameOptions,
-    "oeuvreSoldToKnownPerson.lastname": oeuvreSoldToKnownPersonLastnameOptions,
-    oeuvreReservedToFirstname: oeuvreReservedToFirstnameOptions,
-    oeuvreReservedToLastname: oeuvreReservedToLastnameOptions,
-    oeuvreReservedToKnownPerson: oeuvreReservedToKnownPersonOptions,
-    "oeuvreReservedToKnownPerson.userId":
-      oeuvreReservedToKnownPersonUserIdOptions,
-    "oeuvreReservedToKnownPerson.contactId":
-      oeuvreReservedToKnownPersonContactIdOptions,
-    "oeuvreReservedToKnownPerson.firstname":
-      oeuvreReservedToKnownPersonFirstnameOptions,
-    "oeuvreReservedToKnownPerson.lastname":
-      oeuvreReservedToKnownPersonLastnameOptions,
-    artistComment: artistCommentOptions,
-  });
+artistCommentFrOptions.exists = {
+  if:
+    body("artistCommentEnUS").isString().isLength({ min: 1 }) ||
+    body("artistCommentEnGB").isString().isLength({ min: 1 }),
+  errorMessage: `${errorMsgPrefix}artistCommentFr_exi`,
 };
+const artistCommentEnUSOptions = nullableStr(
+  "artistCommentEnUS",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 254,
+  }
+);
+const artistCommentEnGBOptions = nullableStr(
+  "artistCommentEnGB",
+  errorMsgPrefix,
+  {
+    matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+    maxLength: 254,
+  }
+);
+
+const createPaintingSchema = checkSchema({
+  oeuvreTitle: oeuvreTitleOptions,
+  oeuvreTechnique: oeuvreTechniqueOptions,
+  "oeuvreTechnique.*": oeuvreTechniqueElementOptions,
+  oeuvreSupport: oeuvreSupportOptions,
+  oeuvreFormat: oeuvreFormatOptions,
+  oeuvreWidth: oeuvreWidthOptions,
+  oeuvreHeight: oeuvreHeightOptions,
+  oeuvreAvailability: oeuvreAvailabilityOptions,
+  oeuvreVisibility: oeuvreVisibilityOptions,
+  oeuvreFamily: oeuvreFamilyOptions,
+  oeuvreGivenToFirstname: oeuvreGivenToFirstnameOptions,
+  oeuvreGivenToLastname: oeuvreGivenToLastnameOptions,
+  oeuvreGivenToKnownPerson: oeuvreGivenToKnownPersonOptions,
+  "oeuvreGivenToKnownPerson.userId": oeuvreGivenToKnownPersonUserIdOptions,
+  "oeuvreGivenToKnownPerson.contactId":
+    oeuvreGivenToKnownPersonContactIdOptions,
+  "oeuvreGivenToKnownPerson.firstname":
+    oeuvreGivenToKnownPersonFirstnameOptions,
+  "oeuvreGivenToKnownPerson.lastname": oeuvreGivenToKnownPersonLastnameOptions,
+  oeuvreSoldToFirstname: oeuvreSoldToFirstnameOptions,
+  oeuvreSoldToLastname: oeuvreSoldToLastnameOptions,
+  oeuvreSoldToKnownPerson: oeuvreSoldToKnownPersonOptions,
+  "oeuvreSoldToKnownPerson.userId": oeuvreSoldToKnownPersonUserIdOptions,
+  "oeuvreSoldToKnownPerson.contactId": oeuvreSoldToKnownPersonContactIdOptions,
+  "oeuvreSoldToKnownPerson.firstname": oeuvreSoldToKnownPersonFirstnameOptions,
+  "oeuvreSoldToKnownPerson.lastname": oeuvreSoldToKnownPersonLastnameOptions,
+  oeuvreReservedToFirstname: oeuvreReservedToFirstnameOptions,
+  oeuvreReservedToLastname: oeuvreReservedToLastnameOptions,
+  oeuvreReservedToKnownPerson: oeuvreReservedToKnownPersonOptions,
+  "oeuvreReservedToKnownPerson.userId":
+    oeuvreReservedToKnownPersonUserIdOptions,
+  "oeuvreReservedToKnownPerson.contactId":
+    oeuvreReservedToKnownPersonContactIdOptions,
+  "oeuvreReservedToKnownPerson.firstname":
+    oeuvreReservedToKnownPersonFirstnameOptions,
+  "oeuvreReservedToKnownPerson.lastname":
+    oeuvreReservedToKnownPersonLastnameOptions,
+  artistCommentFr: artistCommentFrOptions,
+  artistCommentEnUS: artistCommentEnUSOptions,
+  artistCommentEnGB: artistCommentEnGBOptions,
+});
 
 module.exports = createPaintingSchema;

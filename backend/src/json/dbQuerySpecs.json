@@ -10,7 +10,7 @@
     "undo": "deleteByPaintingId"
   },
   "createPaintingGift": {
-    "manager": "paintingsGifts",
+    "manager": "paintingGifts",
     "method": "createPaintingGift",
     "undo": "deleteByPaintingId"
   },
@@ -20,12 +20,12 @@
     "undo": "deleteByPaintingId"
   },
   "createPaintingReservation": {
-    "manager": "paintingsReservations",
+    "manager": "paintingReservations",
     "method": "createPaintingReservation",
     "undo": "deleteByPaintingId"
   },
   "createPaintingSale": {
-    "manager": "paintingsSales",
+    "manager": "paintingSales",
     "method": "createPaintingSale",
     "undo": "deleteByPaintingId"
   },
