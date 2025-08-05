@@ -1,7 +1,7 @@
 import { flexRender } from "@tanstack/react-table";
 import tranlationInstance from "../../services/translationInstance";
 
-function ContactManagementList({ tableObj }) {
+export default function TableCore({ tableObj }) {
   const tCommonTable = tranlationInstance("common:table");
 
   const giveHeaderTitle = (headerColumnData) => {
@@ -84,4 +84,3 @@ function ContactManagementList({ tableObj }) {
     </div>
   );
 }
-export default ContactManagementList;
