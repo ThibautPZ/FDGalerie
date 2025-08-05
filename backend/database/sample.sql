@@ -1,4 +1,3 @@
--- Active: 1689174540931@@127.0.0.1@3306@fannydeglave
 
 INSERT INTO
     `painting_sizes` (`name`)
@@ -714,9 +713,10 @@ VALUES (1, 2),
     (31, 1),
     (32, 2);
 
+
 INSERT INTO
-    `paintings_artist_comments` (`paintings_id`, `comment`)
+    `paintings_artist_comments` (`paintings_id`, `fr_comment`)
 VALUES (
         16,
         'Inspirée par l\'oeuvre de Guillaume Bianco "Billy Brouillard".'
-    )
+    );
