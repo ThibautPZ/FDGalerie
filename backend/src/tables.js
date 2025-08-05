@@ -19,9 +19,6 @@ const FamiliesManager = require("./models/FamiliesManager");
 const PaintingsHasTechniquesManager = require("./models/PaintingsHasTechniquesManager");
 const PaintingsStoragesManager = require("./models/PaintingsStoragesManager");
 const PaintingsArtistCommentsManager = require("./models/PaintingsArtistCommentsManager");
-const PaintingsGiftsManager = require("./models/PaintingsGiftsManager");
-const PaintingsSalesManager = require("./models/PaintingsSalesManager");
-const PaintingsReservationsManager = require("./models/PaintingsReservationsManager");
 
 const PaintingsAvailabilitiesManager = require("./models/PaintingsAvailabilitiesManager");
 
@@ -41,9 +38,6 @@ const managers = new Map([
   [PaintingsHasTechniquesManager, "paintingsHasTechniques"],
   [PaintingsStoragesManager, "paintingsStorages"],
   [PaintingsArtistCommentsManager, "paintingsArtistComments"],
-  [PaintingsGiftsManager, "paintingsGifts"],
-  [PaintingsSalesManager, "paintingsSales"],
-  [PaintingsReservationsManager, "paintingsReservations"],
   [PaintingsAvailabilitiesManager, "paintingsAvailabilities"],
 ]);
 
