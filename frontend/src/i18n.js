@@ -133,6 +133,10 @@ i18n
       "popUpContent",
       "formRegisterOptionsMessages",
       "errors",
+      "techniques",
+      "families",
+      "supports",
+      "paintingSizes",
     ],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
