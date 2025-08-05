@@ -6,12 +6,7 @@ const {
   isObjectNotEmpty,
 } = require("../services/typesAndValidationChecks");
 
-const handleMulterParsing = (
-  storageOptions,
-  limitsOptions,
-  validationSchema,
-  ...validationFunctions
-) => {
+const handleMulterParsing = (limitsOptions) => {
   return asyncHandler(async (req, res, next) => {
     const filesFieldsQuery = req.query.fileFields;
     const fileFieldName = req.query.files;
@@ -24,12 +19,7 @@ const handleMulterParsing = (
     if (!isObjectNotEmpty(fileNameObj)) {
       next(wrongFileNameError);
     }
-    const multerInstance = await multer(
-      storageOptions,
-      limitsOptions,
-      validationSchema,
-      validationFunctions
-    );
+    const multerInstance = await multer(limitsOptions);
     let multerMW = {};
 
     if (filesFieldsQuery === "none") {
