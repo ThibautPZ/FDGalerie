@@ -9,11 +9,16 @@ class PaintingsArtistCommentsManager extends AbstractManager {
     return this.database.query(`SELECT name, id FROM ${this.table} `);
   }
 
-  async createPaintingComment(paintingId, comment) {
+  async createPaintingComment(
+    paintingId,
+    frComment,
+    enUSComment = null,
+    enGBComment = null
+  ) {
     return this.database.query(
-      `INSERT INTO ${this.table} (paintings_id, comment)
-      VALUES (?, ?);`,
-      [paintingId, comment]
+      `INSERT INTO ${this.table} (paintings_id, fr_comment, en_US_comment, en_GB_comment)
+      VALUES (?, ?, ?, ?)`,
+      [paintingId, frComment, enUSComment, enGBComment]
     );
   }
 }
