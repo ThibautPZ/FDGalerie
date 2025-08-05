@@ -61,7 +61,11 @@ function InputConstructor({
       return Error;
     }
     const returnedArr = res.data.map((obj) => {
-      return { label: obj[labelData], value: obj[valuesData] };
+      const objLabel = obj[labelData.key];
+      if (labelData.labelCb) {
+        return { label: labelData.labelCb(objLabel), value: obj[valuesData] };
+      }
+      return { label: objLabel, value: obj[valuesData] };
     });
     return returnedArr;
   };
