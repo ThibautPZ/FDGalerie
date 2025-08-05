@@ -19,12 +19,12 @@ class UsersManager extends AbstractManager {
     );
   }
 
-  // async findByName(firstname, lastname) {
-  //   return this.database.query(
-  //     `SELECT user_id, firstname, lastname FROM ${this.table} WHERE firstname LIKE ? OR lastname = ?`,
-  //     [firstname, lastname]
-  //   );
-  // }
+  async findNameById(id) {
+    return this.database.query(
+      `SELECT firstname AS firstName, lastname AS lastName FROM ${this.table} WHERE users_id = ?`,
+      [id]
+    );
+  }
 
   async findByName(firstname, lastname) {
     let queryTail = ``;

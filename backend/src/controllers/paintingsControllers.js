@@ -164,11 +164,74 @@ const browseAdminWithDetails = asyncHandler(async (req, res, next) => {
   return res.status(200).json(result);
 });
 
+const readOneAdminWithDetails = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const [result] = await tables.paintings.findOneAdminWithDetails(id);
+
+  if (result.length) {
+    const [data] = result;
+    const addedQueriesSpecs = [];
+    const addedQueriesNames = [];
+    if (data.familyId !== null) {
+      addedQueriesNames.push("sisters");
+      addedQueriesSpecs.push({
+        name: "sisters",
+        manager: "paintings",
+        method: "findAllFamilyMembers",
+        queryArgs: [data.familyId, data.id],
+      });
+    }
+    if (data.oeuvreAvailability === 1) {
+      addedQueriesNames.push("gift");
+      addedQueriesSpecs.push({
+        name: "gift",
+        manager: "paintingGifts",
+        method: "findGiftByPaintingId",
+        queryArgs: [data.id],
+      });
+    }
+    if (data.oeuvreAvailability === 2) {
+      addedQueriesNames.push("sale");
+      addedQueriesSpecs.push({
+        name: "sale",
+        manager: "paintingSales",
+        method: "findSaleByPaintingId",
+        queryArgs: [data.id],
+      });
+    }
+    if (data.oeuvreAvailability === 3) {
+      addedQueriesNames.push("reservation");
+      addedQueriesSpecs.push({
+        name: "reservation",
+        manager: "paintingReservations",
+        method: "findReservationByPaintingId",
+        queryArgs: [data.id],
+      });
+    }
+
+    const results = await giveParallelQueriesPromise(addedQueriesSpecs);
+
+    addedQueriesNames.forEach((name) => {
+      if (name === "sisters") {
+        data[name] = results[name];
+      } else {
+        [data[name]] = results[name];
+      }
+    });
+
+    return res.status(200).json(data);
+  }
+  return next(new CustomErrorClass("00001"));
+});
+
 const createPainting = asyncHandler(async (req, res, next) => {
   const { body } = req;
   const {
     oeuvreTitle,
-    artistComment,
+    artistCommentFr,
+    artistCommentEnUS,
+    artistCommentEnGB,
     oeuvreTechnique,
     rawFileName,
     rawFileExtension,
@@ -216,10 +279,15 @@ const createPainting = asyncHandler(async (req, res, next) => {
     });
   }
 
-  if (artistComment) {
+  if (artistCommentFr) {
     newPaintingAssociatedQueriesSpecsReference.push({
       name: "createPaintingComment",
-      queryArgs: [newPaintingId, artistComment],
+      queryArgs: [
+        newPaintingId,
+        artistCommentFr,
+        artistCommentEnUS,
+        artistCommentEnGB,
+      ],
       undoQueryArgs: [newPaintingId],
     });
   }
@@ -317,5 +385,6 @@ module.exports = {
   readByTitle,
   readPublicByTitle,
   browseAdminWithDetails,
+  readOneAdminWithDetails,
   createPainting,
 };

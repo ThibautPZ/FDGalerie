@@ -18,12 +18,13 @@ class PaintingsManager extends AbstractManager {
 
   async readPublicByTitle(title) {
     return this.database.query(
-      `SELECT  p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, p.family_member AS familyMember, p.families_id AS familyId, f.name AS family, ps.name AS format, s.name as support, pst.file_name AS filename, pst.file_extension AS fileExtension, pac.comment AS artistComment
+      `SELECT  p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.family_member AS familyMember, p.families_id AS familyId, f.name AS family, ps.name AS format, s.name as support, pst.file_name AS filename, pst.file_extension AS fileExtension, pac.comment AS artistComment
       FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
       LEFT JOIN families AS f ON p.families_id = f.id
       LEFT JOIN supports AS s ON p.supports_id = s.id
       LEFT JOIN paintings_storages AS pst ON p.id = pst.paintings_id
       LEFT JOIN paintings_artist_comments AS pac ON p.id = pac.paintings_id
+      LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
       WHERE p.title = ? AND p.publicly_visible = ?`,
       [title, true]
     );
@@ -38,7 +39,7 @@ class PaintingsManager extends AbstractManager {
     );
   }
 
-  async findByTitle(title) {
+  async findByTitle({ title }) {
     return this.database.query(
       `SELECT title FROM ${this.table} WHERE title = ? `,
       [title]
@@ -47,7 +48,7 @@ class PaintingsManager extends AbstractManager {
 
   async findAllFamilyMembers(familyId, currentMemberId) {
     return this.database.query(
-      `SELECT  p.title AS sister FROM ${this.table} AS p LEFT JOIN families AS f ON p.families_id = f.id WHERE f.id = ? AND p.id <> ?`,
+      `SELECT p.id AS id, p.title AS title, p.family_member AS familyMember FROM ${this.table} AS p LEFT JOIN families AS f ON p.families_id = f.id WHERE f.id = ? AND p.id <> ?`,
       [familyId, currentMemberId]
     );
   }
@@ -95,7 +96,10 @@ class PaintingsManager extends AbstractManager {
 
   async readAdminWithDetails() {
     return this.database.query(
-      `SELECT  p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, p.family_member AS familyMember, p.families_id AS familyId, f.name AS family, ps.name AS format, s.name as support, pst.file_name AS filename, pst.file_extension AS fileExtension, pac.comment AS artistComment, GROUP_CONCAT(t.name SEPARATOR "|") AS techniques
+      `SELECT p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, p.publicly_visible AS publiclyVisible, pa.name AS availabilityName, p.family_member AS familyMember, p.families_id AS familyId,  JSON_ARRAYAGG(t.name) AS techniques,
+      f.name AS family, ps.name AS format, s.name as support, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS, pac.en_GB_comment AS artistCommentEnGB, GROUP_CONCAT(pg.id SEPARATOR "|") AS giftNumber, GROUP_CONCAT(pg.date SEPARATOR "|") AS giftDate, GROUP_CONCAT(pg.users_id SEPARATOR "|") AS giftUserId, GROUP_CONCAT(pg.contacts_id SEPARATOR "|") AS giftContactId, GROUP_CONCAT(psl.id SEPARATOR "|") AS saleNumber, GROUP_CONCAT(psl.price SEPARATOR "|") AS salePrice, GROUP_CONCAT(psl.date SEPARATOR "|") AS saleDate, GROUP_CONCAT(psl.users_id SEPARATOR "|") AS saleUserId, GROUP_CONCAT(psl.contacts_id SEPARATOR "|") AS saleContactId,
+      GROUP_CONCAT(pg.id SEPARATOR "|") AS giftNumber, GROUP_CONCAT(pg.date SEPARATOR "|") AS giftDate, GROUP_CONCAT(pg.users_id SEPARATOR "|") AS giftUserId, GROUP_CONCAT(pg.contacts_id SEPARATOR "|") AS giftContactId, GROUP_CONCAT(psl.id SEPARATOR "|") AS saleNumber, GROUP_CONCAT(psl.price SEPARATOR "|") AS salePrice, GROUP_CONCAT(psl.date SEPARATOR "|") AS saleDate, GROUP_CONCAT(psl.users_id SEPARATOR "|") AS saleUserId, GROUP_CONCAT(psl.contacts_id SEPARATOR "|") AS saleContactId,
+      GROUP_CONCAT(pr.id SEPARATOR "|") AS reservationNumber, GROUP_CONCAT(pr.price SEPARATOR "|") AS reservationPrice, GROUP_CONCAT(pr.date SEPARATOR "|") AS reservationDate, GROUP_CONCAT(pr.users_id SEPARATOR "|") AS reservationUserId, GROUP_CONCAT(pr.contacts_id SEPARATOR "|") AS reservationContactId
       FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
       LEFT JOIN families AS f ON p.families_id = f.id
       LEFT JOIN supports AS s ON p.supports_id = s.id
@@ -103,8 +107,28 @@ class PaintingsManager extends AbstractManager {
       LEFT JOIN techniques AS t ON pht.techniques_id = t.id
       LEFT JOIN paintings_storages AS pst ON p.id = pst.paintings_id
       LEFT JOIN paintings_artist_comments AS pac ON p.id = pac.paintings_id
-      GROUP BY p.id
-      `
+      LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
+      LEFT JOIN painting_gifts AS pg ON p.id = pg.paintings_id
+      LEFT JOIN painting_sales AS psl ON p.id = psl.paintings_id
+      LEFT JOIN painting_reservations AS pr ON p.id = pr.paintings_id
+      GROUP BY p.id;`
+    );
+  }
+
+  async findOneAdminWithDetails(id) {
+    return this.database.query(
+      `SELECT p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(t.name) AS techniques,
+      f.name AS family, ps.name AS format, s.name as support, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS, pac.en_GB_comment AS artistCommentEnGB
+      FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
+      LEFT JOIN families AS f ON p.families_id = f.id
+      LEFT JOIN supports AS s ON p.supports_id = s.id
+      LEFT JOIN paintings_has_techniques AS pht ON p.id = pht.paintings_id
+      LEFT JOIN techniques AS t ON pht.techniques_id = t.id
+      LEFT JOIN paintings_storages AS pst ON p.id = pst.paintings_id
+      LEFT JOIN paintings_artist_comments AS pac ON p.id = pac.paintings_id
+      LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
+      WHERE p.id = ? GROUP BY p.id;`,
+      [id]
     );
   }
 
