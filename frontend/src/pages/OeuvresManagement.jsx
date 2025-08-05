@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import "../scss/OeuvresManagement.scss";
 
 import axiosInstance from "../services/axiosInstance";
-import OeuvresManagementList from "../pageComponents/oeuvresManagement/OeuvresManagementList";
 import PopUp from "../components/modals/PopUp";
 import UseCreateContact from "../hooks/RQmutation/UseCreateContact";
 import UseCreateOeuvre from "../hooks/RQmutation/UseCreateOeuvre";
@@ -21,12 +20,12 @@ import createFormatDefaultValues from "../json/formDefaultValues/createFormatDef
 import UseCreateFormat from "../hooks/RQmutation/UseCreateFormat";
 import UseCreateSupport from "../hooks/RQmutation/UseCreateSupport";
 import createSupportDefaultValues from "../json/formDefaultValues/createSupportDefaultValues.json";
+import OeuvresManagementOeuvresList from "../pageComponents/oeuvresManagement/OeuvresManagementOeuvresList";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [selectedOeuvre, setSelectedOeuvre] = useState({});
   const [isModifying, setIsModifying] = useState(false);
 
   const createContactFormMethods = useForm({
@@ -57,28 +56,15 @@ function OeuvresManagement() {
     shouldUnregister: false,
   });
 
-  const separateTechniques = (oeuvreObj) => {
-    const techArr = oeuvreObj.techniques.split("|");
-    return { ...oeuvreObj, techniques: techArr };
-  };
-
-  const updateOeuvresWithSeparateTechniques = (oeuvresArr) => {
-    const returnedArr = oeuvresArr.map((oeuvre) => {
-      return separateTechniques(oeuvre);
-    });
-    return returnedArr;
-  };
-
   const getOeuvresListFromDb = async () => {
     const url = "api/paintings/adminDetailed";
     const res = await axiosInstance.get(url);
-    return updateOeuvresWithSeparateTechniques(res.data);
+    return res.data;
   };
 
   const oeuvresQuery = useSuspenseQuery({
     queryKey: ["oeuvresWithDetails"],
     queryFn: getOeuvresListFromDb,
-    // meta: {}
     throwOnError: true,
   });
 
@@ -137,21 +123,14 @@ function OeuvresManagement() {
     return navigate("./");
   };
 
-  const handleOeuvreSelected = (oeuvre) => {
-    return setSelectedOeuvre(oeuvre);
-  };
-
   return (
     <div className="OeuvresManagement">
-      {/* {displayedComponents !== "newOeuvre" ? ( */}
       {pathname !== "/management/oeuvres/new" ? (
         <div>
           <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
           <Suspense fallback={<h1>Loading...</h1>}>
-            <OeuvresManagementList
+            <OeuvresManagementOeuvresList
               oeuvresList={oeuvresQuery.data}
-              selectedOeuvre={selectedOeuvre}
-              handleOeuvreSelected={handleOeuvreSelected}
               setIsModifying={setIsModifying}
             />
           </Suspense>

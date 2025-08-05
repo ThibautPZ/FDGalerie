@@ -4,13 +4,144 @@ import { Link } from "react-router-dom";
 import "../../scss/Oeuvre.scss";
 
 import ZoomedPainting from "../../components/ZoomedPainting";
+import PaintingThumbLg from "../../components/image/PaintingThumbLg";
+import FallbackImg from "../../components/image/FallbackImg";
+import tranlationInstance from "../../services/translationInstance";
+import { isStringNotEmpty } from "../../services/typesAndValidationChecks";
 
-function OeuvresManagementDetailedOeuvre({ oeuvre }) {
+function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
+  const {
+    id,
+    title,
+    width,
+    height,
+    techniques,
+    support,
+    format,
+    family,
+    artistCommentFr,
+    artistCommentEnUS,
+    artistCommentEnGB,
+    oeuvreAvailability,
+    availabilityName,
+    fileName,
+    fileExtension,
+    sisters = [],
+    gift = {},
+    sale = {},
+    reservation = {},
+  } = oeuvreData;
+
+  const [
+    tPageText,
+    tCommon,
+    tCommonInfo,
+    tTechniques,
+    tSupports,
+    tFormats,
+    tFamilies,
+  ] = tranlationInstance(
+    "pageText:OeuvresManagement.OMDetailedOeuvre",
+    "common",
+    "common:info",
+    "techniques",
+    "supports",
+    "paintingSizes",
+    "families"
+  );
   const [openZoomPainting, setOpenZoomPainting] = useState(false);
 
   const getTechniquesLength = () => {
-    return oeuvre.techniques?.length;
+    return techniques?.length;
   };
+
+  const giveFullName = (firstName, lastName) => {
+    if (!isStringNotEmpty(firstName) && !isStringNotEmpty(lastName)) {
+      return "";
+    }
+    if (isStringNotEmpty(firstName) && isStringNotEmpty(lastName)) {
+      return `${firstName} ${lastName}`;
+    }
+    if (isStringNotEmpty(firstName)) {
+      return firstName;
+    }
+    if (isStringNotEmpty(lastName)) {
+      return lastName;
+    }
+    return tCommonInfo("unnamed");
+  };
+
+  const givePaintingOwnershipData = () => {
+    if (oeuvreAvailability === 4 || oeuvreAvailability === 5) {
+      return { isOwned: false };
+    }
+    let transactionData = {};
+    const paintingOwnershipData = {
+      isOwned: true,
+    };
+
+    if (oeuvreAvailability === 1) {
+      transactionData = gift;
+      paintingOwnershipData.tParagraphNS = "oeuvreGivenInfo";
+      paintingOwnershipData.tLinkNS = "clickToGoGiftedPersonProfile";
+      paintingOwnershipData.transactionPrice = "";
+    }
+    if (oeuvreAvailability === 2) {
+      transactionData = sale;
+      paintingOwnershipData.tParagraphNS = "oeuvreSoldInfo";
+      paintingOwnershipData.tLinkNS = "clickToGoSoldPersonProfile";
+      paintingOwnershipData.transactionPrice = sale.price;
+    }
+    if (oeuvreAvailability === 3) {
+      transactionData = reservation;
+      paintingOwnershipData.tParagraphNS = "oeuvreReservedInfo";
+      paintingOwnershipData.tLinkNS = "clickToGoReservedPersonProfile";
+      paintingOwnershipData.transactionPrice = isStringNotEmpty(
+        reservation.price
+      )
+        ? tPageText("oeuvreReservedPrice", { price: reservation.price })
+        : "";
+    }
+    const { userId, contactId, firstName, lastName, date, transactionNumber } =
+      transactionData;
+    if (userId) {
+      paintingOwnershipData.ownerStatus = "user";
+      paintingOwnershipData.ownerId = userId;
+      paintingOwnershipData.linkedURL = `/management/users/id:${userId}`;
+    } else {
+      paintingOwnershipData.ownerStatus = "contact";
+      paintingOwnershipData.ownerId = contactId;
+      paintingOwnershipData.linkedURL = `/management/contacts/id:${contactId}`;
+    }
+    paintingOwnershipData.ownerName = giveFullName(firstName, lastName);
+    paintingOwnershipData.transactionDate = tCommon("intlDate", {
+      val: new Date(date),
+      formatParams: {
+        val: {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        },
+      },
+    });
+    paintingOwnershipData.transactionNumber = transactionNumber;
+
+    return paintingOwnershipData;
+  };
+
+  const {
+    isOwned,
+    tParagraphNS,
+    tLinkNS,
+    linkedURL,
+    ownerStatus,
+    ownerId,
+    ownerName,
+    transactionDate,
+    transactionPrice,
+    transactionNumber,
+  } = givePaintingOwnershipData();
 
   const handlePaintingClick = () => {
     setOpenZoomPainting(true);
@@ -21,60 +152,109 @@ function OeuvresManagementDetailedOeuvre({ oeuvre }) {
 
   return (
     <div className="OeuvresManagementDetailedOeuvre">
-      {oeuvre.pathname ? (
+      {fileName && fileExtension ? (
         <button type="button" onClick={handlePaintingClick}>
-          <img
-            src={`${import.meta.env.VITE_BACKEND_URL}${
-              import.meta.env.VITE_PAINTINGS_PATH
-            }/${oeuvre.pathname}`}
-            alt={oeuvre.title}
-          />
+          <PaintingThumbLg fileName={fileName} />
         </button>
       ) : (
-        <p>Chargement...</p>
+        <FallbackImg />
       )}
-      <h2>{oeuvre.title}</h2>
+      <h2>{title}</h2>
+      <p>{tPageText("oeuvreNumber", { number: id })}</p>
       <p>
-        {`Technique${getTechniquesLength() > 1 ? "s" : ""} : `}
-        {oeuvre.techniques?.map(({ technique }, index) => {
-          return (
-            <span key={technique}>
-              {technique}
-              {index !== getTechniquesLength() - 1 ? ", " : " "}
-            </span>
-          );
+        {tPageText("technique", { count: getTechniquesLength() })}
+        {tPageText("techniquesList", {
+          val: techniques?.map((technique) => tTechniques(`${technique}.name`)),
         })}
-        {oeuvre.support && `sur ${oeuvre.support}`}
       </p>
-      <p>{`Format ${oeuvre.format} : largeur ${oeuvre.width} cm, hauteur ${oeuvre.height} cm`}</p>
-      {oeuvre.sisters?.length > 0 && (
+      <p>
+        {tPageText("support", {
+          support: tSupports(`${support}.name`),
+        })}
+      </p>
+      <p>
+        {tPageText("format", {
+          format: tFormats(`${format}.name`),
+          width,
+          height,
+        })}
+      </p>
+      {sisters?.length > 0 && (
         <div>
-          <p>{`Appartient à la série ${oeuvre.family}, auprès de ces autres oeuvres :`}</p>
           <p>
-            {oeuvre.sisters?.map(({ sister }) => (
-              <Link to={`/oeuvre/${sister}`} key={sister}>
-                <span>{sister}, </span>
-              </Link>
-            ))}
-            (Cliquez sur les noms pour y accéder)
+            {tPageText("family", {
+              family: tFamilies(`${family}.name`),
+            })}
+          </p>
+          <p>
+            {sisters?.map(
+              ({ id: sisterId, title: sisterTitle }, index, array) => (
+                <Link to={`/management/oeuvres/id:${sisterId}`} key={sisterId}>
+                  <span>
+                    {sisterTitle}
+                    {index !== array.length - 1 ? ", " : ""}
+                  </span>
+                </Link>
+              )
+            )}
+            {tPageText("clickToGo")}
           </p>
         </div>
       )}
-
-      {oeuvre.comment ? (
+      {artistCommentFr ? (
         <div>
-          <p>Note de l'artiste : </p>
-          <p>{oeuvre.comment}</p>
+          <p>{tPageText("commentFr")}</p>
+          <p>{artistCommentFr}</p>
         </div>
       ) : (
         ""
       )}
-      {oeuvre.sold === 1 && <p>Indisponible à l'acquisition</p>}
+      {artistCommentEnUS ? (
+        <div>
+          <p>{tPageText("commentEnUS")}</p>
+          <p>{artistCommentEnUS}</p>
+        </div>
+      ) : (
+        ""
+      )}
+      {artistCommentEnGB ? (
+        <div>
+          <p>{tPageText("commentEnGB")}</p>
+          <p>{artistCommentEnGB}</p>
+        </div>
+      ) : (
+        ""
+      )}
+      <p>
+        {tPageText("availability", {
+          availability: tCommon(`oeuvreAvailability.${availabilityName}`),
+        })}
+      </p>
+      {isOwned ? (
+        <>
+          <p>
+            {tPageText(tParagraphNS, {
+              person: ownerName,
+              status: tCommonInfo(ownerStatus),
+              id: ownerId,
+              price: transactionPrice,
+              date: transactionDate,
+              number: transactionNumber,
+            })}
+          </p>
+          <Link to={linkedURL}>
+            <span>{tPageText(tLinkNS)}</span>
+          </Link>
+        </>
+      ) : (
+        ""
+      )}
+
       <ZoomedPainting
         isOpen={openZoomPainting}
         onClose={handleCloseModal}
-        title={oeuvre.title}
-        pathname={oeuvre.pathname}
+        title={title}
+        pathname={`${fileName}.${fileExtension}`}
       />
     </div>
   );
