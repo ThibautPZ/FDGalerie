@@ -117,8 +117,8 @@ class PaintingsManager extends AbstractManager {
 
   async findOneAdminWithDetails(id) {
     return this.database.query(
-      `SELECT p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(t.name) AS techniques,
-      f.name AS family, ps.name AS format, s.name as support, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS, pac.en_GB_comment AS artistCommentEnGB
+      `SELECT p.id, p.title, p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.publicly_visible AS publiclyVisible, p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(JSON_OBJECT('id', t.id, 'name', t.name)) AS techniques,
+      f.name AS family, f.id AS familyId, ps.name AS format, ps.id AS formatId, s.name as support, s.id AS supportId, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS, pac.en_GB_comment AS artistCommentEnGB
       FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
       LEFT JOIN families AS f ON p.families_id = f.id
       LEFT JOIN supports AS s ON p.supports_id = s.id
