@@ -117,7 +117,7 @@ function OeuvresManagement() {
     if (createOeuvreFormMethods.formState.isDirty) {
       return handleModalInstall(
         { type: "info", message: "backWhileCreatingOeuvre" },
-        "popUpContent:OeuvreManagement."
+        "popUpContent:OeuvresManagement."
       );
     }
     return navigate("./");
