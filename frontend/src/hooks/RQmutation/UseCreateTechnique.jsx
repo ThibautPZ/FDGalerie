@@ -11,7 +11,7 @@ const UseCreateTechnique = (handleModalInstall) => {
 
     const query = "/api/techniques/createTechnique";
 
-    queryclient.invalidateQueries(["oeuvresWithDetails"]);
+    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
 
     const res = await axiosInstance.post(query, formData);
     return res.data;
@@ -30,7 +30,7 @@ const UseCreateTechnique = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries(["oeuvresWithDetails"]);
+      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
