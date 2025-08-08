@@ -27,6 +27,7 @@ export default function FetchImage({ url, name }) {
       setObjectUrl(objUrl);
       return () => URL.revokeObjectURL(objUrl);
     }
+    return () => URL.revokeObjectURL(objectUrl);
   }, [data]);
 
   if (!isStringNotEmpty(url) || isError) return <FallbackImg />;
