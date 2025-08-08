@@ -34,6 +34,7 @@ function InputConstructor({
   asyncValues,
   registerOptions,
   useWatchWithControl,
+  isFormModifying,
   errors,
   t,
 }) {
@@ -102,6 +103,7 @@ function InputConstructor({
         isHidden={isHidden}
         isDisabled={isInputDisabled}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -117,6 +119,7 @@ function InputConstructor({
         fieldName={name}
         inputMode={inputmode}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -132,6 +135,7 @@ function InputConstructor({
         label={label}
         options={options}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -148,6 +152,7 @@ function InputConstructor({
         fieldName={name}
         options={options}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -165,6 +170,7 @@ function InputConstructor({
         fieldName={name}
         options={options}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -179,6 +185,7 @@ function InputConstructor({
         isHidden={isHidden}
         isDisabled={isInputDisabled}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         error={errors[name]}
         t={t}
@@ -193,6 +200,7 @@ function InputConstructor({
         isHidden={isHidden}
         isDisabled={isInputDisabled}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         dateRestrictions={dateRestrictions}
         error={errors[name]}
@@ -208,6 +216,7 @@ function InputConstructor({
         isHidden={isHidden}
         isDisabled={isInputDisabled}
         registerOptions={fieldRegisterOptions}
+        isFormModifying={isFormModifying}
         asyncValues={asyncFormValues.data}
         uploadOptions={uploadOptions}
         error={errors[name]}

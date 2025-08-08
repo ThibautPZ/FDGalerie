@@ -102,6 +102,7 @@ function FetchedDataSelect({
         value: giveOptionValue(valueKeys, obj),
       };
     });
+
     return returnedArr;
   };
 
@@ -138,11 +139,10 @@ function FetchedDataSelect({
               options={options}
               placeholder={placeholder}
               onChange={(e) => handleChange(e, onChange)}
-              // onChange={onChange}
               onBlur={onBlur}
               name={name}
               ref={ref}
-              value={value}
+              value={value?.value}
               components={{ Option: CustomOption }}
               isMulti={multipleSelection}
             />

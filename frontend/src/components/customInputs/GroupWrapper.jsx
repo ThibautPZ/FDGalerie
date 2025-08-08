@@ -26,6 +26,7 @@ function GroupWrapper({
   conditionalDisabling,
   asyncValues,
   registerOptions,
+  isFormModifying,
   errors,
   t,
 }) {
@@ -53,6 +54,7 @@ function GroupWrapper({
           isDisabled={isGroupDisabled}
           asyncValues={asyncValues}
           registerOptions={registerOptions}
+          isFormModifying={isFormModifying}
           errors={errors}
           t={t}
         />
@@ -75,6 +77,7 @@ function GroupWrapper({
               fields={field.includedComponents}
               asyncValues={asyncValues}
               registerOptions={registerOptions}
+              isFormModifying={isFormModifying}
               errors={errors}
               t={t}
             />
@@ -86,6 +89,7 @@ function GroupWrapper({
               asyncValues={asyncValues}
               registerOptions={registerOptions}
               useWatchWithControl={useWatchWithControl}
+              isFormModifying={isFormModifying}
               errors={errors}
               t={t}
             />

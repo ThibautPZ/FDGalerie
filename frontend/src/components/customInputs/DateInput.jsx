@@ -11,7 +11,8 @@ import giveTimeUnitsFromDate from "../../services/dateTimeMethods/giveTimeUnitsF
 import translationInstance from "../../services/translationInstance";
 import { supportedLngs } from "../../i18n";
 import { isObjectNotEmpty } from "../../services/typesAndValidationChecks";
-import Eraser from "../SVG/Eraser";
+import FieldResetButton from "../customComponents/FieldResetButton";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
 
 const dateLocales = { fr, enUS, enGB };
 
@@ -39,15 +40,17 @@ export default function DateInput({
   isHidden,
   isDisabled,
   registerOptions = {},
+  isFormModifying,
+  // asyncValues,
   dateRestrictions,
   error,
   t,
 }) {
-  const [tCommonD, tformMsg] = translationInstance(
+  const [tCommonD, tFormMsg] = translationInstance(
     "common:date",
     "formRegisterOptionsMessages"
   );
-  const { getValues, setValue, control } = useFormContext();
+  const { getValues, setValue, control, formState, watch } = useFormContext();
 
   const { resolvedLanguage } = translationInstance();
 
@@ -80,6 +83,7 @@ export default function DateInput({
   const { minDate, maxDate } = giveRestrictions(dateRestrictions);
 
   const dateValue = getValues(fieldName);
+
   const { strYear, strMonth, strDay } = giveTimeUnitsFromDate(dateValue);
   const [day, setDay] = useState(strDay);
   const [month, setMonth] = useState(strMonth);
@@ -104,19 +108,33 @@ export default function DateInput({
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
+  const inputValues = new Map([
+    ["strYear", year],
+    ["strMonth", month],
+    ["strDay", day],
+  ]);
+
   const checkInputAndCalendarSameValue = (calendarValue) => {
     const calendarValues = giveTimeUnitsFromDate(calendarValue);
-    const inputValues = new Map([
-      ["strYear", year],
-      ["strMonth", month],
-      ["strDay", day],
-    ]);
+
     for (const [key, value] of inputValues) {
       if (calendarValues[key] !== value) {
-        return tformMsg(`${fieldName}.pattern`);
+        return tFormMsg(`${fieldName}.pattern`);
       }
     }
     return true;
+  };
+
+  const areInputsDirty = () => {
+    const defaultValues = giveTimeUnitsFromDate(
+      formState.defaultValues[fieldName]
+    );
+    for (const [key, value] of inputValues) {
+      if (defaultValues[key] !== value) {
+        return true;
+      }
+    }
+    return false;
   };
 
   Object.assign(registerOptions, {
@@ -124,6 +142,11 @@ export default function DateInput({
       inputDate: checkInputAndCalendarSameValue,
     },
   });
+
+  const isEraseButtonHidden = !watch(fieldName) && !day && !month && !year;
+
+  const isResetButtonHidden =
+    !isFormModifying || !(formState.dirtyFields[fieldName] || areInputsDirty());
 
   return (
     <div
@@ -166,9 +189,14 @@ export default function DateInput({
           />
         )}
       />
-      <button type="button" onClick={() => onCalendarDatePicked(null)}>
-        <Eraser />
-      </button>
+      <FieldEraseButton
+        onClick={() => onCalendarDatePicked(null)}
+        isHidden={isEraseButtonHidden}
+      />
+      <FieldResetButton
+        onClick={() => onCalendarDatePicked(formState.defaultValues[fieldName])}
+        isHidden={isResetButtonHidden}
+      />
     </div>
   );
 }

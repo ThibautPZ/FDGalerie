@@ -10,6 +10,7 @@ function SpecialGroupConstructor({
   isDisabled,
   // asyncValues,
   registerOptions,
+  isFormModifying,
   errors,
   t,
 }) {
@@ -33,6 +34,7 @@ function SpecialGroupConstructor({
         isDisabled={isDisabled}
         querySpecs={querySpecs}
         registerOptions={registerOptions}
+        isFormModifying={isFormModifying}
         errors={errors}
         t={t}
       />
@@ -46,6 +48,7 @@ function SpecialGroupConstructor({
         isDisabled={isDisabled}
         querySpecs={querySpecs}
         registerOptions={registerOptions}
+        isFormModifying={isFormModifying}
         errors={errors}
         t={t}
       />

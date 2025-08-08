@@ -8,8 +8,8 @@ import {
 import FetchedDataSelect from "./FetchedDataSelect";
 import AdditionalSelectLabelInfo from "../customComponents/AdditionalSelectLabelInfo";
 import { giveFieldRegisterOptions } from "../../services/formFunctions";
-
-// todo: registerOptions
+import FieldEraseButton from "../customComponents/FieldEraseButton";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 function DualSearchbarSetByResultSelectGroup({
   groupClassname,
@@ -18,13 +18,35 @@ function DualSearchbarSetByResultSelectGroup({
   querySpecs,
   // asyncValues,
   registerOptions,
+  isFormModifying,
   errors,
   t,
 }) {
   const { textField1, textField2, selectField, selectedValueField } = fields;
 
-  const { register, setValue, getValues, trigger } = useFormContext();
+  const watchedInputsNames = [
+    textField1.name,
+    textField2.name,
+    selectedValueField.name,
+  ];
+
+  const { responseKeysToBeOptionContent, additionalLabelInfo } = querySpecs;
+
+  const {
+    register,
+    setValue,
+    getValues,
+    resetField,
+    trigger,
+    watch,
+    formState,
+  } = useFormContext();
+
   const [isSelectNeeded, setIsSelectNeeded] = useState(false);
+  const [isResetButtonHidden, setIsResetButtonHidden] = useState(
+    !isFormModifying ||
+      !watchedInputsNames.find((name) => formState.dirtyFields[name])
+  );
 
   const textField1RegisterOptions = giveFieldRegisterOptions(
     textField1,
@@ -103,6 +125,38 @@ function DualSearchbarSetByResultSelectGroup({
 
   const selectFieldValue = getValues(selectField.name);
 
+  const isEraseButtonHidden = !watch(watchedInputsNames).find((value) => value);
+
+  const giveEmptyValue = (index) => {
+    return index < 2 ? "" : null;
+  };
+
+  const areWatchedInputsDefaultValuesEmpty = () => {
+    return watchedInputsNames.find((name, index) => {
+      const searchedValue = giveEmptyValue(index);
+      return formState.defaultValues[name] !== searchedValue;
+    });
+  };
+
+  const eraseFields = () => {
+    watchedInputsNames.forEach((name, index) => {
+      const emptyValue = giveEmptyValue(index);
+      return setValue(name, emptyValue);
+    });
+    if (isFormModifying && areWatchedInputsDefaultValuesEmpty()) {
+      return setIsResetButtonHidden(false);
+    }
+    return setIsSelectNeeded(false);
+  };
+
+  const resetFields = () => {
+    watchedInputsNames.forEach((name) => {
+      resetField(name);
+    });
+    setIsResetButtonHidden(true);
+    return setIsSelectNeeded(false);
+  };
+
   return (
     <div className={groupClassname}>
       {textField1.label.namespace ? <p>{t(textField1.label.namespace)}</p> : ""}
@@ -128,27 +182,36 @@ function DualSearchbarSetByResultSelectGroup({
         ref={registeredText2.ref}
         aria-invalid={errors[textField2.name] ? "true" : "false"}
         maxLength={registerOptions[textField2.name]?.maxLength?.value}
-      />
-      {isSelectNeeded ? (
-        <FetchedDataSelect
-          fieldName={selectField.name}
-          label={selectField.label}
-          isHidden={!isSelectNeeded}
-          disabled={isDisabled}
-          multipleSelection={false}
-          watchedInputs={watchedInputs}
-          query={querySpecs}
-          onSelectedFunction={handleSelected}
-          registerOptions={selectFieldRegisterOptions}
-          errors={errors}
-          t={t}
-        />
-      ) : (
+      />{" "}
+      {!isSelectNeeded && (
         <AdditionalSelectLabelInfo
-          label={selectFieldValue?.label || null}
+          label={
+            querySpecs.additionalLabelInfo
+              ? {
+                  labelKeys: responseKeysToBeOptionContent,
+                  searchedKeys: [],
+                  additionalLabelData: additionalLabelInfo,
+                }
+              : null
+          }
           value={selectFieldValue?.value || null}
         />
       )}
+      <FieldEraseButton onClick={eraseFields} isHidden={isEraseButtonHidden} />
+      <FieldResetButton onClick={resetFields} isHidden={isResetButtonHidden} />
+      <FetchedDataSelect
+        fieldName={selectField.name}
+        label={selectField.label}
+        isHidden={!isSelectNeeded}
+        disabled={isDisabled}
+        multipleSelection={false}
+        watchedInputs={watchedInputs}
+        query={querySpecs}
+        onSelectedFunction={handleSelected}
+        registerOptions={selectFieldRegisterOptions}
+        errors={errors}
+        t={t}
+      />
       <input
         type="hidden"
         onChange={registeredHidden.onChange}

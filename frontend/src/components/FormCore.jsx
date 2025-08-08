@@ -27,6 +27,7 @@ function FormCore({
   fields,
   submitbuttonText,
   onSubmit,
+  isFormModifying,
 }) {
   // const [asyncFormValues, setAsyncFormValues] = useState({});
   const { t } = useTranslation([
@@ -75,6 +76,7 @@ function FormCore({
             fields={fields}
             asyncValues={asyncValues}
             registerOptions={registerOptions}
+            isFormModifying={isFormModifying}
             errors={methods.formState.errors}
             t={t}
           />

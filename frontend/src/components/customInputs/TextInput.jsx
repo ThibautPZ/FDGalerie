@@ -10,6 +10,8 @@ import {
   floatPrec3RegExp,
   exponentialRegExp,
 } from "../../services/regularExpressions";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 const inputModeRegistrationInfo = {
   text: { regex: null, inputMode: "text" },
@@ -43,10 +45,11 @@ function TextInput({
   isDisabled,
   inputMode,
   registerOptions = {},
+  isFormModifying,
   error,
   t,
 }) {
-  const { watch, register, setValue } = useFormContext();
+  const { watch, register, setValue, resetField, formState } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
   const registeredField = register(fieldName, registerOptions);
@@ -69,6 +72,9 @@ function TextInput({
       inputModeRegistrationInfo.text.inputMode
     );
   };
+
+  const isResetButtonHidden =
+    !isFormModifying || formState.defaultValues[fieldName] === watch(fieldName);
 
   return (
     <div hidden={isHidden} className={fieldName}>
@@ -93,8 +99,15 @@ function TextInput({
         aria-invalid={error ? "true" : "false"}
         maxLength={registerOptions?.maxLength?.value}
       />
-
       {inputMode === "priceEur" && <label htmlFor={fieldName}> € </label>}
+      <FieldEraseButton
+        onClick={() => setValue(fieldName, "")}
+        isHidden={!watch(fieldName)}
+      />
+      <FieldResetButton
+        onClick={() => resetField(fieldName)}
+        isHidden={isResetButtonHidden}
+      />
     </div>
   );
 }
