@@ -126,7 +126,8 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 CREATE TABLE IF NOT EXISTS `painting_gifts` (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `date` VARCHAR(64) NULL,
+    `date` VARCHAR(45) NOT NULL,
+    `note` VARCHAR(254) NULL,
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
@@ -138,7 +139,8 @@ CREATE TABLE IF NOT EXISTS `painting_gifts` (
 CREATE TABLE IF NOT EXISTS `painting_sales` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `price` DECIMAL NOT NULL,
-    `date` VARCHAR(45) NULL,
+    `date` VARCHAR(45) NOT NULL,
+    `note` VARCHAR(254) NULL,
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
@@ -150,7 +152,8 @@ CREATE TABLE IF NOT EXISTS `painting_sales` (
 CREATE TABLE IF NOT EXISTS `painting_reservations` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `price` DECIMAL NULL,
-    `date` VARCHAR(45) NULL,
+    `date` VARCHAR(45) NOT NULL,
+    `note` VARCHAR(254) NULL,
     `paintings_id` INT NOT NULL,
     `users_id` INT NULL,
     `contacts_id` INT NULL,
