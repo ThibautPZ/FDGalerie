@@ -69,12 +69,11 @@ CREATE TABLE IF NOT EXISTS `paintings` (
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `paintings_has_techniques` (
-    `id` INT NOT NULL AUTO_INCREMENT,
     `paintings_id` INT NOT NULL,
     `techniques_id` INT NOT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `fk_paintings_has_techniques_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    CONSTRAINT `fk_paintings_has_techniques_techniques` FOREIGN KEY (`techniques_id`) REFERENCES `techniques` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    PRIMARY KEY (`paintings_id`, `techniques_id`),
+    CONSTRAINT `fk_paintings_has_techniques_paintings` FOREIGN KEY (`paintings_id`) REFERENCES `paintings` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_paintings_has_techniques_techniques` FOREIGN KEY (`techniques_id`) REFERENCES `techniques` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `paintings_storages` (
