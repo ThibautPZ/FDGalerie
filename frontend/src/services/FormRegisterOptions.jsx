@@ -423,14 +423,41 @@ function FormRegisterOptions(watch) {
     giftDate: {
       required: tWithPrefix("giftDate.required"),
     },
-    artistComment: {
+    artistCommentFr: {
       pattern: {
-        value: /[a-z0-9éèàëñçù;,.!?%µ*§£$€"'&:()/+-]/gi,
-        message: tWithPrefix("artistComment.pattern"),
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("artistCommentFr.pattern"),
       },
       maxLength: {
         value: 254,
-        message: tWithPrefix("artistComment.maxLength"),
+        message: tWithPrefix("artistCommentFr.maxLength"),
+      },
+      validate: (value) =>
+        !!value ||
+        !areNumberOfFieldsFilled(1, [
+          "artistCommentEnUS",
+          "artistCommentEnGB",
+        ]) ||
+        tWithPrefix("artistCommentFr.validate"),
+    },
+    artistCommentEnUS: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("artistCommentEnUS.pattern"),
+      },
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("artistCommentEnUS.maxLength"),
+      },
+    },
+    artistCommentEnGB: {
+      pattern: {
+        value: minOneNonSpaceCharRegExp,
+        message: tWithPrefix("artistCommentEnGB.pattern"),
+      },
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("artistCommentEnGB.maxLength"),
       },
     },
     oeuvreVisibility: {
