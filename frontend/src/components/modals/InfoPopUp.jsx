@@ -9,9 +9,10 @@ function InfoPopUp({ isOpen, onClose, responseDataObj, translationPrefix }) {
     "errors",
     "popUpContent",
   ]);
-  const tWithPrefix = (keyStr, insertText1) => {
+  const tWithPrefix = (keyStr, insertText1, insertText2) => {
     return t(`${translationPrefix}${responseDataObj.message}.${keyStr}`, {
       insertText1,
+      insertText2,
     });
   };
 
@@ -28,7 +29,8 @@ function InfoPopUp({ isOpen, onClose, responseDataObj, translationPrefix }) {
         <p>
           {tWithPrefix(
             "message",
-            responseDataObj.infoData && responseDataObj.infoData.insertText1
+            responseDataObj.infoData && responseDataObj.infoData.insertText1,
+            responseDataObj.infoData && responseDataObj.infoData.insertText2
           )}
         </p>
         {tWithPrefix("validationBtnText") && (
