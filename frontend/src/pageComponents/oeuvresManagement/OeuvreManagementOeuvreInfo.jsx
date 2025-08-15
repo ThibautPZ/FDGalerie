@@ -1,20 +1,33 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useOutletContext, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { Suspense } from "react";
 
 import axiosInstance from "../../services/axiosInstance";
 // import ModifyOeuvre from "./ModifyOeuvre";
 import OeuvresManagementDetailedOeuvre from "./OeuvresManagementDetailedOeuvre";
 import tranlationInstance from "../../services/translationInstance";
-import filterObject from "../../services/objectMethods/filterObject";
 
 import OeuvresManagementModifyOeuvre from "./OeuvresManagementModifyOeuvre";
 
-// todo : call mutation and formmethods here by sending handlemodalinstall in context
 export default function OeuvresManagementOeuvreInfo() {
-  const tPageText = tranlationInstance(
-    "pageText:OeuvresManagement.OMOeuvreInfo"
+  const [
+    tPageText,
+    tPageDetailedOeuvreText,
+    tCommon,
+    tCommonInfo,
+    tTechniques,
+    tSupports,
+    tFormats,
+    tFamilies,
+  ] = tranlationInstance(
+    "pageText:OeuvresManagement",
+    "pageText:OeuvresManagement.OMDetailedOeuvre",
+    "common",
+    "common:info",
+    "techniques",
+    "supports",
+    "paintingSizes",
+    "families"
   );
   const { isModifying, setIsModifying } = useOutletContext();
   const { id } = useParams();
@@ -34,25 +47,6 @@ export default function OeuvresManagementOeuvreInfo() {
     throwOnError: true,
   });
 
-  const defaultValues = {};
-  const formMethods = useForm({
-    defaultValues,
-    shouldUnregister: true,
-  });
-  const formDirtyFields = formMethods.formState.dirtyFields;
-  const isKeyDirtyField = (key) => {
-    if (formDirtyFields[key]) {
-      return true;
-    }
-    return false;
-  };
-
-  const handleSubmitForm = (formData) => {
-    const [returnedData] = filterObject(formData, isKeyDirtyField);
-
-    return returnedData;
-  };
-
   const handleModifyBtnClick = () => {
     setIsModifying(!isModifying);
   };
@@ -62,12 +56,30 @@ export default function OeuvresManagementOeuvreInfo() {
       <div>
         <Suspense fallback={<h1>Loading...</h1>}>
           {!isModifying ? (
-            <OeuvresManagementDetailedOeuvre oeuvreData={data} />
+            <OeuvresManagementDetailedOeuvre
+              oeuvreData={data}
+              translations={{
+                tPageDetailedOeuvreText,
+                tCommon,
+                tCommonInfo,
+                tTechniques,
+                tSupports,
+                tFormats,
+                tFamilies,
+              }}
+            />
           ) : (
             <OeuvresManagementModifyOeuvre
-              mutation={null}
-              formMethods={formMethods}
-              onSubmit={handleSubmitForm}
+              oeuvreData={data}
+              translations={{
+                tPageText,
+                tCommon,
+                tCommonInfo,
+                tTechniques,
+                tSupports,
+                tFormats,
+                tFamilies,
+              }}
               isModifying
             />
           )}
@@ -75,8 +87,8 @@ export default function OeuvresManagementOeuvreInfo() {
       </div>
       <button type="button" onClick={handleModifyBtnClick}>
         {isModifying
-          ? tPageText("modifyBtnReturn")
-          : tPageText("modifyBtnModify")}
+          ? tPageText("OMOeuvreInfo.modifyBtnReturn")
+          : tPageText("OMOeuvreInfo.modifyBtnModify")}
       </button>
     </>
   );
