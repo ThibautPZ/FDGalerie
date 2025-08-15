@@ -6,10 +6,9 @@ import "../../scss/Oeuvre.scss";
 import ZoomedPainting from "../../components/ZoomedPainting";
 import PaintingThumbLg from "../../components/image/PaintingThumbLg";
 import FallbackImg from "../../components/image/FallbackImg";
-import tranlationInstance from "../../services/translationInstance";
 import { isStringNotEmpty } from "../../services/typesAndValidationChecks";
 
-function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
+function OeuvresManagementDetailedOeuvre({ oeuvreData, translations }) {
   const {
     id,
     title,
@@ -24,6 +23,7 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
     artistCommentEnGB,
     oeuvreAvailability,
     availabilityName,
+    publiclyVisible,
     fileName,
     fileExtension,
     sisters = [],
@@ -32,23 +32,16 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
     reservation = {},
   } = oeuvreData;
 
-  const [
-    tPageText,
+  const {
+    tPageDetailedOeuvreText,
     tCommon,
     tCommonInfo,
     tTechniques,
     tSupports,
     tFormats,
     tFamilies,
-  ] = tranlationInstance(
-    "pageText:OeuvresManagement.OMDetailedOeuvre",
-    "common",
-    "common:info",
-    "techniques",
-    "supports",
-    "paintingSizes",
-    "families"
-  );
+  } = translations;
+
   const [openZoomPainting, setOpenZoomPainting] = useState(false);
 
   const getTechniquesLength = () => {
@@ -99,7 +92,9 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
       paintingOwnershipData.transactionPrice = isStringNotEmpty(
         reservation.price
       )
-        ? tPageText("oeuvreReservedPrice", { price: reservation.price })
+        ? tPageDetailedOeuvreText("oeuvreReservedPrice", {
+            price: reservation.price,
+          })
         : "";
     }
     const { userId, contactId, firstName, lastName, date, transactionNumber } =
@@ -143,6 +138,10 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
     transactionNumber,
   } = givePaintingOwnershipData();
 
+  const visibility = publiclyVisible
+    ? tPageDetailedOeuvreText("public")
+    : tPageDetailedOeuvreText("private");
+
   const handlePaintingClick = () => {
     setOpenZoomPainting(true);
   };
@@ -160,20 +159,23 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
         <FallbackImg />
       )}
       <h2>{title}</h2>
-      <p>{tPageText("oeuvreNumber", { number: id })}</p>
+      <p>{tPageDetailedOeuvreText("oeuvreNumber", { number: id })}</p>
+      <p>{tPageDetailedOeuvreText("visibility", { visibility })}</p>
       <p>
-        {tPageText("technique", { count: getTechniquesLength() })}
-        {tPageText("techniquesList", {
-          val: techniques?.map((technique) => tTechniques(`${technique}.name`)),
+        {tPageDetailedOeuvreText("technique", { count: getTechniquesLength() })}
+        {tPageDetailedOeuvreText("techniquesList", {
+          val: techniques?.map((technique) =>
+            tTechniques(`${technique.name}.name`)
+          ),
         })}
       </p>
       <p>
-        {tPageText("support", {
+        {tPageDetailedOeuvreText("support", {
           support: tSupports(`${support}.name`),
         })}
       </p>
       <p>
-        {tPageText("format", {
+        {tPageDetailedOeuvreText("format", {
           format: tFormats(`${format}.name`),
           width,
           height,
@@ -182,7 +184,7 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
       {sisters?.length > 0 && (
         <div>
           <p>
-            {tPageText("family", {
+            {tPageDetailedOeuvreText("family", {
               family: tFamilies(`${family}.name`),
             })}
           </p>
@@ -197,13 +199,13 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
                 </Link>
               )
             )}
-            {tPageText("clickToGo")}
+            {tPageDetailedOeuvreText("clickToGo")}
           </p>
         </div>
       )}
       {artistCommentFr ? (
         <div>
-          <p>{tPageText("commentFr")}</p>
+          <p>{tPageDetailedOeuvreText("commentFr")}</p>
           <p>{artistCommentFr}</p>
         </div>
       ) : (
@@ -211,7 +213,7 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
       )}
       {artistCommentEnUS ? (
         <div>
-          <p>{tPageText("commentEnUS")}</p>
+          <p>{tPageDetailedOeuvreText("commentEnUS")}</p>
           <p>{artistCommentEnUS}</p>
         </div>
       ) : (
@@ -219,21 +221,21 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
       )}
       {artistCommentEnGB ? (
         <div>
-          <p>{tPageText("commentEnGB")}</p>
+          <p>{tPageDetailedOeuvreText("commentEnGB")}</p>
           <p>{artistCommentEnGB}</p>
         </div>
       ) : (
         ""
       )}
       <p>
-        {tPageText("availability", {
+        {tPageDetailedOeuvreText("availability", {
           availability: tCommon(`oeuvreAvailability.${availabilityName}`),
         })}
       </p>
       {isOwned ? (
         <>
           <p>
-            {tPageText(tParagraphNS, {
+            {tPageDetailedOeuvreText(tParagraphNS, {
               person: ownerName,
               status: tCommonInfo(ownerStatus),
               id: ownerId,
@@ -243,7 +245,7 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData }) {
             })}
           </p>
           <Link to={linkedURL}>
-            <span>{tPageText(tLinkNS)}</span>
+            <span>{tPageDetailedOeuvreText(tLinkNS)}</span>
           </Link>
         </>
       ) : (
