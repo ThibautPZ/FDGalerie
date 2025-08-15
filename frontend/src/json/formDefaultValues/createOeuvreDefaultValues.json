@@ -22,9 +22,14 @@
   "oeuvreReservedToKnownPerson": null,
   "oeuvreVisibility": false,
   "giftDate": null,
+  "giftNote": "",
   "saleDate": null,
   "salePrice": "",
+  "saleNote": "",
   "reservationDate": null,
   "reservationPrice": "",
-  "artistComment": ""
+  "reservationNote": "",
+  "artistCommentFr": "",
+  "artistCommentEnUS": "",
+  "artistCommentEnGB": ""
 }
