@@ -17,6 +17,7 @@ const modifyPaintingSchema = require("../Validators/modifyPainting.validator");
 const sendGetRes = require("../middlewares/resSenders/sendGetRes");
 const deleteFiles = require("../middlewares/fsWriters/deleteFiles");
 const addModifyPaintingQueries = require("../middlewares/reqAdders/addModifyPaintingQueries");
+const addDeletePaintingQueries = require("../middlewares/reqAdders/addDeletePaintingQueries");
 
 const isPreviousPaintingFileToBeDeleted = (request) => {
   const { fileFields } = request.query;
@@ -33,6 +34,11 @@ const isPreviousPaintingFileToBeDeleted = (request) => {
     return false;
   }
   return true;
+};
+
+const isTherePaintingFilesToDelete = (request) => {
+  const { fileName, fileExtension } = request.body.detailedPaintingData;
+  return !!(fileName && fileExtension);
 };
 
 router.get("/sizes", paintingsControllers.readAllSizes);
@@ -181,4 +187,37 @@ router.put(
   paintingsControllers.modifyPainting
 );
 
+router.delete(
+  "/deletePainting/:id",
+  checkPresenceInDb({
+    manager: "paintings",
+    method: "findById",
+    reqParamsKeyParams: { id: "id" },
+    errorNumber: "05004",
+  }),
+  paintingsControllers.readOneAdminWithDetails,
+  deleteFiles(
+    [
+      {
+        folderName: "paintings",
+        fileName: { key: "body.detailedPaintingData.fileName" },
+        fileExtension: { key: "body.detailedPaintingData.fileExtension" },
+      },
+      {
+        folderName: "paintingsThumb_lg",
+        fileName: { key: "body.detailedPaintingData.fileName", suffix: "_lg" },
+        fileExtension: { extension: "jpg" },
+      },
+      {
+        folderName: "paintingsThumb_md",
+        fileName: { key: "body.detailedPaintingData.fileName", suffix: "_md" },
+        fileExtension: { extension: "jpg" },
+      },
+    ],
+    isTherePaintingFilesToDelete,
+    "03002"
+  ),
+  addDeletePaintingQueries,
+  paintingsControllers.deletePainting
+);
 module.exports = router;

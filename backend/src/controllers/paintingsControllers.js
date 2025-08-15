@@ -677,6 +677,141 @@ const modifyPainting = asyncHandler(async (req, res, next) => {
   });
 });
 
+const deletePainting = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+  const { title } = req.body.detailedPaintingData;
+  const {
+    paintingsTableUndoQueryArgs,
+    paintingsHasTechniquesTableUndoQueriesArgs,
+    isPaintingStoragesTableOperation,
+    paitingsStoragesTableUndoQueriesArgs,
+    isArtistCommentTableOperation,
+    artistCommentTableUndoQueriesArgs,
+    isPaintingGiftsTableOperation,
+    paintingsGiftsTableDeleteUndoQueriesArgs,
+    isPaintingSalesTableOperation,
+    paintingsSalesTableDeleteUndoQueriesArgs,
+    isPaintingReservationsTableOperation,
+    paintingsReservationsTableDeleteUndoQueriesArgs,
+  } = req.body.deletePaintingQueries;
+
+  const deletePaintingQuerySpecsReference = [
+    {
+      name: "deletePainting",
+      queryArgs: [id],
+      undoQueryArgs: [paintingsTableUndoQueryArgs],
+    },
+  ];
+
+  const deletePaintingRelatedDataQuerySpecsReference = [
+    {
+      name: "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds",
+      queryArgs: [id, paintingsHasTechniquesTableUndoQueriesArgs],
+      undoQueryArgs: [id, paintingsHasTechniquesTableUndoQueriesArgs],
+    },
+  ];
+
+  if (isPaintingStoragesTableOperation) {
+    deletePaintingRelatedDataQuerySpecsReference.push({
+      name: "deletePaintingStorage",
+      queryArgs: [id],
+      undoQueryArgs: [paitingsStoragesTableUndoQueriesArgs],
+    });
+  }
+
+  if (isArtistCommentTableOperation) {
+    deletePaintingRelatedDataQuerySpecsReference.push({
+      name: "deletePaintingArtistComment",
+      queryArgs: [id],
+      undoQueryArgs: [artistCommentTableUndoQueriesArgs],
+    });
+  }
+
+  if (isPaintingGiftsTableOperation) {
+    const { date, note, userId, contactId } =
+      paintingsGiftsTableDeleteUndoQueriesArgs;
+    deletePaintingRelatedDataQuerySpecsReference.push({
+      name: "deletePaintingGiftByPaintingId",
+      queryArgs: [id],
+      undoQueryArgs: [id, date, note, userId, contactId],
+    });
+  }
+
+  if (isPaintingSalesTableOperation) {
+    const { price, date, note, userId, contactId } =
+      paintingsSalesTableDeleteUndoQueriesArgs;
+    deletePaintingRelatedDataQuerySpecsReference.push({
+      name: "deletePaintingSaleByPaintingId",
+      queryArgs: [id],
+      undoQueryArgs: [price, id, date, note, userId, contactId],
+    });
+  }
+
+  if (isPaintingReservationsTableOperation) {
+    const { price, date, note, userId, contactId } =
+      paintingsReservationsTableDeleteUndoQueriesArgs;
+    deletePaintingRelatedDataQuerySpecsReference.push({
+      name: "deletePaintingReservationByPaintingId",
+      queryArgs: [id],
+      undoQueryArgs: [price, id, date, note, userId, contactId],
+    });
+  }
+
+  const deletePaintingRelatedDataQuerySpecs = giveDbQueriesSpecs(
+    deletePaintingRelatedDataQuerySpecsReference
+  );
+
+  const relatedDataResults = await giveParallelQueriesPromise(
+    deletePaintingRelatedDataQuerySpecs,
+    5
+  );
+
+  const { success, failures } = giveSuccesfulAndFailedQueryNames(
+    relatedDataResults,
+    true,
+    true
+  );
+
+  if (failures.length) {
+    const deletePaintingUndoQuerySpecs = giveDbQueriesSpecsToUndoSuccess(
+      deletePaintingQuerySpecsReference,
+      success
+    );
+
+    await giveParallelQueriesPromise(deletePaintingUndoQuerySpecs);
+    const err = await new CustomErrorClass("06004", failures);
+    return next(err);
+  }
+
+  const [deletePaintingQuerySpecs] = giveDbQueriesSpecs(
+    deletePaintingQuerySpecsReference
+  );
+
+  const results = await giveQueryPromise(deletePaintingQuerySpecs, 5);
+
+  if (!results.affectedRows) {
+    const deletePaintingUndoQuerySpecs = giveDbQueriesSpecsToUndoSuccess(
+      deletePaintingRelatedDataQuerySpecsReference,
+      success
+    );
+
+    await giveParallelQueriesPromise(deletePaintingUndoQuerySpecs, 5);
+    const err = await new CustomErrorClass("06004", results);
+    return next(err);
+  }
+
+  const successObj = {
+    ...successfulResMsg.paintingsControllers.deletePainting,
+    infoData: {
+      insertText1: title,
+    },
+  };
+  return res.status(201).json({
+    success: true,
+    successObj,
+  });
+});
+
 module.exports = {
   browse,
   readAllPublicMinimalInfos,
@@ -692,4 +827,5 @@ module.exports = {
   readOneAdminWithDetails,
   createPainting,
   modifyPainting,
+  deletePainting,
 };
