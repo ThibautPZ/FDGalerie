@@ -74,7 +74,7 @@ function SelectInput({
     if (multipleSelection) {
       return areArrayValuesEqual(defaultValue, watchValue);
     }
-    return defaultValue.value === watchValue?.value;
+    return defaultValue?.value === watchValue?.value;
   };
 
   const isResetButtonHidden = !isFormModifying || areValuesDefault();
