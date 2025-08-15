@@ -28,12 +28,9 @@ const giveExpectedMimeTypes = (fileType) => {
   return {};
 };
 
-// todo : transformations
 const checkFile = (fileType) => {
   return expressAsyncHandler(async (req, res, next) => {
     const { file = null, query } = req;
-    // const { folderName, fileType } = storageOptions;
-
     if (query.fileFields === "none") {
       return next();
     }
