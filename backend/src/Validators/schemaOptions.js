@@ -45,6 +45,14 @@ const requiredStr = (fieldName, errMsgPrefix, options) => {
   return returnedObj;
 };
 
+const requiredObj = (fieldName, errMsgPrefix) => {
+  const uppercasedFieldName = uppercaseFirstChar(fieldName);
+  const returnedObj = {
+    isObject: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isObj` },
+  };
+  return returnedObj;
+};
+
 const requiredArr = (fieldName, errMsgPrefix, options) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
@@ -110,7 +118,7 @@ const nullableStr = (fieldName, errMsgPrefix, options) => {
 const nullableInt = (fieldName, errMsgPrefix) => {
   const uppercasedFieldName = uppercaseFirstChar(fieldName);
   return {
-    optional: { options: { values: null } },
+    optional: { options: { values: "falsy" } },
     isInt: { errorMessage: `${errMsgPrefix}${uppercasedFieldName}_isInt` },
     toInt: true,
   };
@@ -138,6 +146,7 @@ const requiredBool = (fieldName, errMsgPrefix) => {
 
 module.exports = {
   requiredStr,
+  requiredObj,
   requiredArr,
   requiredInt,
   requiredFloat,
