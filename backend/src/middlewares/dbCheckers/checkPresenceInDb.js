@@ -163,10 +163,15 @@ const checkPresenceInDb = (...options) => {
       }
     }
 
+    if (errors.length === 1) {
+      return next(errors[0]);
+    }
+
     if (errors.length) {
       const err = new CustomErrorClass("01001", errors);
       return next(err);
     }
+
     return next();
   });
 };
