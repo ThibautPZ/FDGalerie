@@ -46,6 +46,15 @@ class PaintingsManager extends AbstractManager {
     );
   }
 
+  async findById({ id }) {
+    return this.database.query(
+      `SELECT p.id, p.title
+    FROM ${this.table} AS p
+    WHERE p.id = ?`,
+      [id]
+    );
+  }
+
   async findAllFamilyMembers(familyId, currentMemberId) {
     return this.database.query(
       `SELECT p.id AS id, p.title AS title, p.family_member AS familyMember FROM ${this.table} AS p LEFT JOIN families AS f ON p.families_id = f.id WHERE f.id = ? AND p.id <> ?`,
@@ -158,6 +167,21 @@ class PaintingsManager extends AbstractManager {
         oeuvreAvailability,
       ]
     );
+  }
+
+  async modifyPaintingById(paintingData, paintingId) {
+    const queryTailArr = [];
+    const queryValues = [];
+
+    for (const [columnName, value] of Object.entries(paintingData)) {
+      queryTailArr.push(`${columnName} = ?`);
+      queryValues.push(value);
+    }
+    const queryTail = queryTailArr.join(", ");
+    queryValues.push(paintingId);
+    const queryBody = `UPDATE ${this.table} SET ${queryTail} WHERE id = ?;`;
+
+    return this.database.query(queryBody, queryValues);
   }
 
   async deletePaintingById(paintingId) {

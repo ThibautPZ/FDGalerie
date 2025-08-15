@@ -21,7 +21,7 @@ class PaintingGiftsManager extends AbstractManager {
 
   findGiftByPaintingId(id) {
     return this.database.query(
-      `SELECT pg.id AS transactionNumber, pg.date AS date, pg.users_id AS userId, pg.contacts_id AS contactId,
+      `SELECT pg.id AS transactionNumber, pg.date AS date, pg.note AS note, pg.users_id AS userId, pg.contacts_id AS contactId,
       COALESCE(u.firstname, c.firstname) AS firstName,
       COALESCE(u.lastname,  c.lastname)  AS lastName
       FROM ${this.table} AS pg
@@ -34,12 +34,25 @@ class PaintingGiftsManager extends AbstractManager {
     );
   }
 
-  async createPaintingGift(paintingId, date, userId, contactId) {
+  async createPaintingGift(paintingId, date, note, userId, contactId) {
     return this.database.query(
-      `INSERT INTO ${this.table} (date, paintings_id, users_id, contacts_id)
-      VALUES (?, ?, ?, ?);`,
-      [date, paintingId, userId, contactId]
+      `INSERT INTO ${this.table} (date, paintings_id, note, users_id, contacts_id)
+      VALUES (?, ?, ?, ?, ?);`,
+      [date, paintingId, note, userId, contactId]
     );
+  }
+
+  async modifyPaintingGift(paintingId, giftData) {
+    const values = [];
+    const queryTailArr = [];
+    for (const [columnName, value] of Object.entries(giftData)) {
+      values.push(value);
+      queryTailArr.push(`${columnName} = ?`);
+    }
+    const queryTail = queryTailArr.join(", ");
+    values.push(paintingId);
+    const queryBody = `UPDATE ${this.table} SET ${queryTail} WHERE paintings_id = ?`;
+    return this.database.query(queryBody, values);
   }
 }
 

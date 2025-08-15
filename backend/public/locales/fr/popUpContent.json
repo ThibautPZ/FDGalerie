@@ -53,49 +53,49 @@
     },
     "06001": {
       "title": "Impossible d'enregistrer le nouveau contact",
-      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06002": {
       "title": "Impossible de mettre à jour le contact",
-      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06003": {
       "title": "Impossible d'enregistrer le nouveau tableau",
-      "message": "Une erreur est survenue lors de la sauvegarde du nouveau tableau. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau tableau. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06006": {
       "title": "Impossible d'enregistrer la nouvelle technique",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06007": {
       "title": "Impossible d'enregistrer la nouvelle famille",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle famille. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle famille. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06008": {
       "title": "Impossible d'enregistrer la nouvelle format",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle format. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle format. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
     },
     "06009": {
       "title": "Impossible d'enregistrer la nouvelle support",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle support. Veauillez réessayer plus tard.",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle support. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "closeBtnText": "OK"
@@ -336,6 +336,22 @@
     "paintingCreated": {
       "title": "Tableau créé",
       "message": "{{insertText1}} a été ajouté à vos tableaux.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingModified": {
+      "title": "Tableau modifié",
+      "message": "Le tableau {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingModifiedTitle": {
+      "title": "Tableau modifié",
+      "message": "Le tableau {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,

@@ -9,21 +9,28 @@ class PaintingsHasTechniquesManager extends AbstractManager {
     return this.database.query(`SELECT name, id FROM ${this.table} `);
   }
 
-  async createNewPaintingTechniques(paintingId, techniques) {
-    const queryHead = `INSERT INTO ${this.table} (paintings_id, techniques_id) VALUES`;
-    let queryBody = "";
-    const queryValue = " (?, ?)";
+  async createPaintingTechniqueRelationsByPaintingId(paintingId, techniques) {
     const values = [];
+    const queryTail = techniques
+      .map((techId) => {
+        values.push(paintingId, techId);
+        return `(?, ?)`;
+      })
+      .join(", ");
+    const queryBody = `INSERT INTO ${this.table} (paintings_id, techniques_id) VALUES ${queryTail};`;
 
-    techniques.forEach((techniqueId, index) => {
-      values.push(paintingId, techniqueId);
-      if (index > 0) {
-        queryBody = `${queryBody},`;
-      }
-      queryBody = `${queryBody}${queryValue}`;
-    });
+    return this.database.query(queryBody, values);
+  }
 
-    return this.database.query(`${queryHead}${queryBody};`, values);
+  async deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds(
+    paintingId,
+    techniques
+  ) {
+    const queryTail = techniques.map(() => `?`).join(", ");
+    const queryBody = `DELETE FROM ${this.table} WHERE paintings_id = ? AND techniques_id IN (${queryTail});`;
+    const queryValues = [paintingId, ...techniques];
+
+    return this.database.query(queryBody, queryValues);
   }
 }
 

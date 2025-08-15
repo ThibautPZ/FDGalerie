@@ -64,7 +64,12 @@
     "name": "thumbCreateFail",
     "statusCode": 400,
     "type": "error",
-    "publicCode": "00004"
+    "publicCode": "03002"
+  },
+  "03002": {
+    "name": "fileWriteFail",
+    "statusCode": 400,
+    "type": "error"
   },
   "04001": { "name": "contactExists", "statusCode": 400, "type": "warn" },
   "05001": {
@@ -132,6 +137,11 @@
     "statusCode": 400,
     "type": "warn"
   },
+  "05013": {
+    "name": "paintingOwnerNotFound",
+    "statusCode": 500,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
@@ -166,6 +176,11 @@
   },
   "06009": {
     "name": "cannotWriteNewSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06010": {
+    "name": "cannotUpdatePainting",
     "statusCode": 500,
     "type": "error"
   },

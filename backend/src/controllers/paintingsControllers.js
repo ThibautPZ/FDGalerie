@@ -11,6 +11,10 @@ const {
   giveQueryPromise,
   giveDbQueryUndoSpecs,
 } = require("../helpers/dbAsyncQueriesHelper");
+const {
+  isObjectNotEmpty,
+  isArrayNotEmpty,
+} = require("../services/typesAndValidationChecks");
 
 const giveResultWithFilePathname = (resultObj) => {
   const pathname = `${resultObj.filename}.${resultObj.fileExtension}`;
@@ -219,8 +223,8 @@ const readOneAdminWithDetails = asyncHandler(async (req, res, next) => {
         [data[name]] = results[name];
       }
     });
-
-    return res.status(200).json(data);
+    req.body.detailedPaintingData = data;
+    return next();
   }
   return next(new CustomErrorClass("00001"));
 });
@@ -238,12 +242,15 @@ const createPainting = asyncHandler(async (req, res, next) => {
     oeuvreAvailability,
     oeuvreGivenToKnownPerson,
     giftDate,
+    giftNote,
     oeuvreSoldToKnownPerson,
     salePrice,
     saleDate,
+    saleNote,
     oeuvreReservedToKnownPerson,
     reservationPrice,
     reservationDate,
+    reservationNote,
   } = body;
 
   const createNewPaintingQuerySpecsReference = {
@@ -265,9 +272,9 @@ const createPainting = asyncHandler(async (req, res, next) => {
 
   const newPaintingAssociatedQueriesSpecsReference = [
     {
-      name: "createNewPaintingTechniques",
+      name: "createPaintingTechniqueRelationsByPaintingId",
       queryArgs: [newPaintingId, oeuvreTechnique],
-      undoQueryArgs: [newPaintingId],
+      undoQueryArgs: [newPaintingId, oeuvreTechnique],
     },
   ];
 
@@ -296,7 +303,7 @@ const createPainting = asyncHandler(async (req, res, next) => {
     const { userId = null, contactId = null } = oeuvreGivenToKnownPerson;
     newPaintingAssociatedQueriesSpecsReference.push({
       name: "createPaintingGift",
-      queryArgs: [newPaintingId, giftDate, userId, contactId],
+      queryArgs: [newPaintingId, giftDate, giftNote, userId, contactId],
       undoQueryArgs: [newPaintingId],
     });
   }
@@ -305,7 +312,14 @@ const createPainting = asyncHandler(async (req, res, next) => {
     const { userId = null, contactId = null } = oeuvreSoldToKnownPerson;
     newPaintingAssociatedQueriesSpecsReference.push({
       name: "createPaintingSale",
-      queryArgs: [salePrice, newPaintingId, saleDate, userId, contactId],
+      queryArgs: [
+        salePrice,
+        newPaintingId,
+        saleDate,
+        saleNote,
+        userId,
+        contactId,
+      ],
       undoQueryArgs: [newPaintingId],
     });
   }
@@ -318,6 +332,7 @@ const createPainting = asyncHandler(async (req, res, next) => {
         reservationPrice,
         newPaintingId,
         reservationDate,
+        reservationNote,
         userId,
         contactId,
       ],
@@ -373,6 +388,295 @@ const createPainting = asyncHandler(async (req, res, next) => {
   });
 });
 
+const modifyPainting = asyncHandler(async (req, res, next) => {
+  const { id: paintingId } = req.params;
+  const {
+    oeuvreTitle,
+    modifyPaintingQueries,
+    modifiedFields,
+    detailedPaintingData,
+  } = req.body;
+
+  const {
+    paintingsTableQueryArgs,
+    paintingsTableUndoQueryArgs,
+    paintingsHasTechniquesTableCreateQueriesArgs,
+    paintingsHasTechniquesTableDeleteQueriesArgs,
+    paintingStoragesTableOperation,
+    paitingsStoragesTableCreateQueriesArgs,
+    paitingsStoragesTableDeleteQueriesArgs,
+    paintingsArtistCommentsTableOperation,
+    paintingsArtistCommentsTableQueriesArgs,
+    paintingsArtistCommentsTableUndoQueriesArgs,
+    paintingsGiftsTableCreateQueriesArgs,
+    paintingsGiftsTableDeleteQuery,
+    paintingsGiftsTableDeleteUndoQueriesArgs,
+    paintingsGiftsTableModifyQueriesArgs,
+    paintingsGiftsTableModifyUndoQueriesArgs,
+    paintingsSalesTableCreateQueriesArgs,
+    paintingsSalesTableDeleteQuery,
+    paintingsSalesTableDeleteUndoQueriesArgs,
+    paintingsSalesTableModifyQueriesArgs,
+    paintingsSalesTableModifyUndoQueriesArgs,
+    paintingsReservationsTableCreateQueriesArgs,
+    paintingsReservationsTableDeleteQuery,
+    paintingsReservationsTableDeleteUndoQueriesArgs,
+    paintingsReservationsTableModifyQueriesArgs,
+    paintingsReservationsTableModifyUndoQueriesArgs,
+  } = modifyPaintingQueries;
+
+  const modifyPaintingQueriesReference = [];
+
+  if (isObjectNotEmpty(paintingsTableQueryArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPainting",
+      queryArgs: [paintingsTableQueryArgs, paintingId],
+      undoQueryArgs: [paintingsTableUndoQueryArgs, paintingId],
+    });
+  }
+
+  if (isArrayNotEmpty(paintingsHasTechniquesTableCreateQueriesArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "createPaintingTechniqueRelationsByPaintingId",
+      queryArgs: [paintingId, paintingsHasTechniquesTableCreateQueriesArgs],
+      undoQueryArgs: [paintingId, paintingsHasTechniquesTableCreateQueriesArgs],
+    });
+  }
+
+  if (isArrayNotEmpty(paintingsHasTechniquesTableDeleteQueriesArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds",
+      queryArgs: [paintingId, paintingsHasTechniquesTableDeleteQueriesArgs],
+      undoQueryArgs: [paintingId, paintingsHasTechniquesTableDeleteQueriesArgs],
+    });
+  }
+
+  if (paintingStoragesTableOperation === "create") {
+    modifyPaintingQueriesReference.push({
+      name: "createNewPaintingStorage",
+      queryArgs: [
+        paintingId,
+        paitingsStoragesTableCreateQueriesArgs.fileName,
+        paitingsStoragesTableCreateQueriesArgs.fileExtension,
+      ],
+      undoQueryArgs: [paintingId],
+    });
+  }
+
+  if (paintingStoragesTableOperation === "modify") {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPaintingStorage",
+      queryArgs: [
+        paintingId,
+        paitingsStoragesTableCreateQueriesArgs.fileName,
+        paitingsStoragesTableCreateQueriesArgs.fileExtension,
+      ],
+      undoQueryArgs: [
+        paintingId,
+        paitingsStoragesTableDeleteQueriesArgs.fileName,
+        paitingsStoragesTableDeleteQueriesArgs.fileExtension,
+      ],
+    });
+  }
+
+  if (paintingStoragesTableOperation === "delete") {
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingStorage",
+      queryArgs: [paintingId],
+      undoQueryArgs: [
+        paintingId,
+        paitingsStoragesTableDeleteQueriesArgs.fileName,
+        paitingsStoragesTableDeleteQueriesArgs.fileExtension,
+      ],
+    });
+  }
+
+  if (paintingsArtistCommentsTableOperation === "create") {
+    modifyPaintingQueriesReference.push({
+      name: "createPaintingArtistComment",
+      queryArgs: [
+        paintingId,
+        paintingsArtistCommentsTableQueriesArgs.fr_Comment,
+        paintingsArtistCommentsTableQueriesArgs.en_US_Comment,
+        paintingsArtistCommentsTableQueriesArgs.en_GB_Comment,
+      ],
+      undoQueryArgs: [paintingId],
+    });
+  }
+
+  if (paintingsArtistCommentsTableOperation === "modify") {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPaintingArtistComment",
+      queryArgs: [paintingId, paintingsArtistCommentsTableQueriesArgs],
+      undoQueryArgs: [paintingId, paintingsArtistCommentsTableUndoQueriesArgs],
+    });
+  }
+
+  if (paintingsArtistCommentsTableOperation === "delete") {
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingArtistComment",
+      queryArgs: [paintingId],
+      undoQueryArgs: [
+        paintingId,
+        paintingsArtistCommentsTableUndoQueriesArgs.fr_Comment,
+        paintingsArtistCommentsTableUndoQueriesArgs.en_US_Comment,
+        paintingsArtistCommentsTableUndoQueriesArgs.en_GB_Comment,
+      ],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsGiftsTableCreateQueriesArgs)) {
+    const { date, note, userId, contactId } =
+      paintingsGiftsTableCreateQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "createPaintingGift",
+      queryArgs: [paintingId, date, note, userId, contactId],
+      undoQueryArgs: [paintingId],
+    });
+  }
+
+  if (paintingsGiftsTableDeleteQuery) {
+    const { date, note, userId, contactId } =
+      paintingsGiftsTableDeleteUndoQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingGiftByPaintingId",
+      queryArgs: [paintingId],
+      undoQueryArgs: [paintingId, date, note, userId, contactId],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsGiftsTableModifyQueriesArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPaintingGift",
+      queryArgs: [paintingId, paintingsGiftsTableModifyQueriesArgs],
+      undoQueryArgs: [paintingId, paintingsGiftsTableModifyUndoQueriesArgs],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsSalesTableCreateQueriesArgs)) {
+    const { price, date, note, userId, contactId } =
+      paintingsSalesTableCreateQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "createPaintingSale",
+      queryArgs: [price, paintingId, date, note, userId, contactId],
+      undoQueryArgs: [paintingId],
+    });
+  }
+
+  if (paintingsSalesTableDeleteQuery) {
+    const { price, date, note, userId, contactId } =
+      paintingsSalesTableDeleteUndoQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingSaleByPaintingId",
+      queryArgs: [paintingId],
+      undoQueryArgs: [price, paintingId, date, note, userId, contactId],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsSalesTableModifyQueriesArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPaintingSale",
+      queryArgs: [paintingId, paintingsSalesTableModifyQueriesArgs],
+      undoQueryArgs: [paintingId, paintingsSalesTableModifyUndoQueriesArgs],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsReservationsTableCreateQueriesArgs)) {
+    const { price, date, note, userId, contactId } =
+      paintingsReservationsTableCreateQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "createPaintingReservation",
+      queryArgs: [price, paintingId, date, note, userId, contactId],
+      undoQueryArgs: [paintingId],
+    });
+  }
+
+  if (paintingsReservationsTableDeleteQuery) {
+    const { price, date, note, userId, contactId } =
+      paintingsReservationsTableDeleteUndoQueriesArgs;
+    modifyPaintingQueriesReference.push({
+      name: "deletePaintingReservationByPaintingId",
+      queryArgs: [paintingId],
+      undoQueryArgs: [price, paintingId, date, note, userId, contactId],
+    });
+  }
+
+  if (isObjectNotEmpty(paintingsReservationsTableModifyQueriesArgs)) {
+    modifyPaintingQueriesReference.push({
+      name: "modifyPaintingReservation",
+      queryArgs: [paintingId, paintingsReservationsTableModifyQueriesArgs],
+      undoQueryArgs: [
+        paintingId,
+        paintingsReservationsTableModifyUndoQueriesArgs,
+      ],
+    });
+  }
+
+  if (!modifyPaintingQueriesReference.length) {
+    return next(new CustomErrorClass("06010"));
+  }
+
+  const modifyPaintingQueriesSpecs = giveDbQueriesSpecs(
+    modifyPaintingQueriesReference
+  );
+
+  const results = await giveParallelQueriesPromise(
+    modifyPaintingQueriesSpecs,
+    5
+  );
+
+  const { success, failures } = giveSuccesfulAndFailedQueryNames(
+    results,
+    true,
+    true
+  );
+
+  if (failures.length) {
+    const modifyPaintingUndoQueriesSpecs = giveDbQueriesSpecsToUndoSuccess(
+      modifyPaintingQueriesReference,
+      success
+    );
+
+    const undoResults = await giveParallelQueriesPromise(
+      modifyPaintingUndoQueriesSpecs,
+      5
+    );
+    const { failures: undoFailures } = giveSuccesfulAndFailedQueryNames(
+      undoResults,
+      true,
+      true
+    );
+
+    if (undoFailures.length) {
+      return next(new CustomErrorClass("06010", undoFailures));
+    }
+
+    return next(
+      new CustomErrorClass("06010", [...failures, results[failures[0]]])
+    );
+  }
+
+  const successObj = modifiedFields.oeuvreTitle
+    ? {
+        ...successfulResMsg.paintingsControllers.modifyPaintingTitle,
+        infoData: {
+          insertText1: oeuvreTitle,
+          insertText2: detailedPaintingData.title,
+        },
+      }
+    : {
+        ...successfulResMsg.paintingsControllers.modifyPainting,
+        infoData: {
+          insertText1: oeuvreTitle,
+        },
+      };
+
+  return res.status(201).json({
+    success: true,
+    successObj,
+  });
+});
+
 module.exports = {
   browse,
   readAllPublicMinimalInfos,
@@ -387,4 +691,5 @@ module.exports = {
   browseAdminWithDetails,
   readOneAdminWithDetails,
   createPainting,
+  modifyPainting,
 };

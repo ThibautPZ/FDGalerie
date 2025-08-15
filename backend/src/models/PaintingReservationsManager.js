@@ -21,7 +21,7 @@ class PaintingReservationsManager extends AbstractManager {
 
   async findReservationByPaintingId(id) {
     return this.database.query(
-      `SELECT pr.id AS transactionNumber, pr.price, pr.date AS date, pr.users_id AS userId, pr.contacts_id AS contactId,
+      `SELECT pr.id AS transactionNumber, pr.price, pr.date AS date, pr.note AS note, pr.users_id AS userId, pr.contacts_id AS contactId,
       COALESCE(u.firstname, c.firstname) AS firstName,
       COALESCE(u.lastname,  c.lastname)  AS lastName
       FROM ${this.table} AS pr
@@ -34,19 +34,32 @@ class PaintingReservationsManager extends AbstractManager {
     );
   }
 
-  async createPaintingReservation(price, paintingId, date, userId, contactId) {
+  async createPaintingReservation(
+    price,
+    paintingId,
+    date,
+    note,
+    userId,
+    contactId
+  ) {
     return this.database.query(
-      `INSERT INTO ${this.table} (price, date, paintings_id, users_id, contacts_id)
-      VALUES (?, ?, ?, ?, ?);`,
-      [price, date, paintingId, userId, contactId]
+      `INSERT INTO ${this.table} (price, date, note, paintings_id, users_id, contacts_id)
+      VALUES (?, ?, ?, ?, ?, ?);`,
+      [price, date, note, paintingId, userId, contactId]
     );
   }
 
-  async deletePaintingReservationByPaintingId(paintingId) {
-    return this.database.query(
-      `DELETE FROM ${this.table} WHERE paintings_id = ?`,
-      [paintingId]
-    );
+  async modifyPaintingReservation(paintingId, reservationData) {
+    const values = [];
+    const queryTailArr = [];
+    for (const [columnName, value] of Object.entries(reservationData)) {
+      values.push(value);
+      queryTailArr.push(`${columnName} = ?`);
+    }
+    const queryTail = queryTailArr.join(", ");
+    values.push(paintingId);
+    const queryBody = `UPDATE ${this.table} SET ${queryTail} WHERE paintings_id = ?`;
+    return this.database.query(queryBody, values);
   }
 }
 

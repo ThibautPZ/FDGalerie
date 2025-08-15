@@ -21,6 +21,19 @@ class PaintingsArtistCommentsManager extends AbstractManager {
       [paintingId, frComment, enUSComment, enGBComment]
     );
   }
+
+  async modifyPaintingArtistComment(paintingId, comments) {
+    const values = [];
+    const queryTailArr = [];
+    for (const [columnName, value] of Object.entries(comments)) {
+      values.push(value);
+      queryTailArr.push(`${columnName} = ?`);
+    }
+    const queryTail = queryTailArr.join(", ");
+    values.push(paintingId);
+    const queryBody = `UPDATE ${this.table} SET ${queryTail} WHERE paintings_id = ?`;
+    return this.database.query(queryBody, values);
+  }
 }
 
 module.exports = PaintingsArtistCommentsManager;

@@ -16,6 +16,13 @@ class PaintingsStoragesManager extends AbstractManager {
       [paintingId, fileName, fileExtension]
     );
   }
+
+  async modifyPaintingStorage(paintingId, fileName, fileExtension) {
+    return this.database.query(
+      `UPDATE ${this.table} SET file_name = ?, file_extension = ? WHERE paintings_id = ?`,
+      [fileName, fileExtension, paintingId]
+    );
+  }
 }
 
 module.exports = PaintingsStoragesManager;

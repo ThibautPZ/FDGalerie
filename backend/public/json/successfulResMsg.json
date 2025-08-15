@@ -3,10 +3,18 @@
     "createOneContact": { "type": "info", "message": "contactCreated" },
     "updateContact": { "type": "info", "message": "contactModified" }
   },
-  "paintingsController": {
+  "paintingsControllers": {
     "createPainting": {
       "type": "info",
       "message": "paintingCreated"
+    },
+    "modifyPainting": {
+      "type": "info",
+      "message": "paintingModified"
+    },
+    "modifyPaintingTitle": {
+      "type": "info",
+      "message": "paintingModifiedTitle"
     }
   },
   "techniquesControllers": {

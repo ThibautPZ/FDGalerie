@@ -121,6 +121,10 @@
   "reservationPrice": {
     "pattern": "Le prix indiqué est invalide."
   },
+  "reservationNote": {
+    "pattern": "La note indiquée est invalide.",
+    "maxLength": "La note ne peut excéder les 254 caractères."
+  },
   "saleDate": {
     "required": "Vous devez indiquer la date de vente.",
     "pattern": "La date de vente sélectionnée est invalide."
@@ -129,12 +133,29 @@
     "required": "Vous devez indiquer le prix de vente.",
     "pattern": "Le prix de vente indiqué est invalide."
   },
+  "saleNote": {
+    "pattern": "La note indiquée est invalide.",
+    "maxLength": "La note ne peut excéder les 254 caractères."
+  },
   "giftDate": {
     "required": "Vous devez indiquer la date du don.",
     "pattern": "La date de don sélectionnée est invalide."
   },
-  "artistComment": {
-    "pattern": "Votre commentaire contient des caractères invalides.",
+  "giftNote": {
+    "pattern": "La note indiquée est invalide.",
+    "maxLength": "La note ne peut excéder les 254 caractères."
+  },
+  "artistCommentFr": {
+    "pattern": "Votre commentaire en français contient des caractères invalides.",
+    "maxLength": "Le commentaire ne peut excéder les 254 caractères.",
+    "validate": "Vous devez indiquer un commentaire en français si vous indiquez un commentaire en anglais."
+  },
+  "artistCommentEnUS": {
+    "pattern": "Votre commentaire en anglais (US) contient des caractères invalides.",
+    "maxLength": "Le commentaire ne peut excéder les 254 caractères."
+  },
+  "artistCommentEnGB": {
+    "pattern": "Votre commentaire en anglais (GB) contient des caractères invalides.",
     "maxLength": "Le commentaire ne peut excéder les 254 caractères."
   },
   "oeuvreVisibility": {
