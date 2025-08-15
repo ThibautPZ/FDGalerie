@@ -12,11 +12,22 @@ const {
   giveParallelQueriesPromise,
 } = require("../../helpers/dbAsyncQueriesHelper");
 
-const giveParams = (reqBody, bodyKeyParams, addedParams) => {
+const giveParams = (
+  reqBody,
+  reqParams,
+  bodyKeyParams,
+  reqParamsKeyParams,
+  addedParams
+) => {
   const params = {};
   if (isObjectNotEmpty(bodyKeyParams)) {
     for (const [param, bodyKey] of Object.entries(bodyKeyParams)) {
       params[param] = reqBody[bodyKey];
+    }
+  }
+  if (isObjectNotEmpty(reqParamsKeyParams)) {
+    for (const [param, value] of Object.entries(reqParamsKeyParams)) {
+      params[param] = reqParams[value];
     }
   }
   if (isObjectNotEmpty(addedParams)) {
@@ -43,6 +54,7 @@ const checkPresenceInDb = (...options) => {
         manager,
         method,
         bodyKeyParams,
+        reqParamsKeyParams,
         addedParams,
         errorNumber,
         rejectWhenTrue = false,
@@ -54,7 +66,13 @@ const checkPresenceInDb = (...options) => {
         return next(err);
       }
 
-      const params = giveParams(req.body, bodyKeyParams, addedParams);
+      const params = giveParams(
+        req.body,
+        req.params,
+        bodyKeyParams,
+        reqParamsKeyParams,
+        addedParams
+      );
 
       const result = await giveQueryPromise(
         { name: `${manager}${method}`, manager, method, queryArgs: [params] },
@@ -82,6 +100,7 @@ const checkPresenceInDb = (...options) => {
         manager,
         method,
         bodyKeyParams,
+        reqParamsKeyParams,
         addedParams,
         errorNumber,
         rejectWhenTrue = false,
@@ -104,7 +123,13 @@ const checkPresenceInDb = (...options) => {
       Object.assign(errorConditions, {
         [name]: conditions,
       });
-      const params = giveParams(req.body, bodyKeyParams, addedParams);
+      const params = giveParams(
+        req.body,
+        req.params,
+        bodyKeyParams,
+        reqParamsKeyParams,
+        addedParams
+      );
 
       return {
         name: `${manager}${method}`,
