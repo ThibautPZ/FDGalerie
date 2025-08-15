@@ -61,7 +61,10 @@ function TextInput({
     }
     const onChange = (event) => {
       const { value } = event.target;
-      return setValue(fieldName, value.match(regex)?.[0] || "");
+      return setValue(fieldName, value.match(regex)?.[0] || "", {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     };
     return onChange;
   };
@@ -74,7 +77,7 @@ function TextInput({
   };
 
   const isResetButtonHidden =
-    !isFormModifying || formState.defaultValues[fieldName] === watch(fieldName);
+    !isFormModifying || !formState.dirtyFields[fieldName];
 
   return (
     <div hidden={isHidden} className={fieldName}>
@@ -101,7 +104,9 @@ function TextInput({
       />
       {inputMode === "priceEur" && <label htmlFor={fieldName}> € </label>}
       <FieldEraseButton
-        onClick={() => setValue(fieldName, "")}
+        onClick={() =>
+          setValue(fieldName, "", { shouldValidate: true, shouldDirty: true })
+        }
         isHidden={!watch(fieldName)}
       />
       <FieldResetButton

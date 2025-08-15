@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import DatePicker, { registerLocale } from "react-datepicker";
 import fr from "date-fns/locale/fr";
@@ -50,7 +50,8 @@ export default function DateInput({
     "common:date",
     "formRegisterOptionsMessages"
   );
-  const { getValues, setValue, control, formState, watch } = useFormContext();
+  const { getValues, setValue, control, formState, watch, trigger } =
+    useFormContext();
 
   const { resolvedLanguage } = translationInstance();
 
@@ -92,18 +93,19 @@ export default function DateInput({
 
   const onDateChange = (dateChange) => {
     setValue(fieldName, dateChange, {
+      shouldValidate: true,
       shouldDirty: true,
     });
 
-    setSelectedDate(dateChange);
+    return setSelectedDate(dateChange);
   };
 
   const onCalendarDatePicked = (pickedDate) => {
-    onDateChange(pickedDate);
     const newValues = giveTimeUnitsFromDate(pickedDate);
     setDay(newValues.strDay);
     setMonth(newValues.strMonth);
     setYear(newValues.strYear);
+    return onDateChange(pickedDate);
   };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
@@ -147,6 +149,10 @@ export default function DateInput({
 
   const isResetButtonHidden =
     !isFormModifying || !(formState.dirtyFields[fieldName] || areInputsDirty());
+
+  useEffect(() => {
+    trigger(fieldName);
+  }, [day, month, year, dateValue]);
 
   return (
     <div

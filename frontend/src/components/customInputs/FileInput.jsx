@@ -78,14 +78,15 @@ function FileInput({
   const deleteFileFieldName = `${fieldName}DeleteFile`;
   const deleteFile = formState.defaultValues[deleteFileFieldName];
   const isDeleteFileNeeded = isBoolean(deleteFile) && defaultFile;
-  if (isDeleteFileNeeded) {
-    register(deleteFileFieldName);
-  }
+
   const registeredField = register(fieldName, {
     ...registerOptions,
     onChange: () => {
       if (isDeleteFileNeeded) {
-        setValue(deleteFileFieldName, false);
+        setValue(deleteFileFieldName, false, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
       }
     },
   });
@@ -117,14 +118,23 @@ function FileInput({
   const resetFile = () => {
     resetField(fieldName);
     if (isDeleteFileNeeded) {
-      setValue(deleteFileFieldName, false);
+      setValue(deleteFileFieldName, false, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     }
   };
 
   const eraseFile = () => {
-    setValue(fieldName, []);
+    setValue(fieldName, [], {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
     if (isDeleteFileNeeded) {
-      setValue(deleteFileFieldName, true);
+      setValue(deleteFileFieldName, true, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     }
   };
 

@@ -37,16 +37,14 @@ function DualSearchbarSetByResultSelectGroup({
     setValue,
     getValues,
     resetField,
-    trigger,
+    // trigger,
     watch,
     formState,
   } = useFormContext();
 
+  const { dirtyFields } = formState;
+
   const [isSelectNeeded, setIsSelectNeeded] = useState(false);
-  const [isResetButtonHidden, setIsResetButtonHidden] = useState(
-    !isFormModifying ||
-      !watchedInputsNames.find((name) => formState.dirtyFields[name])
-  );
 
   const textField1RegisterOptions = giveFieldRegisterOptions(
     textField1,
@@ -67,7 +65,14 @@ function DualSearchbarSetByResultSelectGroup({
     }
     if (!isStringNotEmpty(value) && !getValues(otherTextInputName)) {
       setIsSelectNeeded(false);
-      setValue(selectField.name, {});
+      setValue(
+        selectField.name,
+        {},
+        {
+          shouldValidate: true,
+          shouldDirty: true,
+        }
+      );
     }
   };
 
@@ -92,10 +97,19 @@ function DualSearchbarSetByResultSelectGroup({
         textField2.valueKeysToSetWhenSelect,
         value.value
       );
-      setValue(textField1.name, valueForTextField1);
-      setValue(textField2.name, valueForTextField2);
-      setValue(selectedValueField.name, value.value);
-      trigger(selectedValueField.name);
+      setValue(textField1.name, valueForTextField1, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setValue(textField2.name, valueForTextField2, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      setValue(selectedValueField.name, value.value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+      // trigger(selectedValueField.name);
     }
     return setIsSelectNeeded(false);
   };
@@ -123,7 +137,10 @@ function DualSearchbarSetByResultSelectGroup({
     watchedInputNames: [textField1.name, textField2.name],
   };
 
-  const selectFieldValue = getValues(selectField.name);
+  const hiddenFieldValue = watch(selectedValueField.name);
+
+  const isResetButtonHidden =
+    !isFormModifying || !watchedInputsNames.find((name) => dirtyFields[name]);
 
   const isEraseButtonHidden = !watch(watchedInputsNames).find((value) => value);
 
@@ -131,29 +148,20 @@ function DualSearchbarSetByResultSelectGroup({
     return index < 2 ? "" : null;
   };
 
-  const areWatchedInputsDefaultValuesEmpty = () => {
-    return watchedInputsNames.find((name, index) => {
-      const searchedValue = giveEmptyValue(index);
-      return formState.defaultValues[name] !== searchedValue;
-    });
-  };
-
   const eraseFields = () => {
     watchedInputsNames.forEach((name, index) => {
       const emptyValue = giveEmptyValue(index);
-      return setValue(name, emptyValue);
+      setValue(name, emptyValue, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
     });
-    if (isFormModifying && areWatchedInputsDefaultValuesEmpty()) {
-      return setIsResetButtonHidden(false);
-    }
-    return setIsSelectNeeded(false);
   };
 
   const resetFields = () => {
     watchedInputsNames.forEach((name) => {
       resetField(name);
     });
-    setIsResetButtonHidden(true);
     return setIsSelectNeeded(false);
   };
 
@@ -183,7 +191,7 @@ function DualSearchbarSetByResultSelectGroup({
         aria-invalid={errors[textField2.name] ? "true" : "false"}
         maxLength={registerOptions[textField2.name]?.maxLength?.value}
       />{" "}
-      {!isSelectNeeded && (
+      {!isSelectNeeded && hiddenFieldValue ? (
         <AdditionalSelectLabelInfo
           label={
             querySpecs.additionalLabelInfo
@@ -194,9 +202,9 @@ function DualSearchbarSetByResultSelectGroup({
                 }
               : null
           }
-          value={selectFieldValue?.value || null}
+          value={hiddenFieldValue?.value || null}
         />
-      )}
+      ) : null}
       <FieldEraseButton onClick={eraseFields} isHidden={isEraseButtonHidden} />
       <FieldResetButton onClick={resetFields} isHidden={isResetButtonHidden} />
       <FetchedDataSelect

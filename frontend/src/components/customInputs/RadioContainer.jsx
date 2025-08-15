@@ -38,7 +38,7 @@ function RadioContainer({
   const isEraseButtonHidden = !watch(fieldName);
 
   const isResetButtonHidden =
-    !isFormModifying || formState.defaultValues[fieldName] === watch(fieldName);
+    !isFormModifying || !formState.dirtyFields[fieldName];
 
   return (
     <div
@@ -65,7 +65,9 @@ function RadioContainer({
         </div>
       ))}
       <FieldEraseButton
-        onClick={() => setValue(fieldName, "")}
+        onClick={() =>
+          setValue(fieldName, "", { shouldValidate: true, shouldDirty: true })
+        }
         isHidden={isEraseButtonHidden}
       />
       <FieldResetButton
