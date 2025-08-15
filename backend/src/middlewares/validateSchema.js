@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+const { validationResult, matchedData } = require("express-validator");
 const CustomErrorClass = require("../services/ErrorClasses");
 
 const validateSchema = (schema) => [
@@ -8,6 +8,7 @@ const validateSchema = (schema) => [
     if (!errors.isEmpty()) {
       return next(new CustomErrorClass("00005", errors.mapped()));
     }
+    req.body = matchedData(req);
     return next();
   },
 ];
