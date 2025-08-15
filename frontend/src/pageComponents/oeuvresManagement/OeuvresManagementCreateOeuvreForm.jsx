@@ -2,17 +2,41 @@ import { useTranslation } from "react-i18next";
 
 import "../../scss/Oeuvre.scss";
 import FormCore from "../../components/FormCore";
-import { isArrayNotEmpty } from "../../services/typesAndValidationChecks";
+import {
+  isArrayNotEmpty,
+  isStringNotEmpty,
+} from "../../services/typesAndValidationChecks";
 import axiosInstance from "../../services/axiosInstance";
-import createOeuvreDefaultValues from "../../json/formDefaultValues/createOeuvreDefaultValues.json";
+import tranlationInstance from "../../services/translationInstance";
 
-// todo: create big text box collapsable on unfocus to leave comment, create conditional deactivating
-
-function OeuvresManagementCreateOeuvreForm({ mutation }) {
+function OeuvresManagementCreateOeuvreForm({
+  mutation,
+  formMethods,
+  onSubmit,
+  onSuccess,
+  isFormModifying = false,
+}) {
   const { t } = useTranslation(["common", "pageText"]);
 
+  const [tCommon, tTechniques, tSupports, tFormats, tFamilies] =
+    tranlationInstance(
+      "common",
+      "techniques",
+      "supports",
+      "paintingSizes",
+      "families"
+    );
+
+  const submitBtnText = isFormModifying
+    ? t("pageText:OeuvresManagement.OMModifyOeuvre.submitBtnText")
+    : t("pageText:OeuvresManagement.OMCreateOeuvre.submitBtnText");
+
   const fetchUsersAndContactsMatchingSearch = async (searchedArrOfStr) => {
-    if (!isArrayNotEmpty(searchedArrOfStr)) {
+    if (
+      !isArrayNotEmpty(searchedArrOfStr) ||
+      (!isStringNotEmpty(searchedArrOfStr[0]) &&
+        !isStringNotEmpty(searchedArrOfStr[1]))
+    ) {
       return [];
     }
 
@@ -31,6 +55,8 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
       label: {
         namespace: "pageText:OeuvresManagement.OMCreateOeuvre.file",
         placeHolder: t("pageText:OeuvresManagement.OMCreateOeuvre.title"),
+        newNamespace: "pageText:OeuvresManagement.OMCreateOeuvre.newFile",
+        modifyNamespace: "pageText:OeuvresManagement.OMCreateOeuvre.modifyFile",
       },
       input: "file",
       uploadOptions: { fileTypes: "image", maxSize: "" },
@@ -97,14 +123,36 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
     },
     { name: "oeuvreFamily", input: "select" },
     {
-      name: "artistComment",
+      name: "artistCommentFr",
       input: "text",
       label: {
-        namespace: `pageText:OeuvresManagement.OMCreateOeuvre.artistComment`,
+        namespace: `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentFr`,
         placeHolder: t(
-          `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentPlaceHolder`
+          `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentFrPlaceHolder`
         ),
-        count: "artistComment",
+        count: "artistCommentFr",
+      },
+    },
+    {
+      name: "artistCommentEnUS",
+      input: "text",
+      label: {
+        namespace: `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentEnUS`,
+        placeHolder: t(
+          `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentEnUSPlaceHolder`
+        ),
+        count: "artistCommentEnUS",
+      },
+    },
+    {
+      name: "artistCommentEnGB",
+      input: "text",
+      label: {
+        namespace: `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentEnGB`,
+        placeHolder: t(
+          `pageText:OeuvresManagement.OMCreateOeuvre.artistCommentEnGBPlaceHolder`
+        ),
+        count: "artistCommentEnGB",
       },
     },
     {
@@ -114,11 +162,11 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
       },
       input: "select",
       options: [
-        { value: 4 },
-        { value: 1 },
-        { value: 2 },
-        { value: 3 },
-        { value: 5 },
+        { value: 4, label: tCommon("oeuvreAvailability.available") },
+        { value: 1, label: tCommon("oeuvreAvailability.given") },
+        { value: 2, label: tCommon("oeuvreAvailability.sold") },
+        { value: 3, label: tCommon("oeuvreAvailability.reserved") },
+        { value: 5, label: tCommon("oeuvreAvailability.unavailable") },
       ],
     },
     {
@@ -189,6 +237,17 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
           },
           input: "date",
         },
+        {
+          name: "giftNote",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenNote",
+            placeHolder: t(
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreNotePlaceHolder"
+            ),
+          },
+          input: "text",
+        },
       ],
 
       conditionalRendering: {
@@ -233,7 +292,7 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
                 name: "oeuvreSoldToSelection",
                 label: {
                   namespace:
-                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToKnownSelection",
+                    "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreGivenToSelection",
                   placeHolder: t("pageText:inputPlaceHolder.choosePerson"),
                 },
               },
@@ -281,6 +340,17 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
           },
           input: "text",
           inputmode: "priceEur",
+        },
+        {
+          name: "saleNote",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreSoldNote",
+            placeHolder: t(
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreNotePlaceHolder"
+            ),
+          },
+          input: "text",
         },
       ],
       conditionalRendering: {
@@ -371,6 +441,17 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
           input: "text",
           inputmode: "priceEur",
         },
+        {
+          name: "reservationNote",
+          label: {
+            namespace:
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreReservedNote",
+            placeHolder: t(
+              "pageText:OeuvresManagement.OMCreateOeuvre.oeuvreNotePlaceHolder"
+            ),
+          },
+          input: "text",
+        },
       ],
       conditionalRendering: {
         hiddenWhenNoMatch: true,
@@ -400,6 +481,7 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
         ],
       },
     },
+
     {
       groupClassname: "noVisibilityCuzNoFile",
       includedComponents: [
@@ -430,25 +512,34 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
     oeuvreFormat: {
       key: "oeuvreFormat",
       url: "paintingSizes",
-      labelData: "name",
+      labelData: { key: "name", labelCb: (value) => tFormats(`${value}.name`) },
       valuesData: "id",
     },
     oeuvreSupport: {
       key: "oeuvreSupport",
       url: "supports",
-      labelData: "name",
+      labelData: {
+        key: "name",
+        labelCb: (value) => tSupports(`${value}.name`),
+      },
       valuesData: "id",
     },
     oeuvreTechnique: {
       key: "oeuvreTechnique",
       url: "techniques",
-      labelData: "name",
+      labelData: {
+        key: "name",
+        labelCb: (value) => tTechniques(`${value}.name`),
+      },
       valuesData: "id",
     },
     oeuvreFamily: {
       key: "oeuvreFamily",
       url: "families",
-      labelData: "name",
+      labelData: {
+        key: "name",
+        labelCb: (value) => tFamilies(`${value}.name`),
+      },
       valuesData: "id",
     },
   };
@@ -458,13 +549,14 @@ function OeuvresManagementCreateOeuvreForm({ mutation }) {
       <FormCore
         className="CreateOeuvreForm"
         mutation={mutation}
-        defaultValues={createOeuvreDefaultValues}
+        formMethods={formMethods}
         addedValues={addedValues}
         asyncValues={asyncVal}
         fields={formFields}
-        submitbuttonText={t(
-          "pageText:OeuvresManagement.OMCreateOeuvre.submitBtnText"
-        )}
+        onSubmit={onSubmit}
+        onSuccess={onSuccess}
+        isFormModifying={isFormModifying}
+        submitbuttonText={submitBtnText}
       />
     </div>
   );
