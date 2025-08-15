@@ -16,18 +16,21 @@ function OeuvresManagementCreateOeuvre() {
     "pageText:OeuvresManagement.OMCreateOeuvre"
   );
 
-  const { createOeuvreMutation, createContactFormMethods } = useOutletContext();
+  const { createOeuvreMutation, createOeuvreFormMethods } = useOutletContext();
 
   const popUpNS = "popUpContent:";
   const onFoldClose = {
-    condition: createContactFormMethods.formState.isDirty,
+    condition: createOeuvreFormMethods.formState.isDirty,
     popUpNS,
   };
 
   return (
     <div className="OeuvresManagementCreateOeuvre">
       <div>
-        <OeuvresManagementCreateOeuvreForm mutation={createOeuvreMutation} />
+        <OeuvresManagementCreateOeuvreForm
+          mutation={createOeuvreMutation}
+          formMethods={createOeuvreFormMethods}
+        />
         <FoldableComponent
           className=""
           labelText={tPageText("createNewContact")}
