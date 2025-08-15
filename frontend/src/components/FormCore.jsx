@@ -27,6 +27,7 @@ function FormCore({
   fields,
   submitbuttonText,
   onSubmit,
+  onSuccess,
   isFormModifying,
 }) {
   // const [asyncFormValues, setAsyncFormValues] = useState({});
@@ -63,9 +64,12 @@ function FormCore({
 
   useEffect(() => {
     if (methods.formState.isSubmitSuccessful && isSuccess) {
-      methods.reset(defaultValues);
+      methods.reset();
+      if (onSuccess) {
+        onSuccess();
+      }
     }
-  }, [methods.formState.isSubmitSuccessful, methods.reset]);
+  }, [methods.formState.isSubmitSuccessful, isSuccess]);
 
   return (
     <>
