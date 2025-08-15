@@ -2,7 +2,11 @@ import { useTranslation } from "react-i18next";
 
 import { isArray } from "./typesAndValidationChecks";
 import { hasKeysWithTruthyValue } from "./objectMethods/objectValidation";
-import { minOneNonSpaceCharRegExp, priceEurRegExp } from "./regularExpressions";
+import {
+  minOneNonSpaceCharRegExp,
+  emptyOrMinOneNonSpaceCharRegExp,
+  priceEurRegExp,
+} from "./regularExpressions";
 
 // todo: validate fields if availability is not available
 function FormRegisterOptions(watch) {
@@ -389,11 +393,44 @@ function FormRegisterOptions(watch) {
         hasKeysWithTruthyValue(value, ["userId", "contactId"]) ||
         tWithPrefix("oeuvreGivenToKnownPerson.pattern"),
     },
+    giftDate: {
+      required: tWithPrefix("giftDate.required"),
+    },
+    giftNote: {
+      pattern: {
+        value: emptyOrMinOneNonSpaceCharRegExp,
+        message: tWithPrefix("giftNote.pattern"),
+      },
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("giftNote.maxLength"),
+      },
+    },
     oeuvreSoldToKnownPerson: {
       required: tWithPrefix("oeuvreSoldToKnownPerson.required"),
       validate: (value) =>
         hasKeysWithTruthyValue(value, ["userId", "contactId"]) ||
         tWithPrefix("oeuvreSoldToKnownPerson.pattern"),
+    },
+    saleDate: {
+      required: tWithPrefix("saleDate.required"),
+    },
+    salePrice: {
+      required: tWithPrefix("salePrice.required"),
+      pattern: {
+        value: priceEurRegExp,
+        message: tWithPrefix("salePrice.pattern"),
+      },
+    },
+    saleNote: {
+      pattern: {
+        value: emptyOrMinOneNonSpaceCharRegExp,
+        message: tWithPrefix("saleNote.pattern"),
+      },
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("saleNote.maxLength"),
+      },
     },
     oeuvreReservedToKnownPerson: {
       required: tWithPrefix("oeuvreReservedToKnownPerson.required"),
@@ -410,18 +447,15 @@ function FormRegisterOptions(watch) {
         message: tWithPrefix("reservationPrice.pattern"),
       },
     },
-    saleDate: {
-      required: tWithPrefix("saleDate.required"),
-    },
-    salePrice: {
-      required: tWithPrefix("salePrice.required"),
+    reservationNote: {
       pattern: {
-        value: priceEurRegExp,
-        message: tWithPrefix("salePrice.pattern"),
+        value: emptyOrMinOneNonSpaceCharRegExp,
+        message: tWithPrefix("reservationNote.pattern"),
       },
-    },
-    giftDate: {
-      required: tWithPrefix("giftDate.required"),
+      maxLength: {
+        value: 254,
+        message: tWithPrefix("reservationNote.maxLength"),
+      },
     },
     artistCommentFr: {
       pattern: {
