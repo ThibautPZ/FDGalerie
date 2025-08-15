@@ -9,7 +9,11 @@ const {
   requiredBool,
 } = require("./schemaOptions");
 const { uppercaseFirstChar } = require("../services/stringFunctions");
-const { hasValue } = require("../services/typesAndValidationChecks");
+const {
+  hasValue,
+  isPositiveNumber,
+} = require("../services/typesAndValidationChecks");
+const { isoDateRegExp } = require("../services/regularExpressions");
 
 const paintingAvailability = {
   oeuvreGivenToKnownPerson: "1",
@@ -25,6 +29,17 @@ const objectFieldValidation = (req, objectFieldName) => {
     return false;
   }
   if (!hasValue(userId) && !hasValue(contactId)) {
+    return false;
+  }
+  return true;
+};
+
+const dateFieldValidation = (req, availability, fieldName) => {
+  const { oeuvreAvailability } = req.body;
+  if (
+    oeuvreAvailability === availability &&
+    !isoDateRegExp.test(req.body[fieldName])
+  ) {
     return false;
   }
   return true;
@@ -117,6 +132,16 @@ const oeuvreGivenToKnownPersonLastnameOptions = nullableStr(
     maxLength: 64,
   }
 );
+const giftDateOptions = {
+  custom: {
+    options: (value, { req }) => dateFieldValidation(req, 1, "giftDate"),
+    errorMessage: `${errorMsgPrefix}GiftDate_dat`,
+  },
+};
+const giftNoteOptions = nullableStr("giftNote", errorMsgPrefix, {
+  matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+  maxLength: 254,
+});
 const oeuvreSoldToFirstnameOptions = nullableStr(
   "oeuvreSoldToFirstname",
   errorMsgPrefix,
@@ -160,6 +185,32 @@ const oeuvreSoldToKnownPersonLastnameOptions = nullableStr(
     maxLength: 64,
   }
 );
+const salePriceOptions = {
+  custom: {
+    options: (value, { req }) => {
+      const { oeuvreAvailability, salePrice } = req.body;
+      if (
+        oeuvreAvailability === 2 &&
+        !isPositiveNumber(parseInt(salePrice, 10))
+      ) {
+        return false;
+      }
+      return true;
+    },
+    errorMessage: `${errorMsgPrefix}SalePrice_price`,
+  },
+  toInt: true,
+};
+const saleDateOptions = {
+  custom: {
+    options: (value, { req }) => dateFieldValidation(req, 2, "saleDate"),
+    errorMessage: `${errorMsgPrefix}SaleDate_dat`,
+  },
+};
+const saleNoteOptions = nullableStr("saleNote", errorMsgPrefix, {
+  matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+  maxLength: 254,
+});
 const oeuvreReservedToFirstnameOptions = nullableStr(
   "oeuvreReservedToFirstname",
   errorMsgPrefix,
@@ -203,6 +254,17 @@ const oeuvreReservedToKnownPersonLastnameOptions = nullableStr(
     maxLength: 64,
   }
 );
+const reservationPriceOptions = nullableInt("reservationPrice", errorMsgPrefix);
+const reservationNoteOptions = nullableStr("reservationNote", errorMsgPrefix, {
+  matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
+  maxLength: 254,
+});
+const reservationDateOptions = {
+  custom: {
+    options: (value, { req }) => dateFieldValidation(req, 3, "reservationDate"),
+    errorMessage: `${errorMsgPrefix}ReservationDate_dat`,
+  },
+};
 const artistCommentFrOptions = nullableStr("artistCommentFr", errorMsgPrefix, {
   matches: { regexName: "emptyOrMinOneNonSpaceCharRegExp" },
   maxLength: 254,
@@ -251,6 +313,8 @@ const createPaintingSchema = checkSchema({
   "oeuvreGivenToKnownPerson.firstname":
     oeuvreGivenToKnownPersonFirstnameOptions,
   "oeuvreGivenToKnownPerson.lastname": oeuvreGivenToKnownPersonLastnameOptions,
+  giftDate: giftDateOptions,
+  giftNote: giftNoteOptions,
   oeuvreSoldToFirstname: oeuvreSoldToFirstnameOptions,
   oeuvreSoldToLastname: oeuvreSoldToLastnameOptions,
   oeuvreSoldToKnownPerson: oeuvreSoldToKnownPersonOptions,
@@ -258,6 +322,9 @@ const createPaintingSchema = checkSchema({
   "oeuvreSoldToKnownPerson.contactId": oeuvreSoldToKnownPersonContactIdOptions,
   "oeuvreSoldToKnownPerson.firstname": oeuvreSoldToKnownPersonFirstnameOptions,
   "oeuvreSoldToKnownPerson.lastname": oeuvreSoldToKnownPersonLastnameOptions,
+  saleDate: saleDateOptions,
+  salePrice: salePriceOptions,
+  saleNote: saleNoteOptions,
   oeuvreReservedToFirstname: oeuvreReservedToFirstnameOptions,
   oeuvreReservedToLastname: oeuvreReservedToLastnameOptions,
   oeuvreReservedToKnownPerson: oeuvreReservedToKnownPersonOptions,
@@ -269,6 +336,9 @@ const createPaintingSchema = checkSchema({
     oeuvreReservedToKnownPersonFirstnameOptions,
   "oeuvreReservedToKnownPerson.lastname":
     oeuvreReservedToKnownPersonLastnameOptions,
+  reservationDate: reservationDateOptions,
+  reservationPrice: reservationPriceOptions,
+  reservationNote: reservationNoteOptions,
   artistCommentFr: artistCommentFrOptions,
   artistCommentEnUS: artistCommentEnUSOptions,
   artistCommentEnGB: artistCommentEnGBOptions,
