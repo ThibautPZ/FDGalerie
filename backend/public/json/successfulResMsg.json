@@ -15,6 +15,10 @@
     "modifyPaintingTitle": {
       "type": "info",
       "message": "paintingModifiedTitle"
+    },
+    "deletePainting": {
+      "type": "info",
+      "message": "paintingDeleted"
     }
   },
   "techniquesControllers": {

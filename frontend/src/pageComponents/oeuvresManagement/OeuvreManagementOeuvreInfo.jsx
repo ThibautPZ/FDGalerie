@@ -29,7 +29,8 @@ export default function OeuvresManagementOeuvreInfo() {
     "paintingSizes",
     "families"
   );
-  const { isModifying, setIsModifying } = useOutletContext();
+  const { isModifying, setIsModifying, handleModalInstall } =
+    useOutletContext();
   const { id } = useParams();
   const oeuvreId = parseInt(id.split(":")[1], 10);
 
@@ -49,6 +50,20 @@ export default function OeuvresManagementOeuvreInfo() {
 
   const handleModifyBtnClick = () => {
     setIsModifying(!isModifying);
+  };
+
+  const handleDeleteOeuvreBtnClick = () => {
+    return handleModalInstall(
+      {
+        type: "confirmation",
+        message: "deleteOeuvreConfirmation",
+        confirmationData: {
+          case: "confirmOperation",
+          operationData: { id: oeuvreId },
+        },
+      },
+      "popUpContent:OeuvresManagement."
+    );
   };
 
   return (
@@ -89,6 +104,9 @@ export default function OeuvresManagementOeuvreInfo() {
         {isModifying
           ? tPageText("OMOeuvreInfo.modifyBtnReturn")
           : tPageText("OMOeuvreInfo.modifyBtnModify")}
+      </button>
+      <button type="button" onClick={handleDeleteOeuvreBtnClick}>
+        {tPageText("OMOeuvreInfo.deleteBtn")}
       </button>
     </>
   );

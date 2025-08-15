@@ -21,6 +21,7 @@ import UseCreateFormat from "../hooks/RQmutation/UseCreateFormat";
 import UseCreateSupport from "../hooks/RQmutation/UseCreateSupport";
 import createSupportDefaultValues from "../json/formDefaultValues/createSupportDefaultValues.json";
 import OeuvresManagementOeuvresList from "../pageComponents/oeuvresManagement/OeuvresManagementOeuvresList";
+import UseDeletePainting from "../hooks/RQmutation/UseDeleteOeuvre";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
@@ -75,6 +76,7 @@ function OeuvresManagement() {
   const createFamilyMutation = UseCreateFamily(handleModalInstall);
   const createFormatMutation = UseCreateFormat(handleModalInstall);
   const createSupportMutation = UseCreateSupport(handleModalInstall);
+  const deleteOeuvreMutation = UseDeletePainting(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -92,6 +94,11 @@ function OeuvresManagement() {
     createContactMutation.mutate(formData);
   };
 
+  const deleteOeuvre = (data) => {
+    const { id } = data;
+    return deleteOeuvreMutation.mutate(id);
+  };
+
   const handleCloseModal = giveOnClose(
     {
       status: "backToPreviousPage",
@@ -104,6 +111,10 @@ function OeuvresManagement() {
     {
       status: "doCreateContact",
       cb: confirmedContactCreation,
+    },
+    {
+      status: "doDeleteOeuvre",
+      cb: deleteOeuvre,
     }
   );
 

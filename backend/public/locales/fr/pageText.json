@@ -220,7 +220,8 @@
     "OMOeuvreInfo": {
       "header": "Informations de l'oeuvre {{title}}",
       "modifyBtnModify": "Modifier les informations",
-      "modifyBtnReturn": "Annuler la modification"
+      "modifyBtnReturn": "Annuler la modification",
+      "deleteBtn": "Supprimer cette oeuvre"
     },
     "OMModifyOeuvre": {
       "submitBtnText": "Enregistrer les modifications"

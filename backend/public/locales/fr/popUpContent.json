@@ -356,6 +356,22 @@
       "validationBtnText": "",
       "hasCloseBtn": true,
       "closeBtnText": "OK"
+    },
+    "deleteOeuvreConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce tableau. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteOeuvre",
+      "validationBtnText": "Oui, supprimer ce tableau",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "paintingDeleted": {
+      "title": "Tableau supprimé",
+      "message": "Le tableau {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
     }
   },
   "ContactManagement": {

@@ -79,6 +79,11 @@
     "method": "modifyPaintingReservation",
     "undo": "modifyPaintingReservation"
   },
+  "deletePainting": {
+    "manager": "paintings",
+    "method": "deletePaintingById",
+    "undo": "createNewPainting"
+  },
   "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds": {
     "manager": "paintingsHasTechniques",
     "method": "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds",
