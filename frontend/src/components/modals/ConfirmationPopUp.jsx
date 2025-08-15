@@ -88,6 +88,36 @@ function ConfirmationPopUp({
     );
   }
 
+  if (responseDataObj.confirmationData.case === "confirmOperation") {
+    return (
+      <Modal
+        isOpen={isOpen}
+        hasCloseBtn={tWithPrefix("hasCloseBtn")}
+        validationBtnEvent={tWithPrefix("validationBtnReturnedStr")}
+        closeBtnText={tWithPrefix("closeBtnText")}
+        onClose={onClose}
+      >
+        <div>
+          <p>{tWithPrefix("title")}</p>
+          <p>{tWithPrefix("message")}</p>
+          {tWithPrefix("validationBtnText") && (
+            <button
+              type="button"
+              onClick={() =>
+                onClose(
+                  tWithPrefix("validationBtnReturnedStr"),
+                  responseDataObj.confirmationData.operationData
+                )
+              }
+            >
+              {tWithPrefix("validationBtnText")}
+            </button>
+          )}
+        </div>
+      </Modal>
+    );
+  }
+
   // return (
   //   <Modal
   //     isOpen={isOpen}
