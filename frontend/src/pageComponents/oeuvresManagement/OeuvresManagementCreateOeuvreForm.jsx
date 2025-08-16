@@ -2,12 +2,10 @@ import { useTranslation } from "react-i18next";
 
 import "../../scss/Oeuvre.scss";
 import FormCore from "../../components/FormCore";
-import {
-  isArrayNotEmpty,
-  isStringNotEmpty,
-} from "../../services/typesAndValidationChecks";
+import { isArrayNotEmpty } from "../../services/typesAndValidationChecks";
 import axiosInstance from "../../services/axiosInstance";
 import tranlationInstance from "../../services/translationInstance";
+import { minOneNonSpaceCharRegExp } from "../../services/regularExpressions";
 
 function OeuvresManagementCreateOeuvreForm({
   mutation,
@@ -32,19 +30,22 @@ function OeuvresManagementCreateOeuvreForm({
     : t("pageText:OeuvresManagement.OMCreateOeuvre.submitBtnText");
 
   const fetchUsersAndContactsMatchingSearch = async (searchedArrOfStr) => {
-    if (
-      !isArrayNotEmpty(searchedArrOfStr) ||
-      (!isStringNotEmpty(searchedArrOfStr[0]) &&
-        !isStringNotEmpty(searchedArrOfStr[1]))
-    ) {
+    if (!isArrayNotEmpty(searchedArrOfStr)) {
+      return [];
+    }
+    const [firstName, lastName] = searchedArrOfStr;
+    const searchedFirstname = minOneNonSpaceCharRegExp.test(firstName)
+      ? firstName
+      : "!null";
+    const searchedLastname = minOneNonSpaceCharRegExp.test(lastName)
+      ? lastName
+      : "!null";
+
+    if (searchedFirstname === "!null" && searchedLastname === "!null") {
       return [];
     }
 
-    const searchedStr = `${searchedArrOfStr[0] || "!null"}&${
-      searchedArrOfStr[1] || "!null"
-    }`;
-
-    const url = `api/users/searchUsersAndContactsByName/${searchedStr}`;
+    const url = `api/users/searchUsersAndContactsByName/${searchedFirstname}&${searchedLastname}`;
     const res = await axiosInstance.get(url);
     return res.data;
   };
