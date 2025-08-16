@@ -1,7 +1,6 @@
 const express = require("express");
 
 const router = express.Router();
-const { param } = require("express-validator");
 const validateSchema = require("../middlewares/validateSchema");
 const usersControllers = require("../controllers/usersControllers");
 const errorHandler = require("../middlewares/errorHandler");
@@ -10,7 +9,6 @@ const warnUserSchema = require("../Validators/warnUser.validator");
 const unwarnUserSchema = require("../Validators/unwarnUser.validator");
 const banUserSchema = require("../Validators/banUser.validator");
 const modifyUserInfoSchema = require("../Validators/modifyUserInfo.validator");
-
 const checkEmailDoesntExist = require("../middlewares/dbCheckers/checkEmailDoesntExist");
 const deleteBanMsgIfExists = require("../middlewares/dbWriters/deleteBanMsgIfExists");
 const updateAccountState = require("../middlewares/dbWriters/updateAccountState");
@@ -18,10 +16,11 @@ const createWarnMessage = require("../middlewares/dbWriters/createWarnMessage");
 const createBanMessage = require("../middlewares/dbWriters/createBanMessage");
 const deleteAccountData = require("../middlewares/dbWriters/deleteAccountData");
 const addNewUserInfos = require("../middlewares/reqAdders/addNewUserInfos");
+const searchUsersAndContactsByNameSchema = require("../Validators/searchUsersAndContactsByName.validator");
 
 router.get(
   "/searchUsersAndContactsByName/:firstname&:lastname",
-  validateSchema(param()),
+  validateSchema(searchUsersAndContactsByNameSchema),
   usersControllers.readByNameWithContacts,
   errorHandler
 );
