@@ -8,40 +8,38 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import tranlationInstance from "../../services/translationInstance";
-import PaintingThumbMd from "../../components/image/PaintingThumbMd";
-import {
-  isArrayNotEmpty,
-  isStringNotEmpty,
-} from "../../services/typesAndValidationChecks";
+
+import { isArrayNotEmpty } from "../../services/typesAndValidationChecks";
 import TableCore from "../../components/reactTable/TableCore";
+import {
+  defaultCellCb,
+  giveTextFieldsCellCb,
+  giveTranslationCellCb,
+  giveTranslationFromNameCellCb,
+  giveYesNoCellCb,
+  thumbMdCellCb,
+} from "../../helpers/reactTable/cellCb";
 
 const fallbackData = [];
 const columnHelper = createColumnHelper();
 
-const thumbMdCellCb = ({ row }) => {
-  const { original } = row;
-  const { fileName } = original;
-  return PaintingThumbMd({
-    fileName,
-    className: "PaintingThumbMd",
-  });
-};
-
-const artistCommentCellCb = (info) => {
-  const value = info.getValue();
-  let comment = isStringNotEmpty(value) ? value : "-";
-  if (comment.length > 24) {
-    comment = `${comment.substring(0, 24)}...`;
+const artistCommentCellCb = giveTextFieldsCellCb(
+  {
+    colName: "artistCommentFr",
+    title: "Fr",
+    textLimit: 24,
+  },
+  {
+    colName: "artistCommentEnUS",
+    title: "EnUS",
+    textLimit: 24,
+  },
+  {
+    colName: "artistCommentEnGB",
+    title: "EnGB",
+    textLimit: 24,
   }
-  return comment;
-};
-
-const giveTranslatedCellCb = (t) => {
-  return (info) => {
-    const value = info.getValue();
-    return value ? t(`${value}.name`) : "-";
-  };
-};
+);
 
 function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
   const navigate = useNavigate();
@@ -89,23 +87,15 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
    ${width} x ${height} ${tCommonInfo("cm")}`;
   };
 
-  const availabilityCellCb = (info) => {
-    const availability = info.getValue();
-    return tAvailability(availability);
-  };
-
-  const visibilityCellCb = (info) => {
-    const visibility = info.getValue();
-    return visibility ? tCommon("yes") : tCommon("no");
-  };
-
-  const supportCellCb = giveTranslatedCellCb(tSupports);
-  const familyCellCb = giveTranslatedCellCb(tFamilies);
+  const availabilityCellCb = giveTranslationCellCb(tAvailability);
+  const visibilityCellCb = giveYesNoCellCb(tCommon);
+  const supportCellCb = giveTranslationFromNameCellCb(tSupports);
+  const familyCellCb = giveTranslationFromNameCellCb(tFamilies);
 
   const giveAccessor = (colName, tKey, options, cellCb) => {
     const headerText = tCommonInfo(...tKey);
     const addedEntries = { enableSorting: false };
-    const defaultCellCb = (info) => info.getValue() || "-";
+    // const defaultCellCb = (info) => info.getValue() || "-";
 
     const assignToAddedEntries = (assigned) => {
       return Object.assign(addedEntries, assigned);
@@ -149,7 +139,7 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
     giveAccessor("format", ["oeuvreFormat"], { sorting: true }, formatCellCb),
     giveAccessor("family", ["oeuvreFamily"], { sorting: true }, familyCellCb),
     giveAccessor(
-      "artistComment",
+      "artistCommentFr",
       ["artistComment"],
       { sorting: true },
       artistCommentCellCb
@@ -171,6 +161,7 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
   const onRowSelectionChange = (stateCb) => {
     return setRowSelection(stateCb);
   };
+
   const table = useReactTable({
     columns: defaultColumns,
     data: oeuvresList ?? fallbackData,
