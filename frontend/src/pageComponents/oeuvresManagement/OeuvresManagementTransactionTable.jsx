@@ -16,6 +16,7 @@ import TableCore from "../../components/reactTable/TableCore";
 import {
   defaultCellCb,
   giveDateCellCb,
+  giveLimitedTextCellCb,
   thumbMdCellCb,
 } from "../../helpers/reactTable/cellCb";
 
@@ -48,7 +49,7 @@ export default function OeuvresManagementTransactionTable({
           : `${tCommonInfo("contactId")} ${contactId}`;
         return `${firstName} ${lastName} (${ownerStatus})`;
       },
-
+      noteCellCb: giveLimitedTextCellCb(24),
       dateCellCb: giveDateCellCb(tCommon),
       thumbMdCellCb,
     };

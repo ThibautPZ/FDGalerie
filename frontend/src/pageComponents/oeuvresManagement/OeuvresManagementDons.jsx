@@ -47,6 +47,12 @@ export default function OeuvresManagementDons() {
       cellCb: "dateCellCb",
     },
     {
+      colName: "note",
+      tKey: ["note"],
+      options: { sorting: true },
+      cellCb: "noteCellCb",
+    },
+    {
       colName: "giftNumber",
       tKey: ["giftNumber"],
       options: { sorting: true },

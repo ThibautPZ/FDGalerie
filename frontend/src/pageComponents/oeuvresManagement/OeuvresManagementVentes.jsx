@@ -52,6 +52,12 @@ export default function OeuvresManagementVentes() {
       options: { sorting: true },
     },
     {
+      colName: "note",
+      tKey: ["note"],
+      options: { sorting: true },
+      cellCb: "noteCellCb",
+    },
+    {
       colName: "saleNumber",
       tKey: ["saleNumber"],
       options: { sorting: true },
