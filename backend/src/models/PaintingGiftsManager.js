@@ -19,7 +19,7 @@ class PaintingGiftsManager extends AbstractManager {
     );
   }
 
-  findGiftByPaintingId(id) {
+  async findGiftByPaintingId(id) {
     return this.database.query(
       `SELECT pg.id AS transactionNumber, pg.date AS date, pg.note AS note, pg.users_id AS userId, pg.contacts_id AS contactId,
       COALESCE(u.firstname, c.firstname) AS firstName,
@@ -31,6 +31,20 @@ class PaintingGiftsManager extends AbstractManager {
       ON pg.contacts_id = c.contacts_id
       WHERE pg.paintings_id = ?;`,
       [id]
+    );
+  }
+
+  async findAllGiftsWithDetails() {
+    return this.database.query(
+      `SELECT pg.id AS giftNumber, pg.date AS date, pg.note AS note, pg.users_id AS userId, pg.contacts_id AS contactId,
+    ps.file_name AS fileName, ps.file_extension AS fileExtension, p.title AS paintingTitle, 
+    COALESCE(u.firstname, c.firstname) AS firstName,
+    COALESCE(u.lastname,  c.lastname)  AS lastName
+    FROM ${this.table} AS pg
+    LEFT JOIN users AS u ON pg.users_id = u.users_id
+    LEFT JOIN contacts AS c ON pg.contacts_id = c.contacts_id
+    LEFT JOIN paintings_storages AS ps ON pg.paintings_id = ps.paintings_id
+    LEFT JOIN paintings AS p ON pg.paintings_id = p.id;`
     );
   }
 
