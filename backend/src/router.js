@@ -11,6 +11,7 @@ const paintingSizesRoutes = require("./routes/paintingSizes.routes");
 const contactsRoutes = require("./routes/contacts.routes");
 const familiesRoutes = require("./routes/families.routes");
 const paintingGiftsRoutes = require("./routes/paintingGifts.routes");
+const paintingSalesRoutes = require("./routes/paintingSales.routes");
 
 router.use("/paintings", paintingsRoutes);
 router.use("/auth", authRoutes);
@@ -21,5 +22,6 @@ router.use("/paintingSizes", paintingSizesRoutes);
 router.use("/contacts", contactsRoutes);
 router.use("/families", familiesRoutes);
 router.use("/paintingGifts", paintingGiftsRoutes);
+router.use("/paintingSales", paintingSalesRoutes);
 
 module.exports = router;

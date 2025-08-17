@@ -34,6 +34,20 @@ class PaintingSalesManager extends AbstractManager {
     );
   }
 
+  async findAllSalesWithDetails() {
+    return this.database.query(
+      `SELECT psl.id AS saleNumber, psl.price AS price, psl.date AS date, psl.note AS note, psl.users_id AS userId, psl.contacts_id AS contactId,
+    ps.file_name AS fileName, ps.file_extension AS fileExtension, p.id as paintingId, p.title AS paintingTitle, 
+    COALESCE(u.firstname, c.firstname) AS firstName,
+    COALESCE(u.lastname,  c.lastname)  AS lastName
+    FROM ${this.table} AS psl
+    LEFT JOIN users AS u ON psl.users_id = u.users_id
+    LEFT JOIN contacts AS c ON psl.contacts_id = c.contacts_id
+    LEFT JOIN paintings_storages AS ps ON psl.paintings_id = ps.paintings_id
+    LEFT JOIN paintings AS p ON psl.paintings_id = p.id;`
+    );
+  }
+
   async createPaintingSale(price, paintingId, date, note, userId, contactId) {
     return this.database.query(
       `INSERT INTO ${this.table} (price, date, note, paintings_id, users_id, contacts_id)
