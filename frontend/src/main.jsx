@@ -36,6 +36,8 @@ import CreateContact from "./pageComponents/contactManagement/CreateContact";
 import GlobalErrorBoundary from "./services/errorElements/GlobalErrorBoundary";
 import OeuvresManagementCreateOeuvre from "./pageComponents/oeuvresManagement/OeuvresManagementCreateOeuvre";
 import OeuvresManagementOeuvreInfo from "./pageComponents/oeuvresManagement/OeuvreManagementOeuvreInfo";
+import OeuvresManagementDons from "./pageComponents/oeuvresManagement/OeuvresManagementDons";
+import OeuvresManagementVentes from "./pageComponents/oeuvresManagement/OeuvresManagementVentes";
 
 const router = createBrowserRouter([
   {
@@ -146,6 +148,34 @@ const router = createBrowserRouter([
                   <OeuvresManagementCreateOeuvre />
                   // </Suspense>
                 ),
+              },
+              {
+                path: "dons",
+                element: <OeuvresManagementDons />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "ventes",
+                element: <OeuvresManagementVentes />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
               },
             ],
           },
