@@ -134,24 +134,46 @@ function OeuvresManagement() {
     return navigate("./");
   };
 
+  /* eslint-disable prefer-destructuring */
+  const givePath = (basePath) => {
+    const id = pathname.split("/id:")[1];
+    return basePath + (id ? `id:${id}` : "");
+  };
+
   return (
     <div className="OeuvresManagement">
       {pathname !== "/management/oeuvres/new" ? (
-        <div>
+        <div className="OeuvresManagementHeader">
           <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <OeuvresManagementOeuvresList
-              oeuvresList={oeuvresQuery.data}
-              setIsModifying={setIsModifying}
-            />
-          </Suspense>
+          <Link to={givePath("/management/oeuvres/")}>
+            {t("pageText:OeuvresManagement.OM.allOeuvres")}
+          </Link>
+          <Link to={givePath("/management/oeuvres/dons/")}>
+            {t("pageText:OeuvresManagement.OM.dons")}
+          </Link>
+          <Link to={givePath("/management/oeuvres/ventes/")}>
+            {t("pageText:OeuvresManagement.OM.ventes")}
+          </Link>
+          <Link to={givePath("/management/oeuvres/reservations/")}>
+            {t("pageText:OeuvresManagement.OM.reservations")}
+          </Link>
         </div>
       ) : (
         <button type="button" onClick={() => handleReturnClick()}>
           {t("pageText:OeuvresManagement.OM.return")}
         </button>
       )}
-
+      {pathname === "/management/oeuvres/" ||
+      pathname.startsWith("/management/oeuvres/id:") ? (
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <OeuvresManagementOeuvresList
+            oeuvresList={oeuvresQuery.data}
+            setIsModifying={setIsModifying}
+          />
+        </Suspense>
+      ) : (
+        ""
+      )}
       {popUpState.modalOpen ? (
         <PopUp
           isOpen={popUpState.modalOpen}
