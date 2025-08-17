@@ -38,6 +38,7 @@ import OeuvresManagementCreateOeuvre from "./pageComponents/oeuvresManagement/Oe
 import OeuvresManagementOeuvreInfo from "./pageComponents/oeuvresManagement/OeuvreManagementOeuvreInfo";
 import OeuvresManagementDons from "./pageComponents/oeuvresManagement/OeuvresManagementDons";
 import OeuvresManagementVentes from "./pageComponents/oeuvresManagement/OeuvresManagementVentes";
+import OeuvresManagementReservations from "./pageComponents/oeuvresManagement/OeuvresManagementReservations";
 
 const router = createBrowserRouter([
   {
@@ -166,6 +167,20 @@ const router = createBrowserRouter([
               {
                 path: "ventes",
                 element: <OeuvresManagementVentes />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "reservations",
+                element: <OeuvresManagementReservations />,
                 children: [
                   {
                     path: ":id",
