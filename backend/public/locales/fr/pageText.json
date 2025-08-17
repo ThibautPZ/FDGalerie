@@ -142,7 +142,11 @@
   "OeuvresManagement": {
     "OM": {
       "newOeuvre": "Ajouter une nouvelle peinture",
-      "return": "Retour à la liste"
+      "return": "Retour à la liste",
+      "allOeuvres": "Toutes les oeuvres",
+      "dons": "Dons",
+      "ventes": "Ventes",
+      "reservations": "Réservations"
     },
     "OMOeuvrePanel": {
       "picture": "Aperçu",
@@ -225,6 +229,15 @@
     },
     "OMModifyOeuvre": {
       "submitBtnText": "Enregistrer les modifications"
+    },
+    "OMDons": {
+      "noDons": "Aucun don enregistré"
+    },
+    "OMVentes": {
+      "noVentes": "Aucun vente enregistrée"
+    },
+    "OMReservations": {
+      "noReservations": "Aucune réservation enregistrée"
     }
   },
   "ContactManagement": {
