@@ -21,22 +21,37 @@ import {
 
 const fallbackData = [];
 const columnHelper = createColumnHelper();
-export default function OeuvresManagementDonsTable({ donsList }) {
+
+export default function OeuvresManagementTransactionTable({
+  tableData,
+  tableColumns,
+  emptyDataText,
+  className,
+}) {
   const navigate = useNavigate();
   const { setIsModifying } = useOutletContext();
   const [sorting, setSorting] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
 
-  const [tCommon, tCommonInfo, tPageText] = tranlationInstance(
-    "common",
-    "common:info",
-    "pageText:OeuvresManagement.OMDons"
-  );
+  const [tCommon, tCommonInfo] = tranlationInstance("common", "common:info");
 
   const giveAccessor = (colName, tKey, options, cellCb) => {
     const colId = isString(colName) ? colName : colName.join("_");
     const headerText = tCommonInfo(...tKey);
     const addedEntries = { enableSorting: false };
+
+    const cellCbObj = {
+      ownerCellCb: ({ row }) => {
+        const { firstName, lastName, userId, contactId } = row.original;
+        const ownerStatus = userId
+          ? `${tCommonInfo("userId")} ${userId}`
+          : `${tCommonInfo("contactId")} ${contactId}`;
+        return `${firstName} ${lastName} (${ownerStatus})`;
+      },
+
+      dateCellCb: giveDateCellCb(tCommon),
+      thumbMdCellCb,
+    };
 
     const assignToAddedEntries = (assigned) => {
       return Object.assign(addedEntries, assigned);
@@ -70,7 +85,7 @@ export default function OeuvresManagementDonsTable({ donsList }) {
 
     const col = columnHelper.accessor(giveRowData, {
       id: colId,
-      cell: cellCb || defaultCellCb,
+      cell: cellCb ? cellCbObj[cellCb] : defaultCellCb,
       header: headerText,
       ...addedEntries,
       // sortingFn:
@@ -79,36 +94,17 @@ export default function OeuvresManagementDonsTable({ donsList }) {
     return col;
   };
 
-  const ownerCellCb = ({ row }) => {
-    const { firstName, lastName, userId, contactId } = row.original;
-    const ownerStatus = userId
-      ? `${tCommonInfo("userId")} ${userId}`
-      : `${tCommonInfo("contactId")} ${contactId}`;
-    return `${firstName} ${lastName} (${ownerStatus})`;
-  };
-
-  const dateCellCb = giveDateCellCb(tCommon);
-
-  const defaultColumns = [
-    giveAccessor("image", ["preview"], null, thumbMdCellCb),
-    giveAccessor("paintingTitle", ["oeuvreTitle"], { sorting: true }),
-    giveAccessor(
-      ["firstName", "lastName"],
-      ["ownerName"],
-      { sorting: true },
-      ownerCellCb
-    ),
-    giveAccessor("date", ["date"], { sorting: true }, dateCellCb),
-    giveAccessor("giftNumber", ["giftNumber"], { sorting: true }),
-    giveAccessor("paintingId", ["paintingId"], { sorting: true }),
-  ];
+  const defaultColumns = tableColumns.map(
+    ({ colName, tKey, options, cellCb }) =>
+      giveAccessor(colName, tKey, options, cellCb)
+  );
 
   const onRowSelectionChange = (stateCb) => {
     return setRowSelection(stateCb);
   };
   const table = useReactTable({
     columns: defaultColumns,
-    data: donsList ?? fallbackData,
+    data: tableData ?? fallbackData,
     state: { sorting, rowSelection },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -126,11 +122,13 @@ export default function OeuvresManagementDonsTable({ donsList }) {
       setIsModifying(false);
     }
   }, [Object.keys(rowSelection)[0]]);
-  if (!isArrayNotEmpty(donsList)) {
-    return <div>{tPageText("noDons")}</div>;
+
+  if (!isArrayNotEmpty(tableData)) {
+    return <div>{emptyDataText}</div>;
   }
+
   return (
-    <div className="OeuvresManagementDonsList">
+    <div className={className}>
       <TableCore tableObj={table} />
     </div>
   );
