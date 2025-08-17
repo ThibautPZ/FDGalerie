@@ -12,6 +12,7 @@ const contactsRoutes = require("./routes/contacts.routes");
 const familiesRoutes = require("./routes/families.routes");
 const paintingGiftsRoutes = require("./routes/paintingGifts.routes");
 const paintingSalesRoutes = require("./routes/paintingSales.routes");
+const paintingReservationsRoutes = require("./routes/paintingReservations.routes");
 
 router.use("/paintings", paintingsRoutes);
 router.use("/auth", authRoutes);
@@ -23,5 +24,6 @@ router.use("/contacts", contactsRoutes);
 router.use("/families", familiesRoutes);
 router.use("/paintingGifts", paintingGiftsRoutes);
 router.use("/paintingSales", paintingSalesRoutes);
+router.use("/paintingReservations", paintingReservationsRoutes);
 
 module.exports = router;

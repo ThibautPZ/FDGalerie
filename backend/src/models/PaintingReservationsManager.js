@@ -34,6 +34,20 @@ class PaintingReservationsManager extends AbstractManager {
     );
   }
 
+  async findAllReservationsWithDetails() {
+    return this.database.query(
+      `SELECT pr.id AS reservationNumber, pr.price AS price, pr.date AS date, pr.note AS note, pr.users_id AS userId, pr.contacts_id AS contactId,
+    ps.file_name AS fileName, ps.file_extension AS fileExtension, p.id as paintingId, p.title AS paintingTitle, 
+    COALESCE(u.firstname, c.firstname) AS firstName,
+    COALESCE(u.lastname,  c.lastname)  AS lastName
+    FROM ${this.table} AS pr
+    LEFT JOIN users AS u ON pr.users_id = u.users_id
+    LEFT JOIN contacts AS c ON pr.contacts_id = c.contacts_id
+    LEFT JOIN paintings_storages AS ps ON pr.paintings_id = ps.paintings_id
+    LEFT JOIN paintings AS p ON pr.paintings_id = p.id;`
+    );
+  }
+
   async createPaintingReservation(
     price,
     paintingId,
