@@ -37,7 +37,7 @@ class PaintingGiftsManager extends AbstractManager {
   async findAllGiftsWithDetails() {
     return this.database.query(
       `SELECT pg.id AS giftNumber, pg.date AS date, pg.note AS note, pg.users_id AS userId, pg.contacts_id AS contactId,
-    ps.file_name AS fileName, ps.file_extension AS fileExtension, p.title AS paintingTitle, 
+    ps.file_name AS fileName, ps.file_extension AS fileExtension, p.id as paintingId, p.title AS paintingTitle, 
     COALESCE(u.firstname, c.firstname) AS firstName,
     COALESCE(u.lastname,  c.lastname)  AS lastName
     FROM ${this.table} AS pg
