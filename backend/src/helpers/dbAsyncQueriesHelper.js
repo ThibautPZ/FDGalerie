@@ -121,7 +121,7 @@ const giveSuccesfulAndFailedQueryNames = (
 const giveParallelQueriesPromise = async (queriesSpecs, retryOptions) => {
   const queryPromises = {};
 
-  queriesSpecs.forEach(({ name, manager, method, queryArgs }) => {
+  queriesSpecs.forEach(({ name, manager, method, queryArgs = [] }) => {
     const asyncFunc = async () => {
       try {
         const [result] = await tables[manager][method](...queryArgs);
@@ -161,7 +161,7 @@ const giveParallelQueriesPromise = async (queriesSpecs, retryOptions) => {
  * `asyncFunc`.
  */
 const giveQueryPromise = (querySpecs, retryOptions) => {
-  const { manager, method, queryArgs } = querySpecs;
+  const { manager, method, queryArgs = [] } = querySpecs;
 
   const asyncFunc = async () => {
     try {
