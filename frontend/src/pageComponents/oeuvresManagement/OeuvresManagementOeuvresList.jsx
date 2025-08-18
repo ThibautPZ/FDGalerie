@@ -4,6 +4,7 @@ import {
   createColumnHelper,
   getCoreRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +20,12 @@ import {
   giveYesNoCellCb,
   thumbMdCellCb,
 } from "../../helpers/reactTable/cellCb";
+import {
+  filterArrByArr,
+  filterValueByArr,
+  filterByImagePresence,
+} from "../../helpers/reactTable/filterFunctions";
+import OeuvresListFilters from "./OeuvresListFilters";
 
 const fallbackData = [];
 const columnHelper = createColumnHelper();
@@ -41,7 +48,14 @@ const artistCommentCellCb = giveTextFieldsCellCb(
   }
 );
 
-function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
+function OeuvresManagementOeuvresList({
+  oeuvresList,
+  techniques,
+  families,
+  formats,
+  supports,
+  setIsModifying,
+}) {
   const navigate = useNavigate();
   const [
     tCommon,
@@ -51,6 +65,7 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
     tFormats,
     tFamilies,
     tAvailability,
+    tPageText,
   ] = tranlationInstance(
     "common",
     "common:info",
@@ -58,11 +73,13 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
     "supports",
     "paintingSizes",
     "families",
-    "common:oeuvreAvailability"
+    "common:oeuvreAvailability",
+    "pageText:OeuvresManagement.OMOeuvresList"
   );
 
   const [sorting, setSorting] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [columnFilters, setColumnFilters] = useState([]);
 
   const techniqueCellCb = (info) => {
     const techniquesArr = info.getValue();
@@ -95,7 +112,6 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
   const giveAccessor = (colName, tKey, options, cellCb) => {
     const headerText = tCommonInfo(...tKey);
     const addedEntries = { enableSorting: false };
-    // const defaultCellCb = (info) => info.getValue() || "-";
 
     const assignToAddedEntries = (assigned) => {
       return Object.assign(addedEntries, assigned);
@@ -115,29 +131,56 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
         assignToAddedEntries({ sortUndefined: sorting.undefined });
       }
     }
+    if (options?.filtering) {
+      assignToAddedEntries({ enableFiltering: true });
+
+      if (options.filtering.filterFn) {
+        assignToAddedEntries({ filterFn: options.filtering.filterFn });
+      }
+    }
 
     const col = columnHelper.accessor((row) => row[colName], {
       id: colName,
       cell: cellCb || defaultCellCb,
       header: headerText,
       ...addedEntries,
-      // sortingFn:
+
       // footer: (props) => props.column.id,
     });
     return col;
   };
   const defaultColumns = [
-    giveAccessor("image", ["preview"], null, thumbMdCellCb),
+    giveAccessor(
+      "image",
+      ["preview"],
+      { filtering: { filterFn: "filterByImagePresence" } },
+      thumbMdCellCb
+    ),
     giveAccessor("title", ["oeuvreTitle"], { sorting: true }),
-    giveAccessor("techniques", ["oeuvreTechnique"], null, techniqueCellCb),
+    giveAccessor(
+      "techniques",
+      ["oeuvreTechnique"],
+      { filtering: { filterFn: "filterArrByArr" } },
+      techniqueCellCb
+    ),
     giveAccessor(
       "support",
       ["oeuvreSupport"],
-      { sorting: true },
+      { sorting: true, filtering: { filterFn: "filterValueByArr" } },
       supportCellCb
     ),
-    giveAccessor("format", ["oeuvreFormat"], { sorting: true }, formatCellCb),
-    giveAccessor("family", ["oeuvreFamily"], { sorting: true }, familyCellCb),
+    giveAccessor(
+      "format",
+      ["oeuvreFormat"],
+      { sorting: true, filtering: { filterFn: "filterValueByArr" } },
+      formatCellCb
+    ),
+    giveAccessor(
+      "family",
+      ["oeuvreFamily"],
+      { sorting: true, filtering: { filterFn: "filterValueByArr" } },
+      familyCellCb
+    ),
     giveAccessor(
       "artistCommentFr",
       ["artistComment"],
@@ -147,13 +190,13 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
     giveAccessor(
       "availabilityName",
       ["availability"],
-      { sorting: true },
+      { sorting: true, filtering: { filterFn: "filterValueByArr" } },
       availabilityCellCb
     ),
     giveAccessor(
       "publiclyVisible",
       ["publiclyVisible"],
-      { sorting: true },
+      { sorting: true, filtering: { filterFn: "equals" } },
       visibilityCellCb
     ),
   ];
@@ -165,7 +208,10 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
   const table = useReactTable({
     columns: defaultColumns,
     data: oeuvresList ?? fallbackData,
-    state: { sorting, rowSelection },
+    state: { sorting, rowSelection, columnFilters },
+    filterFns: { filterArrByArr, filterValueByArr, filterByImagePresence },
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
@@ -183,7 +229,19 @@ function OeuvresManagementOeuvresList({ oeuvresList, setIsModifying }) {
 
   return (
     <div className="OeuvresManagementOeuvresList">
-      <TableCore tableObj={table} />
+      <h1>{tPageText("title")}</h1>
+      <OeuvresListFilters
+        tableData={table}
+        techniques={techniques}
+        families={families}
+        formats={formats}
+        supports={supports}
+      />
+      {!isArrayNotEmpty(oeuvresList) ? (
+        <p>{tPageText("noOeuvres")}</p>
+      ) : (
+        <TableCore tableObj={table} />
+      )}
     </div>
   );
 }

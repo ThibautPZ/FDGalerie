@@ -69,6 +69,54 @@ function OeuvresManagement() {
     throwOnError: true,
   });
 
+  const getAllTechniquesFromDb = async () => {
+    const url = "api/techniques";
+    const res = await axiosInstance.get(url);
+    return res.data;
+  };
+
+  const techniquesQuery = useSuspenseQuery({
+    queryKey: ["oeuvreTechnique"],
+    queryFn: getAllTechniquesFromDb,
+    throwOnError: true,
+  });
+
+  const getAllFamiliesFromDb = async () => {
+    const url = "api/families";
+    const res = await axiosInstance.get(url);
+    return res.data;
+  };
+
+  const familiesQuery = useSuspenseQuery({
+    queryKey: ["oeuvreFamily"],
+    queryFn: getAllFamiliesFromDb,
+    throwOnError: true,
+  });
+
+  const getAllSupportsFromDb = async () => {
+    const url = "api/supports";
+    const res = await axiosInstance.get(url);
+    return res.data;
+  };
+
+  const supportsQuery = useSuspenseQuery({
+    queryKey: ["oeuvreSupport"],
+    queryFn: getAllSupportsFromDb,
+    throwOnError: true,
+  });
+
+  const getAllPaintingSizesFromDb = async () => {
+    const url = "api/paintingSizes";
+    const res = await axiosInstance.get(url);
+    return res.data;
+  };
+
+  const formatsQuery = useSuspenseQuery({
+    queryKey: ["oeuvreFormat"],
+    queryFn: getAllPaintingSizesFromDb,
+    throwOnError: true,
+  });
+
   const { popUpState, giveOnClose, handleModalInstall } = UseModal();
   const createContactMutation = UseCreateContact(handleModalInstall);
   const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
@@ -144,7 +192,9 @@ function OeuvresManagement() {
     <div className="OeuvresManagement">
       {pathname !== "/management/oeuvres/new" ? (
         <div className="OeuvresManagementHeader">
-          <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
+          <div>
+            <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
+          </div>
           <Link to={givePath("/management/oeuvres/")}>
             {t("pageText:OeuvresManagement.OM.allOeuvres")}
           </Link>
@@ -168,6 +218,10 @@ function OeuvresManagement() {
         <Suspense fallback={<h1>Loading...</h1>}>
           <OeuvresManagementOeuvresList
             oeuvresList={oeuvresQuery.data}
+            techniques={techniquesQuery.data}
+            families={familiesQuery.data}
+            formats={formatsQuery.data}
+            supports={supportsQuery.data}
             setIsModifying={setIsModifying}
           />
         </Suspense>

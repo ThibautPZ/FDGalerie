@@ -230,14 +230,42 @@
     "OMModifyOeuvre": {
       "submitBtnText": "Enregistrer les modifications"
     },
+    "OMOeuvresList": {
+      "noOeuvres": "Aucune oeuvre enregistrée",
+      "title": "Toutes les oeuvres",
+      "titleFilterPlaceholder": "Titre...",
+      "techniqueFilterPlaceholder": "Toutes les techniques",
+      "familyFilterPlaceholder": "Toutes les familles",
+      "supportFilterPlaceholder": "Tous les supports",
+      "formatFilterPlaceholder": "Toutes les dimensions",
+      "availabilityFilterPlaceholder": "Toutes les disponibilités",
+      "filterBy": "Filtrer par :",
+      "filterByTitle": "Titre : ",
+      "filterByTechnique": "Technique : ",
+      "filterByFamily": "Famille : ",
+      "filterBySupport": "Support : ",
+      "filterByFormat": "Format : ",
+      "filterByAvailability": "Disponibilité : ",
+      "filterByPaintingImagePresence": "Présence d'image : ",
+      "allImagePresence": "Tout",
+      "hasPaintingImage": "Image présente",
+      "noPaintingImage": "Pas d'image",
+      "filterByPubliclyVisible": "Visibilité : ",
+      "allVisibilities": "Tout",
+      "visible": "Visible par les visiteurs",
+      "hidden": "Privée"
+    },
     "OMDons": {
-      "noDons": "Aucun don enregistré"
+      "noDons": "Aucun don enregistré",
+      "title": "Tous les dons"
     },
     "OMVentes": {
-      "noVentes": "Aucun vente enregistrée"
+      "noVentes": "Aucun vente enregistrée",
+      "title": "Toutes les ventes"
     },
     "OMReservations": {
-      "noReservations": "Aucune réservation enregistrée"
+      "noReservations": "Aucune réservation enregistrée",
+      "title": "Toutes les réservations"
     }
   },
   "ContactManagement": {
