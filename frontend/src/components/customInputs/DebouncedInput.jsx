@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 export default function DebouncedInput({
+  type,
+  id,
   value,
   placeholder,
   onChange,
@@ -25,7 +27,8 @@ export default function DebouncedInput({
 
   return (
     <input
-      type="text"
+      type={type}
+      id={id}
       className={className}
       value={debouncedValue}
       placeholder={placeholder}
