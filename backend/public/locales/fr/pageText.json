@@ -253,7 +253,30 @@
       "filterByPubliclyVisible": "Visibilité : ",
       "allVisibilities": "Tout",
       "visible": "Visible par les visiteurs",
-      "hidden": "Privée"
+      "hidden": "Privée",
+      "resetFilters": "Réinitialiser les filtres"
+    },
+    "OMTransactions": {
+      "filterBy": "Filtrer par :",
+      "filterByTitle": "Titre : ",
+      "titleFilterPlaceholder": "Titre...",
+      "filterByOwner": "Propriétaire : ",
+      "ownerFilterPlaceholder": "Nom...",
+      "filterByDate": "Date : ",
+      "minDateFilter": "Date de début",
+      "minDateFilterPlaceholder": "Date de début...",
+      "maxDateFilter": "Date de fin",
+      "maxDateFilterPlaceholder": "Date de fin...",
+      "filterByPrice": "Prix : ",
+      "minPriceFilter": "Minimum",
+      "minPriceFilterPlaceholder": "Minimum...",
+      "maxPriceFilter": "Maximum",
+      "maxPriceFilterPlaceholder": "Maximum...",
+      "filterByPaintingImagePresence": "Présence d'image : ",
+      "allImagePresence": "Tout",
+      "hasPaintingImage": "Image présente",
+      "noPaintingImage": "Pas d'image",
+      "resetFilters": "Réinitialiser les filtres"
     },
     "OMDons": {
       "noDons": "Aucun don enregistré",

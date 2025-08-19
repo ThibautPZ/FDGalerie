@@ -4,6 +4,7 @@ import {
   createColumnHelper,
   getCoreRowModel,
   getSortedRowModel,
+  getFilteredRowModel,
 } from "@tanstack/react-table";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
@@ -19,6 +20,12 @@ import {
   giveLimitedTextCellCb,
   thumbMdCellCb,
 } from "../../helpers/reactTable/cellCb";
+import {
+  filterByDateRange,
+  filterByImagePresence,
+  filterByNumberRange,
+} from "../../helpers/reactTable/filterFunctions";
+import OeuvresManagementTransactionTableFilters from "./OeuvresManagementTransactionTableFilters";
 
 const fallbackData = [];
 const columnHelper = createColumnHelper();
@@ -28,13 +35,19 @@ export default function OeuvresManagementTransactionTable({
   tableColumns,
   emptyDataText,
   className,
+  transaction,
 }) {
   const navigate = useNavigate();
   const { setIsModifying } = useOutletContext();
   const [sorting, setSorting] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [columnFilters, setColumnFilters] = useState([]);
 
-  const [tCommon, tCommonInfo] = tranlationInstance("common", "common:info");
+  const [tCommon, tCommonInfo, tPageText] = tranlationInstance(
+    "common",
+    "common:info",
+    "pageText:OeuvresManagement.OMTransactions"
+  );
 
   const giveAccessor = (colName, tKey, options, cellCb) => {
     const colId = isString(colName) ? colName : colName.join("_");
@@ -84,6 +97,13 @@ export default function OeuvresManagementTransactionTable({
       }
     }
 
+    if (options?.filtering) {
+      assignToAddedEntries({ enableFiltering: true });
+      if (options.filtering.filterFn) {
+        assignToAddedEntries({ filterFn: options.filtering.filterFn });
+      }
+    }
+
     const col = columnHelper.accessor(giveRowData, {
       id: colId,
       cell: cellCb ? cellCbObj[cellCb] : defaultCellCb,
@@ -106,7 +126,14 @@ export default function OeuvresManagementTransactionTable({
   const table = useReactTable({
     columns: defaultColumns,
     data: tableData ?? fallbackData,
-    state: { sorting, rowSelection },
+    state: { sorting, rowSelection, columnFilters },
+    filterFns: {
+      filterByImagePresence,
+      filterByNumberRange,
+      filterByDateRange,
+    },
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
@@ -130,6 +157,11 @@ export default function OeuvresManagementTransactionTable({
 
   return (
     <div className={className}>
+      <OeuvresManagementTransactionTableFilters
+        tableData={table}
+        transaction={transaction}
+        t={tPageText}
+      />
       <TableCore tableObj={table} />
     </div>
   );

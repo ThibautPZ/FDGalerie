@@ -28,7 +28,7 @@ export default function OeuvresManagementReservations() {
     {
       colName: "image",
       tKey: ["preview"],
-      options: null,
+      options: { filtering: { filterFn: "filterByImagePresence" } },
       cellCb: "thumbMdCellCb",
     },
     {
@@ -45,13 +45,16 @@ export default function OeuvresManagementReservations() {
     {
       colName: "date",
       tKey: ["date"],
-      options: { sorting: true },
+      options: { sorting: true, filtering: { filterFn: "filterByDateRange" } },
       cellCb: "dateCellCb",
     },
     {
       colName: "price",
       tKey: ["reservationPriceEur"],
-      options: { sorting: true },
+      options: {
+        sorting: true,
+        filtering: { filterFn: "filterByNumberRange" },
+      },
     },
     {
       colName: "note",
@@ -73,12 +76,14 @@ export default function OeuvresManagementReservations() {
 
   return (
     <div>
+      <h1>{tPageText("title")}</h1>
       <Suspense fallback={<h1>Loading...</h1>}>
         <OeuvresManagementTransactionTable
           tableData={reservationsListQuery.data}
           tableColumns={ReservationsColumns}
           emptyDataText={tPageText("noReservations")}
           className="OeuvresManagementReservationsTable"
+          transaction="reservations"
         />
       </Suspense>
       <Outlet context={outletContext} />

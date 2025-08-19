@@ -26,7 +26,7 @@ export default function OeuvresManagementDons() {
     {
       colName: "image",
       tKey: ["preview"],
-      options: null,
+      options: { filtering: { filterFn: "filterByImagePresence" } },
       cellCb: "thumbMdCellCb",
     },
     {
@@ -43,7 +43,7 @@ export default function OeuvresManagementDons() {
     {
       colName: "date",
       tKey: ["date"],
-      options: { sorting: true },
+      options: { sorting: true, filtering: { filterFn: "filterByDateRange" } },
       cellCb: "dateCellCb",
     },
     {
@@ -66,12 +66,15 @@ export default function OeuvresManagementDons() {
 
   return (
     <div>
+      <h1>{tPageText("title")}</h1>
+
       <Suspense fallback={<h1>Loading...</h1>}>
         <OeuvresManagementTransactionTable
           tableData={giftsListQuery.data}
           tableColumns={donsColumns}
           emptyDataText={tPageText("noDons")}
           className="OeuvresManagementDonsTable"
+          transaction="gifts"
         />
       </Suspense>
       <Outlet context={outletContext} />

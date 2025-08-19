@@ -26,7 +26,7 @@ export default function OeuvresManagementVentes() {
     {
       colName: "image",
       tKey: ["preview"],
-      options: null,
+      options: { filtering: { filterFn: "filterByImagePresence" } },
       cellCb: "thumbMdCellCb",
     },
     {
@@ -43,13 +43,16 @@ export default function OeuvresManagementVentes() {
     {
       colName: "date",
       tKey: ["date"],
-      options: { sorting: true },
+      options: { sorting: true, filtering: { filterFn: "filterByDateRange" } },
       cellCb: "dateCellCb",
     },
     {
       colName: "price",
       tKey: ["salePriceEur"],
-      options: { sorting: true },
+      options: {
+        sorting: true,
+        filtering: { filterFn: "filterByNumberRange" },
+      },
     },
     {
       colName: "note",
@@ -71,12 +74,15 @@ export default function OeuvresManagementVentes() {
 
   return (
     <div>
+      {" "}
+      <h1>{tPageText("title")}</h1>
       <Suspense fallback={<h1>Loading...</h1>}>
         <OeuvresManagementTransactionTable
           tableData={salesListQuery.data}
           tableColumns={ventesColumns}
           emptyDataText={tPageText("noVentes")}
           className="OeuvresManagementVentesTable"
+          transaction="sales"
         />
       </Suspense>
       <Outlet context={outletContext} />
