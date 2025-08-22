@@ -321,7 +321,10 @@
       "techniqueDescriptionEnUS": "Description en anglais (US)",
       "techniqueDescriptionEnGB": "Description en anglais (GB)",
       "nbPaintings": "Nombre de peintures l'utilisant",
-      "id": "Technique n°"
+      "id": "Technique n°",
+      "newTechnique": "Ajouter une nouvelle technique",
+      "return": "Retour à la liste",
+      "createTechnique": "Création d'une technique"
     },
     "OMDetailedAttribute": {
       "name": "Nom : ",
