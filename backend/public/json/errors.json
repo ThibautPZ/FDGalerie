@@ -184,6 +184,11 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06011": {
+    "name": "cannotUpdateTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,
@@ -198,6 +203,16 @@
   },
   "07003": {
     "name": "cannotGetContact",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07004": {
+    "name": "cannotGetTechniquesWithPaintingCount",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07005": {
+    "name": "cannotGetTechniqueById",
     "statusCode": 400,
     "type": "error"
   }

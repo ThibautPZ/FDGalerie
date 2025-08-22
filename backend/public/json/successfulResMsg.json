@@ -25,6 +25,14 @@
     "createTechnique": {
       "type": "info",
       "message": "techniqueCreated"
+    },
+    "modifyTechnique": {
+      "type": "info",
+      "message": "techniqueModified"
+    },
+    "modifyTechniqueName": {
+      "type": "info",
+      "message": "techniqueModifiedName"
     }
   },
   "familiesControllers": {

@@ -164,6 +164,7 @@
         "message": "{{insertText1}} a été ajoutée à la liste des techniques.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       },
       "techniqueAlreadyExists": {
@@ -171,6 +172,7 @@
         "message": "Une technique avec ce nom existe déjà.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       },
       "cannotWriteNewTechnique": {
@@ -178,6 +180,7 @@
         "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       }
     },
@@ -187,6 +190,7 @@
         "message": "{{insertText1}} a été ajoutée à la liste des familles.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       }
     },
@@ -196,6 +200,7 @@
         "message": "{{insertText1}} a été ajouté à la liste des formats.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       }
     },
@@ -205,6 +210,7 @@
         "message": "{{insertText1}} a été ajouté à la liste des supports.",
         "validationBtnReturnedStr": "",
         "validationBtnText": "",
+        "hasCloseBtn": true,
         "closeBtnText": "OK"
       }
     }
@@ -221,6 +227,7 @@
       "message": "Vous avez commencé à enregistrer un nouvel utilisateur, si vous continuez les informations que vous avez inscrites ne seront pas gardées.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
       "closeBtnText": "Rester sur cette page"
     },
     "backWhileWritingBanMessage": {
@@ -228,6 +235,7 @@
       "message": "Vous avez commencé à écrire un message de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
       "closeBtnText": "Rester sur cette page"
     },
     "backWhileWritingUnbanMessage": {
@@ -235,6 +243,7 @@
       "message": "Vous avez commencé à écrire un message d'annulation de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
       "closeBtnText": "Rester sur cette page"
     },
     "backWhileWritingDeleteMessage": {
@@ -242,6 +251,7 @@
       "message": "Vous avez commencé à écrire un message concernant la suppression de ce compte, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
       "closeBtnText": "Rester sur cette page"
     },
     "banWithMessage": {
@@ -249,6 +259,7 @@
       "message": "Le compte a été suspendu. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à chaque tentative de connexion.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "OK",
+      "hasCloseBtn": false,
       "closeBtnText": ""
     },
     "warnWithMessage": {
@@ -256,6 +267,7 @@
       "message": "Le message a été envoyé. L'utilisateur concerné va en recevoir une copie par mail, et pourra lire le message envoyé à la prochaine tentative de connexion.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "OK",
+      "hasCloseBtn": false,
       "closeBtnText": ""
     },
     "unbanWithMessage": {
@@ -263,6 +275,7 @@
       "message": "Le compte est de nouveau utilisable. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à la prochaine connexion.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "OK",
+      "hasCloseBtn": false,
       "closeBtnText": ""
     },
 
@@ -271,6 +284,7 @@
       "message": "Le nouveau compte a été créé.",
       "validationBtnReturnedStr": "backToUserList",
       "validationBtnText": "Retour à la liste",
+      "hasCloseBtn": false,
       "closeBtnText": ""
     },
     "unbanUser": {
@@ -278,6 +292,7 @@
       "message": "Vous êtes sur le point de lever la suspension du compte choisi, permettant ainsi à l'utlilisateur de reprendre son activité sur le compte. Voulez-vous continuer ?",
       "validationBtnReturnedStr": "unbanUser",
       "validationBtnText": "Oui",
+      "hasCloseBtn": true,
       "closeBtnText": "Non"
     },
     "unwarnUser": {
@@ -285,6 +300,7 @@
       "message": "Vous êtes sur le point de supprimer le message d'avertissement précédemment envoyé à cet utilisateur. Ce message n'a pas encore été confirmé comme lu par l'utilisateur concerné. Voulez-vous continuer ?",
       "validationBtnReturnedStr": "unwarnUser",
       "validationBtnText": "Oui",
+      "hasCloseBtn": true,
       "closeBtnText": "Non"
     },
     "unwarned": {
@@ -292,6 +308,7 @@
       "message": "La notification a été effacée.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "userHasNotif": {
@@ -299,6 +316,7 @@
       "message": "Cet utilisateur fait déjà l'objet d'une notification dont il n'a pas confirmé la lecture. Une nouvelle notification remplacera celle déjà envoyée. Voulez-vous continuer ?",
       "validationBtnReturnedStr": "warnUser",
       "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
       "closeBtnText": "Annuler"
     }
   },
@@ -372,6 +390,22 @@
       "validationBtnText": "OK",
       "hasCloseBtn": false,
       "closeBtnText": ""
+    },
+    "techniqueModified": {
+      "title": "Technique modifiée",
+      "message": "La technique {{insertText1}} a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "techniqueModifiedName": {
+      "title": "Technique modifiée",
+      "message": "La technique {{insertText1}} (anciennement {{insertText2}}) a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
     }
   },
   "ContactManagement": {
