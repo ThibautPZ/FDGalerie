@@ -4,16 +4,30 @@ const router = express.Router();
 
 const techniquesControllers = require("../controllers/techniquesControllers");
 const createTechniqueSchema = require("../Validators/createTechnique.validator");
+const modifyTechniqueSchema = require("../Validators/modifyTechnique.validator");
 const addTechniqueKey = require("../middlewares/reqAdders/addTechniqueKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 const validateSchema = require("../middlewares/validateSchema");
+const sendGetRes = require("../middlewares/resSenders/sendGetRes");
+const addModifyTechniqueQueries = require("../middlewares/reqAdders/addModifyTechniqueQueries");
 
-router.get("/", techniquesControllers.browse);
+router.get("/", techniquesControllers.browse, sendGetRes("techniques"));
+
+router.get(
+  "/techniquesWithDetails",
+  techniquesControllers.browseWithDetails,
+  sendGetRes("detailedTechniques")
+);
+
+router.get(
+  "/adminOneDetailed/:id",
+  techniquesControllers.adminFindOneDetailed,
+  sendGetRes("detailedTechnique")
+);
 
 router.post(
   "/createTechnique",
   validateSchema(createTechniqueSchema),
-
   addTechniqueKey,
   checkPresenceInDb({
     manager: "techniques",
@@ -23,6 +37,20 @@ router.post(
     rejectWhenTrue: true,
   }),
   techniquesControllers.createOneTechnique
+);
+
+router.put(
+  "/modifyTechnique/:id",
+  validateSchema(modifyTechniqueSchema),
+  checkPresenceInDb({
+    manager: "techniques",
+    method: "findById",
+    reqParamsKeyParams: { id: "id" },
+    errorNumber: "05008",
+  }),
+  techniquesControllers.adminFindOneDetailed,
+  addModifyTechniqueQueries,
+  techniquesControllers.modifyOneTechnique
 );
 
 module.exports = router;
