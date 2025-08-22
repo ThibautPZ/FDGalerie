@@ -10,7 +10,7 @@ const {
 } = require("../helpers/dbAsyncQueriesHelper");
 const successfulResMsg = require("../../public/json/successfulResMsg.json");
 const CustomErrorClass = require("../services/ErrorClasses");
-const updateJsonFile = require("../services/updateJsonFile");
+const updateJsonFile = require("../services/fileSystem/updateJsonFile");
 
 const browse = asyncHandler(async (req, res, next) => {
   const [rows] = await tables.paintingSizes.readAll();
