@@ -6,10 +6,10 @@ import OeuvresManagementCreateOeuvreForm from "./OeuvresManagementCreateOeuvreFo
 import FoldableComponent from "../../components/FoldableComponent";
 import CreateContactForm from "../../components/CreateContactForm";
 import translationInstance from "../../services/translationInstance";
-import CreateTechniqueForm from "../shared/CreateTechniqueForm";
 import CreateFamilyForm from "../shared/CreateFamilyForm";
 import CreateFormatForm from "../shared/CreateFormatForm";
 import CreateSupportForm from "../shared/CreateSupportForm";
+import TechniqueForm from "../shared/TechniqueForm";
 
 function OeuvresManagementCreateOeuvre() {
   const tPageText = translationInstance(
@@ -49,7 +49,7 @@ function OeuvresManagementCreateOeuvre() {
           onOpen={null}
           onClose={onFoldClose}
         >
-          <CreateTechniqueForm />
+          <TechniqueForm />
         </FoldableComponent>
         <FoldableComponent
           className=""
