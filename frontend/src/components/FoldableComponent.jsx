@@ -2,16 +2,25 @@ import { useState } from "react";
 
 import ArrowSelector from "./customComponents/ArrowSelector";
 
+import { isBoolean, isFunction } from "../services/typesAndValidationChecks";
+
 export default function FoldableComponent({
   className,
   labelText,
   isOpen,
+  foldedState,
+  foldedSetState,
   whenLabel,
   onOpen,
   onClose,
   children,
 }) {
-  const [isFolded, setIsFolded] = useState(!isOpen);
+  const isFoldedStateSupplied =
+    isBoolean(foldedState) && isFunction(foldedSetState);
+
+  const [isFolded, setIsFolded] = isFoldedStateSupplied
+    ? [foldedState, foldedSetState]
+    : useState(!isOpen);
   return (
     <div className={className || ""}>
       <ArrowSelector
