@@ -22,7 +22,7 @@ const UseDeleteOeuvre = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries(["oeuvre"]);
+      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
       return handleModalInstall(data.successObj, translationPrefix);
     },
   });

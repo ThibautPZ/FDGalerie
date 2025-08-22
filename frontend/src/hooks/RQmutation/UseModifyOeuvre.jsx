@@ -47,7 +47,7 @@ const UseModifyOeuvre = (oeuvreId, handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries(["oeuvre"]);
+      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
