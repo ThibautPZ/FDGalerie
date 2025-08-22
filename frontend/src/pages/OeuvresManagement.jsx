@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import i18n from "../i18n";
 import "../scss/OeuvresManagement.scss";
 
 import axiosInstance from "../services/axiosInstance";
@@ -76,7 +77,7 @@ function OeuvresManagement() {
   };
 
   const techniquesQuery = useSuspenseQuery({
-    queryKey: ["oeuvreTechnique"],
+    queryKey: ["techniques", { type: "basic" }],
     queryFn: getAllTechniquesFromDb,
     throwOnError: true,
   });
@@ -120,7 +121,7 @@ function OeuvresManagement() {
   const { popUpState, giveOnClose, handleModalInstall } = UseModal();
   const createContactMutation = UseCreateContact(handleModalInstall);
   const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
-  const createTechniqueMutation = UseCreateTechnique(handleModalInstall);
+  const createTechniqueMutation = UseCreateTechnique(handleModalInstall, i18n);
   const createFamilyMutation = UseCreateFamily(handleModalInstall);
   const createFormatMutation = UseCreateFormat(handleModalInstall);
   const createSupportMutation = UseCreateSupport(handleModalInstall);
@@ -207,6 +208,9 @@ function OeuvresManagement() {
           <Link to={givePath("/management/oeuvres/reservations/")}>
             {t("pageText:OeuvresManagement.OM.reservations")}
           </Link>
+          <Link to="/management/oeuvres/techniques/">
+            {t("pageText:OeuvresManagement.OM.techniques")}
+          </Link>
         </div>
       ) : (
         <button type="button" onClick={() => handleReturnClick()}>
@@ -216,6 +220,7 @@ function OeuvresManagement() {
       {pathname === "/management/oeuvres/" ||
       pathname.startsWith("/management/oeuvres/id:") ? (
         <Suspense fallback={<h1>Loading...</h1>}>
+          <h1>{t("pageText:OeuvresManagement.OMOeuvresList.title")}</h1>
           <OeuvresManagementOeuvresList
             oeuvresList={oeuvresQuery.data}
             techniques={techniquesQuery.data}
@@ -238,6 +243,10 @@ function OeuvresManagement() {
       <Outlet
         context={{
           oeuvresQuery,
+          techniquesQuery,
+          familiesQuery,
+          formatsQuery,
+          supportsQuery,
           createContactMutation,
           createContactFormMethods,
           createOeuvreMutation,

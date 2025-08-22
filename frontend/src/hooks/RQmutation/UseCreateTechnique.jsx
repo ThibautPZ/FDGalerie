@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../../services/axiosInstance";
 import giveSanitizedFormData from "../../services/giveSanitizedFormData";
 
-const UseCreateTechnique = (handleModalInstall) => {
+const UseCreateTechnique = (handleModalInstall, i18n) => {
   const queryclient = useQueryClient();
 
   const postTechnique = async (newTechniqueFormData) => {
@@ -30,7 +30,8 @@ const UseCreateTechnique = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries(["oeuvre"]);
+      i18n.reloadResources(["fr", "enUS", "enGB"], "techniques");
+      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
