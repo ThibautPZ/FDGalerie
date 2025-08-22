@@ -31,7 +31,7 @@ const UseCreateTechnique = (handleModalInstall, i18n) => {
     onSuccess: (data) => {
       console.warn(data);
       i18n.reloadResources(["fr", "enUS", "enGB"], "techniques");
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["techniques"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
