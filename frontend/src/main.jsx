@@ -39,6 +39,8 @@ import OeuvresManagementOeuvreInfo from "./pageComponents/oeuvresManagement/Oeuv
 import OeuvresManagementDons from "./pageComponents/oeuvresManagement/OeuvresManagementDons";
 import OeuvresManagementVentes from "./pageComponents/oeuvresManagement/OeuvresManagementVentes";
 import OeuvresManagementReservations from "./pageComponents/oeuvresManagement/OeuvresManagementReservations";
+import OeuvresManagementDetailedTechnique from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedTechnique";
+import OeuvresManagementTechniques from "./pageComponents/oeuvresManagement/OeuvresManagementTechniques";
 
 const router = createBrowserRouter([
   {
@@ -187,6 +189,20 @@ const router = createBrowserRouter([
                     element: (
                       <Suspense fallback={<p>"loading"</p>}>
                         <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "techniques",
+                element: <OeuvresManagementTechniques />,
+                children: [
+                  {
+                    path: ":technique",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementDetailedTechnique />
                       </Suspense>
                     ),
                   },
