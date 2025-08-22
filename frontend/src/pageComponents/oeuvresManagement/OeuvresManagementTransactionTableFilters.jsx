@@ -16,7 +16,7 @@ export default function OeuvresManagementTransactionTableFilters({
   };
 
   return (
-    <div className="OeuvresManagementOeuvresListFilters">
+    <div className="OeuvresManagementTransactionTableFilters">
       <p>{t("filterBy")}</p>
       <span>{t("filterByTitle")}</span>
       <DebouncedInput
