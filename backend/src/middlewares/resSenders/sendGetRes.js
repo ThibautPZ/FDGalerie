@@ -9,7 +9,7 @@ const sendGetRes = (...fieldsToSend) => {
     if (fieldsToSend.length === 1) {
       const fieldToSend = fieldsToSend[0];
       const sent = req.body[fieldToSend];
-      return res.send(sent);
+      return res.status(200).json(sent);
     }
 
     const sent = {};
@@ -19,7 +19,7 @@ const sendGetRes = (...fieldsToSend) => {
         sent[field] = sentField;
       }
     });
-    return res.send(sent);
+    return res.status(200).json(sent);
   });
 };
 
