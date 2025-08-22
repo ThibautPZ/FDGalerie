@@ -222,14 +222,15 @@ function OeuvresManagementOeuvresList({
 
   useEffect(() => {
     if (Object.keys(rowSelection)[0]) {
-      navigate(`id:${table.getRow(Object.keys(rowSelection)[0]).original.id}`);
+      navigate(
+        `/management/oeuvres/id:${table.getRow(Object.keys(rowSelection)[0]).original.id}`
+      );
       setIsModifying(false);
     }
   }, [Object.keys(rowSelection)[0]]);
 
   return (
     <div className="OeuvresManagementOeuvresList">
-      <h1>{tPageText("title")}</h1>
       <OeuvresListFilters
         tableData={table}
         techniques={techniques}
