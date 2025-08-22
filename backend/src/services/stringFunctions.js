@@ -9,6 +9,15 @@ const uppercaseFirstChar = (str) => {
   return `${uppercasedChar}${remainingChars}`;
 };
 
+const lowercaseFirstChar = (str) => {
+  if (!isStringNotEmpty(str)) {
+    return null;
+  }
+  const lowercasedChar = str[0].toLowerCase();
+  const remainingChars = str.slice(1);
+  return `${lowercasedChar}${remainingChars}`;
+};
+
 const toScreamingSnakeCase = (str) => {
   if (!isStringNotEmpty(str)) {
     return "";
@@ -27,4 +36,8 @@ const toScreamingSnakeCase = (str) => {
     .replace(/^_+|_+$/g, "")
     .toUpperCase();
 };
-module.exports = { uppercaseFirstChar, toScreamingSnakeCase };
+module.exports = {
+  uppercaseFirstChar,
+  lowercaseFirstChar,
+  toScreamingSnakeCase,
+};
