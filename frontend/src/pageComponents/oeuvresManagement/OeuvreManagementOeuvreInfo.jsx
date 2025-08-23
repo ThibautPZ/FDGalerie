@@ -105,9 +105,11 @@ export default function OeuvresManagementOeuvreInfo() {
           ? tPageText("OMOeuvreInfo.modifyBtnReturn")
           : tPageText("OMOeuvreInfo.modifyBtnModify")}
       </button>
-      <button type="button" onClick={handleDeleteOeuvreBtnClick}>
-        {tPageText("OMOeuvreInfo.deleteBtn")}
-      </button>
+      {!isModifying && (
+        <button type="button" onClick={handleDeleteOeuvreBtnClick}>
+          {tPageText("OMOeuvreInfo.deleteBtn")}
+        </button>
+      )}
     </>
   );
 }

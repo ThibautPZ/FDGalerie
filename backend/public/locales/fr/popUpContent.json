@@ -14,6 +14,7 @@
       "message": "Une erreur est survenue lors de la communication avec le serveur. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "00001": {
@@ -21,6 +22,7 @@
       "message": "L'opération demandée est indisponible. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "00004": {
@@ -28,6 +30,7 @@
       "message": "Une erreur inattendue s'est produite durant l'opération demandée. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "00200": {
@@ -35,6 +38,7 @@
       "message": "Les identifiants que vous avez saisis ne correspondent pas à nos enregistrements.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "05001": {
@@ -42,6 +46,7 @@
       "message": "Le nom du contact doit être renseigné.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "05004": {
@@ -49,6 +54,15 @@
       "message": "Une image de tableau doit être fournie pour rendre ce tableau public.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05014": {
+      "title": "Tableaux utilisant cette technique",
+      "message": "Cette technique est utilisée par au moins un tableau. Vous pouvez supprimer les tableaux utilisant cette technique ou utiliser la fonction \"Supprimer la mention de cette technique dans les tableaux associés\" pour pouvoir supprimer cette technique.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06001": {
@@ -56,6 +70,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06002": {
@@ -63,6 +78,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06003": {
@@ -70,6 +86,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde du nouveau tableau. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06006": {
@@ -77,6 +94,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06007": {
@@ -84,6 +102,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle famille. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06008": {
@@ -91,6 +110,7 @@
       "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle format. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06009": {
@@ -98,6 +118,15 @@
       "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle support. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06012": {
+      "title": "Impossible de supprimer la technique",
+      "message": "Une erreur est survenue lors de la suppression de la technique. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "07003": {
@@ -105,6 +134,7 @@
       "message": "Le contact demandé n'a pas été trouvé.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
+      "hasCloseBtn": true,
       "closeBtnText": "OK"
     }
   },
@@ -402,6 +432,22 @@
     "techniqueModifiedName": {
       "title": "Technique modifiée",
       "message": "La technique {{insertText1}} (anciennement {{insertText2}}) a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteTechniqueConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer la technique n°{{insertText1}}. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteTechnique",
+      "validationBtnText": "Oui, supprimer cette technique",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "techniqueDeleted": {
+      "title": "Technique supprimée",
+      "message": "La technique {{insertText1}} a été supprimée.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,

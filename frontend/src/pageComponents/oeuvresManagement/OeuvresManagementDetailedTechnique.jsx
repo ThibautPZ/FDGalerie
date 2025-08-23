@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import axiosInstance from "../../services/axiosInstance";
@@ -8,6 +8,7 @@ import tranlationInstance from "../../services/translationInstance";
 import OeuvresManagementModifyTechnique from "./OeuvresManagementModifyTechnique";
 
 export default function OeuvresManagementDetailedTechnique() {
+  const { handleModalInstall } = useOutletContext();
   const { technique } = useParams();
   const techniqueId = parseInt(technique.split(":")[1], 10);
 
@@ -30,6 +31,23 @@ export default function OeuvresManagementDetailedTechnique() {
     throwOnError: true,
   });
 
+  const handleDeleteTechniqueBtnClick = () => {
+    return handleModalInstall(
+      {
+        type: "confirmation",
+        message: "deleteTechniqueConfirmation",
+        infoData: {
+          insertText1: techniqueId,
+        },
+        confirmationData: {
+          case: "confirmOperation",
+          operationData: { id: techniqueId },
+        },
+      },
+      "popUpContent:OeuvresManagement."
+    );
+  };
+
   return (
     <div className="OeuvresManagementDetailedTechnique">
       {isModifying ? (
@@ -38,9 +56,6 @@ export default function OeuvresManagementDetailedTechnique() {
             techniqueData={data}
             setIsModifying={setIsModifying}
           />
-          <button type="button" onClick={() => setIsModifying(false)}>
-            {tPageText("return")}
-          </button>
         </Suspense>
       ) : (
         <Suspense fallback={<h1>Loading...</h1>}>
@@ -50,9 +65,14 @@ export default function OeuvresManagementDetailedTechnique() {
             tAttributePageText={tPageText}
             tAttribute={tTechniques}
             setIsModifying={setIsModifying}
+            handleDeleteBtnClick={handleDeleteTechniqueBtnClick}
           />
         </Suspense>
       )}
+
+      <button type="button" onClick={() => setIsModifying(!isModifying)}>
+        {isModifying ? tPageText("return") : tPageText("modifyBtn")}
+      </button>
     </div>
   );
 }

@@ -343,7 +343,9 @@
       "relatedOeuvres": "Oeuvres utilisant cette technique",
       "nbRelatedOeuvres": "Nombre de tableaux utilisant cette technique",
       "noRelatedOeuvres": "Aucun tableau utilisant cette technique",
-      "return": "Annuler la modification"
+      "return": "Annuler la modification",
+      "deleteBtn": "Supprimer la technique",
+      "cannotDelete": "Cette technique est utilisée par au moins un tableau. Veuillez supprimer les tableaux utilisant cette technique avant de la supprimer."
     }
   },
   "ContactManagement": {

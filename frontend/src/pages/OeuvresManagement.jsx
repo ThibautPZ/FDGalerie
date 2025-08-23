@@ -23,6 +23,7 @@ import UseCreateSupport from "../hooks/RQmutation/UseCreateSupport";
 import createSupportDefaultValues from "../json/formDefaultValues/createSupportDefaultValues.json";
 import OeuvresManagementOeuvresList from "../pageComponents/oeuvresManagement/OeuvresManagementOeuvresList";
 import UseDeletePainting from "../hooks/RQmutation/UseDeleteOeuvre";
+import UseDeleteTechnique from "../hooks/RQmutation/UseDeleteTechnique";
 
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
@@ -126,6 +127,7 @@ function OeuvresManagement() {
   const createFormatMutation = UseCreateFormat(handleModalInstall);
   const createSupportMutation = UseCreateSupport(handleModalInstall);
   const deleteOeuvreMutation = UseDeletePainting(handleModalInstall);
+  const deleteTechniqueMutation = UseDeleteTechnique(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -148,6 +150,12 @@ function OeuvresManagement() {
     return deleteOeuvreMutation.mutate(id);
   };
 
+  const deleteTechnique = (data) => {
+    const { id } = data;
+    navigate(`/management/oeuvres/techniques/`);
+    return deleteTechniqueMutation.mutate(id);
+  };
+
   const handleCloseModal = giveOnClose(
     {
       status: "backToPreviousPage",
@@ -164,6 +172,10 @@ function OeuvresManagement() {
     {
       status: "doDeleteOeuvre",
       cb: deleteOeuvre,
+    },
+    {
+      status: "doDeleteTechnique",
+      cb: deleteTechnique,
     }
   );
 

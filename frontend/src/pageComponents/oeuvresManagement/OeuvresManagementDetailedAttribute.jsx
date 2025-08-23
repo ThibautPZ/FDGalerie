@@ -8,6 +8,7 @@ export default function OeuvresManagementDetailedAttribute({
   tAttributePageText,
   tAttribute,
   setIsModifying,
+  handleDeleteBtnClick,
 }) {
   const {
     relatedOeuvres,
@@ -72,10 +73,19 @@ export default function OeuvresManagementDetailedAttribute({
         <p>{tAttributePageText("nbRelatedOeuvres")}</p>
         <p>{nbPaintings || tAttributePageText("noRelatedOeuvres")}</p>
       </div>
-      <button type="button" onClick={() => setIsModifying(true)}>
+      {/* <button type="button" onClick={() => setIsModifying(true)}>
         {tAttributePageText("modifyBtn")}
+      </button> */}
+      <button
+        type="button"
+        onClick={handleDeleteBtnClick}
+        disabled={!!nbPaintings}
+      >
+        {tAttributePageText("deleteBtn")}
       </button>
-      {nbPaintings ? (
+      {nbPaintings > 0 && <p>{tAttributePageText("cannotDelete")}</p>}
+
+      {nbPaintings > 0 && (
         <FoldableComponent
           isOpen={!isFolded}
           foldedState={isFolded}
@@ -92,7 +102,7 @@ export default function OeuvresManagementDetailedAttribute({
             setIsModifying={setIsModifying}
           />
         </FoldableComponent>
-      ) : null}
+      )}
     </div>
   );
 }
