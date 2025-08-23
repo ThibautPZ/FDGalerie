@@ -1,8 +1,4 @@
 {
-  "45": {
-    "name": "aa",
-    "description": ""
-  },
   "ACRYLIQUE": {
     "name": "Acrylique",
     "description": "Acrylic is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
@@ -28,19 +24,7 @@
     "description": "Collage is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
   },
   "CRAYONS_GRAS": {
-    "name": "Crayons gras",
+    "name": "Crayons grasss",
     "description": "Crayons gras is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
-  },
-  "LA_DFQ": {
-    "name": "gsgs",
-    "description": ""
-  },
-  "451_A_2": {
-    "name": "aag",
-    "description": ""
-  },
-  "451_A_2_S": {
-    "name": "aags",
-    "description": ""
   }
 }

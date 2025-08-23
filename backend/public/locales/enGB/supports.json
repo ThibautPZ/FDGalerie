@@ -3,5 +3,8 @@
     "name": "Papier",
     "description": "Papier de couleur blanc ou noir, parfois avec des étiquettes ou des motifs."
   },
-  "TOILE": { "name": "Toile", "description": "Toile sur support de bois." }
+  "TOILE": {
+    "name": "Toile",
+    "description": "Toile sur support de bois."
+  }
 }

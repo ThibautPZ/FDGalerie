@@ -1,8 +1,4 @@
 {
-  "45": {
-    "name": "45",
-    "description": ""
-  },
   "ACRYLIQUE": {
     "name": "Acrylique",
     "description": "Acrylique est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
@@ -30,17 +26,5 @@
   "CRAYONS_GRAS": {
     "name": "Crayons gras",
     "description": "Crayons gras est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
-  },
-  "LA_DFQ": {
-    "name": "la dfqfds",
-    "description": "s"
-  },
-  "451_A_2": {
-    "name": "451A 2",
-    "description": "aaatsr"
-  },
-  "451_A_2_S": {
-    "name": "451A 2 s",
-    "description": "aaatsr"
   }
 }
