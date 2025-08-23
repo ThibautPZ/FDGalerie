@@ -17,6 +17,12 @@ router.get(
   sendGetRes("detailedSupportsData")
 );
 
+router.get(
+  "/adminOneDetailed/:id",
+  supportsControllers.adminFindOneDetailed,
+  sendGetRes("detailedSupportData")
+);
+
 router.post(
   "/createSupport",
   validateSchema(createSupportSchema),

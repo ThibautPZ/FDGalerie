@@ -60,6 +60,56 @@ const browseWithDetails = asyncHandler(async (req, res, next) => {
   return next();
 });
 
+const adminFindOneDetailed = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  const queries = {
+    ...baseQueriesWithReadJson,
+    support: async.retryable(5, async () => {
+      try {
+        const [result] = await tables.supports.findOneAdminWithDetails(id);
+        return result;
+      } catch (error) {
+        return error;
+      }
+    }),
+    oeuvres: async.retryable(5, async () => {
+      try {
+        const [result] = await tables.paintings.findAllPaintingsBySupportId(id);
+        return result;
+      } catch (error) {
+        return error;
+      }
+    }),
+  };
+  const results = await async.parallel(queries);
+
+  const { failures } = giveSuccesfulAndFailedQueryNames(results);
+  if (failures.length) {
+    return next(new CustomErrorClass("07005", failures));
+  }
+
+  const { support, oeuvres, jsonFr, jsonEnUS, jsonEnGB } = results;
+
+  const supportData = support[0];
+  const untranslatedName = supportData.name;
+
+  const detailedSupport = {
+    ...supportData,
+    relatedOeuvres: oeuvres,
+    nameFr: jsonFr[untranslatedName].name,
+    nameEnUS: jsonEnUS[untranslatedName].name,
+    nameEnGB: jsonEnGB[untranslatedName].name,
+    descriptionFr: jsonFr[untranslatedName].description,
+    descriptionEnUS: jsonEnUS[untranslatedName].description,
+    descriptionEnGB: jsonEnGB[untranslatedName].description,
+  };
+
+  req.body.detailedSupportData = detailedSupport;
+
+  return next();
+});
+
 const createSupport = asyncHandler(async (req, res, next) => {
   const {
     supportKey,
@@ -161,5 +211,6 @@ const createSupport = asyncHandler(async (req, res, next) => {
 module.exports = {
   browse,
   browseWithDetails,
+  adminFindOneDetailed,
   createSupport,
 };

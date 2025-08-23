@@ -32,6 +32,16 @@ class SupportsManager extends AbstractManager {
     );
   }
 
+  async findOneAdminWithDetails(id) {
+    return this.database.query(
+      `SELECT s.id AS id, s.name AS name, COUNT(p.id) AS nbPaintings
+      FROM ${this.table} AS s
+      LEFT JOIN paintings AS p ON p.supports_id = s.id
+      WHERE s.id = ? GROUP BY s.id, s.name`,
+      [id]
+    );
+  }
+
   async createOne(name) {
     return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
       name,
