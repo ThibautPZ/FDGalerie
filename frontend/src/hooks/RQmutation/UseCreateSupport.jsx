@@ -11,7 +11,7 @@ const UseCreateSupport = (handleModalInstall) => {
 
     const query = "/api/supports/createSupport";
 
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["supports"] });
 
     const res = await axiosInstance.post(query, formData);
     return res.data;
@@ -30,7 +30,7 @@ const UseCreateSupport = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["supports"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
