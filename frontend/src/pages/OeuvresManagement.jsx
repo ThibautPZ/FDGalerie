@@ -24,7 +24,9 @@ import createSupportDefaultValues from "../json/formDefaultValues/createSupportD
 import OeuvresManagementOeuvresList from "../pageComponents/oeuvresManagement/OeuvresManagementOeuvresList";
 import UseDeletePainting from "../hooks/RQmutation/UseDeleteOeuvre";
 import UseDeleteTechnique from "../hooks/RQmutation/UseDeleteTechnique";
+import UseDeleteSupport from "../hooks/RQmutation/UseDeleteSupport";
 
+// todo : ajouter i18n in attribute mutations to update t attribtes
 function OeuvresManagement() {
   const { t } = useTranslation(["common", "pageText"]);
   const { pathname } = useLocation();
@@ -128,6 +130,7 @@ function OeuvresManagement() {
   const createSupportMutation = UseCreateSupport(handleModalInstall);
   const deleteOeuvreMutation = UseDeletePainting(handleModalInstall);
   const deleteTechniqueMutation = UseDeleteTechnique(handleModalInstall);
+  const deleteSupportMutation = UseDeleteSupport(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -156,6 +159,12 @@ function OeuvresManagement() {
     return deleteTechniqueMutation.mutate(id);
   };
 
+  const deleteSupport = (data) => {
+    const { id } = data;
+    navigate(`/management/oeuvres/supports/`);
+    return deleteSupportMutation.mutate(id);
+  };
+
   const handleCloseModal = giveOnClose(
     {
       status: "backToPreviousPage",
@@ -176,6 +185,10 @@ function OeuvresManagement() {
     {
       status: "doDeleteTechnique",
       cb: deleteTechnique,
+    },
+    {
+      status: "doDeleteSupport",
+      cb: deleteSupport,
     }
   );
 

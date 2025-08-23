@@ -42,6 +42,9 @@ import OeuvresManagementReservations from "./pageComponents/oeuvresManagement/Oe
 import OeuvresManagementDetailedTechnique from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedTechnique";
 import OeuvresManagementTechniques from "./pageComponents/oeuvresManagement/OeuvresManagementTechniques";
 import OeuvresManagementCreateTechnique from "./pageComponents/oeuvresManagement/OeuvresManagementCreateTechnique";
+import OeuvresManagementSupports from "./pageComponents/oeuvresManagement/OeuvresManagementSupports";
+import OeuvresManagementCreateSupport from "./pageComponents/oeuvresManagement/OeuvresManagementCreateSupport";
+import OeuvresManagementDetailedSupport from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedSupport";
 
 const router = createBrowserRouter([
   {
@@ -210,6 +213,20 @@ const router = createBrowserRouter([
                   {
                     path: "new",
                     element: <OeuvresManagementCreateTechnique />,
+                  },
+                ],
+              },
+              {
+                path: "supports",
+                element: <OeuvresManagementSupports />,
+                children: [
+                  {
+                    path: ":support",
+                    element: <OeuvresManagementDetailedSupport />,
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateSupport />,
                   },
                 ],
               },

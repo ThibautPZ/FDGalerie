@@ -129,6 +129,22 @@
       "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
+    "06013": {
+      "title": "Impossible de modifier le support",
+      "message": "Une erreur est survenue lors de la modification du support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06014": {
+      "title": "Impossible de supprimer le support",
+      "message": "Une erreur est survenue lors de la suppression du support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
     "07003": {
       "title": "Impossible de trouver le contact",
       "message": "Le contact demandé n'a pas été trouvé.",
@@ -449,6 +465,38 @@
       "title": "Technique supprimée",
       "message": "La technique {{insertText1}} a été supprimée.",
       "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "supportModified": {
+      "title": "Support modifié",
+      "message": "Le support {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "supportModifiedName": {
+      "title": "Support modifié",
+      "message": "Le support {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteSupportConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce support. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteSupport",
+      "validationBtnText": "Oui, supprimer ce support",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "supportDeleted": {
+      "title": "Support supprimé",
+      "message": "Le support {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
       "validationBtnText": "",
       "hasCloseBtn": true,
       "closeBtnText": "OK"

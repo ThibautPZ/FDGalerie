@@ -56,7 +56,7 @@
       "paintingSizeDescriptionEnGB": "Description du format en anglais (GB)",
       "createNewFormatBtnText": "Enregistrer le nouveau format"
     },
-    "CreateSupport": {
+    "SupportForm": {
       "supportNameFrPH": "Nom en français...",
       "supportNameEnUSPH": "Nom en anglais (US)...",
       "supportNameEnGBPH": "Nom en anglais (GB)...",
@@ -69,7 +69,8 @@
       "supportDescriptionFr": "Description du support en français",
       "supportDescriptionEnUS": "Description du support en anglais (US)",
       "supportDescriptionEnGB": "Description du support en anglais (GB)",
-      "createNewSupportBtnText": "Enregistrer le nouveau support"
+      "createSupportBtnText": "Enregistrer le nouveau support",
+      "modifySupportBtnText": "Modifier le support"
     }
   },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
@@ -326,6 +327,21 @@
       "return": "Retour à la liste",
       "createTechnique": "Création d'une technique"
     },
+    "OMSupports": {
+      "noSupports": "Aucun support enregistré",
+      "title": "Tous les supports",
+      "supportNameFr": "Nom en français",
+      "supportNameEnUS": "Nom en anglais (US)",
+      "supportNameEnGB": "Nom en anglais (GB)",
+      "supportDescriptionFr": "Description en français",
+      "supportDescriptionEnUS": "Description en anglais (US)",
+      "supportDescriptionEnGB": "Description en anglais (GB)",
+      "nbPaintings": "Nombre de peintures l'utilisant",
+      "id": "Support n°",
+      "newSupport": "Ajouter un nouveau support",
+      "return": "Retour à la liste",
+      "createSupport": "Création d'un support"
+    },
     "OMDetailedAttribute": {
       "name": "Nom : ",
       "nameFr": "Nom en français",
@@ -346,6 +362,17 @@
       "return": "Annuler la modification",
       "deleteBtn": "Supprimer la technique",
       "cannotDelete": "Cette technique est utilisée par au moins un tableau. Veuillez supprimer les tableaux utilisant cette technique avant de la supprimer."
+    },
+    "OMDetailedSupport": {
+      "title": "Support : ",
+      "id": "Support n° {{id}}",
+      "modifyBtn": "Modifier le support",
+      "relatedOeuvres": "Oeuvres utilisant ce support",
+      "nbRelatedOeuvres": "Nombre de tableaux utilisant ce support",
+      "noRelatedOeuvres": "Aucun tableau utilisant ce support",
+      "return": "Annuler la modification",
+      "deleteBtn": "Supprimer le support",
+      "cannotDelete": "Ce support est utilisé par au moins un tableau. Veuillez supprimer les tableaux utilisant ce support avant de le supprimer."
     }
   },
   "ContactManagement": {
