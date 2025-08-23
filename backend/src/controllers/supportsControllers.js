@@ -1,3 +1,4 @@
+const path = require("node:path");
 const async = require("async");
 const asyncHandler = require("express-async-handler");
 
@@ -11,6 +12,16 @@ const {
   giveDbQueryUndoSpecs,
 } = require("../helpers/dbAsyncQueriesHelper");
 const updateJsonFile = require("../services/fileSystem/updateJsonFile");
+const readJsonFile = require("../services/fileSystem/readJsonFile");
+
+const givePath = (language) =>
+  path.join(__dirname, `../../public/locales/${language}/supports.json`);
+
+const baseQueriesWithReadJson = {
+  jsonFr: async.retryable(5, async () => readJsonFile(givePath("fr"))),
+  jsonEnUS: async.retryable(5, async () => readJsonFile(givePath("enUS"))),
+  jsonEnGB: async.retryable(5, async () => readJsonFile(givePath("enGB"))),
+};
 
 const browse = asyncHandler(async (req, res, next) => {
   const [rows] = await tables.supports.readAll();
@@ -19,6 +30,34 @@ const browse = asyncHandler(async (req, res, next) => {
   } else {
     res.sendStatus(400);
   }
+});
+
+const browseWithDetails = asyncHandler(async (req, res, next) => {
+  const queries = {
+    ...baseQueriesWithReadJson,
+    supports: async.retryable(5, async () => {
+      try {
+        const [rows] = await tables.supports.readWithDetails();
+        return rows;
+      } catch (error) {
+        return error;
+      }
+    }),
+  };
+
+  const results = await async.parallel(queries);
+
+  const { success } = giveSuccesfulAndFailedQueryNames(results);
+
+  const detailedSupports = {};
+  for (let i = 0; i < success.length; i += 1) {
+    const queryName = success[i];
+    detailedSupports[queryName] = results[queryName];
+  }
+
+  req.body.detailedSupportsData = detailedSupports;
+
+  return next();
 });
 
 const createSupport = asyncHandler(async (req, res, next) => {
@@ -115,5 +154,6 @@ const createSupport = asyncHandler(async (req, res, next) => {
 
 module.exports = {
   browse,
+  browseWithDetails,
   createSupport,
 };

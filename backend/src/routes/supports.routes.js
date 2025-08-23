@@ -7,8 +7,15 @@ const validateSchema = require("../middlewares/validateSchema");
 const createSupportSchema = require("../Validators/createSupport.validator");
 const addSupportKey = require("../middlewares/reqAdders/addSupportKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
+const sendGetRes = require("../middlewares/resSenders/sendGetRes");
 
 router.get("/", supportsControllers.browse);
+
+router.get(
+  "/supportsWithDetails",
+  supportsControllers.browseWithDetails,
+  sendGetRes("detailedSupportsData")
+);
 
 router.post(
   "/createSupport",
