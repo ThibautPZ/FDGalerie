@@ -55,6 +55,14 @@
     "createSupport": {
       "type": "info",
       "message": "supportCreated"
+    },
+    "modifySupport": {
+      "type": "info",
+      "message": "supportModified"
+    },
+    "modifySupportName": {
+      "type": "info",
+      "message": "supportModifiedName"
     }
   }
 }

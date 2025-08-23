@@ -55,7 +55,7 @@ const browseWithDetails = asyncHandler(async (req, res, next) => {
     detailedSupports[queryName] = results[queryName];
   }
 
-  req.body.detailedSupportsData = detailedSupports;
+  req.body.detailedSupports = detailedSupports;
 
   return next();
 });
@@ -105,7 +105,7 @@ const adminFindOneDetailed = asyncHandler(async (req, res, next) => {
     descriptionEnGB: jsonEnGB[untranslatedName].description,
   };
 
-  req.body.detailedSupportData = detailedSupport;
+  req.body.detailedSupport = detailedSupport;
 
   return next();
 });
@@ -208,9 +208,80 @@ const createSupport = asyncHandler(async (req, res, next) => {
   return res.status(201).json({ success: true, successObj });
 });
 
+const modifyOneSupport = asyncHandler(async (req, res, next) => {
+  const {
+    jsonKey,
+    modifyAttributeQueries,
+    modifiedFields,
+    detailedSupport,
+    supportNameFr,
+  } = req.body;
+
+  const modifyingQueries = {};
+
+  for (const [language, queries] of Object.entries(modifyAttributeQueries)) {
+    const { queries: queriesObj } = queries;
+    modifyingQueries[language] = async.retryable(5, async () =>
+      updateJsonFile(
+        "add",
+        "../../../public/locales/fr",
+        "supports",
+        jsonKey,
+        queriesObj
+      )
+    );
+  }
+
+  const results = await async.parallel(modifyingQueries);
+
+  const { success, failures } = giveSuccesfulAndFailedQueryNames(
+    results,
+    true,
+    false
+  );
+
+  if (failures.length) {
+    if (success.length) {
+      const undoPromises = {};
+      success.forEach((lang) => {
+        undoPromises[lang] = async.retryable(5, async () =>
+          updateJsonFile(
+            "add",
+            `../../../public/locales/${lang}`,
+            "supports",
+            jsonKey,
+            modifyAttributeQueries[lang].undoQueries
+          )
+        );
+      });
+
+      await async.parallel(undoPromises);
+    }
+    return next(new CustomErrorClass("06011", failures));
+  }
+
+  const successObj = modifiedFields.supportNameFr
+    ? {
+        ...successfulResMsg.supportsControllers.modifySupportName,
+        infoData: {
+          insertText1: supportNameFr,
+          insertText2: detailedSupport.nameFr,
+        },
+      }
+    : {
+        ...successfulResMsg.supportsControllers.modifySupport,
+        infoData: {
+          insertText1: supportNameFr,
+        },
+      };
+
+  return res.status(201).json({ success: true, successObj });
+});
+
 module.exports = {
   browse,
   browseWithDetails,
   adminFindOneDetailed,
   createSupport,
+  modifyOneSupport,
 };

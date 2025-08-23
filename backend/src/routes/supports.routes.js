@@ -5,22 +5,24 @@ const router = express.Router();
 const supportsControllers = require("../controllers/supportsControllers");
 const validateSchema = require("../middlewares/validateSchema");
 const createSupportSchema = require("../Validators/createSupport.validator");
+const modifySupportSchema = require("../Validators/modifySupport.validator");
 const addSupportKey = require("../middlewares/reqAdders/addSupportKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 const sendGetRes = require("../middlewares/resSenders/sendGetRes");
+const addModifyAttributeQueries = require("../middlewares/reqAdders/addModifyAttributeQueries");
 
 router.get("/", supportsControllers.browse);
 
 router.get(
   "/supportsWithDetails",
   supportsControllers.browseWithDetails,
-  sendGetRes("detailedSupportsData")
+  sendGetRes("detailedSupports")
 );
 
 router.get(
   "/adminOneDetailed/:id",
   supportsControllers.adminFindOneDetailed,
-  sendGetRes("detailedSupportData")
+  sendGetRes("detailedSupport")
 );
 
 router.post(
@@ -35,6 +37,20 @@ router.post(
     rejectWhenTrue: true,
   }),
   supportsControllers.createSupport
+);
+
+router.put(
+  "/modifySupport/:id",
+  validateSchema(modifySupportSchema),
+  checkPresenceInDb({
+    manager: "supports",
+    method: "readById",
+    reqParamsKeyParams: { id: "id" },
+    errorNumber: "05006",
+  }),
+  supportsControllers.adminFindOneDetailed,
+  addModifyAttributeQueries("support"),
+  supportsControllers.modifyOneSupport
 );
 
 module.exports = router;

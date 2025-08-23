@@ -199,6 +199,11 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06013": {
+    "name": "cannotUpdateSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,
