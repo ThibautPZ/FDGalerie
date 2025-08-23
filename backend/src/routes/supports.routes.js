@@ -10,6 +10,7 @@ const addSupportKey = require("../middlewares/reqAdders/addSupportKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 const sendGetRes = require("../middlewares/resSenders/sendGetRes");
 const addModifyAttributeQueries = require("../middlewares/reqAdders/addModifyAttributeQueries");
+const addDeleteAttributeQueries = require("../middlewares/reqAdders/addDeleteAttributeQueries");
 
 router.get("/", supportsControllers.browse);
 
@@ -51,6 +52,19 @@ router.put(
   supportsControllers.adminFindOneDetailed,
   addModifyAttributeQueries("support"),
   supportsControllers.modifyOneSupport
+);
+
+router.delete(
+  "/deleteSupport/:id",
+  checkPresenceInDb({
+    manager: "supports",
+    method: "readById",
+    reqParamsKeyParams: { id: "id" },
+    errorNumber: "05006",
+  }),
+  supportsControllers.adminFindOneDetailed,
+  addDeleteAttributeQueries("support"),
+  supportsControllers.deleteSupport
 );
 
 module.exports = router;

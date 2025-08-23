@@ -204,6 +204,11 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06014": {
+    "name": "cannotDeleteSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,

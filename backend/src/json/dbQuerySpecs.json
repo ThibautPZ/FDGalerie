@@ -118,5 +118,10 @@
     "manager": "techniques",
     "method": "deleteById",
     "undo": "insertTechnique"
+  },
+  "deleteSupport": {
+    "manager": "supports",
+    "method": "deleteById",
+    "undo": "createOne"
   }
 }

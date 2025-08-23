@@ -63,6 +63,10 @@
     "modifySupportName": {
       "type": "info",
       "message": "supportModifiedName"
+    },
+    "deleteSupport": {
+      "type": "info",
+      "message": "supportDeleted"
     }
   }
 }

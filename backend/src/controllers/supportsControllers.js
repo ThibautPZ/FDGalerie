@@ -13,6 +13,7 @@ const {
 } = require("../helpers/dbAsyncQueriesHelper");
 const updateJsonFile = require("../services/fileSystem/updateJsonFile");
 const readJsonFile = require("../services/fileSystem/readJsonFile");
+const { isError } = require("../services/typesAndValidationChecks");
 
 const givePath = (language) =>
   path.join(__dirname, `../../public/locales/${language}/supports.json`);
@@ -278,10 +279,103 @@ const modifyOneSupport = asyncHandler(async (req, res, next) => {
   return res.status(201).json({ success: true, successObj });
 });
 
+const deleteSupport = asyncHandler(async (req, res, next) => {
+  const { body, params } = req;
+  const { id } = params;
+  const { jsonKeyName, nameFr, jsonQueriesArgs } = body.deleteAttributeQueries;
+
+  const deleteSupportQuerySpecsReference = {
+    name: "deleteSupport",
+    queryArgs: [id],
+    undoQueryArgs: [jsonKeyName],
+  };
+
+  const [deleteSupportQuerySpecs] = giveDbQueriesSpecs([
+    deleteSupportQuerySpecsReference,
+  ]);
+
+  const jsonDeleteQueries = {
+    fr: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/fr`,
+        "supports",
+        jsonKeyName
+      )
+    ),
+    enUS: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/enUS`,
+        "supports",
+        jsonKeyName
+      )
+    ),
+    enGB: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/enGB`,
+        "supports",
+        jsonKeyName
+      )
+    ),
+  };
+
+  const undoPromises = {};
+
+  const undoJsonDelete = async (success) => {
+    if (!success.length) {
+      return;
+    }
+    success.forEach((lang) => {
+      undoPromises[lang] = async.retryable(5, async () =>
+        updateJsonFile(
+          "add",
+          `../../../public/locales/${lang}`,
+          "supports",
+          jsonKeyName,
+          jsonQueriesArgs[lang]
+        )
+      );
+    });
+    async.parallel(undoPromises);
+  };
+
+  const jsonDeleteResults = await async.parallel(jsonDeleteQueries);
+
+  const { success, failures } = giveSuccesfulAndFailedQueryNames(
+    jsonDeleteResults,
+    true,
+    false
+  );
+
+  if (failures.length) {
+    await undoJsonDelete(success);
+    return next(new CustomErrorClass("06014", failures));
+  }
+
+  const results = await giveQueryPromise(deleteSupportQuerySpecs, 5);
+
+  if (isError(results)) {
+    await undoJsonDelete(success);
+    return next(new CustomErrorClass("06014", results));
+  }
+
+  const successObj = {
+    ...successfulResMsg.supportsControllers.deleteSupport,
+    infoData: {
+      insertText1: nameFr,
+    },
+  };
+
+  return res.status(201).json({ success: true, successObj });
+});
+
 module.exports = {
   browse,
   browseWithDetails,
   adminFindOneDetailed,
   createSupport,
   modifyOneSupport,
+  deleteSupport,
 };
