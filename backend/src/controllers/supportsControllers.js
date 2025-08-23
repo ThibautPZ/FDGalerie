@@ -87,15 +87,21 @@ const createSupport = asyncHandler(async (req, res, next) => {
 
   const filesResults = await async.parallel({
     fr: async.retryable(5, async () =>
-      updateJsonFile("add", "../../public/locales/fr", "supports", supportKey, {
-        name: supportNameFr,
-        description: supportDescriptionFr || "",
-      })
+      updateJsonFile(
+        "add",
+        "../../../public/locales/fr",
+        "supports",
+        supportKey,
+        {
+          name: supportNameFr,
+          description: supportDescriptionFr || "",
+        }
+      )
     ),
     enUS: async.retryable(5, async () =>
       updateJsonFile(
         "add",
-        "../../public/locales/enUS",
+        "../../../public/locales/enUS",
         "supports",
         supportKey,
         { name: supportNameEnUS, description: supportDescriptionEnUS || "" }
@@ -104,7 +110,7 @@ const createSupport = asyncHandler(async (req, res, next) => {
     enGB: async.retryable(5, async () =>
       updateJsonFile(
         "add",
-        "../../public/locales/enGB",
+        "../../../public/locales/enGB",
         "supports",
         supportKey,
         { name: supportNameEnGB, description: supportDescriptionEnGB || "" }
@@ -124,7 +130,7 @@ const createSupport = asyncHandler(async (req, res, next) => {
       undoPromises[lang] = async.retryable(5, async () =>
         updateJsonFile(
           "remove",
-          `../../public/locales/${lang}`,
+          `../../../public/locales/${lang}`,
           "supports",
           supportKey
         )
