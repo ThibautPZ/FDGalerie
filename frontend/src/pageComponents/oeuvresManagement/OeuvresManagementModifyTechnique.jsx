@@ -11,7 +11,6 @@ export default function OeuvresManagementModifyTechnique({
 }) {
   const { handleModalInstall } = useOutletContext();
   const i18n = tranlationInstance("i18n");
-  i18n.reloadResources();
 
   const {
     id,
@@ -51,22 +50,12 @@ export default function OeuvresManagementModifyTechnique({
   );
 
   return (
-    <>
-      <TechniqueForm
-        mutation={modifyTechniqueMutation}
-        formMethods={formMethods}
-        onSubmit={handleSubmitForm}
-        onSuccess={() => setIsModifying(false)}
-        isFormModifying
-      />
-      <button
-        type="button"
-        onClick={() =>
-          i18n.reloadResources(["fr", "enUS", "enGB"], "techniques")
-        }
-      >
-        reload
-      </button>
-    </>
+    <TechniqueForm
+      mutation={modifyTechniqueMutation}
+      formMethods={formMethods}
+      onSubmit={handleSubmitForm}
+      onSuccess={() => setIsModifying(false)}
+      isFormModifying
+    />
   );
 }
