@@ -9,8 +9,8 @@ const addTechniqueKey = require("../middlewares/reqAdders/addTechniqueKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 const validateSchema = require("../middlewares/validateSchema");
 const sendGetRes = require("../middlewares/resSenders/sendGetRes");
-const addModifyTechniqueQueries = require("../middlewares/reqAdders/addModifyTechniqueQueries");
 const addDeleteTechniqueQueries = require("../middlewares/reqAdders/addDeleteTechniqueQueries");
+const addModifyAttributeQueries = require("../middlewares/reqAdders/addModifyAttributeQueries");
 
 router.get("/", techniquesControllers.browse, sendGetRes("techniques"));
 
@@ -50,7 +50,7 @@ router.put(
     errorNumber: "05008",
   }),
   techniquesControllers.adminFindOneDetailed,
-  addModifyTechniqueQueries,
+  addModifyAttributeQueries("technique"),
   techniquesControllers.modifyOneTechnique
 );
 

@@ -212,8 +212,8 @@ const createOneTechnique = asyncHandler(async (req, res, next) => {
 
 const modifyOneTechnique = asyncHandler(async (req, res, next) => {
   const {
-    techniqueKey,
-    modifyTechniqueQueries,
+    jsonKey,
+    modifyAttributeQueries,
     modifiedFields,
     detailedTechnique,
     techniqueNameFr,
@@ -221,14 +221,14 @@ const modifyOneTechnique = asyncHandler(async (req, res, next) => {
 
   const modifyingQueries = {};
 
-  for (const [language, queries] of Object.entries(modifyTechniqueQueries)) {
+  for (const [language, queries] of Object.entries(modifyAttributeQueries)) {
     const { queries: queriesObj } = queries;
     modifyingQueries[language] = async.retryable(5, async () =>
       updateJsonFile(
         "add",
         `../../../public/locales/${language}`,
         "techniques",
-        techniqueKey,
+        jsonKey,
         queriesObj
       )
     );
@@ -251,8 +251,8 @@ const modifyOneTechnique = asyncHandler(async (req, res, next) => {
             "add",
             `../../../public/locales/${lang}`,
             "techniques",
-            techniqueKey,
-            modifyTechniqueQueries[lang].undoQueries
+            jsonKey,
+            modifyAttributeQueries[lang].undoQueries
           )
         );
       });
