@@ -6,7 +6,7 @@ const {
   requiredObj,
 } = require("./schemaOptions");
 
-const errorMsgPrefix = "creTec_val_";
+const errorMsgPrefix = "modTec_val_";
 
 const modifiedFieldsOptions = requiredObj("modifiedFields", errorMsgPrefix);
 const modifiedFieldsElementOptions = requiredBool(
