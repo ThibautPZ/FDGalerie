@@ -9,8 +9,8 @@ const addTechniqueKey = require("../middlewares/reqAdders/addTechniqueKey");
 const checkPresenceInDb = require("../middlewares/dbCheckers/checkPresenceInDb");
 const validateSchema = require("../middlewares/validateSchema");
 const sendGetRes = require("../middlewares/resSenders/sendGetRes");
-const addDeleteTechniqueQueries = require("../middlewares/reqAdders/addDeleteTechniqueQueries");
 const addModifyAttributeQueries = require("../middlewares/reqAdders/addModifyAttributeQueries");
+const addDeleteAttributeQueries = require("../middlewares/reqAdders/addDeleteAttributeQueries");
 
 router.get("/", techniquesControllers.browse, sendGetRes("techniques"));
 
@@ -72,7 +72,7 @@ router.delete(
     }
   ),
   techniquesControllers.adminFindOneDetailed,
-  addDeleteTechniqueQueries,
+  addDeleteAttributeQueries("technique"),
   techniquesControllers.deleteTechnique
 );
 

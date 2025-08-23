@@ -284,7 +284,7 @@ const modifyOneTechnique = asyncHandler(async (req, res, next) => {
 const deleteTechnique = asyncHandler(async (req, res, next) => {
   const { body, params } = req;
   const { id } = params;
-  const { jsonKeyName, nameFr, jsonQueriesArgs } = body.deleteTechniqueQueries;
+  const { jsonKeyName, nameFr, jsonQueriesArgs } = body.deleteAttributeQueries;
 
   const deleteTechniqueQuerySpecsReference = {
     name: "deleteTechnique",
