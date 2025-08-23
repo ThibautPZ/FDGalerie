@@ -33,6 +33,10 @@
     "modifyTechniqueName": {
       "type": "info",
       "message": "techniqueModifiedName"
+    },
+    "deleteTechnique": {
+      "type": "info",
+      "message": "techniqueDeleted"
     }
   },
   "familiesControllers": {

@@ -113,5 +113,10 @@
     "manager": "paintingReservations",
     "method": "deleteByPaintingId",
     "undo": "createPaintingReservation"
+  },
+  "deleteTechnique": {
+    "manager": "techniques",
+    "method": "deleteById",
+    "undo": "insertTechnique"
   }
 }

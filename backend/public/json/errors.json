@@ -142,6 +142,11 @@
     "statusCode": 500,
     "type": "error"
   },
+  "05014": {
+    "name": "cannotDeleteTechniqueUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
@@ -186,6 +191,11 @@
   },
   "06011": {
     "name": "cannotUpdateTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06012": {
+    "name": "cannotDeleteTechnique",
     "statusCode": 500,
     "type": "error"
   },

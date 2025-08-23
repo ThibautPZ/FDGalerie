@@ -7,10 +7,12 @@ const successfulResMsg = require("../../public/json/successfulResMsg.json");
 const {
   giveQueryPromise,
   giveSuccesfulAndFailedQueryNames,
+  giveDbQueriesSpecs,
 } = require("../helpers/dbAsyncQueriesHelper");
 const CustomErrorClass = require("../services/ErrorClasses");
 const updateJsonFile = require("../services/fileSystem/updateJsonFile");
 const readJsonFile = require("../services/fileSystem/readJsonFile");
+const { isError } = require("../services/typesAndValidationChecks");
 
 const givePath = (language) =>
   path.join(__dirname, `../../public/locales/${language}/techniques.json`);
@@ -279,10 +281,103 @@ const modifyOneTechnique = asyncHandler(async (req, res, next) => {
   return res.status(201).json({ success: true, successObj });
 });
 
+const deleteTechnique = asyncHandler(async (req, res, next) => {
+  const { body, params } = req;
+  const { id } = params;
+  const { jsonKeyName, nameFr, jsonQueriesArgs } = body.deleteTechniqueQueries;
+
+  const deleteTechniqueQuerySpecsReference = {
+    name: "deleteTechnique",
+    queryArgs: [id],
+    undoQueryArgs: [jsonKeyName],
+  };
+
+  const [deleteTechniqueQuerySpecs] = giveDbQueriesSpecs([
+    deleteTechniqueQuerySpecsReference,
+  ]);
+
+  const jsonDeleteQueries = {
+    fr: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/fr`,
+        "techniques",
+        jsonKeyName
+      )
+    ),
+    enUS: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/enUS`,
+        "techniques",
+        jsonKeyName
+      )
+    ),
+    enGB: async.retryable(5, async () =>
+      updateJsonFile(
+        "remove",
+        `../../../public/locales/enGB`,
+        "techniques",
+        jsonKeyName
+      )
+    ),
+  };
+
+  const undoPromises = {};
+
+  const undoJsonDelete = async (success) => {
+    if (!success.length) {
+      return;
+    }
+    success.forEach((lang) => {
+      undoPromises[lang] = async.retryable(5, async () =>
+        updateJsonFile(
+          "add",
+          `../../../public/locales/${lang}`,
+          "techniques",
+          jsonKeyName,
+          jsonQueriesArgs[lang]
+        )
+      );
+    });
+    async.parallel(undoPromises);
+  };
+
+  const jsonDeleteResults = await async.parallel(jsonDeleteQueries);
+
+  const { success, failures } = giveSuccesfulAndFailedQueryNames(
+    jsonDeleteResults,
+    true,
+    false
+  );
+
+  if (failures.length) {
+    await undoJsonDelete(success);
+    return next(new CustomErrorClass("06012", failures));
+  }
+
+  const results = await giveQueryPromise(deleteTechniqueQuerySpecs, 5);
+
+  if (isError(results)) {
+    await undoJsonDelete(success);
+    return next(results);
+  }
+
+  const successObj = {
+    ...successfulResMsg.techniquesControllers.deleteTechnique,
+    infoData: {
+      insertText1: nameFr,
+    },
+  };
+
+  return res.status(201).json({ success: true, successObj });
+});
+
 module.exports = {
   browse,
   browseWithDetails,
   adminFindOneDetailed,
   createOneTechnique,
   modifyOneTechnique,
+  deleteTechnique,
 };
