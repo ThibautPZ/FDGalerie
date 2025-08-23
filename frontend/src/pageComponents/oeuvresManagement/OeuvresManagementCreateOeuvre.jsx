@@ -8,7 +8,7 @@ import CreateContactForm from "../../components/CreateContactForm";
 import translationInstance from "../../services/translationInstance";
 import CreateFamilyForm from "../shared/CreateFamilyForm";
 import CreateFormatForm from "../shared/CreateFormatForm";
-import CreateSupportForm from "../shared/CreateSupportForm";
+import SupportForm from "../shared/SupportForm";
 import TechniqueForm from "../shared/TechniqueForm";
 
 function OeuvresManagementCreateOeuvre() {
@@ -80,7 +80,7 @@ function OeuvresManagementCreateOeuvre() {
           onOpen={null}
           onClose={onFoldClose}
         >
-          <CreateSupportForm />
+          <SupportForm />
         </FoldableComponent>
       </div>
     </div>

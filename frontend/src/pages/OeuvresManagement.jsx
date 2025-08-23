@@ -102,7 +102,7 @@ function OeuvresManagement() {
   };
 
   const supportsQuery = useSuspenseQuery({
-    queryKey: ["oeuvreSupport"],
+    queryKey: ["supports", { type: "basic" }],
     queryFn: getAllSupportsFromDb,
     throwOnError: true,
   });
@@ -222,6 +222,9 @@ function OeuvresManagement() {
           </Link>
           <Link to="/management/oeuvres/techniques/">
             {t("pageText:OeuvresManagement.OM.techniques")}
+          </Link>
+          <Link to="/management/oeuvres/supports/">
+            {t("pageText:OeuvresManagement.OM.supports")}
           </Link>
         </div>
       ) : (
