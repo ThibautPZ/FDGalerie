@@ -89,9 +89,6 @@ export default function OeuvresManagementTechniques() {
                 jsonEnUS: data.jsonEnUS,
                 jsonEnGB: data.jsonEnGB,
               }}
-              jsonFrData={data.jsonFr}
-              jsonEnUSData={data.jsonEnUS}
-              jsonEnGBData={data.jsonEnGB}
               tableColumns={techniquesColumns}
               emptyDataText={tPageText("noTechniques")}
               className="OeuvresManagementTechniquesTable"
