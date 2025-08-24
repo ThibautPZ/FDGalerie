@@ -1,9 +1,8 @@
 import { useState, Suspense } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import i18n from "../i18n";
+
 import "../scss/OeuvresManagement.scss";
 
 import axiosInstance from "../services/axiosInstance";
@@ -25,10 +24,15 @@ import OeuvresManagementOeuvresList from "../pageComponents/oeuvresManagement/Oe
 import UseDeletePainting from "../hooks/RQmutation/UseDeleteOeuvre";
 import UseDeleteTechnique from "../hooks/RQmutation/UseDeleteTechnique";
 import UseDeleteSupport from "../hooks/RQmutation/UseDeleteSupport";
+import UseDeleteFormat from "../hooks/RQmutation/UseDeleteFormat";
+import tranlationInstance from "../services/translationInstance";
 
 // todo : ajouter i18n in attribute mutations to update t attribtes
 function OeuvresManagement() {
-  const { t } = useTranslation(["common", "pageText"]);
+  const [tPageText, i18n] = tranlationInstance(
+    "pageText:OeuvresManagement.OM",
+    "i18n"
+  );
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [isModifying, setIsModifying] = useState(false);
@@ -116,7 +120,7 @@ function OeuvresManagement() {
   };
 
   const formatsQuery = useSuspenseQuery({
-    queryKey: ["oeuvreFormat"],
+    queryKey: ["paintingSizes", { type: "basic" }],
     queryFn: getAllPaintingSizesFromDb,
     throwOnError: true,
   });
@@ -125,12 +129,13 @@ function OeuvresManagement() {
   const createContactMutation = UseCreateContact(handleModalInstall);
   const createOeuvreMutation = UseCreateOeuvre(handleModalInstall);
   const createTechniqueMutation = UseCreateTechnique(handleModalInstall, i18n);
-  const createFamilyMutation = UseCreateFamily(handleModalInstall);
-  const createFormatMutation = UseCreateFormat(handleModalInstall);
-  const createSupportMutation = UseCreateSupport(handleModalInstall);
+  const createFamilyMutation = UseCreateFamily(handleModalInstall, i18n);
+  const createFormatMutation = UseCreateFormat(handleModalInstall, i18n);
+  const createSupportMutation = UseCreateSupport(handleModalInstall, i18n);
   const deleteOeuvreMutation = UseDeletePainting(handleModalInstall);
   const deleteTechniqueMutation = UseDeleteTechnique(handleModalInstall);
   const deleteSupportMutation = UseDeleteSupport(handleModalInstall);
+  const deleteFormatMutation = UseDeleteFormat(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -165,6 +170,12 @@ function OeuvresManagement() {
     return deleteSupportMutation.mutate(id);
   };
 
+  const deleteFormat = (data) => {
+    const { id } = data;
+    navigate(`/management/oeuvres/formats/`);
+    return deleteFormatMutation.mutate(id);
+  };
+
   const handleCloseModal = giveOnClose(
     {
       status: "backToPreviousPage",
@@ -189,6 +200,10 @@ function OeuvresManagement() {
     {
       status: "doDeleteSupport",
       cb: deleteSupport,
+    },
+    {
+      status: "doDeleteFormat",
+      cb: deleteFormat,
     }
   );
 
@@ -219,36 +234,37 @@ function OeuvresManagement() {
       {pathname !== "/management/oeuvres/new" ? (
         <div className="OeuvresManagementHeader">
           <div>
-            <Link to="new">{t("pageText:OeuvresManagement.OM.newOeuvre")}</Link>
+            <Link to="new">{tPageText("newOeuvre")}</Link>
           </div>
           <Link to={givePath("/management/oeuvres/")}>
-            {t("pageText:OeuvresManagement.OM.allOeuvres")}
+            {tPageText("allOeuvres")}
           </Link>
           <Link to={givePath("/management/oeuvres/dons/")}>
-            {t("pageText:OeuvresManagement.OM.dons")}
+            {tPageText("dons")}
           </Link>
           <Link to={givePath("/management/oeuvres/ventes/")}>
-            {t("pageText:OeuvresManagement.OM.ventes")}
+            {tPageText("ventes")}
           </Link>
           <Link to={givePath("/management/oeuvres/reservations/")}>
-            {t("pageText:OeuvresManagement.OM.reservations")}
+            {tPageText("reservations")}
           </Link>
           <Link to="/management/oeuvres/techniques/">
-            {t("pageText:OeuvresManagement.OM.techniques")}
+            {tPageText("techniques")}
           </Link>
           <Link to="/management/oeuvres/supports/">
-            {t("pageText:OeuvresManagement.OM.supports")}
+            {tPageText("supports")}
           </Link>
+          <Link to="/management/oeuvres/formats/">{tPageText("formats")}</Link>
         </div>
       ) : (
         <button type="button" onClick={() => handleReturnClick()}>
-          {t("pageText:OeuvresManagement.OM.return")}
+          {tPageText("return")}
         </button>
       )}
       {pathname === "/management/oeuvres/" ||
       pathname.startsWith("/management/oeuvres/id:") ? (
         <Suspense fallback={<h1>Loading...</h1>}>
-          <h1>{t("pageText:OeuvresManagement.OMOeuvresList.title")}</h1>
+          <h1>{tPageText("oeuvresListTitle")}</h1>
           <OeuvresManagementOeuvresList
             oeuvresList={oeuvresQuery.data}
             techniques={techniquesQuery.data}
