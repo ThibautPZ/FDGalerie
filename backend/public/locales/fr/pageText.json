@@ -41,7 +41,7 @@
       "familyDescriptionEnGBPH": "Description en anglais (GB)...",
       "createNewFamilyBtnText": "Enregistrer la nouvelle famille"
     },
-    "CreateFormat": {
+    "FormatForm": {
       "paintingSizeNameFrPH": "Nom en français...",
       "paintingSizeNameEnUSPH": "Nom en anglais (US)...",
       "paintingSizeNameEnGBPH": "Nom en anglais (GB)...",
@@ -54,7 +54,8 @@
       "paintingSizeDescriptionFr": "Description du format en français",
       "paintingSizeDescriptionEnUS": "Description du format en anglais (US)",
       "paintingSizeDescriptionEnGB": "Description du format en anglais (GB)",
-      "createNewFormatBtnText": "Enregistrer le nouveau format"
+      "createFormatBtnText": "Enregistrer le nouveau format",
+      "modifyFormatBtnText": "Modifier le format"
     },
     "SupportForm": {
       "supportNameFrPH": "Nom en français...",
@@ -158,7 +159,8 @@
       "techniques": "Techniques",
       "supports": "Supports",
       "formats": "Formats",
-      "families": "Familles"
+      "families": "Familles",
+      "oeuvresListTitle": "Toutes les oeuvres"
     },
     "OMOeuvrePanel": {
       "picture": "Aperçu",
@@ -244,7 +246,6 @@
     },
     "OMOeuvresList": {
       "noOeuvres": "Aucune oeuvre enregistrée",
-      "title": "Toutes les oeuvres",
       "titleFilterPlaceholder": "Titre...",
       "techniqueFilterPlaceholder": "Toutes les techniques",
       "familyFilterPlaceholder": "Toutes les familles",
@@ -342,6 +343,21 @@
       "return": "Retour à la liste",
       "createSupport": "Création d'un support"
     },
+    "OMFormats": {
+      "noFormats": "Aucun format enregistré",
+      "title": "Tous les formats",
+      "paintingSizeNameFr": "Nom en français",
+      "paintingSizeNameEnUS": "Nom en anglais (US)",
+      "paintingSizeNameEnGB": "Nom en anglais (GB)",
+      "paintingSizeDescriptionFr": "Description en français",
+      "paintingSizeDescriptionEnUS": "Description en anglais (US)",
+      "paintingSizeDescriptionEnGB": "Description en anglais (GB)",
+      "nbPaintings": "Nombre de peintures l'utilisant",
+      "id": "Format n°",
+      "newFormat": "Ajouter un nouveau format",
+      "return": "Retour à la liste",
+      "createFormat": "Création d'un format"
+    },
     "OMDetailedAttribute": {
       "name": "Nom : ",
       "nameFr": "Nom en français",
@@ -373,6 +389,17 @@
       "return": "Annuler la modification",
       "deleteBtn": "Supprimer le support",
       "cannotDelete": "Ce support est utilisé par au moins un tableau. Veuillez supprimer les tableaux utilisant ce support avant de le supprimer."
+    },
+    "OMDetailedFormat": {
+      "title": "Format : ",
+      "id": "Format n° {{id}}",
+      "modifyBtn": "Modifier le format",
+      "relatedOeuvres": "Oeuvres utilisant ce format",
+      "nbRelatedOeuvres": "Nombre de tableaux utilisant ce format",
+      "noRelatedOeuvres": "Aucun tableau utilisant ce format",
+      "return": "Annuler la modification",
+      "deleteBtn": "Supprimer le format",
+      "cannotDelete": "Ce format est utilisé par au moins un tableau. Veuillez supprimer les tableaux utilisant ce format avant de le supprimer."
     }
   },
   "ContactManagement": {

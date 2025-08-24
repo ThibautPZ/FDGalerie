@@ -106,16 +106,16 @@
       "closeBtnText": "OK"
     },
     "06008": {
-      "title": "Impossible d'enregistrer la nouvelle format",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle format. Veuillez réessayer plus tard.",
+      "title": "Impossible d'enregistrer le nouveau format",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau format. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
     "06009": {
-      "title": "Impossible d'enregistrer la nouvelle support",
-      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle support. Veuillez réessayer plus tard.",
+      "title": "Impossible d'enregistrer le nouveau support",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau support. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,
@@ -140,6 +140,22 @@
     "06014": {
       "title": "Impossible de supprimer le support",
       "message": "Une erreur est survenue lors de la suppression du support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06015": {
+      "title": "Impossible de modifier le format",
+      "message": "Une erreur est survenue lors de la modification du format. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06016": {
+      "title": "Impossible de supprimer le format",
+      "message": "Une erreur est survenue lors de la suppression du format. Veuillez réessayer plus tard.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,
@@ -241,7 +257,7 @@
       }
     },
     "CreateFormat": {
-      "paintingSizeCreated": {
+      "formatCreated": {
         "title": "Format créé",
         "message": "{{insertText1}} a été ajouté à la liste des formats.",
         "validationBtnReturnedStr": "",
@@ -496,6 +512,38 @@
     "supportDeleted": {
       "title": "Support supprimé",
       "message": "Le support {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "formatModified": {
+      "title": "Format modifié",
+      "message": "Le format {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "formatModifiedName": {
+      "title": "Format modifié",
+      "message": "Le format {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteFormatConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce format. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteFormat",
+      "validationBtnText": "Oui, supprimer ce format",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "formatDeleted": {
+      "title": "Format supprimé",
+      "message": "Le format {{insertText1}} a été supprimé.",
       "validationBtnReturnedStr": "backToPreviousPage",
       "validationBtnText": "",
       "hasCloseBtn": true,
