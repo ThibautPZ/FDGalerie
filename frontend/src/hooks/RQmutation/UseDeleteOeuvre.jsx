@@ -6,7 +6,7 @@ const UseDeleteOeuvre = (handleModalInstall) => {
   const queryclient = useQueryClient();
 
   const deleteOeuvre = async (oeuvreId) => {
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["oeuvres"] });
     const url = `/api/paintings/deletePainting/${oeuvreId}`;
 
     const res = await axiosInstance.delete(url);
@@ -20,9 +20,15 @@ const UseDeleteOeuvre = (handleModalInstall) => {
     onError: (error) => {
       return handleModalInstall(error.response.data.errorObj);
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       console.warn(data);
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.removeQueries({
+        queryKey: [
+          "oeuvres",
+          { type: "singleWithDetails", oeuvreId: variables },
+        ],
+      });
+      queryclient.refetchQueries({ queryKey: ["oeuvres"] });
       return handleModalInstall(data.successObj, translationPrefix);
     },
   });

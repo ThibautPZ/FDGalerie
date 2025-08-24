@@ -26,7 +26,7 @@ const UseModifyOeuvre = (oeuvreId, handleModalInstall) => {
 
     const requestQuery = `fileFields=${fileFields}&files=${parsedFiles}`;
 
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["oeuvres"] });
 
     const url = `/api/paintings/updatePainting/${oeuvreId}?${requestQuery}`;
 
@@ -47,7 +47,7 @@ const UseModifyOeuvre = (oeuvreId, handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["oeuvres"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });

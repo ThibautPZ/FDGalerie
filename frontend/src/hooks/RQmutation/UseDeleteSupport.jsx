@@ -20,8 +20,14 @@ const UseDeleteSupport = (handleModalInstall) => {
     onError: (error) => {
       return handleModalInstall(error.response.data.errorObj);
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       console.warn(data);
+      queryclient.removeQueries({
+        queryKey: [
+          "supports",
+          { type: "singleWithDetails", supportId: variables },
+        ],
+      });
       queryclient.refetchQueries({ queryKey: ["supports"] });
       return handleModalInstall(data.successObj, translationPrefix);
     },

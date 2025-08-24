@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../../services/axiosInstance";
 import giveSanitizedFormData from "../../services/giveSanitizedFormData";
 
-const UseCreateFamily = (handleModalInstall) => {
+const UseCreateFamily = (handleModalInstall, i18n) => {
   const queryclient = useQueryClient();
 
   const postFamily = async (newFamilyFormData) => {
@@ -30,6 +30,7 @@ const UseCreateFamily = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
+      i18n.reloadResources(["fr", "enUS", "enGB"], "families");
       queryclient.refetchQueries({ queryKey: ["oeuvre"] });
       handleModalInstall(data.successObj, translationPrefix);
     },

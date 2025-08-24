@@ -43,7 +43,7 @@ export default function OeuvresManagementOeuvreInfo() {
   };
 
   const { data } = useSuspenseQuery({
-    queryKey: ["detailedOeuvre", { oeuvreId }],
+    queryKey: ["oeuvres", { type: "singleWithDetails", oeuvreId }],
     queryFn: getDetailedOeuvreFromDb,
     throwOnError: true,
   });

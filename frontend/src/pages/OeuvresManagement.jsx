@@ -72,7 +72,7 @@ function OeuvresManagement() {
   };
 
   const oeuvresQuery = useSuspenseQuery({
-    queryKey: ["oeuvresWithDetails"],
+    queryKey: ["oeuvres", { type: "allWithDetails" }],
     queryFn: getOeuvresListFromDb,
     throwOnError: true,
   });

@@ -20,8 +20,14 @@ const UseDeleteTechnique = (handleModalInstall) => {
     onError: (error) => {
       return handleModalInstall(error.response.data.errorObj);
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       console.warn(data);
+      queryclient.removeQueries({
+        queryKey: [
+          "techniques",
+          { type: "singleWithDetails", techniqueId: variables },
+        ],
+      });
       queryclient.refetchQueries({ queryKey: ["techniques"] });
       return handleModalInstall(data.successObj, translationPrefix);
     },

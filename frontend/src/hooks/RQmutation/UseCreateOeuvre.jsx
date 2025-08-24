@@ -29,7 +29,7 @@ const UseCreateOeuvre = (handleModalInstall) => {
     const parsedFiles = JSON.stringify(files);
 
     const requestQuery = `fileFields=${fileFields}&files=${parsedFiles}`;
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["oeuvres"] });
     const res = await axiosInstance.postForm(
       `/api/paintings/createPainting?${requestQuery}`,
       formData,
@@ -55,7 +55,7 @@ const UseCreateOeuvre = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["oeuvres"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });

@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../../services/axiosInstance";
 import giveSanitizedFormData from "../../services/giveSanitizedFormData";
 
-const UseCreateFormat = (handleModalInstall) => {
+const UseCreateFormat = (handleModalInstall, i18n) => {
   const queryclient = useQueryClient();
 
   const postFormat = async (newFormatFormData) => {
@@ -11,7 +11,7 @@ const UseCreateFormat = (handleModalInstall) => {
 
     const query = "/api/paintingSizes/createPaintingSize";
 
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["paintingSizes"] });
 
     const res = await axiosInstance.post(query, formData);
     return res.data;
@@ -30,7 +30,8 @@ const UseCreateFormat = (handleModalInstall) => {
     },
     onSuccess: (data) => {
       console.warn(data);
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["paintingSizes"] });
+      i18n.reloadResources(["fr", "enUS", "enGB"], "paintingSizes");
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
