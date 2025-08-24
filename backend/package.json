@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon --config nodemon.json index.js",
     "db:migrate": "node migrate.js",
     "db:seed": "node seed.js",
     "start": "node index.js",
