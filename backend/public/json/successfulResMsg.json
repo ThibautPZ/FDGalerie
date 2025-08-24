@@ -48,7 +48,19 @@
   "paintingSizesControllers": {
     "createPaintingSize": {
       "type": "info",
-      "message": "paintingSizeCreated"
+      "message": "formatCreated"
+    },
+    "modifyPaintingSize": {
+      "type": "info",
+      "message": "formatModified"
+    },
+    "modifyPaintingSizeName": {
+      "type": "info",
+      "message": "formatModifiedName"
+    },
+    "deletePaintingSize": {
+      "type": "info",
+      "message": "formatDeleted"
     }
   },
   "supportsControllers": {

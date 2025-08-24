@@ -23,10 +23,33 @@ class PaintingSizesManager extends AbstractManager {
     );
   }
 
+  async readWithDetails() {
+    return this.database.query(
+      `SELECT ps.id AS id, ps.name AS name, COUNT(p.id) AS nbPaintings
+      FROM ${this.table} AS ps
+      LEFT JOIN paintings AS p ON p.painting_sizes_id = ps.id
+      GROUP BY ps.id, ps.name`
+    );
+  }
+
+  async findOneAdminWithDetails(id) {
+    return this.database.query(
+      `SELECT ps.id AS id, ps.name AS name, COUNT(p.id) AS nbPaintings
+      FROM ${this.table} AS ps
+      LEFT JOIN paintings AS p ON p.painting_sizes_id = ps.id
+      WHERE ps.id = ? GROUP BY ps.id, ps.name`,
+      [id]
+    );
+  }
+
   async createOne(name) {
     return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?);`, [
       name,
     ]);
+  }
+
+  async deleteById(id) {
+    return this.database.query(`DELETE FROM ${this.table} WHERE id = ?`, [id]);
   }
 }
 

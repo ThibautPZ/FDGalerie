@@ -209,6 +209,16 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06015": {
+    "name": "cannotUpdatePaintingSize",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06016": {
+    "name": "cannotDeletePaintingSize",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,

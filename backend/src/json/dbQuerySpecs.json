@@ -123,5 +123,10 @@
     "manager": "supports",
     "method": "deleteById",
     "undo": "createOne"
+  },
+  "deletePaintingSize": {
+    "manager": "paintingSizes",
+    "method": "deleteById",
+    "undo": "createOne"
   }
 }

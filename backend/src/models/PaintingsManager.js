@@ -143,8 +143,10 @@ class PaintingsManager extends AbstractManager {
 
   async findAllPaintingsBySupportId(supportId) {
     return this.database.query(
-      `SELECT p.id, p.title,  p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.publicly_visible AS publiclyVisible, p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(t.name) AS techniques,
-      f.name AS family, ps.name AS format, ps.id AS formatId, s.name as support, s.id AS supportId, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS, pac.en_GB_comment AS artistCommentEnGB
+      `SELECT p.id, p.title,  p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.publicly_visible AS publiclyVisible,
+      p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(t.name) AS techniques, f.name AS family, ps.name AS format, ps.id AS formatId,
+      s.name as support, s.id AS supportId, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS,
+      pac.en_GB_comment AS artistCommentEnGB
       FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
       LEFT JOIN families AS f ON p.families_id = f.id
       LEFT JOIN supports AS s ON p.supports_id = s.id
@@ -155,6 +157,25 @@ class PaintingsManager extends AbstractManager {
       LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
       WHERE p.supports_id = ? GROUP BY p.id;`,
       [supportId]
+    );
+  }
+
+  async findAllPaintingsBySize(sizeId) {
+    return this.database.query(
+      `SELECT p.id, p.title,  p.width, p.height, p.paintings_availabilities_id AS oeuvreAvailability, pa.name AS availabilityName, p.publicly_visible AS publiclyVisible,
+      p.family_member AS familyMember, p.families_id AS familyId, JSON_ARRAYAGG(t.name) AS techniques, f.name AS family, ps.name AS format, ps.id AS formatId,
+      s.name as support, s.id AS supportId, pst.file_name AS fileName, pst.file_extension AS fileExtension, pac.fr_comment AS artistCommentFr, pac.en_US_comment AS artistCommentEnUS,
+      pac.en_GB_comment AS artistCommentEnGB
+      FROM ${this.table} AS p LEFT JOIN painting_sizes AS ps ON p.painting_sizes_id = ps.id
+      LEFT JOIN families AS f ON p.families_id = f.id
+      LEFT JOIN supports AS s ON p.supports_id = s.id
+      LEFT JOIN paintings_has_techniques AS pht ON p.id = pht.paintings_id
+      LEFT JOIN techniques AS t ON pht.techniques_id = t.id
+      LEFT JOIN paintings_storages AS pst ON p.id = pst.paintings_id
+      LEFT JOIN paintings_artist_comments AS pac ON p.id = pac.paintings_id
+      LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
+      WHERE p.painting_sizes_id = ? GROUP BY p.id;`,
+      [sizeId]
     );
   }
 
