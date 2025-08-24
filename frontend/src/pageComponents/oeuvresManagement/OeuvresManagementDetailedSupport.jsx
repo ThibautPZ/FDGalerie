@@ -61,7 +61,7 @@ export default function OeuvresManagementDetailedSupport() {
         <Suspense fallback={<h1>Loading...</h1>}>
           <OeuvresManagementDetailedAttribute
             attributeData={data}
-            attribute="technique"
+            attribute="support"
             tAttributePageText={tPageText}
             tAttribute={tSupports}
             setIsModifying={setIsModifying}

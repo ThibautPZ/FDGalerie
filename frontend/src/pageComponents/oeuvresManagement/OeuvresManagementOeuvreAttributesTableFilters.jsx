@@ -2,7 +2,6 @@ import DebouncedInput from "../../components/customInputs/DebouncedInput";
 
 export default function OeuvresManagementAttributesTableFilters({
   tableData,
-
   t,
 }) {
   const giveTableFilterValue = (colName) =>
