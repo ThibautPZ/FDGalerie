@@ -15,6 +15,7 @@ export default function OeuvresListFilters({
   families,
   formats,
   supports,
+  attribute = "",
 }) {
   const [
     tTechniques,
@@ -41,7 +42,7 @@ export default function OeuvresListFilters({
   const giveOptionObj = (value, options) => {
     const { translationFn, optionsObj } = options;
     if (!isStringNotEmpty(value)) {
-      return null;
+      return "";
     }
     if (translationFn) {
       return { value, label: translationFn(`${value}.name`) };
@@ -112,62 +113,78 @@ export default function OeuvresListFilters({
         onChange={(value) => setTableFilterValue("title", value)}
         debounce={500}
       />
-      <span>{tPageText("filterByTechnique")}</span>
-      <Select
-        isClearable
-        options={techniqueFilterOptions}
-        placeholder={tPageText("techniqueFilterPlaceholder")}
-        onChange={(value) => onMultipleSelectChange(value, "techniques")}
-        name="techniquesFilter"
-        value={giveMultipleOptionValues("techniques", {
-          translationFn: tTechniques,
-        })}
-        controlShouldRenderValue
-        hideSelectedOptions
-        isMulti
-      />
-      <span>{tPageText("filterBySupport")}</span>
-      <Select
-        isClearable
-        options={supportFilterOptions}
-        placeholder={tPageText("supportFilterPlaceholder")}
-        onChange={(value) => onMultipleSelectChange(value, "support")}
-        name="supportFilter"
-        value={giveMultipleOptionValues("support", {
-          translationFn: tSupports,
-        })}
-        controlShouldRenderValue
-        hideSelectedOptions
-        isMulti
-      />
-      <span>{tPageText("filterByFormat")}</span>
-      <Select
-        isClearable
-        options={formatFilterOptions}
-        placeholder={tPageText("formatFilterPlaceholder")}
-        onChange={(value) => onMultipleSelectChange(value, "format")}
-        name="formatFilter"
-        value={giveMultipleOptionValues("format", {
-          translationFn: tFormats,
-        })}
-        controlShouldRenderValue
-        hideSelectedOptions
-        isMulti
-      />
-      <span>{tPageText("filterByFamily")}</span>
-      <Select
-        isClearable
-        options={familyFilterOptions}
-        placeholder={tPageText("familyFilterPlaceholder")}
-        onChange={(value) => onMultipleSelectChange(value, "family")}
-        name="familyFilter"
-        value={giveMultipleOptionValues("family", {
-          translationFn: tFamilies,
-        })}
-        controlShouldRenderValue
-        hideSelectedOptions
-        isMulti
-      />
+      {attribute !== "technique" && (
+        <>
+          <span>{tPageText("filterByTechnique")}</span>
+          <Select
+            isClearable
+            options={techniqueFilterOptions}
+            placeholder={tPageText("techniqueFilterPlaceholder")}
+            onChange={(value) => onMultipleSelectChange(value, "techniques")}
+            name="techniquesFilter"
+            value={giveMultipleOptionValues("techniques", {
+              translationFn: tTechniques,
+            })}
+            controlShouldRenderValue
+            hideSelectedOptions
+            isMulti
+          />
+        </>
+      )}
+      {attribute !== "support" && (
+        <>
+          <span>{tPageText("filterBySupport")}</span>
+          <Select
+            isClearable
+            options={supportFilterOptions}
+            placeholder={tPageText("supportFilterPlaceholder")}
+            onChange={(value) => onMultipleSelectChange(value, "support")}
+            name="supportFilter"
+            value={giveMultipleOptionValues("support", {
+              translationFn: tSupports,
+            })}
+            controlShouldRenderValue
+            hideSelectedOptions
+            isMulti
+          />
+        </>
+      )}
+      {attribute !== "format" && (
+        <>
+          <span>{tPageText("filterByFormat")}</span>
+          <Select
+            isClearable
+            options={formatFilterOptions}
+            placeholder={tPageText("formatFilterPlaceholder")}
+            onChange={(value) => onMultipleSelectChange(value, "format")}
+            name="formatFilter"
+            value={giveMultipleOptionValues("format", {
+              translationFn: tFormats,
+            })}
+            controlShouldRenderValue
+            hideSelectedOptions
+            isMulti
+          />
+        </>
+      )}
+      {attribute !== "family" && (
+        <>
+          <span>{tPageText("filterByFamily")}</span>
+          <Select
+            isClearable
+            options={familyFilterOptions}
+            placeholder={tPageText("familyFilterPlaceholder")}
+            onChange={(value) => onMultipleSelectChange(value, "family")}
+            name="familyFilter"
+            value={giveMultipleOptionValues("family", {
+              translationFn: tFamilies,
+            })}
+            controlShouldRenderValue
+            hideSelectedOptions
+            isMulti
+          />
+        </>
+      )}
       <span>{tPageText("filterByAvailability")}</span>
       <Select
         isClearable
@@ -193,7 +210,7 @@ export default function OeuvresListFilters({
             onChange={(event) =>
               setTableFilterValue("publiclyVisible", event.target.value)
             }
-            value={null}
+            value=""
             checked={!isNumber(giveTableFilterValue("publiclyVisible"))}
           />
           <label htmlFor="allVisibilities">
@@ -244,7 +261,7 @@ export default function OeuvresListFilters({
             onChange={(event) =>
               setTableFilterValue("image", event.target.value)
             }
-            value={null}
+            value=""
             checked={!isNumber(giveTableFilterValue("image"))}
           />
           <label htmlFor="allImagePresence">

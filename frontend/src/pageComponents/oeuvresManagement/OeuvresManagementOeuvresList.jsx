@@ -54,6 +54,7 @@ function OeuvresManagementOeuvresList({
   families,
   formats,
   supports,
+  attribute = "",
   setIsModifying,
 }) {
   const navigate = useNavigate();
@@ -237,6 +238,7 @@ function OeuvresManagementOeuvresList({
         families={families}
         formats={formats}
         supports={supports}
+        attribute={attribute}
       />
       {!isArrayNotEmpty(oeuvresList) ? (
         <p>{tPageText("noOeuvres")}</p>

@@ -5,6 +5,7 @@ import OeuvresManagementOeuvresList from "./OeuvresManagementOeuvresList";
 
 export default function OeuvresManagementDetailedAttribute({
   attributeData,
+  attribute,
   tAttributePageText,
   tAttribute,
   setIsModifying,
@@ -99,6 +100,7 @@ export default function OeuvresManagementDetailedAttribute({
             families={familiesQuery.data}
             formats={formatsQuery.data}
             supports={supportsQuery.data}
+            attribute={attribute}
             setIsModifying={setIsModifying}
           />
         </FoldableComponent>
