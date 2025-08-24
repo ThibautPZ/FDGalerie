@@ -225,7 +225,7 @@ const modifyOneSupport = asyncHandler(async (req, res, next) => {
     modifyingQueries[language] = async.retryable(5, async () =>
       updateJsonFile(
         "add",
-        "../../../public/locales/fr",
+        `../../../public/locales/${language}`,
         "supports",
         jsonKey,
         queriesObj
@@ -258,7 +258,7 @@ const modifyOneSupport = asyncHandler(async (req, res, next) => {
 
       await async.parallel(undoPromises);
     }
-    return next(new CustomErrorClass("06011", failures));
+    return next(new CustomErrorClass("06013", failures));
   }
 
   const successObj = modifiedFields.supportNameFr
@@ -276,7 +276,7 @@ const modifyOneSupport = asyncHandler(async (req, res, next) => {
         },
       };
 
-  return res.status(201).json({ success: true, successObj });
+  return res.status(200).json({ success: true, successObj });
 });
 
 const deleteSupport = asyncHandler(async (req, res, next) => {
@@ -368,7 +368,7 @@ const deleteSupport = asyncHandler(async (req, res, next) => {
     },
   };
 
-  return res.status(201).json({ success: true, successObj });
+  return res.status(200).json({ success: true, successObj });
 });
 
 module.exports = {
