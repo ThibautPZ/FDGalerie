@@ -76,6 +76,7 @@ const addModifyPaintingQueries = asyncHandler(async (req, res, next) => {
   const {
     oeuvreAvailability,
     oeuvreTechnique,
+    familyMember,
     rawFileName,
     rawFileExtension,
     artistCommentFr,
@@ -114,6 +115,12 @@ const addModifyPaintingQueries = asyncHandler(async (req, res, next) => {
       paintingsTableUndoQueryArgs[columnName] =
         detailedPaintingData[detailedPaintingDataKey];
     }
+  }
+
+  if (modifiedFields.oeuvreFamily) {
+    paintingsTableQueryArgs.family_member = familyMember || null;
+    paintingsTableUndoQueryArgs.family_member =
+      detailedPaintingData.familyMember;
   }
 
   const paintingsHasTechniquesTableCreateQueriesArgs = [];
