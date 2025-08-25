@@ -1,13 +1,20 @@
+const path = require("node:path");
+const async = require("async");
 const expressAsyncHandler = require("express-async-handler");
 
-const familiesFileFr = require("../../../public/locales/fr/families.json");
-const familiesFileEnUS = require("../../../public/locales/enUS/families.json");
-const familiesFileEnGB = require("../../../public/locales/enGB/families.json");
 const giveJsonNewKeyOrError = require("../../services/giveJsonNewKeyOrError");
+const readJsonFile = require("../../services/fileSystem/readJsonFile");
 
 const addFamilyKey = expressAsyncHandler(async (req, res, next) => {
   const { body } = req;
   const { familyName } = body;
+  const givePath = (language) =>
+    path.join(__dirname, `../../../public/locales/${language}/families.json`);
+  const readJson = async.retryable(5, readJsonFile);
+
+  const familiesFileFr = readJson(givePath("fr"));
+  const familiesFileEnUS = readJson(givePath("enUS"));
+  const familiesFileEnGB = readJson(givePath("enGB"));
 
   const languages = {
     fr: { file: familiesFileFr, name: familyName },
