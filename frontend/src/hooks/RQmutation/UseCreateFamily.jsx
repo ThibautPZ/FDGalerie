@@ -11,7 +11,7 @@ const UseCreateFamily = (handleModalInstall, i18n) => {
 
     const query = "/api/families/createFamily";
 
-    queryclient.invalidateQueries({ queryKey: ["oeuvre"] });
+    queryclient.invalidateQueries({ queryKey: ["families"] });
 
     const res = await axiosInstance.post(query, formData);
     return res.data;
@@ -31,7 +31,7 @@ const UseCreateFamily = (handleModalInstall, i18n) => {
     onSuccess: (data) => {
       console.warn(data);
       i18n.reloadResources(["fr", "enUS", "enGB"], "families");
-      queryclient.refetchQueries({ queryKey: ["oeuvre"] });
+      queryclient.refetchQueries({ queryKey: ["families"] });
       handleModalInstall(data.successObj, translationPrefix);
     },
   });
