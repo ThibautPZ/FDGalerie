@@ -5,41 +5,29 @@ const addDeleteAttributeQueries = (attribute) => {
   return asyncHandler(async (req, res, next) => {
     const { body } = req;
     const detailedAttributeKey = `detailed${uppercaseFirstChar(attribute)}`;
-    const {
-      name,
-      nameFr,
-      nameEnUS,
-      nameEnGB,
-      descriptionFr,
-      descriptionEnUS,
-      descriptionEnGB,
-    } = body[detailedAttributeKey];
+    const detailedAtrribute = body[detailedAttributeKey];
+    const { keyName, name } = detailedAtrribute;
 
-    const jsonKeyName = name;
+    const nameFr = attribute === "family" ? name : detailedAtrribute.nameFr;
 
-    const jsonFrUndoQueriesArgs = {
-      name: nameFr,
-      description: descriptionFr || "",
-    };
-
-    const jsonEnUSUndoQueriesArgs = {
-      name: nameEnUS,
-      description: descriptionEnUS || "",
-    };
-
-    const jsonEnGBUndoQueriesArgs = {
-      name: nameEnGB,
-      description: descriptionEnGB || "",
+    const giveUndoQueriesArgs = (lang) => {
+      const nameKeyName =
+        attribute === "family" ? "name" : `name${uppercaseFirstChar(lang)}`;
+      const descriptionKeyName = `description${uppercaseFirstChar(lang)}`;
+      return {
+        name: detailedAtrribute[nameKeyName],
+        description: detailedAtrribute[descriptionKeyName] || "",
+      };
     };
 
     const jsonQueriesArgs = {
-      fr: jsonFrUndoQueriesArgs,
-      enUS: jsonEnUSUndoQueriesArgs,
-      enGB: jsonEnGBUndoQueriesArgs,
+      fr: giveUndoQueriesArgs("fr"),
+      enUS: giveUndoQueriesArgs("enUS"),
+      enGB: giveUndoQueriesArgs("enGB"),
     };
 
     body.deleteAttributeQueries = {
-      jsonKeyName,
+      jsonKeyName: keyName,
       nameFr,
       jsonQueriesArgs,
     };
