@@ -1,7 +1,6 @@
 const expressAsyncHandler = require("express-async-handler");
 const { isPositiveNumber } = require("../../services/typesAndValidationChecks");
 const tables = require("../../tables");
-const CustomErrorClass = require("../../services/ErrorClasses");
 
 const addFamilyMemberNumber = expressAsyncHandler(async (req, res, next) => {
   const { body } = req;
@@ -15,8 +14,7 @@ const addFamilyMemberNumber = expressAsyncHandler(async (req, res, next) => {
     const newFamilyMemberNumber = previousMaxFamilyMember + 1;
     body.familyMember = newFamilyMemberNumber;
   } else {
-    const err = new CustomErrorClass("paintingMaxFamilyMemberNotFound");
-    return next(err);
+    body.familyMember = 1;
   }
 
   return next();
