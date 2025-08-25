@@ -57,12 +57,21 @@ router.put(
 
 router.delete(
   "/deletePaintingSize/:id",
-  checkPresenceInDb({
-    manager: "paintingSizes",
-    method: "readById",
-    reqParamsKeyParams: { id: "id" },
-    errorNumber: "05007",
-  }),
+  checkPresenceInDb(
+    {
+      manager: "paintingSizes",
+      method: "readById",
+      reqParamsKeyParams: { id: "id" },
+      errorNumber: "05007",
+    },
+    {
+      manager: "paintingSizes",
+      method: "findPaintingsIdByPaintingSizeId",
+      reqParamsKeyParams: { paintingSizeId: "id" },
+      errorNumber: "05016",
+      rejectWhenTrue: true,
+    }
+  ),
   paintingSizesControllers.adminFindOneDetailed,
   addDeleteAttributeQueries("paintingSize"),
   paintingSizesControllers.deletePaintingSize
