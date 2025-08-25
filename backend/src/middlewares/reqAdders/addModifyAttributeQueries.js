@@ -11,7 +11,10 @@ const giveLanguageAndKey = (modifiedFieldName) => {
   for (const key of keys) {
     const splitName = modifiedFieldName.split(key);
     if (splitName.length === 2) {
-      return { language: lowercaseFirstChar(splitName[1]), key };
+      return {
+        language: lowercaseFirstChar(splitName[1]),
+        key: lowercaseFirstChar(key),
+      };
     }
   }
   return {};
@@ -23,7 +26,7 @@ const addModifyAttributeQueries = (attribute) => {
     const { modifiedFields } = body;
     const detailedAttributeKey = `detailed${uppercaseFirstChar(attribute)}`;
     const detailedAttribute = body[detailedAttributeKey];
-    const { name } = detailedAttribute;
+    const { keyName } = detailedAttribute;
 
     const queriesArgs = {
       fr: {},
@@ -33,11 +36,18 @@ const addModifyAttributeQueries = (attribute) => {
 
     for (const fieldName of Object.keys(modifiedFields)) {
       const { language, key } = giveLanguageAndKey(fieldName);
-      queriesArgs[language][key] = body[fieldName];
+      if (attribute === "family" && key === "name") {
+        queriesArgs.fr.name = body[fieldName];
+        queriesArgs.enUS.name = body[fieldName];
+        queriesArgs.enGB.name = body[fieldName];
+      } else {
+        queriesArgs[language][key] = body[fieldName];
+      }
     }
 
     const giveReferenceValues = (lang) => {
-      const nameKey = `name${uppercaseFirstChar(lang)}`;
+      const nameKey =
+        attribute === "family" ? `name` : `name${uppercaseFirstChar(lang)}`;
       const descriptionKey = `description${uppercaseFirstChar(lang)}`;
       return {
         name: detailedAttribute[nameKey],
@@ -51,15 +61,15 @@ const addModifyAttributeQueries = (attribute) => {
         const referenceValues = giveReferenceValues(langKey);
         modifyAttributeQueries[langKey] = {
           queries: {
-            name: args.Name ?? referenceValues.name,
-            description: args.Description ?? referenceValues.description,
+            name: args.name ?? referenceValues.name,
+            description: args.description ?? referenceValues.description,
           },
           undoQueries: referenceValues,
         };
       }
     }
 
-    body.jsonKey = name;
+    body.jsonKey = keyName;
     body.modifyAttributeQueries = modifyAttributeQueries;
 
     return next();
