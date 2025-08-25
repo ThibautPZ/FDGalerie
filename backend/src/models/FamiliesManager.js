@@ -25,6 +25,42 @@ class FamiliesManager extends AbstractManager {
     );
   }
 
+  async findById({ id }) {
+    return this.database.query(
+      `SELECT id, name FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+  }
+
+  async readWithDetails() {
+    return this.database.query(
+      `SELECT f.id AS id, f.name AS keyName, COUNT(p.id) AS nbPaintings
+      FROM ${this.table} AS f
+      LEFT JOIN paintings AS p ON p.families_id = f.id
+      GROUP BY f.id, f.name`
+    );
+  }
+
+  async findOneAdminWithDetails(id) {
+    return this.database.query(
+      `SELECT f.id AS id, f.name AS keyName, COUNT(p.id) AS nbPaintings
+      FROM ${this.table} AS f
+      LEFT JOIN paintings AS p ON p.families_id = f.id
+      WHERE f.id = ? GROUP BY f.id, f.name`,
+      [id]
+    );
+  }
+
+  async findPaintingsIdByFamilyId({ familyId }) {
+    return this.database.query(
+      `SELECT p.id AS id
+      FROM ${this.table} AS f
+      RIGHT JOIN paintings AS p ON p.families_id = f.id
+      WHERE f.id = ?;`,
+      [familyId]
+    );
+  }
+
   async createOne(familyName) {
     return this.database.query(`INSERT INTO ${this.table} (name) VALUES (?)`, [
       familyName,

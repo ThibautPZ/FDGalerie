@@ -43,6 +43,18 @@
     "createFamily": {
       "type": "info",
       "message": "familyCreated"
+    },
+    "modifyFamily": {
+      "type": "info",
+      "message": "familyModified"
+    },
+    "modifyFamilyName": {
+      "type": "info",
+      "message": "familyModifiedName"
+    },
+    "deleteFamily": {
+      "type": "info",
+      "message": "familyDeleted"
     }
   },
   "paintingSizesControllers": {

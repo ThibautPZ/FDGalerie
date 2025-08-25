@@ -49,12 +49,6 @@
     "type": "error",
     "publicCode": "00004"
   },
-  "02001": {
-    "name": "paintingMaxFamilyMemberNotFound",
-    "statusCode": 400,
-    "type": "error",
-    "publicCode": "00004"
-  },
   "00200": {
     "name": "wrongUserPassword",
     "statusCode": 401,
@@ -147,6 +141,21 @@
     "statusCode": 500,
     "type": "error"
   },
+  "05015": {
+    "name": "cannotDeleteFamilyUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05016": {
+    "name": "cannotDeleteFormatUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05017": {
+    "name": "cannotDeleteSupportUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
   "06002": {
     "name": "cannotUpdateContact",
@@ -219,6 +228,16 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06017": {
+    "name": "cannotUpdateFamily",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06018": {
+    "name": "cannotDeleteFamily",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,
@@ -243,6 +262,21 @@
   },
   "07005": {
     "name": "cannotGetTechniqueById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07006": {
+    "name": "cannotGetSupportById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07007": {
+    "name": "cannotGetPaintingSizeById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07008": {
+    "name": "cannotGetFamilyById",
     "statusCode": 400,
     "type": "error"
   }

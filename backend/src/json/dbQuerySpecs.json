@@ -128,5 +128,10 @@
     "manager": "paintingSizes",
     "method": "deleteById",
     "undo": "createOne"
+  },
+  "deleteFamily": {
+    "manager": "families",
+    "method": "deleteById",
+    "undo": "createOne"
   }
 }
