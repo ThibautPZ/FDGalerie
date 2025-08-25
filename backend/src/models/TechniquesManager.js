@@ -34,7 +34,7 @@ class TechniquesManager extends AbstractManager {
 
   async findOneAdminWithDetails(id) {
     return this.database.query(
-      `SELECT t.id AS id, t.name AS name, COUNT(pht.paintings_id) AS nbPaintings
+      `SELECT t.id AS id, t.name AS keyName, COUNT(pht.paintings_id) AS nbPaintings
       FROM ${this.table} AS t
       LEFT JOIN paintings_has_techniques AS pht ON t.id = pht.techniques_id
       WHERE t.id = ? GROUP BY t.id, t.name`,
@@ -44,7 +44,7 @@ class TechniquesManager extends AbstractManager {
 
   async readWithDetails() {
     return this.database.query(
-      `SELECT t.id AS id, t.name AS name, COUNT(pht.paintings_id) AS nbPaintings
+      `SELECT t.id AS id, t.name AS keyName, COUNT(pht.paintings_id) AS nbPaintings
       FROM ${this.table} AS t
       LEFT JOIN paintings_has_techniques AS pht ON t.id = pht.techniques_id
       GROUP BY t.id, t.name`
