@@ -56,12 +56,21 @@ router.put(
 
 router.delete(
   "/deleteSupport/:id",
-  checkPresenceInDb({
-    manager: "supports",
-    method: "readById",
-    reqParamsKeyParams: { id: "id" },
-    errorNumber: "05006",
-  }),
+  checkPresenceInDb(
+    {
+      manager: "supports",
+      method: "readById",
+      reqParamsKeyParams: { id: "id" },
+      errorNumber: "05006",
+    },
+    {
+      manager: "supports",
+      method: "findPaintingsIdBySupportId",
+      reqParamsKeyParams: { supportId: "id" },
+      errorNumber: "05017",
+      rejectWhenTrue: true,
+    }
+  ),
   supportsControllers.adminFindOneDetailed,
   addDeleteAttributeQueries("support"),
   supportsControllers.deleteSupport
