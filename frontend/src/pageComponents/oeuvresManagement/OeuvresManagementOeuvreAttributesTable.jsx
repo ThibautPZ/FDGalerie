@@ -33,7 +33,7 @@ const giveJsonKey = (column) => {
 
 const translatedNameCellCb = ({ column, row, table }) => {
   const { json } = table.options.meta;
-  const untranslatedName = row.original.name;
+  const untranslatedName = row.original.keyName;
   const key = giveJsonKey(column);
   const value = json[key][untranslatedName].name;
   return value || "-";
@@ -41,7 +41,7 @@ const translatedNameCellCb = ({ column, row, table }) => {
 
 const translatedDescriptionCellCb = ({ column, row, table }) => {
   const { json } = table.options.meta;
-  const untranslatedName = row.original.name;
+  const untranslatedName = row.original.keyName;
   const key = giveJsonKey(column);
   const value = json[key][untranslatedName].description;
   if (!value) {
@@ -96,7 +96,7 @@ export default function OeuvreManagementOeuvreAttributesTable({
       if (isArrayNotEmpty(colName)) {
         const [key, subKey] = colName;
         if (key === "name" || key === "description") {
-          const untranslatedName = row.name;
+          const untranslatedName = row.keyName;
           const dataKey = `json${subKey}`;
           return jsonData[dataKey][untranslatedName][key] || "-";
         }
@@ -182,6 +182,7 @@ export default function OeuvreManagementOeuvreAttributesTable({
       <h1>{t("title")}</h1>
       <OeuvresManagementAttributesTableFilters
         tableData={table}
+        attribute={attribute}
         t={tPageText}
       />
       <TableCore tableObj={table} />

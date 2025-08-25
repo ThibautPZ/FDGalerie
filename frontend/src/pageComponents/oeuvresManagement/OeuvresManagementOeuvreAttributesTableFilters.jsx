@@ -2,6 +2,7 @@ import DebouncedInput from "../../components/customInputs/DebouncedInput";
 
 export default function OeuvresManagementAttributesTableFilters({
   tableData,
+  attribute,
   t,
 }) {
   const giveTableFilterValue = (colName) =>
@@ -11,10 +12,13 @@ export default function OeuvresManagementAttributesTableFilters({
     return tableData.getColumn(colName).setFilterValue(value);
   };
 
+  const nameFrFilterNS =
+    attribute === "family" ? "filterByName" : "filterByNameFr";
+
   return (
     <div className="OeuvresManagementAttributesTableFilters">
       <p>{t("filterBy")}</p>
-      <span>{t("filterByNameFr")}</span>
+      <span>{t(nameFrFilterNS)}</span>
       <DebouncedInput
         type="text"
         value={giveTableFilterValue("name_Fr") || ""}
@@ -22,22 +26,26 @@ export default function OeuvresManagementAttributesTableFilters({
         onChange={(value) => setTableFilterValue("name_Fr", value)}
         debounce={500}
       />
-      <span>{t("filterByNameEnUS")}</span>
-      <DebouncedInput
-        type="text"
-        value={giveTableFilterValue("name_EnUS") || ""}
-        placeholder={t("nameEnUSFilterPlaceholder")}
-        onChange={(value) => setTableFilterValue("name_EnUS", value)}
-        debounce={500}
-      />
-      <span>{t("filterByNameEnGB")}</span>
-      <DebouncedInput
-        type="text"
-        value={giveTableFilterValue("name_EnGB") || ""}
-        placeholder={t("nameEnGBFilterPlaceholder")}
-        onChange={(value) => setTableFilterValue("name_EnGB", value)}
-        debounce={500}
-      />
+      {attribute !== "family" && (
+        <>
+          <span>{t("filterByNameEnUS")}</span>
+          <DebouncedInput
+            type="text"
+            value={giveTableFilterValue("name_EnUS") || ""}
+            placeholder={t("nameEnUSFilterPlaceholder")}
+            onChange={(value) => setTableFilterValue("name_EnUS", value)}
+            debounce={500}
+          />
+          <span>{t("filterByNameEnGB")}</span>
+          <DebouncedInput
+            type="text"
+            value={giveTableFilterValue("name_EnGB") || ""}
+            placeholder={t("nameEnGBFilterPlaceholder")}
+            onChange={(value) => setTableFilterValue("name_EnGB", value)}
+            debounce={500}
+          />
+        </>
+      )}
       <button type="button" onClick={() => tableData.resetColumnFilters()}>
         {t("resetFilters")}
       </button>
