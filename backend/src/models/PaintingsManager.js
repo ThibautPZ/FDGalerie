@@ -193,7 +193,7 @@ class PaintingsManager extends AbstractManager {
       LEFT JOIN paintings_storages AS pst ON p.id = pst.paintings_id
       LEFT JOIN paintings_artist_comments AS pac ON p.id = pac.paintings_id
       LEFT JOIN paintings_availabilities AS pa ON p.paintings_availabilities_id = pa.id
-      WHERE p.painting_sizes_id = ? GROUP BY p.id;`,
+      WHERE p.families_id = ? GROUP BY p.id;`,
       [familyId]
     );
   }
