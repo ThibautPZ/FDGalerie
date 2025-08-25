@@ -13,6 +13,7 @@ export default function OeuvresManagementDetailedAttribute({
 }) {
   const {
     relatedOeuvres,
+    keyName,
     name,
     nameFr,
     nameEnUS,
@@ -41,23 +42,32 @@ export default function OeuvresManagementDetailedAttribute({
     <div>
       <h1>
         {tAttributePageText("title")}
-        {tAttribute(`${name}.name`)}
+        {tAttribute(`${keyName}.name`)}
       </h1>
       <div>
         <p>{tAttributePageText("id", { id })}</p>
       </div>
-      <div>
-        <p>{tPageText("nameFr")}</p>
-        <p>{nameFr}</p>
-      </div>
-      <div>
-        <p>{tPageText("nameEnUS")}</p>
-        <p>{nameEnUS}</p>
-      </div>
-      <div>
-        <p>{tPageText("nameEnGB")}</p>
-        <p>{nameEnGB}</p>
-      </div>
+      {attribute === "family" ? (
+        <div>
+          <p>{tPageText("name")}</p>
+          <p>{name}</p>
+        </div>
+      ) : (
+        <>
+          <div>
+            <p>{tPageText("nameFr")}</p>
+            <p>{nameFr}</p>
+          </div>
+          <div>
+            <p>{tPageText("nameEnUS")}</p>
+            <p>{nameEnUS}</p>
+          </div>
+          <div>
+            <p>{tPageText("nameEnGB")}</p>
+            <p>{nameEnGB}</p>
+          </div>
+        </>
+      )}{" "}
       <div>
         <p>{tPageText("descriptionFr")}</p>
         <p>{descriptionFr}</p>
@@ -74,9 +84,6 @@ export default function OeuvresManagementDetailedAttribute({
         <p>{tAttributePageText("nbRelatedOeuvres")}</p>
         <p>{nbPaintings || tAttributePageText("noRelatedOeuvres")}</p>
       </div>
-      {/* <button type="button" onClick={() => setIsModifying(true)}>
-        {tAttributePageText("modifyBtn")}
-      </button> */}
       <button
         type="button"
         onClick={handleDeleteBtnClick}
@@ -85,7 +92,6 @@ export default function OeuvresManagementDetailedAttribute({
         {tAttributePageText("deleteBtn")}
       </button>
       {nbPaintings > 0 && <p>{tAttributePageText("cannotDelete")}</p>}
-
       {nbPaintings > 0 && (
         <FoldableComponent
           isOpen={!isFolded}
