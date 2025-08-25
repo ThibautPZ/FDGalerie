@@ -6,7 +6,11 @@ import "../../scss/Oeuvre.scss";
 import ZoomedPainting from "../../components/ZoomedPainting";
 import PaintingThumbLg from "../../components/image/PaintingThumbLg";
 import FallbackImg from "../../components/image/FallbackImg";
-import { isStringNotEmpty } from "../../services/typesAndValidationChecks";
+import {
+  isArrayNotEmpty,
+  isPositiveNumber,
+  isStringNotEmpty,
+} from "../../services/typesAndValidationChecks";
 
 function OeuvresManagementDetailedOeuvre({ oeuvreData, translations }) {
   const {
@@ -18,6 +22,7 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData, translations }) {
     support,
     format,
     family,
+    familyId,
     artistCommentFr,
     artistCommentEnUS,
     artistCommentEnGB,
@@ -181,10 +186,17 @@ function OeuvresManagementDetailedOeuvre({ oeuvreData, translations }) {
           height,
         })}
       </p>
+      {isPositiveNumber(familyId) && !isArrayNotEmpty(sisters) ? (
+        <p>
+          {tPageDetailedOeuvreText("family", {
+            family: tFamilies(`${family}.name`),
+          })}
+        </p>
+      ) : null}
       {sisters?.length > 0 && (
         <div>
           <p>
-            {tPageDetailedOeuvreText("family", {
+            {tPageDetailedOeuvreText("familyWithSisters", {
               family: tFamilies(`${family}.name`),
             })}
           </p>
