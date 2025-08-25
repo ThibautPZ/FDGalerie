@@ -87,13 +87,13 @@ const adminFindOneDetailed = asyncHandler(async (req, res, next) => {
 
   const { failures } = giveSuccesfulAndFailedQueryNames(results, true);
   if (failures.length) {
-    return next(new CustomErrorClass("07005", failures));
+    return next(new CustomErrorClass("07007", failures));
   }
 
   const { paintingSize, oeuvres, jsonFr, jsonEnUS, jsonEnGB } = results;
 
   const paintingSizeData = paintingSize[0];
-  const untranslatedName = paintingSizeData.name;
+  const untranslatedName = paintingSizeData.keyName;
 
   const detailedPaintingSize = {
     ...paintingSizeData,

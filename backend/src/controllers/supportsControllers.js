@@ -87,13 +87,13 @@ const adminFindOneDetailed = asyncHandler(async (req, res, next) => {
 
   const { failures } = giveSuccesfulAndFailedQueryNames(results);
   if (failures.length) {
-    return next(new CustomErrorClass("07005", failures));
+    return next(new CustomErrorClass("07006", failures));
   }
 
   const { support, oeuvres, jsonFr, jsonEnUS, jsonEnGB } = results;
 
   const supportData = support[0];
-  const untranslatedName = supportData.name;
+  const untranslatedName = supportData.keyName;
 
   const detailedSupport = {
     ...supportData,

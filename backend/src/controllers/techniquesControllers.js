@@ -95,7 +95,7 @@ const adminFindOneDetailed = asyncHandler(async (req, res, next) => {
   const { technique, oeuvres, jsonFr, jsonEnUS, jsonEnGB } = results;
 
   const techniqueData = technique[0];
-  const untranslatedName = techniqueData.name;
+  const untranslatedName = techniqueData.keyName;
 
   const detailedTechnique = {
     ...techniqueData,
