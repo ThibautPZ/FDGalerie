@@ -153,7 +153,7 @@ const checkPresenceInDb = (...options) => {
         if (count) {
           const resCount = Object.values(result[0])[0] || 0;
           const { param, value } = count;
-          const expectedCount = value || giveParamCount(req.body, param);
+          const expectedCount = value ?? giveParamCount(req.body, param);
           doesExist = resCount === expectedCount;
         }
 
