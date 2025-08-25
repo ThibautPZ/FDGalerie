@@ -65,6 +65,31 @@
       "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
+    "05015": {
+      "title": "Tableaux utilisant cette famille",
+      "message": "Cette famille est utilisée par au moins un tableau. Vous pouvez supprimer les tableaux utilisant cette famille ou utiliser la fonction \"Supprimer la mention de cette famille dans les tableaux associés\" pour pouvoir supprimer cette famille.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05016": {
+      "title": "Tableaux utilisant ce format",
+      "message": "Ce format est utilisé par au moins un tableau. Vous pouvez supprimer les tableaux utilisant ce format ou utiliser la fonction \"Supprimer la mention de ce format dans les tableaux associés\" pour pouvoir supprimer ce format.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05017": {
+      "title": "Tableaux utilisant ce support",
+      "message": "Ce support est utilisé par au moins un tableau. Vous pouvez supprimer les tableaux utilisant ce support ou utiliser la fonction \"Supprimer la mention de ce support dans les tableaux associés\" pour pouvoir supprimer ce support.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+
     "06001": {
       "title": "Impossible d'enregistrer le nouveau contact",
       "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
@@ -161,9 +186,33 @@
       "hasCloseBtn": true,
       "closeBtnText": "OK"
     },
+    "06017": {
+      "title": "Impossible de modifier la famille",
+      "message": "Une erreur est survenue lors de la modification de la famille. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06018": {
+      "title": "Impossible de supprimer la famille",
+      "message": "Une erreur est survenue lors de la suppression de la famille. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
     "07003": {
       "title": "Impossible de trouver le contact",
       "message": "Le contact demandé n'a pas été trouvé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "07008": {
+      "title": "Impossible de trouver la famille",
+      "message": "La famille demandée n'a pas été trouvée.",
       "validationBtnReturnedStr": "",
       "validationBtnText": "",
       "hasCloseBtn": true,
@@ -544,6 +593,38 @@
     "formatDeleted": {
       "title": "Format supprimé",
       "message": "Le format {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "familyModified": {
+      "title": "Famille modifiée",
+      "message": "La famille {{insertText1}} a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "familyModifiedName": {
+      "title": "Famille modifiée",
+      "message": "La famille {{insertText1}} (anciennement {{insertText2}}) a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteFamilyConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de cette famille. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteFamily",
+      "validationBtnText": "Oui, supprimer cette famille",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "familyDeleted": {
+      "title": "Famille supprimée",
+      "message": "La famille {{insertText1}} a été supprimée.",
       "validationBtnReturnedStr": "backToPreviousPage",
       "validationBtnText": "",
       "hasCloseBtn": true,

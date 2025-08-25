@@ -6,7 +6,7 @@ import OeuvresManagementCreateOeuvreForm from "./OeuvresManagementCreateOeuvreFo
 import FoldableComponent from "../../components/FoldableComponent";
 import CreateContactForm from "../../components/CreateContactForm";
 import translationInstance from "../../services/translationInstance";
-import CreateFamilyForm from "../shared/CreateFamilyForm";
+import FamilyForm from "../shared/FamilyForm";
 import FormatForm from "../shared/FormatForm";
 import SupportForm from "../shared/SupportForm";
 import TechniqueForm from "../shared/TechniqueForm";
@@ -59,7 +59,7 @@ function OeuvresManagementCreateOeuvre() {
           onOpen={null}
           onClose={onFoldClose}
         >
-          <CreateFamilyForm />
+          <FamilyForm />
         </FoldableComponent>
 
         <FoldableComponent

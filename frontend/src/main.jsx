@@ -48,6 +48,9 @@ import OeuvresManagementDetailedSupport from "./pageComponents/oeuvresManagement
 import OeuvresManagementFormats from "./pageComponents/oeuvresManagement/OeuvresManagementFormats";
 import OeuvresManagementDetailedFormat from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedFormat";
 import OeuvresManagementCreateFormat from "./pageComponents/oeuvresManagement/OeuvresManagementCreateFormat";
+import OeuvresManagementFamilies from "./pageComponents/oeuvresManagement/OeuvresManagementFamilies";
+import OeuvresManagementDetailedFamily from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedFamily";
+import OeuvresManagementCreateFamily from "./pageComponents/oeuvresManagement/OeuvresManagementCreateFamily";
 
 const router = createBrowserRouter([
   {
@@ -244,6 +247,20 @@ const router = createBrowserRouter([
                   {
                     path: "new",
                     element: <OeuvresManagementCreateFormat />,
+                  },
+                ],
+              },
+              {
+                path: "families",
+                element: <OeuvresManagementFamilies />,
+                children: [
+                  {
+                    path: ":family",
+                    element: <OeuvresManagementDetailedFamily />,
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateFamily />,
                   },
                 ],
               },

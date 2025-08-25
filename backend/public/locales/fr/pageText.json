@@ -30,7 +30,7 @@
       "createTechniqueBtnText": "Enregistrer la nouvelle technique",
       "modifyTechniqueBtnText": "Modifier la technique"
     },
-    "CreateFamily": {
+    "FamilyForm": {
       "familyNamePH": "Nom de la famille...",
       "familyDescriptionFrPH": "Description en français..",
       "familyName": "Nom de la famille",
@@ -39,7 +39,8 @@
       "familyDescriptionEnGB": "Description de la famille en anglais (GB)",
       "familyDescriptionEnUSPH": "Description en anglais (US)...",
       "familyDescriptionEnGBPH": "Description en anglais (GB)...",
-      "createNewFamilyBtnText": "Enregistrer la nouvelle famille"
+      "createFamilyBtnText": "Enregistrer la nouvelle famille",
+      "modifyFamilyBtnText": "Modifier la famille"
     },
     "FormatForm": {
       "paintingSizeNameFrPH": "Nom en français...",
@@ -179,7 +180,8 @@
       "techniquesList": "{{val, list}}",
       "support": "Support : sur {{support}}",
       "format": "Format : {{format}}, largeur {{width}} cm, hauteur {{height}} cm",
-      "family": "Appartient à la série {{family}}, auprès de ces autres oeuvres : ",
+      "family": "Appartient à la série {{family}}",
+      "familyWithSisters": "Appartient à la série {{family}}, auprès de ces autres oeuvres : ",
       "availability": "Disponibilité : {{availability}}",
       "clickToGo": "(Cliquez sur les noms pour y accéder)",
       "commentFr": "Votre commentaire sur l'oeuvre en français",
@@ -305,6 +307,7 @@
     },
     "OMAttributes": {
       "filterBy": "Filtrer par :",
+      "filterByName": "Nom ",
       "filterByNameFr": "Nom en français",
       "nameFrFilterPlaceholder": "Nom...",
       "filterByNameEnUS": "Nom en anglais (US)",
@@ -358,6 +361,19 @@
       "return": "Retour à la liste",
       "createFormat": "Création d'un format"
     },
+    "OMFamilies": {
+      "noFamilies": "Aucune famille enregistrée",
+      "title": "Toutes les familles",
+      "familyName": "Nom en français",
+      "familyDescriptionFr": "Description en français",
+      "familyDescriptionEnUS": "Description en anglais (US)",
+      "familyDescriptionEnGB": "Description en anglais (GB)",
+      "nbPaintings": "Nombre de peintures l'utilisant",
+      "id": "Famille n°",
+      "newFamily": "Ajouter une nouvelle famille",
+      "return": "Retour à la liste",
+      "createFamily": "Création d'une famille"
+    },
     "OMDetailedAttribute": {
       "name": "Nom : ",
       "nameFr": "Nom en français",
@@ -400,6 +416,17 @@
       "return": "Annuler la modification",
       "deleteBtn": "Supprimer le format",
       "cannotDelete": "Ce format est utilisé par au moins un tableau. Veuillez supprimer les tableaux utilisant ce format avant de le supprimer."
+    },
+    "OMDetailedFamily": {
+      "title": "Famille : ",
+      "id": "Famille n° {{id}}",
+      "modifyBtn": "Modifier la famille",
+      "relatedOeuvres": "Oeuvres utilisant cette famille",
+      "nbRelatedOeuvres": "Nombre de tableaux utilisant cette famille",
+      "noRelatedOeuvres": "Aucun tableau utilisant cette famille",
+      "return": "Annuler la modification",
+      "deleteBtn": "Supprimer la famille",
+      "cannotDelete": "Cette famille est utilisée par au moins un tableau. Veuillez supprimer les tableaux utilisant cette famille avant de la supprimer."
     }
   },
   "ContactManagement": {

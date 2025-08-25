@@ -26,6 +26,7 @@ import UseDeleteTechnique from "../hooks/RQmutation/UseDeleteTechnique";
 import UseDeleteSupport from "../hooks/RQmutation/UseDeleteSupport";
 import UseDeleteFormat from "../hooks/RQmutation/UseDeleteFormat";
 import tranlationInstance from "../services/translationInstance";
+import UseDeleteFamily from "../hooks/RQmutation/UseDeleteFamily";
 
 // todo : ajouter i18n in attribute mutations to update t attribtes
 function OeuvresManagement() {
@@ -136,6 +137,7 @@ function OeuvresManagement() {
   const deleteTechniqueMutation = UseDeleteTechnique(handleModalInstall);
   const deleteSupportMutation = UseDeleteSupport(handleModalInstall);
   const deleteFormatMutation = UseDeleteFormat(handleModalInstall);
+  const deleteFamilyMutation = UseDeleteFamily(handleModalInstall);
 
   const backToPrev = () => {
     navigate("./");
@@ -176,6 +178,12 @@ function OeuvresManagement() {
     return deleteFormatMutation.mutate(id);
   };
 
+  const deleteFamily = (data) => {
+    const { id } = data;
+    navigate(`/management/oeuvres/families/`);
+    return deleteFamilyMutation.mutate(id);
+  };
+
   const handleCloseModal = giveOnClose(
     {
       status: "backToPreviousPage",
@@ -204,6 +212,10 @@ function OeuvresManagement() {
     {
       status: "doDeleteFormat",
       cb: deleteFormat,
+    },
+    {
+      status: "doDeleteFamily",
+      cb: deleteFamily,
     }
   );
 
@@ -255,6 +267,9 @@ function OeuvresManagement() {
             {tPageText("supports")}
           </Link>
           <Link to="/management/oeuvres/formats/">{tPageText("formats")}</Link>
+          <Link to="/management/oeuvres/families/">
+            {tPageText("families")}
+          </Link>
         </div>
       ) : (
         <button type="button" onClick={() => handleReturnClick()}>
