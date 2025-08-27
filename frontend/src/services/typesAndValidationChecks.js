@@ -1,3 +1,7 @@
+const giveType = (checked) => {
+  return Object.prototype.toString.call(checked).slice(8, -1).toLowerCase();
+};
+
 const isArray = (checked) => {
   if (!checked) {
     return false;
@@ -82,6 +86,7 @@ const isBoolean = (checked) => {
 };
 
 export {
+  giveType,
   isArray,
   isArrayNotEmpty,
   isString,
