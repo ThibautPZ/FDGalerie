@@ -126,7 +126,6 @@ router.put(
   "/updatePainting/:id",
   handleMulterParsing({ maxCount: { oeuvreFile: 1 }, fileSize: 100000000 }),
   validateSchema(modifyPaintingSchema),
-  checkPaintingVisibility,
   checkPresenceInDb(
     {
       manager: "paintings",
@@ -157,8 +156,8 @@ router.put(
     }
   ),
   checkPaintingOwnerId,
-  addFamilyMemberNumber,
   paintingsControllers.readOneAdminWithDetails,
+  checkPaintingVisibility,
   checkFile("image"),
   writeFile("paintings"),
   createThumbnail("paintings", { medium: true, large: true }),
@@ -183,6 +182,7 @@ router.put(
     isPreviousPaintingFileToBeDeleted,
     "03002"
   ),
+  addFamilyMemberNumber,
   addModifyPaintingQueries,
   paintingsControllers.modifyPainting
 );
