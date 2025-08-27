@@ -472,12 +472,20 @@ function OeuvresManagementCreateOeuvreForm({
       },
       input: "checkbox",
       conditionalDisabling: {
-        disbledWhenNoMatch: false,
+        disbledWhenNoMatch: true,
         behaviour: "default",
-        hatedFields: [
+        wantedFields: [{ name: "oeuvreFileDefaultFile", values: "truthy" }],
+        unWantedFields: [],
+        lovedFields: [
           {
             name: "oeuvreFile",
-            values: [null],
+            values: "truthy",
+          },
+        ],
+        hatedFields: [
+          {
+            name: "oeuvreFileDeleteFile",
+            values: [true],
           },
         ],
       },
@@ -495,12 +503,19 @@ function OeuvresManagementCreateOeuvreForm({
         },
       ],
       conditionalRendering: {
-        hiddenWhenNoMatch: true,
-        behaviour: "default",
+        hiddenWhenNoMatch: false,
+        behaviour: "spiteful",
+        unWantedFields: [{ name: "oeuvreFileDefaultFile", values: "truthy" }],
         lovedFields: [
           {
+            name: "oeuvreFileDeleteFile",
+            values: [true],
+          },
+        ],
+        hatedFields: [
+          {
             name: "oeuvreFile",
-            values: [null],
+            values: "truthy",
           },
         ],
       },
