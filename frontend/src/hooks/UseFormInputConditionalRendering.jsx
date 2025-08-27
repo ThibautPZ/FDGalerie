@@ -1,4 +1,22 @@
-import { isArrayNotEmpty } from "../services/typesAndValidationChecks";
+import {
+  giveType,
+  isArrayNotEmpty,
+  isObjectNotEmpty,
+} from "../services/typesAndValidationChecks";
+
+const isValueFalsy = (value) => {
+  if (!value) {
+    return true;
+  }
+  const valueType = giveType(value);
+  if (valueType === "array") {
+    return !isArrayNotEmpty(value);
+  }
+  if (valueType === "object") {
+    return !isObjectNotEmpty(value);
+  }
+  return false;
+};
 
 function UseFormInputConditionalRendering(watch, conditions) {
   if (!conditions) {
@@ -34,11 +52,22 @@ function UseFormInputConditionalRendering(watch, conditions) {
   };
 
   const hasFieldTargetedValues = (fieldObj) => {
-    if (!fieldObj.values || !isArrayNotEmpty(fieldObj.values)) {
+    if (!fieldObj) {
       return false;
     }
+    const { name, values } = fieldObj;
 
-    const watchedValue = watch(fieldObj.name);
+    const watchedValue = watch(name);
+
+    const isWatchedValueFalsy = isValueFalsy(watchedValue);
+
+    if (values === "falsy") {
+      return isWatchedValueFalsy;
+    }
+
+    if (values === "truthy") {
+      return !isWatchedValueFalsy;
+    }
 
     const matchingFieldValues = fieldObj.values.filter((value) =>
       isWatchedValueEqualToTargetedValue(watchedValue, value)
