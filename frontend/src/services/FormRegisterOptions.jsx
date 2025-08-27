@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { isArray } from "./typesAndValidationChecks";
+import { isArray, isDate, isObjectNotEmpty } from "./typesAndValidationChecks";
 import { hasKeysWithTruthyValue } from "./objectMethods/objectValidation";
 import {
   minOneNonSpaceCharRegExp,
@@ -395,6 +395,12 @@ function FormRegisterOptions(watch) {
     },
     giftDate: {
       required: tWithPrefix("giftDate.required"),
+      validate: {
+        requiredDate: (value) =>
+          watch("oeuvreAvailability")?.value !== 1 ||
+          isDate(value) ||
+          tWithPrefix("giftDate.required"),
+      },
     },
     giftNote: {
       pattern: {
@@ -413,7 +419,12 @@ function FormRegisterOptions(watch) {
         tWithPrefix("oeuvreSoldToKnownPerson.pattern"),
     },
     saleDate: {
-      required: tWithPrefix("saleDate.required"),
+      validate: {
+        requiredDate: (value) =>
+          watch("oeuvreAvailability")?.value !== 2 ||
+          isDate(value) ||
+          tWithPrefix("saleDate.required"),
+      },
     },
     salePrice: {
       required: tWithPrefix("salePrice.required"),
@@ -439,7 +450,12 @@ function FormRegisterOptions(watch) {
         tWithPrefix("oeuvreReservedToKnownPerson.pattern"),
     },
     reservationDate: {
-      required: tWithPrefix("reservationDate.required"),
+      validate: {
+        requiredDate: (value) =>
+          watch("oeuvreAvailability")?.value !== 3 ||
+          isDate(value) ||
+          tWithPrefix("reservationDate.required"),
+      },
     },
     reservationPrice: {
       pattern: {
@@ -498,6 +514,8 @@ function FormRegisterOptions(watch) {
       validate: (value) =>
         !value ||
         watch("oeuvreFile").length ||
+        (isObjectNotEmpty(watch("oeuvreFileDefaultFile")) &&
+          !watch("oeuvreFileDeleteFile")) ||
         tWithPrefix("oeuvreVisibility.validate"),
     },
     techniqueNameFr: {
