@@ -11,7 +11,10 @@ import SpecialInputConstructor from "./SpecialInputConstructor";
 import axiosInstance from "../../services/axiosInstance";
 import FileInput from "./FileInput";
 import CreatableSelectInput from "./CreatableSelectInput";
-import { giveFieldRegisterOptions } from "../../services/formFunctions";
+import {
+  giveEmptyValue,
+  giveFieldRegisterOptions,
+} from "../../services/formFunctions";
 import UseFormInputConditionalRendering from "../../hooks/UseFormInputConditionalRendering";
 
 /**
@@ -51,7 +54,7 @@ function InputConstructor({
     conditionalDisabling,
   } = field;
 
-  const { resetField } = useFormContext();
+  const { setValue } = useFormContext();
 
   const fieldRegisterOptions = giveFieldRegisterOptions(field, registerOptions);
 
@@ -92,7 +95,8 @@ function InputConstructor({
 
   useEffect(() => {
     if (isInputDisabled) {
-      resetField(name);
+      const emptyValue = giveEmptyValue(input, multiple);
+      setValue(name, emptyValue);
     }
   }, [isInputDisabled]);
 
