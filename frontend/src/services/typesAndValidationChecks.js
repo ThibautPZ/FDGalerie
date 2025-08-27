@@ -1,3 +1,7 @@
+const giveType = (checked) => {
+  return Object.prototype.toString.call(checked).slice(8, -1).toLowerCase();
+};
+
 const isArray = (checked) => {
   if (!checked) {
     return false;
@@ -57,7 +61,10 @@ const isNegativeNumber = (checked) => {
 };
 
 const isFunction = (checked) => {
-  return checked && {}.toString.call(checked) === "[object Function]";
+  if (!checked) {
+    return false;
+  }
+  return {}.toString.call(checked) === "[object Function]";
 };
 
 const isPromise = (checked) => {
@@ -67,7 +74,19 @@ const isPromise = (checked) => {
   return Promise.resolve(checked) === checked;
 };
 
+const isDate = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return {}.toString.call(checked) === "[object Date]";
+};
+
+const isBoolean = (checked) => {
+  return checked === false || checked === true;
+};
+
 export {
+  giveType,
   isArray,
   isArrayNotEmpty,
   isString,
@@ -79,4 +98,6 @@ export {
   isNegativeNumber,
   isFunction,
   isPromise,
+  isDate,
+  isBoolean,
 };

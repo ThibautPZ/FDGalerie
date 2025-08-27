@@ -6,7 +6,11 @@ import LanguageDetector from "i18next-browser-languagedetector";
 // have a look at the Quick start guide
 // for passing in lng and translations on init
 
-export const supportedLngs = { fr: "Français", en: "English" };
+export const supportedLngs = {
+  fr: "Français",
+  enUS: "English (US)",
+  enGB: "English (GB)",
+};
 
 const HttpApiOptions = {
   // path where resources get loaded from, or a function
@@ -29,7 +33,8 @@ const HttpApiOptions = {
   //     ...etc
   //    }
   //   }
-  loadPath: "/locales/{{lng}}/{{ns}}.json",
+  // loadPath: "/locales/{{lng}}/{{ns}}.json",
+  loadPath: `${import.meta.env.VITE_BACKEND_URL}/locales/{{lng}}/{{ns}}.json`,
 
   // path to post missing resources, or a function
   // function(lng, namespace) { return customPath; }
@@ -37,7 +42,9 @@ const HttpApiOptions = {
   //
   // note that this only works when initialized with { saveMissing: true }
   // (see https://www.i18next.com/overview/configuration-options)
-  addPath: "/locales/add/{{lng}}/{{ns}}",
+
+  // todo: "addPath is not used in this file, but it is used in i18n.js",
+  // addPath: "/locales/add/{{lng}}/{{ns}}",
 
   // parse data after it has been fetched
   // in example use https://www.npmjs.com/package/json5
@@ -120,7 +127,17 @@ i18n
     fallbackLng: "fr",
     supportedLngs: Object.keys(supportedLngs),
     debug: true,
-    ns: ["common", "pageText", "popUpContent"],
+    ns: [
+      "common",
+      "pageText",
+      "popUpContent",
+      "formRegisterOptionsMessages",
+      "errors",
+      "techniques",
+      "families",
+      "supports",
+      "paintingSizes",
+    ],
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

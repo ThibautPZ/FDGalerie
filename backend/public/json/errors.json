@@ -1,4 +1,9 @@
 {
+  "00000": {
+    "name": "unexpectedError",
+    "statusCode": 500,
+    "type": "error"
+  },
   "00001": {
     "name": "notFound",
     "statusCode": 404,
@@ -9,41 +14,146 @@
     "statusCode": 401,
     "type": "warn"
   },
-
   "00003": {
     "name": "emptyRequestBody",
     "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "00004": {
+    "name": "processingError",
+    "statusCode": 500,
     "type": "error"
   },
   "00005": {
     "name": "validationErrors",
     "statusCode": 400,
-    "type": "error"
-  },
-  "00100": {
-    "name": "takenPaintingTitle",
-    "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "01000": {
     "name": "wrongFileExtension",
     "statusCode": 401,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "01001": {
+    "name": "presenceInDb",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
   },
   "01100": {
     "name": "fileFormFieldNameNotFound",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "00004"
   },
   "00200": {
     "name": "wrongUserPassword",
     "statusCode": 401,
     "type": "error"
   },
-  "04001": { "name": "contactExists", "statusCode": 400, "type": "error" },
+  "03001": {
+    "name": "thumbCreateFail",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "03002"
+  },
+  "03002": {
+    "name": "fileWriteFail",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "04001": { "name": "contactExists", "statusCode": 400, "type": "warn" },
   "05001": {
     "name": "noContactName",
     "statusCode": 400,
+    "type": "error"
+  },
+  "05002": {
+    "name": "tooManyPaintingOwners",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "05003": {
+    "name": "takenPaintingTitle",
+    "statusCode": 400,
+    "type": "warn"
+  },
+  "05004": {
+    "name": "publicWhenNoImgFile",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05005": {
+    "name": "techniqueAlreadyExists",
+    "statusCode": 400,
+    "type": "warn"
+  },
+  "05006": {
+    "name": "supportIdNotFound",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "05007": {
+    "name": "paintingSizeIdNotFound",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "05008": {
+    "name": "techniqueIdNotFound",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "05009": {
+    "name": "paintingAvailabilityIdNotFound",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "00004"
+  },
+  "05010": {
+    "name": "familyNameAlreadyExists",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "05011": {
+    "name": "paintingSizeNameAlreadyExists",
+    "statusCode": 400,
+    "type": "warn"
+  },
+  "05012": {
+    "name": "supportNameAlreadyExists",
+    "statusCode": 400,
+    "type": "warn"
+  },
+  "05013": {
+    "name": "paintingOwnerNotFound",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05014": {
+    "name": "cannotDeleteTechniqueUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05015": {
+    "name": "cannotDeleteFamilyUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05016": {
+    "name": "cannotDeleteFormatUsedByPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "05017": {
+    "name": "cannotDeleteSupportUsedByPainting",
+    "statusCode": 500,
     "type": "error"
   },
   "06001": { "name": "cannotWriteContact", "statusCode": 500, "type": "error" },
@@ -52,13 +162,121 @@
     "statusCode": 500,
     "type": "error"
   },
+  "06003": {
+    "name": "cannotWriteNewPainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06004": {
+    "name": "cannotWritePaintingRelatedData",
+    "statusCode": 500,
+    "type": "error",
+    "publicCode": "06003"
+  },
+  "06006": {
+    "name": "cannotWriteNewTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06007": {
+    "name": "cannotWriteNewFamily",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06008": {
+    "name": "cannotWriteNewPaintingSize",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06009": {
+    "name": "cannotWriteNewSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06010": {
+    "name": "cannotUpdatePainting",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06011": {
+    "name": "cannotUpdateTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06012": {
+    "name": "cannotDeleteTechnique",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06013": {
+    "name": "cannotUpdateSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06014": {
+    "name": "cannotDeleteSupport",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06015": {
+    "name": "cannotUpdatePaintingSize",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06016": {
+    "name": "cannotDeletePaintingSize",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06017": {
+    "name": "cannotUpdateFamily",
+    "statusCode": 500,
+    "type": "error"
+  },
+  "06018": {
+    "name": "cannotDeleteFamily",
+    "statusCode": 500,
+    "type": "error"
+  },
   "07001": {
     "name": "cannotGetContactById",
     "statusCode": 400,
-    "type": "error"
+    "type": "error",
+    "publicCode": "07003"
   },
   "07002": {
     "name": "cannotGetContactsWithPaintingOwningCount",
+    "statusCode": 400,
+    "type": "error",
+    "publicCode": "07003"
+  },
+  "07003": {
+    "name": "cannotGetContact",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07004": {
+    "name": "cannotGetTechniquesWithPaintingCount",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07005": {
+    "name": "cannotGetTechniqueById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07006": {
+    "name": "cannotGetSupportById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07007": {
+    "name": "cannotGetPaintingSizeById",
+    "statusCode": 400,
+    "type": "error"
+  },
+  "07008": {
+    "name": "cannotGetFamilyById",
     "statusCode": 400,
     "type": "error"
   }

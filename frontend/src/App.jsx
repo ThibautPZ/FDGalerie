@@ -54,6 +54,11 @@ function App() {
         return console.error(error, query);
       },
     }),
+    defaultOptions: {
+      queries: {
+        suspense: true,
+      },
+    },
   });
 
   return (

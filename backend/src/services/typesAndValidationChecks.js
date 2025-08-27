@@ -85,8 +85,39 @@ const strictlyEqualToOneOf = (checked, ...values) => {
       return true;
     }
   }
-
   return false;
+};
+
+const isFunction = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return {}.toString.call(checked) === "[object Function]";
+};
+
+const isPromise = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return Promise.resolve(checked) === checked;
+};
+
+const isDate = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return {}.toString.call(checked) === "[object Date]";
+};
+
+const isBoolean = (checked) => {
+  return checked === false || checked === true;
+};
+
+const isError = (checked) => {
+  if (!checked) {
+    return false;
+  }
+  return Object.prototype.toString.call(checked) === "[object Error]";
 };
 
 module.exports = {
@@ -103,4 +134,9 @@ module.exports = {
   isNotUndefined,
   hasValue,
   strictlyEqualToOneOf,
+  isFunction,
+  isPromise,
+  isDate,
+  isBoolean,
+  isError,
 };

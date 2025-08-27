@@ -13,7 +13,7 @@ function Technique() {
   const fetchOeuvresByTechnique = async () => {
     try {
       const paintingsList = await axiosInstance.get(
-        `/api/paintings/technique/${nomTechnique}`
+        `/api/paintings/publicTechnique/${nomTechnique}`
       );
 
       setOeuvresList(paintingsList.data);

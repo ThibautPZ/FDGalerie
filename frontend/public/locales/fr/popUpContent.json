@@ -114,12 +114,37 @@
       "return": "Retour",
       "ok": "OK"
     },
-    "matchingPerson": {
-      "title": "Personnes enregistrées correspondantes",
-      "message": "Certaines personnes enregistrées sur le site (utilisateurs et/ou contacts) correspondent au nouveau contact en cours de création. Vérifiez s'il ne s'agit pas de la même personne, afin d'éviter de créer des doublons.",
-      "validationBtnReturnedStr": "doCreateContact",
-      "validationBtnText": "Il s'agit de quelqu'un d'autre, je valide la création de ce contact.",
-      "closeBtnText": "Annuler l'enregistrement"
+    "takenPaintingTitle": {
+      "title": "Titre du tableau déjà pris",
+      "message": "Un autre tableau enregistré possède le même titre. Veuillez modifier le titre du nouveau tableau.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "backWhileCreatingOeuvre": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un tableau. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "publicWhenNoImgFile": {
+      "title": "Impossible de rendre le tableau public",
+      "message": "Ce tableau n'a pas de fichier image, il ne peut donc pas être rendu visible au public. Veuillez ajouter une image ou rendre le tableau privé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingCreated": {
+      "title": "Tableau créé",
+      "message": "{{insertText1}} a été ajouté à vos tableaux.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
     }
   },
   "ContactManagement": {

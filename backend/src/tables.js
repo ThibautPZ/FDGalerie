@@ -15,6 +15,12 @@ const BanMessagesManager = require("./models/BanMessagesManager");
 const PaintingGiftsManager = require("./models/PaintingGiftsManager");
 const PaintingSalesManager = require("./models/PaintingSalesManager");
 const PaintingReservationsManager = require("./models/PaintingReservationsManager");
+const FamiliesManager = require("./models/FamiliesManager");
+const PaintingsHasTechniquesManager = require("./models/PaintingsHasTechniquesManager");
+const PaintingsStoragesManager = require("./models/PaintingsStoragesManager");
+const PaintingsArtistCommentsManager = require("./models/PaintingsArtistCommentsManager");
+
+const PaintingsAvailabilitiesManager = require("./models/PaintingsAvailabilitiesManager");
 
 const managers = new Map([
   [PaintingsManager, "paintings"],
@@ -28,6 +34,11 @@ const managers = new Map([
   [PaintingGiftsManager, "paintingGifts"],
   [PaintingSalesManager, "paintingSales"],
   [PaintingReservationsManager, "paintingReservations"],
+  [FamiliesManager, "families"],
+  [PaintingsHasTechniquesManager, "paintingsHasTechniques"],
+  [PaintingsStoragesManager, "paintingsStorages"],
+  [PaintingsArtistCommentsManager, "paintingsArtistComments"],
+  [PaintingsAvailabilitiesManager, "paintingsAvailabilities"],
 ]);
 
 // Create an empty object to hold data managers for different tables

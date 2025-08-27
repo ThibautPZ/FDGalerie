@@ -1,4 +1,7 @@
-const { isObjectNotEmpty } = require("./typesAndValidationChecks");
+const {
+  isObjectNotEmpty,
+  isStringNotEmpty,
+} = require("./typesAndValidationChecks");
 
 const giveObjectsNotEmpty = (...objects) => {
   const returnedArr = [];
@@ -21,4 +24,13 @@ function iterateObj(object, callback) {
   }
   return true;
 }
-module.exports = { giveObjectsNotEmpty, iterateObj };
+
+function getObjectNestedValue(object, key) {
+  if (!isObjectNotEmpty(object) || !isStringNotEmpty(key)) {
+    return null;
+  }
+  return key
+    .split(".")
+    .reduce((current, segment) => current?.[segment], object);
+}
+module.exports = { giveObjectsNotEmpty, iterateObj, getObjectNestedValue };

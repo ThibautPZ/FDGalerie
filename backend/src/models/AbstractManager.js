@@ -38,6 +38,13 @@ class AbstractManager {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
     return this.database.query(`select * from ${this.table}`);
   }
+
+  async deleteByPaintingId(paintingId) {
+    return this.database.query(
+      `DELETE FROM ${this.table} WHERE paintings_id = ?`,
+      [paintingId]
+    );
+  }
 }
 
 // Ready to export

@@ -11,6 +11,7 @@ function CustomOption(props) {
     <components.Option {...newProps}>
       {label.labelKeys.map((key) => (
         <TextWithHighlights
+          key={key}
           parentName=""
           fullText={value[key]}
           textToBeHighlighted={label.searchedKeys[key]}

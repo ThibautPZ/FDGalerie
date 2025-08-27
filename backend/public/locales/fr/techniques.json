@@ -1,0 +1,30 @@
+{
+  "ACRYLIQUE": {
+    "name": "Acrylique",
+    "description": "Acrylique est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "AQUARELLE": {
+    "name": "Aquarelle",
+    "description": "L'aquarelle est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "HUILE": {
+    "name": "Huile",
+    "description": "Huile est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "CRAYON_À_PAPIER": {
+    "name": "Crayon à papier",
+    "description": "Crayon à papier est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "ENCRE": {
+    "name": "Encre",
+    "description": "Encre est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "COLLAGE": {
+    "name": "Collage",
+    "description": "Collage est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  },
+  "CRAYONS_GRAS": {
+    "name": "Crayons gras",
+    "description": "Crayons gras est un outil de dessin qui permet de dessiner des formes à l'aide d'un crayon. Il est souvent utilisé pour dessiner des objets en bois, dessiner des images, dessiner des éléments de construction, etc."
+  }
+}

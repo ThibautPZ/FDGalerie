@@ -34,6 +34,23 @@ import ProtectedNonUserRoute from "./components/reactrouterdom/ProtectedNonUserR
 import ContactManagementContactInfo from "./pageComponents/contactManagement/ContactManagementContactInfo";
 import CreateContact from "./pageComponents/contactManagement/CreateContact";
 import GlobalErrorBoundary from "./services/errorElements/GlobalErrorBoundary";
+import OeuvresManagementCreateOeuvre from "./pageComponents/oeuvresManagement/OeuvresManagementCreateOeuvre";
+import OeuvresManagementOeuvreInfo from "./pageComponents/oeuvresManagement/OeuvreManagementOeuvreInfo";
+import OeuvresManagementDons from "./pageComponents/oeuvresManagement/OeuvresManagementDons";
+import OeuvresManagementVentes from "./pageComponents/oeuvresManagement/OeuvresManagementVentes";
+import OeuvresManagementReservations from "./pageComponents/oeuvresManagement/OeuvresManagementReservations";
+import OeuvresManagementDetailedTechnique from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedTechnique";
+import OeuvresManagementTechniques from "./pageComponents/oeuvresManagement/OeuvresManagementTechniques";
+import OeuvresManagementCreateTechnique from "./pageComponents/oeuvresManagement/OeuvresManagementCreateTechnique";
+import OeuvresManagementSupports from "./pageComponents/oeuvresManagement/OeuvresManagementSupports";
+import OeuvresManagementCreateSupport from "./pageComponents/oeuvresManagement/OeuvresManagementCreateSupport";
+import OeuvresManagementDetailedSupport from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedSupport";
+import OeuvresManagementFormats from "./pageComponents/oeuvresManagement/OeuvresManagementFormats";
+import OeuvresManagementDetailedFormat from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedFormat";
+import OeuvresManagementCreateFormat from "./pageComponents/oeuvresManagement/OeuvresManagementCreateFormat";
+import OeuvresManagementFamilies from "./pageComponents/oeuvresManagement/OeuvresManagementFamilies";
+import OeuvresManagementDetailedFamily from "./pageComponents/oeuvresManagement/OeuvresManagementDetailedFamily";
+import OeuvresManagementCreateFamily from "./pageComponents/oeuvresManagement/OeuvresManagementCreateFamily";
 
 const router = createBrowserRouter([
   {
@@ -124,10 +141,130 @@ const router = createBrowserRouter([
           {
             path: "oeuvres",
             element: (
-              // <Suspense fallback="loading">
-              <OeuvresManagement />
-              // </Suspense>
+              <Suspense fallback={<p>"loading"</p>}>
+                <OeuvresManagement />
+              </Suspense>
             ),
+            children: [
+              {
+                path: ":id",
+                element: (
+                  <Suspense fallback={<p>"loading"</p>}>
+                    <OeuvresManagementOeuvreInfo />
+                  </Suspense>
+                ),
+              },
+              {
+                path: "new",
+                element: (
+                  // <Suspense fallback="loading">
+                  <OeuvresManagementCreateOeuvre />
+                  // </Suspense>
+                ),
+              },
+              {
+                path: "dons",
+                element: <OeuvresManagementDons />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "ventes",
+                element: <OeuvresManagementVentes />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "reservations",
+                element: <OeuvresManagementReservations />,
+                children: [
+                  {
+                    path: ":id",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementOeuvreInfo />
+                      </Suspense>
+                    ),
+                  },
+                ],
+              },
+              {
+                path: "techniques",
+                element: <OeuvresManagementTechniques />,
+                children: [
+                  {
+                    path: ":technique",
+                    element: (
+                      <Suspense fallback={<p>"loading"</p>}>
+                        <OeuvresManagementDetailedTechnique />
+                      </Suspense>
+                    ),
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateTechnique />,
+                  },
+                ],
+              },
+              {
+                path: "supports",
+                element: <OeuvresManagementSupports />,
+                children: [
+                  {
+                    path: ":support",
+                    element: <OeuvresManagementDetailedSupport />,
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateSupport />,
+                  },
+                ],
+              },
+              {
+                path: "formats",
+                element: <OeuvresManagementFormats />,
+                children: [
+                  {
+                    path: ":format",
+                    element: <OeuvresManagementDetailedFormat />,
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateFormat />,
+                  },
+                ],
+              },
+              {
+                path: "families",
+                element: <OeuvresManagementFamilies />,
+                children: [
+                  {
+                    path: ":family",
+                    element: <OeuvresManagementDetailedFamily />,
+                  },
+                  {
+                    path: "new",
+                    element: <OeuvresManagementCreateFamily />,
+                  },
+                ],
+              },
+            ],
           },
           { path: "bio", element: <BioManagement /> },
           { path: "carousel", element: <CarouselManagement /> },

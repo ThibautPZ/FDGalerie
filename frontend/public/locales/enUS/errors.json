@@ -1,0 +1,49 @@
+{
+    "popUpTitle": {
+        "signUpError": "Error on saving"
+    },
+    "popUpMessage": {
+        "takenMail": "An user already has an account at this mail address."
+    },
+    "registerOptionsUser": {
+        "firstname": {
+            "pattern": "Entered firstname has invalid characters.",
+            "minLength": "A firstname must have at least 2 characters.",
+            "maxLength": "A firstname must have a maximum of 64 characters."
+        },
+        "lastname": {
+            "pattern": "Entered lastname has invalid characters.",
+            "minLength": "A lastname must have at least 2 characters.",
+            "maxLength": "A lastname must have a maximum of 64 characters."
+        },
+        "userTypesId": {
+            "required": "A status must be entered." 
+        },
+        "address": {
+            "maxLength": "An address must have a maximum of 128 characters."
+        },
+        "postalCode": {
+            "maxLength": "A postal code must have a maximum of 14 characters."
+        },
+        "city": {
+            "maxLength": "A city name must have a maximum of 45 characters." 
+        },
+        "phoneNumber": {
+            "maxLength": "A phone number must have a maximum of 22 characters."
+        },
+        "email": {
+            "required": "A mail address must be entered.",
+            "pattern": "Entered mail has the wrong format. It should resemble this : \"micheldupont@exemple.com.\""
+        },
+        "password": {
+            "required": "A password must be entered.",
+            "minLength": "A valid password must contain at least 8 characters.",
+            "maxLength": "A valid password must contain a maximum of 64 characters."
+        },
+        "passwordConfirmation": {
+            "required": "You must confirm your password.",
+            "validate": "Both passwords do not match."
+        }
+        }
+    
+}

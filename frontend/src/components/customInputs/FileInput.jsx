@@ -1,8 +1,15 @@
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
+
 import {
   isArrayNotEmpty,
+  isObjectNotEmpty,
   isStringNotEmpty,
+  isBoolean,
 } from "../../services/typesAndValidationChecks";
+import PaintingThumbLg from "../image/PaintingThumbLg";
+import FieldResetButton from "../customComponents/FieldResetButton";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
 
 /**
  * Renders a text input component with its label to display in a FormCore form.
@@ -21,16 +28,22 @@ import {
 function FileInput({
   label,
   isHidden,
+  isDisabled,
   fieldName,
   registerOptions,
   // asyncValues,
   uploadOptions,
+  isFormModifying,
   error,
   t,
 }) {
   const { fileTypes } = uploadOptions;
-  const { register } = useFormContext();
+  const { register, watch, resetField, setValue, formState } = useFormContext();
   const labelNs = label?.namespace || `common:info.${fieldName}`;
+  const newNs = label?.newNamespace || `common:info.${fieldName}`;
+  const modifyNs = label?.modifyNamespace || `common:info.${fieldName}`;
+  const noFileNs = label?.noFileNamespace || `common:info.noSelectedFile`;
+  const [objectUrl, setObjectUrl] = useState(null);
 
   const acceptedImageExtensions =
     "image/png, image/jpeg, image/jpg, image/webp";
@@ -59,14 +72,90 @@ function FileInput({
 
   const accept = giveInputAccept();
 
-  const registeredField = register(fieldName, registerOptions);
+  const defaultFileFieldName = `${fieldName}DefaultFile`;
+  const defaultFile = formState.defaultValues[defaultFileFieldName];
+  const isDefaultFile = isObjectNotEmpty(defaultFile);
+  const deleteFileFieldName = `${fieldName}DeleteFile`;
+  const deleteFile = formState.defaultValues[deleteFileFieldName];
+  const isDeleteFileNeeded = isBoolean(deleteFile) && defaultFile;
+
+  const registeredField = register(fieldName, {
+    ...registerOptions,
+    onChange: () => {
+      if (isDeleteFileNeeded) {
+        setValue(deleteFileFieldName, false, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
+      }
+    },
+  });
+  const fileValue = watch(fieldName);
+
+  const giveDisplayedFile = () => {
+    const isNewFile = fileValue?.length;
+
+    const isFileDeleted = !!watch(deleteFileFieldName);
+
+    if (isFileDeleted) {
+      return "noFile";
+    }
+    if (isNewFile) {
+      return "newFile";
+    }
+    if (isDefaultFile) {
+      return "defaultFile";
+    }
+    return "noFile";
+  };
+  const giveFileLabel = () => {
+    if (giveDisplayedFile() === "noFile") {
+      return t(newNs);
+    }
+    return t(modifyNs);
+  };
+
+  const resetFile = () => {
+    resetField(fieldName);
+    if (isDeleteFileNeeded) {
+      setValue(deleteFileFieldName, false, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  const eraseFile = () => {
+    setValue(fieldName, [], {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+    if (isDeleteFileNeeded) {
+      setValue(deleteFileFieldName, true, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (giveDisplayedFile() === "newFile") {
+      const objUrl = URL.createObjectURL(fileValue[0]);
+      setObjectUrl(objUrl);
+      return () => URL.revokeObjectURL(objUrl);
+    }
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [fileValue]);
 
   return (
     <div hidden={isHidden} className={fieldName}>
-      <label htmlFor={fieldName}>{t(`${labelNs}`)}</label>
-
+      <p>{t(labelNs)}</p>
+      <label htmlFor={fieldName}>{giveFileLabel()}</label>
       <input
         type="file"
+        id={fieldName}
+        hidden
+        disabled={isDisabled}
         accept={accept}
         placeholder={label?.placeHolder}
         onChange={registeredField.onChange}
@@ -74,6 +163,31 @@ function FileInput({
         ref={registeredField.ref}
         aria-invalid={error ? "true" : "false"}
       />
+      {giveDisplayedFile() === "newFile" ? (
+        <>
+          <img src={objectUrl} alt="preview" />
+          <FieldResetButton
+            onClick={() => resetField(fieldName)}
+            isHidden={!isFormModifying}
+          />
+          <FieldEraseButton onClick={eraseFile} />
+        </>
+      ) : null}
+      {giveDisplayedFile() === "defaultFile" ? (
+        <>
+          <PaintingThumbLg fileName={defaultFile.name} />
+          <FieldEraseButton onClick={eraseFile} />
+        </>
+      ) : null}
+      {giveDisplayedFile() === "noFile" ? (
+        <>
+          <p>{t(noFileNs)}</p>
+          <FieldResetButton
+            onClick={resetFile}
+            isHidden={!(isFormModifying && isDefaultFile)}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

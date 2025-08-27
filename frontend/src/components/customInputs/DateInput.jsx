@@ -1,4 +1,24 @@
-import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import DatePicker, { registerLocale } from "react-datepicker";
+import fr from "date-fns/locale/fr";
+import enUS from "date-fns/locale/en-US";
+import enGB from "date-fns/locale/en-GB";
+
+import "react-datepicker/dist/react-datepicker.css";
+import CustomDateInput from "../customComponents/CustomDateInput";
+import giveTimeUnitsFromDate from "../../services/dateTimeMethods/giveTimeUnitsFromDate";
+import translationInstance from "../../services/translationInstance";
+import { supportedLngs } from "../../i18n";
+import { isObjectNotEmpty } from "../../services/typesAndValidationChecks";
+import FieldResetButton from "../customComponents/FieldResetButton";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
+
+const dateLocales = { fr, enUS, enGB };
+
+Object.keys(supportedLngs).forEach((lng) =>
+  registerLocale(lng, dateLocales[lng])
+);
 
 /**
  * Renders a text input component with its label to display in a FormCore form.
@@ -14,62 +34,186 @@ import PropTypes from "prop-types";
  * @param {function} props.t - Function i18n which returns a string in specified language
  * @returns {JSX.Element} Rendered text input with label.
  */
-function DateInput({
+export default function DateInput({
   label,
-  isHidden,
   fieldName,
+  isHidden,
+  isDisabled,
+  registerOptions = {},
+  isFormModifying,
+  // asyncValues,
   dateRestrictions,
-  register,
   error,
   t,
 }) {
-  const { onChange, name, ref } = register;
-  const { min, max, step } = dateRestrictions;
+  const [tCommonD, tFormMsg] = translationInstance(
+    "common:date",
+    "formRegisterOptionsMessages"
+  );
+  const {
+    getValues,
+    setValue,
+    control,
+    formState,
+    watch,
+    trigger,
+    clearErrors,
+  } = useFormContext();
+
+  const { resolvedLanguage } = translationInstance();
+
+  const giveRestrictions = (restrictionObj) => {
+    const restrictions = {
+      minDate: null,
+      maxDate: null,
+    };
+
+    if (!isObjectNotEmpty(restrictionObj)) {
+      return restrictions;
+    }
+
+    const assignNewDateRestriction = (key) => {
+      return Object.assign(restrictions, {
+        [key]: new Date(restrictionObj[key]),
+      });
+    };
+
+    if (restrictionObj.minDate) {
+      assignNewDateRestriction("minDate");
+    }
+    if (restrictionObj.maxDate) {
+      assignNewDateRestriction("maxDate");
+    }
+
+    return restrictions;
+  };
+
+  const { minDate, maxDate } = giveRestrictions(dateRestrictions);
+
+  const dateValue = getValues(fieldName);
+
+  const { strYear, strMonth, strDay } = giveTimeUnitsFromDate(dateValue);
+  const [day, setDay] = useState(strDay);
+  const [month, setMonth] = useState(strMonth);
+  const [year, setYear] = useState(strYear);
+  const [selectedDate, setSelectedDate] = useState(dateValue);
+
+  const onDateChange = (dateChange) => {
+    setValue(fieldName, dateChange, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+
+    return setSelectedDate(dateChange);
+  };
+
+  const onCalendarDatePicked = (pickedDate) => {
+    const newValues = giveTimeUnitsFromDate(pickedDate);
+    setDay(newValues.strDay);
+    setMonth(newValues.strMonth);
+    setYear(newValues.strYear);
+    return onDateChange(pickedDate);
+  };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
+  const inputValues = new Map([
+    ["strYear", year],
+    ["strMonth", month],
+    ["strDay", day],
+  ]);
+
+  const checkInputAndCalendarSameValue = (calendarValue) => {
+    const calendarValues = giveTimeUnitsFromDate(calendarValue);
+    for (const [key, value] of inputValues) {
+      if (calendarValues[key] !== value) {
+        return tFormMsg(`${fieldName}.pattern`);
+      }
+    }
+    return true;
+  };
+
+  const areInputsDirty = () => {
+    const defaultValues = giveTimeUnitsFromDate(
+      formState.defaultValues[fieldName]
+    );
+    for (const [key, value] of inputValues) {
+      if (defaultValues[key] !== value) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  Object.assign(registerOptions, {
+    validate: {
+      ...registerOptions.validate,
+      inputDate: checkInputAndCalendarSameValue,
+    },
+  });
+
+  const isEraseButtonHidden = !watch(fieldName) && !day && !month && !year;
+
+  const isResetButtonHidden =
+    !isFormModifying || !(formState.dirtyFields[fieldName] || areInputsDirty());
+
+  useEffect(() => {
+    trigger(fieldName);
+    return () => {
+      clearErrors(fieldName);
+    };
+  }, [day, month, year, dateValue]);
+
   return (
-    <div hidden={isHidden} className={fieldName}>
+    <div
+      hidden={isHidden}
+      className={fieldName}
+      aria-invalid={error ? "true" : "false"}
+    >
       <label htmlFor={fieldName}>{t(`${labelNs}`)}</label>
 
-      <input
-        type="date"
-        placeholder={label?.placeHolder}
-        onChange={onChange}
-        name={name}
-        ref={ref}
-        aria-invalid={error ? "true" : "false"}
-        min={min}
-        max={max}
-        step={step}
+      <Controller
+        name={fieldName}
+        control={control}
+        rules={registerOptions}
+        disabled={isHidden}
+        render={({ field: { name, ref } }) => (
+          <DatePicker
+            disabled={isDisabled}
+            selected={selectedDate}
+            openToDate={selectedDate}
+            todayButton={tCommonD("today")}
+            placeholderText={label?.placeHolder}
+            onChange={onCalendarDatePicked}
+            name={name}
+            locale={resolvedLanguage}
+            minDate={minDate}
+            maxDate={maxDate}
+            ref={ref}
+            customInput={
+              <CustomDateInput
+                locale={resolvedLanguage}
+                onDateChange={onDateChange}
+                day={day}
+                setDay={setDay}
+                month={month}
+                setMonth={setMonth}
+                year={year}
+                setYear={setYear}
+                tCommonD={tCommonD}
+              />
+            }
+          />
+        )}
+      />
+      <FieldEraseButton
+        onClick={() => onCalendarDatePicked(null)}
+        isHidden={isEraseButtonHidden}
+      />
+      <FieldResetButton
+        onClick={() => onCalendarDatePicked(formState.defaultValues[fieldName])}
+        isHidden={isResetButtonHidden}
       />
     </div>
   );
 }
-DateInput.propTypes = {
-  label: PropTypes.shape({
-    namespace: PropTypes.string,
-    placeHolder: PropTypes.string,
-    count: PropTypes.string,
-  }),
-  fieldName: PropTypes.string.isRequired,
-  register: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
-    ref: PropTypes.func.isRequired,
-  }).isRequired,
-  error: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    ref: PropTypes.objectOf().isRequired,
-  }),
-  t: PropTypes.func.isRequired,
-};
-
-DateInput.defaultProps = {
-  label: null,
-  error: null,
-};
-
-export default DateInput;

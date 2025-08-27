@@ -32,7 +32,7 @@ function AdditionalSelectLabelInfo({ label, value }) {
 
   const giveAdditionalInfos = () => {
     let returnedStr = "";
-    if (!isObjectNotEmpty(label?.additionalLabelData)) {
+    if (!isObjectNotEmpty(label)) {
       return returnedStr;
     }
     if (infoOfInterestType === "keyHasValue") {

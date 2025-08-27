@@ -1,5 +1,6 @@
 import { Controller, useFormContext } from "react-hook-form";
 import Select from "react-select";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 /**
  * Renders a select field with its label to display in a FormCore form.
@@ -17,34 +18,20 @@ import Select from "react-select";
 function SelectInput({
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   fieldName,
   options,
   registerOptions,
+  isFormModifying,
   asyncValues,
   error,
   t,
 }) {
-  const { control } = useFormContext();
+  const { control, resetField, watch, formState } = useFormContext();
   const placeholder = t(`pageText:inputPlaceHolder.${fieldName}`);
-  // const giveFieldValue = (option) => {
-  //   return `${fieldName}${option.value}`;
-  // };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
-
-  // const isPlaceHolderHidden = () => {
-  //   const selectedValues = useWatch({ name: fieldName });
-
-  //   if (
-  //     selectedValues === "" ||
-  //     (Array.isArray(selectedValues) && !selectedValues[0]) ||
-  //     !Object.values(selectedValues)[0]
-  //   ) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
 
   const populateOptionsWhenMissingLabel = (optionsArr) => {
     if (!Array.isArray(optionsArr) || !optionsArr.length) {
@@ -69,17 +56,28 @@ function SelectInput({
   };
   const selectOptions = giveOptions();
 
-  // const giveOptionLabel = (option) => {
-  //   console.log(option);
-  // };
-  // const giveValue = (onChangeFunc, value) => {
-  //   console.log(value);
-  //   if (!multipleSelection) {
-  //     return onChangeFunc(value.value);
-  //   }
-  //   const returnedArr = value.map((val) => val.value);
-  //   return onChangeFunc(returnedArr);
-  // };
+  const areArrayValuesEqual = (defaultValuesArr, watchValuesArr) => {
+    if (defaultValuesArr.length !== watchValuesArr.length) {
+      return false;
+    }
+    return !defaultValuesArr.find(
+      ({ value }) =>
+        !watchValuesArr.find(({ value: watchedValue }) => {
+          return watchedValue === value;
+        })
+    );
+  };
+
+  const areValuesDefault = () => {
+    const defaultValue = formState.defaultValues[fieldName];
+    const watchValue = watch(fieldName);
+    if (multipleSelection) {
+      return areArrayValuesEqual(defaultValue, watchValue);
+    }
+    return defaultValue?.value === watchValue?.value;
+  };
+
+  const isResetButtonHidden = !isFormModifying || areValuesDefault();
 
   return (
     <div
@@ -94,9 +92,10 @@ function SelectInput({
         rules={registerOptions}
         render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Select
+            isDisabled={isDisabled}
+            isClearable
             options={selectOptions}
             placeholder={placeholder}
-            // onChange={(val) => giveValue(onChange, val)}
             onChange={onChange}
             onBlur={onBlur}
             name={name}
@@ -107,6 +106,10 @@ function SelectInput({
             isMulti={multipleSelection}
           />
         )}
+      />
+      <FieldResetButton
+        onClick={() => resetField(fieldName)}
+        isHidden={isResetButtonHidden}
       />
     </div>
   );

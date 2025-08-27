@@ -43,12 +43,26 @@
     "reservedPaintingsCount": "Tableaux réservés",
     "soldPaintingsCount": "Tableaux achetés",
     "giftedPaintingsCount": "Tableaux offerts",
-    "priceEur": "Prix (€)"
+    "priceEur": "Prix (€)",
+    "oeuvreFamily": "Famille"
   },
   "spokenLanguage": {
     "000": "Je ne sais pas",
     "fr": "Français",
     "en": "Anglais"
+  },
+  "date": {
+    "error": "La date renseignée n'est pas valide",
+    "today": "Aujourd' hui",
+    "year": "année",
+    "month": "mois",
+    "day": "jour",
+    "hour": "heure",
+    "minute": "minute",
+    "second": "seconde",
+    "millisecond": "seconde",
+    "date": "date",
+    "time": "heure"
   },
   "pageNames": {
     "home": "Accueil",
@@ -64,11 +78,11 @@
     "aLAtelier": "A l'atelier"
   },
   "oeuvreAvailability": {
-    "0": "Disponible",
     "1": "Offert",
     "2": "Vendu",
     "3": "Réservé",
-    "4": "Pas à vendre"
+    "4": "Disponible",
+    "5": "Pas à vendre"
   },
 
   "userTypes": {

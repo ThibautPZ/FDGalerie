@@ -35,6 +35,7 @@ import { giveFieldRegisterOptions } from "../../services/formFunctions";
 function SpecialInputConstructor({
   field,
   isHidden,
+  isDisabled,
   registerOptions,
   // asyncValues,
   errors,
@@ -50,6 +51,7 @@ function SpecialInputConstructor({
         fieldName={name}
         label={label}
         isHidden={isHidden}
+        isDisabled={isDisabled}
         multipleSelection={multiple}
         watchedInputs={specialInput.watchSpecs}
         query={specialInput.querySpecs}

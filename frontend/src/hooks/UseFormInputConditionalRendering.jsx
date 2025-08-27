@@ -1,9 +1,30 @@
+import {
+  giveType,
+  isArrayNotEmpty,
+  isObjectNotEmpty,
+} from "../services/typesAndValidationChecks";
+
+const isValueFalsy = (value) => {
+  if (!value) {
+    return true;
+  }
+  const valueType = giveType(value);
+  if (valueType === "array") {
+    return !isArrayNotEmpty(value);
+  }
+  if (valueType === "object") {
+    return !isObjectNotEmpty(value);
+  }
+  return false;
+};
+
 function UseFormInputConditionalRendering(watch, conditions) {
   if (!conditions) {
     return false;
   }
 
-  const hideInput = conditions.hiddenWhenNoMatch || false;
+  const hideInput =
+    conditions.hiddenWhenNoMatch || conditions.disbledWhenNoMatch || false;
 
   const isWatchedValueEqualToTargetedValue = (
     watchedValueStrOrArr,
@@ -23,34 +44,40 @@ function UseFormInputConditionalRendering(watch, conditions) {
       return true;
     }
 
-    if (typeof watchedValueStrOrArr !== "object") {
+    if (typeof watchedValueStrOrArr !== "object" || !watchedValueStrOrArr) {
       return watchedValueStrOrArr === targetedValue;
     }
 
     return watchedValueStrOrArr.value === targetedValue;
-
-    // return watchedValueStrOrArr === targetedValue;
   };
 
   const hasFieldTargetedValues = (fieldObj) => {
-    if (!fieldObj.values || !fieldObj.values[0]) {
+    if (!fieldObj) {
       return false;
     }
+    const { name, values } = fieldObj;
 
-    const watchedValue = watch(fieldObj.name);
+    const watchedValue = watch(name);
+
+    const isWatchedValueFalsy = isValueFalsy(watchedValue);
+
+    if (values === "falsy") {
+      return isWatchedValueFalsy;
+    }
+
+    if (values === "truthy") {
+      return !isWatchedValueFalsy;
+    }
 
     const matchingFieldValues = fieldObj.values.filter((value) =>
       isWatchedValueEqualToTargetedValue(watchedValue, value)
     );
-    if (!matchingFieldValues[0]) {
-      return false;
-    }
 
-    return true;
+    return isArrayNotEmpty(matchingFieldValues);
   };
 
   const haveFieldsTargetedValues = (fieldsArr) => {
-    if (!fieldsArr || !fieldsArr[0]) {
+    if (!isArrayNotEmpty(fieldsArr)) {
       return false;
     }
     const matchingFieldsValues = fieldsArr.filter((fieldToBeWatched) =>

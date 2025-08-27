@@ -51,6 +51,13 @@ class ContactsManager extends AbstractManager {
     );
   }
 
+  async findNameById(id) {
+    return this.database.query(
+      `SELECT firstname AS firstName, lastname AS lastName FROM ${this.table} WHERE contacts_id = ?`,
+      [id]
+    );
+  }
+
   async findByNamePhoneEmail(
     firstname,
     lastname,

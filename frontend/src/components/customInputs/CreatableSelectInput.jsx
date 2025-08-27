@@ -1,5 +1,6 @@
 import { Controller, useFormContext } from "react-hook-form";
 import Creatable from "react-select/creatable";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 /**
  * Renders a select field with its label to display in a FormCore form.
@@ -17,21 +18,23 @@ import Creatable from "react-select/creatable";
 function CreatableSelectInput({
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   fieldName,
   options,
   registerOptions,
+  isFormModifying,
   asyncValues,
   error,
   t,
 }) {
-  const { control } = useFormContext();
+  const { control, formState, resetField } = useFormContext();
   const placeholder = t(`pageText:inputPlaceHolder.${fieldName}`);
-  // const giveFieldValue = (option) => {
-  //   return `${fieldName}${option.value}`;
-  // };
 
   const labelNs = label?.namespace || `common:info.${fieldName}`;
+
+  const isResetButtonHidden =
+    !isFormModifying || !formState.dirtyFields[fieldName];
 
   const populateOptionsWhenMissingLabel = (optionsArr) => {
     if (!Array.isArray(optionsArr) || !optionsArr.length) {
@@ -69,12 +72,12 @@ function CreatableSelectInput({
         rules={registerOptions}
         render={({ field: { onChange, onBlur, value, name, ref } }) => (
           <Creatable
+            isDisabled={isDisabled}
             formatCreateLabel={(val) =>
               t("pageText:selectInput.creatableNewAdd", { new: val })
             }
             options={selectOptions}
             placeholder={placeholder}
-            // onChange={(val) => giveValue(onChange, val)}
             onChange={onChange}
             onBlur={onBlur}
             name={name}
@@ -85,6 +88,10 @@ function CreatableSelectInput({
             isMulti={multipleSelection}
           />
         )}
+      />
+      <FieldResetButton
+        onClick={() => resetField(fieldName)}
+        isHidden={isResetButtonHidden}
       />
     </div>
   );

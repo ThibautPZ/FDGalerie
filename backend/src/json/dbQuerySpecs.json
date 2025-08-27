@@ -1,0 +1,137 @@
+{
+  "createNewPainting": {
+    "manager": "paintings",
+    "method": "createNewPainting",
+    "undo": "deletePaintingById"
+  },
+  "createPaintingComment": {
+    "manager": "paintingsArtistComments",
+    "method": "createPaintingComment",
+    "undo": "deleteByPaintingId"
+  },
+  "createPaintingTechniqueRelationsByPaintingId": {
+    "manager": "paintingsHasTechniques",
+    "method": "createPaintingTechniqueRelationsByPaintingId",
+    "undo": "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds"
+  },
+  "createPaintingGift": {
+    "manager": "paintingGifts",
+    "method": "createPaintingGift",
+    "undo": "deleteByPaintingId"
+  },
+  "createPaintingReservation": {
+    "manager": "paintingReservations",
+    "method": "createPaintingReservation",
+    "undo": "deleteByPaintingId"
+  },
+  "createPaintingSale": {
+    "manager": "paintingSales",
+    "method": "createPaintingSale",
+    "undo": "deleteByPaintingId"
+  },
+  "createNewPaintingStorage": {
+    "manager": "paintingsStorages",
+    "method": "createNewPaintingStorage",
+    "undo": "deleteByPaintingId"
+  },
+  "createFamily": {
+    "manager": "families",
+    "method": "createOne",
+    "undo": "deleteById"
+  },
+  "createPaintingSize": {
+    "manager": "paintingSizes",
+    "method": "createOne",
+    "undo": "deleteById"
+  },
+  "createSupport": {
+    "manager": "supports",
+    "method": "createOne",
+    "undo": "deleteById"
+  },
+  "modifyPainting": {
+    "manager": "paintings",
+    "method": "modifyPaintingById",
+    "undo": "modifyPaintingById"
+  },
+  "modifyPaintingStorage": {
+    "manager": "paintingsStorages",
+    "method": "modifyPaintingStorage",
+    "undo": "modifyPaintingStorage"
+  },
+  "modifyPaintingArtistComment": {
+    "manager": "paintingsArtistComments",
+    "method": "modifyPaintingArtistComment",
+    "undo": "modifyPaintingArtistComment"
+  },
+  "modifyPaintingGift": {
+    "manager": "paintingGifts",
+    "method": "modifyPaintingGift",
+    "undo": "modifyPaintingGift"
+  },
+  "modifyPaintingSale": {
+    "manager": "paintingSales",
+    "method": "modifyPaintingSale",
+    "undo": "modifyPaintingSale"
+  },
+  "modifyPaintingReservation": {
+    "manager": "paintingReservations",
+    "method": "modifyPaintingReservation",
+    "undo": "modifyPaintingReservation"
+  },
+  "deletePainting": {
+    "manager": "paintings",
+    "method": "deletePaintingById",
+    "undo": "createNewPainting"
+  },
+  "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds": {
+    "manager": "paintingsHasTechniques",
+    "method": "deletePaintingTechniqueRelationsByPaintingIdAndTechniqueIds",
+    "undo": "createPaintingTechniqueRelationsByPaintingId"
+  },
+  "deletePaintingStorage": {
+    "manager": "paintingsStorages",
+    "method": "deleteByPaintingId",
+    "undo": "createNewPaintingStorage"
+  },
+  "deletePaintingArtistComment": {
+    "manager": "paintingsArtistComments",
+    "method": "deleteByPaintingId",
+    "undo": "createPaintingArtistComment"
+  },
+  "deletePaintingGiftByPaintingId": {
+    "manager": "paintingGifts",
+    "method": "deleteByPaintingId",
+    "undo": "createPaintingGift"
+  },
+  "deletePaintingSaleByPaintingId": {
+    "manager": "paintingSales",
+    "method": "deleteByPaintingId",
+    "undo": "createPaintingSale"
+  },
+  "deletePaintingReservationByPaintingId": {
+    "manager": "paintingReservations",
+    "method": "deleteByPaintingId",
+    "undo": "createPaintingReservation"
+  },
+  "deleteTechnique": {
+    "manager": "techniques",
+    "method": "deleteById",
+    "undo": "insertTechnique"
+  },
+  "deleteSupport": {
+    "manager": "supports",
+    "method": "deleteById",
+    "undo": "createOne"
+  },
+  "deletePaintingSize": {
+    "manager": "paintingSizes",
+    "method": "deleteById",
+    "undo": "createOne"
+  },
+  "deleteFamily": {
+    "manager": "families",
+    "method": "deleteById",
+    "undo": "createOne"
+  }
+}

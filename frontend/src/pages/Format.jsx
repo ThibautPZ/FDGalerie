@@ -13,7 +13,7 @@ function Format() {
   const fetchOeuvresByFormat = async () => {
     try {
       const paintingsList = await axiosInstance.get(
-        `/api/paintings/format/${nomFormat}`
+        `/api/paintings/publicFormat/${nomFormat}`
       );
 
       setOeuvresList(paintingsList.data);

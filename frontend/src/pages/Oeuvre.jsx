@@ -17,7 +17,7 @@ function Oeuvre() {
         `/api/paintings/${titreOeuvre}`
       );
 
-      setOeuvreDetails(...paintingDetails.data);
+      setOeuvreDetails(paintingDetails.data);
     } catch (error) {
       console.error(error);
     }
@@ -81,10 +81,10 @@ function Oeuvre() {
         </div>
       )}
 
-      {oeuvreDetails.comment ? (
+      {oeuvreDetails.artistComment ? (
         <div>
           <p>Note de l'artiste : </p>
-          <p>{oeuvreDetails.comment}</p>
+          <p>{oeuvreDetails.artistComment}</p>
         </div>
       ) : (
         ""

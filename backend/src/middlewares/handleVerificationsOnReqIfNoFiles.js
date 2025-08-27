@@ -15,6 +15,7 @@ const handleVerificationsOnReqIfNoFiles = (
     }
     const reqBody = JSON.parse(JSON.stringify(req.body));
     req.body = reqBody;
+
     let schemaErrors = null;
     if (validationSchema) {
       schemaErrors = await schemaValidationErrors(validationSchema, req);

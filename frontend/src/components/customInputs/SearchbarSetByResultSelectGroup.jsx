@@ -6,20 +6,28 @@ import {
 } from "../../services/typesAndValidationChecks";
 import FetchedDataSelect from "./FetchedDataSelect";
 import { giveFieldRegisterOptions } from "../../services/formFunctions";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 function SearchbarSetByResultSelectGroup({
   groupClassname,
   fields,
+  isDisabled,
   querySpecs,
   // asyncValues,
   registerOptions,
+  isFormModifying,
   errors,
   t,
 }) {
   const { textField, selectField } = fields;
   const { name, label } = textField;
-  const { register, setValue } = useFormContext();
+  const { register, setValue, resetField, formState, watch } = useFormContext();
   const [isSelectNeeded, setIsSelectNeeded] = useState(false);
+  const [isResetButtonHidden, setIsResetButtonHidden] = useState(
+    !isFormModifying ||
+      !(formState.dirtyFields[name] || formState.dirtyFields[selectField.name])
+  );
 
   const textFieldRegisterOptions = giveFieldRegisterOptions(
     textField,
@@ -59,10 +67,28 @@ function SearchbarSetByResultSelectGroup({
 
   const watchedInputs = { watchedInputNames: name };
 
+  const isEraseButtonHidden = !watch(name);
+
+  const eraseFields = () => {
+    setValue(name, "");
+    if (isFormModifying && formState.defaultValues[name]) {
+      return setIsResetButtonHidden(false);
+    }
+    return setIsSelectNeeded(false);
+  };
+
+  const resetFields = () => {
+    resetField(name);
+
+    setIsResetButtonHidden(true);
+    return setIsSelectNeeded(false);
+  };
+
   return (
     <div className={groupClassname}>
       <input
         type="text"
+        disabled={isDisabled}
         className={name}
         placeholder={label?.placeHolder}
         onChange={registeredText.onChange}
@@ -71,22 +97,22 @@ function SearchbarSetByResultSelectGroup({
         aria-invalid={errors[name] ? "true" : "false"}
         maxLength={textFieldRegisterOptions?.maxLength?.value}
       />
-      {isSelectNeeded ? (
-        <FetchedDataSelect
-          fieldName={selectField.name}
-          label={selectField.label}
-          isHidden={!isSelectNeeded}
-          multipleSelection={false}
-          watchedInputs={watchedInputs}
-          query={querySpecs}
-          onSelectedFunction={handleSelected}
-          registerOptions={selectFieldRegisterOptions}
-          errors={errors}
-          t={t}
-        />
-      ) : (
-        ""
-      )}
+
+      <FetchedDataSelect
+        fieldName={selectField.name}
+        label={selectField.label}
+        isHidden={!isSelectNeeded}
+        isDisabled={isDisabled}
+        multipleSelection={false}
+        watchedInputs={watchedInputs}
+        query={querySpecs}
+        onSelectedFunction={handleSelected}
+        registerOptions={selectFieldRegisterOptions}
+        errors={errors}
+        t={t}
+      />
+      <FieldEraseButton onClick={eraseFields} isHidden={isEraseButtonHidden} />
+      <FieldResetButton onClick={resetFields} isHidden={isResetButtonHidden} />
     </div>
   );
 }

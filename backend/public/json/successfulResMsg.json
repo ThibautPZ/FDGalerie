@@ -2,5 +2,95 @@
   "authController": {
     "createOneContact": { "type": "info", "message": "contactCreated" },
     "updateContact": { "type": "info", "message": "contactModified" }
+  },
+  "paintingsControllers": {
+    "createPainting": {
+      "type": "info",
+      "message": "paintingCreated"
+    },
+    "modifyPainting": {
+      "type": "info",
+      "message": "paintingModified"
+    },
+    "modifyPaintingTitle": {
+      "type": "info",
+      "message": "paintingModifiedTitle"
+    },
+    "deletePainting": {
+      "type": "info",
+      "message": "paintingDeleted"
+    }
+  },
+  "techniquesControllers": {
+    "createTechnique": {
+      "type": "info",
+      "message": "techniqueCreated"
+    },
+    "modifyTechnique": {
+      "type": "info",
+      "message": "techniqueModified"
+    },
+    "modifyTechniqueName": {
+      "type": "info",
+      "message": "techniqueModifiedName"
+    },
+    "deleteTechnique": {
+      "type": "info",
+      "message": "techniqueDeleted"
+    }
+  },
+  "familiesControllers": {
+    "createFamily": {
+      "type": "info",
+      "message": "familyCreated"
+    },
+    "modifyFamily": {
+      "type": "info",
+      "message": "familyModified"
+    },
+    "modifyFamilyName": {
+      "type": "info",
+      "message": "familyModifiedName"
+    },
+    "deleteFamily": {
+      "type": "info",
+      "message": "familyDeleted"
+    }
+  },
+  "paintingSizesControllers": {
+    "createPaintingSize": {
+      "type": "info",
+      "message": "formatCreated"
+    },
+    "modifyPaintingSize": {
+      "type": "info",
+      "message": "formatModified"
+    },
+    "modifyPaintingSizeName": {
+      "type": "info",
+      "message": "formatModifiedName"
+    },
+    "deletePaintingSize": {
+      "type": "info",
+      "message": "formatDeleted"
+    }
+  },
+  "supportsControllers": {
+    "createSupport": {
+      "type": "info",
+      "message": "supportCreated"
+    },
+    "modifySupport": {
+      "type": "info",
+      "message": "supportModified"
+    },
+    "modifySupportName": {
+      "type": "info",
+      "message": "supportModifiedName"
+    },
+    "deleteSupport": {
+      "type": "info",
+      "message": "supportDeleted"
+    }
   }
 }

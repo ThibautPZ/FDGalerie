@@ -4,14 +4,21 @@ import PropTypes from "prop-types";
 import "../../scss/OeuvreDisplay.scss";
 
 function OeuvreDisplay({ oeuvre }) {
+  const { title, filename, fileExtension } = oeuvre;
+
+  const giveFilePathname = () => {
+    return `${filename}.${fileExtension}`;
+  };
+
+  const filePathname = giveFilePathname();
   return (
     <div className="OeuvreDisplay">
-      <Link to={`/oeuvre/${oeuvre.title}`}>
+      <Link to={`/oeuvre/${title}`}>
         <img
           src={`${import.meta.env.VITE_BACKEND_URL}${
             import.meta.env.VITE_PAINTINGS_PATH
-          }/${oeuvre.pathname}`}
-          alt={oeuvre.title}
+          }/${filePathname}`}
+          alt={title}
         />
       </Link>
     </div>

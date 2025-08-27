@@ -16,8 +16,11 @@ function ConfirmationPopUp({
     "errors",
     "popUpContent",
   ]);
-  const tWithPrefix = (keyStr) => {
-    return t(`${translationPrefix}${responseDataObj.message}.${keyStr}`);
+  const tWithPrefix = (keyStr, insertText1, insertText2) => {
+    return t(`${translationPrefix}${responseDataObj.message}.${keyStr}`, {
+      insertText1,
+      insertText2,
+    });
   };
 
   const commonT = (keyStr, number) => {
@@ -77,6 +80,42 @@ function ConfirmationPopUp({
                 onClose(
                   tWithPrefix("validationBtnReturnedStr"),
                   responseDataObj.confirmationData.originalReq
+                )
+              }
+            >
+              {tWithPrefix("validationBtnText")}
+            </button>
+          )}
+        </div>
+      </Modal>
+    );
+  }
+
+  if (responseDataObj.confirmationData.case === "confirmOperation") {
+    return (
+      <Modal
+        isOpen={isOpen}
+        hasCloseBtn={tWithPrefix("hasCloseBtn")}
+        validationBtnEvent={tWithPrefix("validationBtnReturnedStr")}
+        closeBtnText={tWithPrefix("closeBtnText")}
+        onClose={onClose}
+      >
+        <div>
+          <p>{tWithPrefix("title")}</p>
+          <p>
+            {tWithPrefix(
+              "message",
+              responseDataObj.infoData && responseDataObj.infoData.insertText1,
+              responseDataObj.infoData && responseDataObj.infoData.insertText2
+            )}
+          </p>
+          {tWithPrefix("validationBtnText") && (
+            <button
+              type="button"
+              onClick={() =>
+                onClose(
+                  tWithPrefix("validationBtnReturnedStr"),
+                  responseDataObj.confirmationData.operationData
                 )
               }
             >

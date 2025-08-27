@@ -1,0 +1,30 @@
+{
+  "ACRYLIQUE": {
+    "name": "Acrylique",
+    "description": "Acrylic is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "AQUARELLE": {
+    "name": "Aquarelle",
+    "description": "The aquarelle is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "HUILE": {
+    "name": "Huile",
+    "description": "Huile is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "CRAYON_À_PAPIER": {
+    "name": "Crayon à papier",
+    "description": "Crayon à papier is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "ENCRE": {
+    "name": "Encre",
+    "description": "Encre is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "COLLAGE": {
+    "name": "Collage",
+    "description": "Collage is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  },
+  "CRAYONS_GRAS": {
+    "name": "Crayons gr",
+    "description": "Crayons gras is a drawing tool that allows you to draw shapes using a pen. It is often used to draw objects made of wood, draw images, draw construction elements, etc."
+  }
+}

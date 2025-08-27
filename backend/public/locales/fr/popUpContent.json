@@ -1,0 +1,674 @@
+{
+  "httpErrors": {
+    "notFound": {
+      "title": "La requête a échoué",
+      "message": "Une erreur est survenue lors de la communication avec le serveur.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "closeBtnText": "OK"
+    }
+  },
+  "errors": {
+    "00000": {
+      "title": "Erreur",
+      "message": "Une erreur est survenue lors de la communication avec le serveur. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "00001": {
+      "title": "Erreur",
+      "message": "L'opération demandée est indisponible. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "00004": {
+      "title": "Erreur",
+      "message": "Une erreur inattendue s'est produite durant l'opération demandée. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "00200": {
+      "title": "Identifiants incorrects",
+      "message": "Les identifiants que vous avez saisis ne correspondent pas à nos enregistrements.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05001": {
+      "title": "Pas de nom de contact",
+      "message": "Le nom du contact doit être renseigné.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05004": {
+      "title": "Pas d'image du tableau",
+      "message": "Une image de tableau doit être fournie pour rendre ce tableau public.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05014": {
+      "title": "Tableaux utilisant cette technique",
+      "message": "Cette technique est utilisée par au moins un tableau. Vous pouvez supprimer les tableaux utilisant cette technique ou utiliser la fonction \"Supprimer la mention de cette technique dans les tableaux associés\" pour pouvoir supprimer cette technique.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05015": {
+      "title": "Tableaux utilisant cette famille",
+      "message": "Cette famille est utilisée par au moins un tableau. Vous pouvez supprimer les tableaux utilisant cette famille ou utiliser la fonction \"Supprimer la mention de cette famille dans les tableaux associés\" pour pouvoir supprimer cette famille.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05016": {
+      "title": "Tableaux utilisant ce format",
+      "message": "Ce format est utilisé par au moins un tableau. Vous pouvez supprimer les tableaux utilisant ce format ou utiliser la fonction \"Supprimer la mention de ce format dans les tableaux associés\" pour pouvoir supprimer ce format.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05017": {
+      "title": "Tableaux utilisant ce support",
+      "message": "Ce support est utilisé par au moins un tableau. Vous pouvez supprimer les tableaux utilisant ce support ou utiliser la fonction \"Supprimer la mention de ce support dans les tableaux associés\" pour pouvoir supprimer ce support.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+
+    "06001": {
+      "title": "Impossible d'enregistrer le nouveau contact",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06002": {
+      "title": "Impossible de mettre à jour le contact",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau contact. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06003": {
+      "title": "Impossible d'enregistrer le nouveau tableau",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau tableau. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06006": {
+      "title": "Impossible d'enregistrer la nouvelle technique",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06007": {
+      "title": "Impossible d'enregistrer la nouvelle famille",
+      "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle famille. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06008": {
+      "title": "Impossible d'enregistrer le nouveau format",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau format. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06009": {
+      "title": "Impossible d'enregistrer le nouveau support",
+      "message": "Une erreur est survenue lors de la sauvegarde du nouveau support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06012": {
+      "title": "Impossible de supprimer la technique",
+      "message": "Une erreur est survenue lors de la suppression de la technique. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06013": {
+      "title": "Impossible de modifier le support",
+      "message": "Une erreur est survenue lors de la modification du support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06014": {
+      "title": "Impossible de supprimer le support",
+      "message": "Une erreur est survenue lors de la suppression du support. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06015": {
+      "title": "Impossible de modifier le format",
+      "message": "Une erreur est survenue lors de la modification du format. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06016": {
+      "title": "Impossible de supprimer le format",
+      "message": "Une erreur est survenue lors de la suppression du format. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06017": {
+      "title": "Impossible de modifier la famille",
+      "message": "Une erreur est survenue lors de la modification de la famille. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "06018": {
+      "title": "Impossible de supprimer la famille",
+      "message": "Une erreur est survenue lors de la suppression de la famille. Veuillez réessayer plus tard.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "07003": {
+      "title": "Impossible de trouver le contact",
+      "message": "Le contact demandé n'a pas été trouvé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "07008": {
+      "title": "Impossible de trouver la famille",
+      "message": "La famille demandée n'a pas été trouvée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    }
+  },
+  "warnings": {
+    "00002": {
+      "title": "Message existant",
+      "message": "Le compte est déjà suspendu, et un message est présent. Vous pouvez consulter celui-ci et le modifier en cliquant sur le bouton : ",
+      "validationBtnReturnedStr": "banMessageUpdate",
+      "validationBtnText": "Consulter le message de suspension",
+      "closeBtnText": "OK"
+    },
+    "04001": {
+      "title": "Personnes enregistrées correspondantes",
+      "message": "Certaines personnes enregistrées sur le site (utilisateurs et/ou contacts) correspondent au nouveau contact en cours de création. Vérifiez s'il ne s'agit pas de la même personne, afin d'éviter de créer des doublons.",
+      "validationBtnReturnedStr": "doCreateContact",
+      "validationBtnText": "Ce nouveau contact n'est aucune de ces personnes, je valide sa création.",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler l'enregistrement"
+    },
+    "05003": {
+      "title": "Titre déjà pris",
+      "message": "Un autre tableau enregistré possède le même titre. Veuillez modifier le titre du nouveau tableau.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05005": {
+      "title": "Technique existante",
+      "message": "Une autre technique enregistrée possède le même nom. Veuillez modifier le nom de la nouvelle technique.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05011": {
+      "title": "Format existant",
+      "message": "Un autre format enregistré possède le même nom. Veuillez modifier le nom du nouveau format.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "05012": {
+      "title": "Support existant",
+      "message": "Un autre support enregistré possède le même nom. Veuillez modifier le nom du nouveau support.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    }
+  },
+  "shared": {
+    "CreateTechnique": {
+      "techniqueCreated": {
+        "title": "Technique créée",
+        "message": "{{insertText1}} a été ajoutée à la liste des techniques.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      },
+      "techniqueAlreadyExists": {
+        "title": "Technique déjà existante",
+        "message": "Une technique avec ce nom existe déjà.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      },
+      "cannotWriteNewTechnique": {
+        "title": "Impossible d'enregistrer la nouvelle technique",
+        "message": "Une erreur est survenue lors de la sauvegarde de la nouvelle technique.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      }
+    },
+    "CreateFamily": {
+      "familyCreated": {
+        "title": "Famille créée",
+        "message": "{{insertText1}} a été ajoutée à la liste des familles.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      }
+    },
+    "CreateFormat": {
+      "formatCreated": {
+        "title": "Format créé",
+        "message": "{{insertText1}} a été ajouté à la liste des formats.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      }
+    },
+    "CreateSupport": {
+      "supportCreated": {
+        "title": "Support créé",
+        "message": "{{insertText1}} a été ajouté à la liste des supports.",
+        "validationBtnReturnedStr": "",
+        "validationBtnText": "",
+        "hasCloseBtn": true,
+        "closeBtnText": "OK"
+      }
+    }
+  },
+  "UtilisateurManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "backWhileCreatingUser": {
+      "title": "Modifications en cours",
+      "message": "Vous avez commencé à enregistrer un nouvel utilisateur, si vous continuez les informations que vous avez inscrites ne seront pas gardées.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingBanMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingUnbanMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message d'annulation de suspension, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "backWhileWritingDeleteMessage": {
+      "title": "Message en cours d'écriture",
+      "message": "Vous avez commencé à écrire un message concernant la suppression de ce compte, si vous quittez la page le message que vous avez inscrit ne sera pas gardé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "banWithMessage": {
+      "title": "Compte suspendu",
+      "message": "Le compte a été suspendu. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à chaque tentative de connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "warnWithMessage": {
+      "title": "Notification envoyée",
+      "message": "Le message a été envoyé. L'utilisateur concerné va en recevoir une copie par mail, et pourra lire le message envoyé à la prochaine tentative de connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "unbanWithMessage": {
+      "title": "Droits rétablis",
+      "message": "Le compte est de nouveau utilisable. L'utilisateur concerné va recevoir un mail de notification, et pourra lire le message envoyé à la prochaine connexion.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+
+    "createdUser": {
+      "title": "Compte créé",
+      "message": "Le nouveau compte a été créé.",
+      "validationBtnReturnedStr": "backToUserList",
+      "validationBtnText": "Retour à la liste",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "unbanUser": {
+      "title": "Lever le ban sur le compte",
+      "message": "Vous êtes sur le point de lever la suspension du compte choisi, permettant ainsi à l'utlilisateur de reprendre son activité sur le compte. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "unbanUser",
+      "validationBtnText": "Oui",
+      "hasCloseBtn": true,
+      "closeBtnText": "Non"
+    },
+    "unwarnUser": {
+      "title": "Annulation de l'avertissement",
+      "message": "Vous êtes sur le point de supprimer le message d'avertissement précédemment envoyé à cet utilisateur. Ce message n'a pas encore été confirmé comme lu par l'utilisateur concerné. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "unwarnUser",
+      "validationBtnText": "Oui",
+      "hasCloseBtn": true,
+      "closeBtnText": "Non"
+    },
+    "unwarned": {
+      "title": "Avertissement effacé",
+      "message": "La notification a été effacée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "userHasNotif": {
+      "title": "Utilisateur notifié",
+      "message": "Cet utilisateur fait déjà l'objet d'une notification dont il n'a pas confirmé la lecture. Une nouvelle notification remplacera celle déjà envoyée. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "warnUser",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler"
+    }
+  },
+  "OeuvresManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "takenPaintingTitle": {
+      "title": "Titre du tableau déjà pris",
+      "message": "Un autre tableau enregistré possède le même titre. Veuillez modifier le titre du nouveau tableau.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "backWhileCreatingOeuvre": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un tableau. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    },
+    "publicWhenNoImgFile": {
+      "title": "Impossible de rendre le tableau public",
+      "message": "Ce tableau n'a pas de fichier image, il ne peut donc pas être rendu visible au public. Veuillez ajouter une image ou rendre le tableau privé.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingCreated": {
+      "title": "Tableau créé",
+      "message": "{{insertText1}} a été ajouté à vos tableaux.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingModified": {
+      "title": "Tableau modifié",
+      "message": "Le tableau {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "paintingModifiedTitle": {
+      "title": "Tableau modifié",
+      "message": "Le tableau {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteOeuvreConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce tableau. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteOeuvre",
+      "validationBtnText": "Oui, supprimer ce tableau",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "paintingDeleted": {
+      "title": "Tableau supprimé",
+      "message": "Le tableau {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "techniqueModified": {
+      "title": "Technique modifiée",
+      "message": "La technique {{insertText1}} a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "techniqueModifiedName": {
+      "title": "Technique modifiée",
+      "message": "La technique {{insertText1}} (anciennement {{insertText2}}) a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteTechniqueConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer la technique n°{{insertText1}}. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteTechnique",
+      "validationBtnText": "Oui, supprimer cette technique",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "techniqueDeleted": {
+      "title": "Technique supprimée",
+      "message": "La technique {{insertText1}} a été supprimée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "supportModified": {
+      "title": "Support modifié",
+      "message": "Le support {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "supportModifiedName": {
+      "title": "Support modifié",
+      "message": "Le support {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteSupportConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce support. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteSupport",
+      "validationBtnText": "Oui, supprimer ce support",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "supportDeleted": {
+      "title": "Support supprimé",
+      "message": "Le support {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "formatModified": {
+      "title": "Format modifié",
+      "message": "Le format {{insertText1}} a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "formatModifiedName": {
+      "title": "Format modifié",
+      "message": "Le format {{insertText1}} (anciennement {{insertText2}}) a été modifié.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteFormatConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de ce format. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteFormat",
+      "validationBtnText": "Oui, supprimer ce format",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "formatDeleted": {
+      "title": "Format supprimé",
+      "message": "Le format {{insertText1}} a été supprimé.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "familyModified": {
+      "title": "Famille modifiée",
+      "message": "La famille {{insertText1}} a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "familyModifiedName": {
+      "title": "Famille modifiée",
+      "message": "La famille {{insertText1}} (anciennement {{insertText2}}) a été modifiée.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "deleteFamilyConfirmation": {
+      "title": "Confirmation de suppression",
+      "message": "Vous êtes sur le point de supprimer toutes les informations de cette famille. Cette action est irréversible. Voulez-vous continuer ?",
+      "validationBtnReturnedStr": "doDeleteFamily",
+      "validationBtnText": "Oui, supprimer cette famille",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler la suppression"
+    },
+    "familyDeleted": {
+      "title": "Famille supprimée",
+      "message": "La famille {{insertText1}} a été supprimée.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    }
+  },
+  "ContactManagement": {
+    "generic": {
+      "close": "Fermer",
+      "cancel": "Annuler",
+      "return": "Retour",
+      "ok": "OK"
+    },
+    "matchingPerson": {
+      "title": "Personnes enregistrées correspondantes",
+      "message": "Certaines personnes enregistrées sur le site (utilisateurs et/ou contacts) correspondent au nouveau contact en cours de création. Vérifiez s'il ne s'agit pas de la même personne, afin d'éviter de créer des doublons.",
+      "validationBtnReturnedStr": "doCreateContact",
+      "validationBtnText": "Ce nouveau contact n'est aucune de ces personnes, je valide sa création.",
+      "hasCloseBtn": true,
+      "closeBtnText": "Annuler l'enregistrement"
+    },
+    "contactCreated": {
+      "title": "Contact créé",
+      "message": "{{insertText1}} a été ajouté à la liste de vos contacts.",
+      "validationBtnReturnedStr": "",
+      "validationBtnText": "",
+      "hasCloseBtn": true,
+      "closeBtnText": "OK"
+    },
+    "contactModified": {
+      "title": "Contact modifié",
+      "message": "Les modifications ont bien été enregistrées.",
+      "validationBtnReturnedStr": "setIsModifyingFalse",
+      "validationBtnText": "OK",
+      "hasCloseBtn": false,
+      "closeBtnText": ""
+    },
+    "backWhileCreatingContact": {
+      "title": "Création en cours",
+      "message": "Vous êtes en cours de création d'un contact. Si vous continuez la navigation, les informations inscrites dans les champs de ce formulaire ne seront pas sauvegardées.",
+      "validationBtnReturnedStr": "backToPreviousPage",
+      "validationBtnText": "Continuer",
+      "hasCloseBtn": true,
+      "closeBtnText": "Rester sur cette page"
+    }
+  }
+}

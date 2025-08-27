@@ -1,0 +1,14 @@
+{
+  "MINI": {
+    "name": "Mini",
+    "description": "description de la taille Mini"
+  },
+  "MEDIUM": {
+    "name": "Medium",
+    "description": "description de la taille Medium"
+  },
+  "MAXI": {
+    "name": "Maxi",
+    "description": "description de la taille Maxi"
+  }
+}

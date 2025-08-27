@@ -1,0 +1,10 @@
+{
+  "title": {
+    "generic": "Une erreur est survenue",
+    "signUpError": "Erreur lors de l'enregistrement"
+  },
+  "message": {
+    "generic": "Veuillez réitérer l'opération, si l'erreur se répète contactez le service de maintenance de ce site.",
+    "takenMail": "Un utilisateur a déjà un compte enregistré à cette adresse mail."
+  }
+}

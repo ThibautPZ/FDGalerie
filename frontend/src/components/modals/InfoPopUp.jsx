@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 import Modal from "./Modal";
@@ -10,15 +9,12 @@ function InfoPopUp({ isOpen, onClose, responseDataObj, translationPrefix }) {
     "errors",
     "popUpContent",
   ]);
-  const tWithPrefix = (keyStr, insertText1) => {
+  const tWithPrefix = (keyStr, insertText1, insertText2) => {
     return t(`${translationPrefix}${responseDataObj.message}.${keyStr}`, {
       insertText1,
+      insertText2,
     });
   };
-
-  // const commonT = (keyStr, number) => {
-  //   return t(`common:info.${keyStr}`, number && { number });
-  // };
 
   return (
     <Modal
@@ -33,7 +29,8 @@ function InfoPopUp({ isOpen, onClose, responseDataObj, translationPrefix }) {
         <p>
           {tWithPrefix(
             "message",
-            responseDataObj.infoData && responseDataObj.infoData.insertText1
+            responseDataObj.infoData && responseDataObj.infoData.insertText1,
+            responseDataObj.infoData && responseDataObj.infoData.insertText2
           )}
         </p>
         {tWithPrefix("validationBtnText") && (
@@ -50,19 +47,3 @@ function InfoPopUp({ isOpen, onClose, responseDataObj, translationPrefix }) {
 }
 
 export default InfoPopUp;
-
-InfoPopUp.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  content: PropTypes.shape({
-    title: PropTypes.string,
-    message: PropTypes.string,
-    closeBtnText: PropTypes.string,
-    button: PropTypes.shape({
-      onValidation: PropTypes.string,
-      text: PropTypes.string,
-      value: PropTypes.number,
-    }),
-    hasCloseBtn: PropTypes.bool,
-  }).isRequired,
-};

@@ -1,5 +1,7 @@
-import PropTypes from "prop-types";
-import RadioInput from "./RadioInput";
+import { useFormContext } from "react-hook-form";
+
+import FieldResetButton from "../customComponents/FieldResetButton";
+import FieldEraseButton from "../customComponents/FieldEraseButton";
 
 /**
  * Renders a radio inputs container with its label to display in a FormCore form.
@@ -17,22 +19,26 @@ function RadioContainer({
   fieldName,
   label,
   isHidden,
+  isDisabled,
   options,
-  defaultValue,
-  register,
+  registerOptions,
+  // asyncValues,
+  isFormModifying,
   error,
   t,
 }) {
+  const { register, formState, resetField, setValue, watch } = useFormContext();
+
   const giveFieldKey = (option) => {
-    return `${fieldName}${option.key}`;
+    return `${fieldName}${option?.value}`;
   };
 
-  const putIdOutOfStringEnd = (str) => {
-    if (str.endsWith("sId")) {
-      return str.slice(0, -2);
-    }
-    return str;
-  };
+  const { name, ref, onChange } = register(fieldName, registerOptions);
+
+  const isEraseButtonHidden = !watch(fieldName);
+
+  const isResetButtonHidden =
+    !isFormModifying || !formState.dirtyFields[fieldName];
 
   return (
     <div
@@ -45,53 +51,31 @@ function RadioContainer({
       </legend>
       {options.map((option) => (
         <div>
-          <RadioInput
+          <input
+            type="radio"
+            disabled={isDisabled}
             key={giveFieldKey(option)}
-            fieldName={giveFieldKey(option)}
-            optionValue={option.value}
-            defaultValue={defaultValue}
-            isDefault={option.defaultValue}
-            register={register}
+            id={giveFieldKey(option)}
+            name={name}
+            value={option.value}
+            onChange={onChange}
+            ref={ref}
           />
-          <label htmlFor={giveFieldKey(option)}>
-            {t(`common:${putIdOutOfStringEnd(fieldName)}.${option.value}`)}
-          </label>
+          <label htmlFor={giveFieldKey(option)}>{t(option.label)}</label>
         </div>
       ))}
+      <FieldEraseButton
+        onClick={() =>
+          setValue(fieldName, "", { shouldValidate: true, shouldDirty: true })
+        }
+        isHidden={isEraseButtonHidden}
+      />
+      <FieldResetButton
+        onClick={() => resetField(fieldName)}
+        isHidden={isResetButtonHidden}
+      />
     </div>
   );
 }
-
-RadioContainer.propTypes = {
-  fieldName: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      defaultValue: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  register: PropTypes.objectOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      onChange: PropTypes.func.isRequired,
-      onBlur: PropTypes.func.isRequired,
-      ref: PropTypes.func.isRequired,
-    })
-  ).isRequired,
-  error: PropTypes.objectOf(
-    PropTypes.shape({
-      type: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
-      ref: PropTypes.objectOf().isRequired,
-    })
-  ).isRequired,
-  t: PropTypes.func.isRequired,
-};
-
-RadioContainer.defaultProps = {
-  defaultValue: null,
-};
 
 export default RadioContainer;

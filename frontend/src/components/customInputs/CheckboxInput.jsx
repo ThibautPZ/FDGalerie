@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import FieldResetButton from "../customComponents/FieldResetButton";
 
 /**
  * Renders a text input component with its label to display in a FormCore form.
@@ -17,18 +18,23 @@ import { useFormContext } from "react-hook-form";
 function CheckboxInput({
   label,
   isHidden,
+  isDisabled,
   fieldName,
   registerOptions,
+  isFormModifying,
   // asyncValues,
   error,
   t,
 }) {
-  const { register } = useFormContext();
+  const { register, formState, resetField } = useFormContext();
   const { onChange, name, ref } = register(fieldName, registerOptions);
   const labelNs = label?.namespace || `common:info.${fieldName}`;
 
+  const isResetButtonHidden =
+    !isFormModifying || !formState.dirtyFields[fieldName];
+
   return (
-    <div hidden={isHidden} className={fieldName}>
+    <fieldset hidden={isHidden} disabled={isDisabled} className={fieldName}>
       {label ? <label htmlFor={fieldName}>{t(`${labelNs}`)}</label> : ""}
 
       <input
@@ -36,10 +42,13 @@ function CheckboxInput({
         onChange={onChange}
         name={name}
         ref={ref}
-        value
         aria-invalid={error ? "true" : "false"}
       />
-    </div>
+      <FieldResetButton
+        onClick={() => resetField(fieldName)}
+        isHidden={isResetButtonHidden}
+      />
+    </fieldset>
   );
 }
 

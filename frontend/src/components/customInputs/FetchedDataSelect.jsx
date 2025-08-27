@@ -21,6 +21,7 @@ function FetchedDataSelect({
   fieldName,
   label,
   isHidden,
+  isDisabled,
   multipleSelection,
   watchedInputs,
   query,
@@ -101,6 +102,7 @@ function FetchedDataSelect({
         value: giveOptionValue(valueKeys, obj),
       };
     });
+
     return returnedArr;
   };
 
@@ -133,14 +135,14 @@ function FetchedDataSelect({
           rules={registerOptions}
           render={({ field: { onChange, onBlur, name, ref, value } }) => (
             <Select
+              isDisabled={isDisabled}
               options={options}
               placeholder={placeholder}
               onChange={(e) => handleChange(e, onChange)}
-              // onChange={onChange}
               onBlur={onBlur}
               name={name}
               ref={ref}
-              value={value}
+              value={value?.value}
               components={{ Option: CustomOption }}
               isMulti={multipleSelection}
             />

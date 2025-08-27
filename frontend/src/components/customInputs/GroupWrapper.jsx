@@ -21,26 +21,29 @@ function GroupWrapper({
   groupClassname,
   specialGroup,
   fields,
+  isDisabled,
   conditionalRendering,
+  conditionalDisabling,
   asyncValues,
   registerOptions,
+  isFormModifying,
   errors,
   t,
 }) {
   const { control } = useFormContext();
-
-  let isGroupHidden = false;
-
+  // todo : replace div by fieldset for disaable
   const useWatchWithControl = (inputName) => {
     return useWatch({ control, name: inputName });
   };
 
-  if (conditionalRendering) {
-    isGroupHidden = UseFormInputConditionalRendering(
-      useWatchWithControl,
-      conditionalRendering
-    );
-  }
+  const isGroupHidden = UseFormInputConditionalRendering(
+    useWatchWithControl,
+    conditionalRendering
+  );
+
+  const isGroupDisabled =
+    isDisabled ||
+    UseFormInputConditionalRendering(useWatchWithControl, conditionalDisabling);
 
   if (!isGroupHidden) {
     if (specialGroup) {
@@ -48,8 +51,10 @@ function GroupWrapper({
         <SpecialGroupConstructor
           groupClassname={groupClassname}
           specialGroupSpecs={specialGroup}
+          isDisabled={isGroupDisabled}
           asyncValues={asyncValues}
           registerOptions={registerOptions}
+          isFormModifying={isFormModifying}
           errors={errors}
           t={t}
         />
@@ -64,21 +69,27 @@ function GroupWrapper({
           return field.groupClassname ? (
             <GroupWrapper
               key={field.groupClassname}
+              isDisabled={isGroupDisabled}
               conditionalRendering={field.conditionalRendering || null}
+              conditionalDisabling={field.conditionalDisabling || null}
               specialGroup={field.specialGroup}
               groupClassname={field.groupClassname}
               fields={field.includedComponents}
               asyncValues={asyncValues}
               registerOptions={registerOptions}
+              isFormModifying={isFormModifying}
               errors={errors}
               t={t}
             />
           ) : (
             <InputConstructor
               key={field.name || field.label.namespace}
+              isDisabled={isGroupDisabled}
               field={field}
               asyncValues={asyncValues}
               registerOptions={registerOptions}
+              useWatchWithControl={useWatchWithControl}
+              isFormModifying={isFormModifying}
               errors={errors}
               t={t}
             />

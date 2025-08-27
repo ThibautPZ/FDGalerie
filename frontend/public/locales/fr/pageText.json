@@ -10,7 +10,20 @@
     "oeuvreAvailability": "Indiquez la disponibilité du tableau",
     "oeuvreGivenToWho": "Nom...",
     "choosePerson": "Choisissez une personne",
-    "spokenLanguage": "Sélectionnez la langue"
+    "spokenLanguage": "Sélectionnez la langue",
+    "oeuvreFamily": "Choisissez la famille à laquelle appartient le tableau"
+  },
+  "shared": {
+    "CreateTechnique": {
+      "techniqueNameFrPH": "Nom en français...",
+      "techniqueNameEnUSPH": "Nom en anglais (US)...",
+      "techniqueNameEnGBPH": "Nom en anglais (GB)...",
+      "techniqueNameFr": "Nom de la technique en français",
+      "techniqueNameEnUS": "Nom de la technique en anglais (US)",
+      "techniqueNameEnGB": "Nom de la technique en anglais (GB)",
+      "createNewTechnique": "Créer une nouvelle technique",
+      "createNewTechniqueBtnText": "Enregistrer la nouvelle technique"
+    }
   },
   "selectInput": { "creatableNewAdd": "Ajouter \"{{new}}\" à la liste" },
   "UtilisateurManagement": {
@@ -87,7 +100,10 @@
     }
   },
   "OeuvresManagement": {
-    "OM": { "newOeuvre": "Ajouter une nouvelle peinture" },
+    "OM": {
+      "newOeuvre": "Ajouter une nouvelle peinture",
+      "return": "Retour à la liste"
+    },
     "OMOeuvrePanel": {
       "picture": "Aperçu",
       "title": "Titre",
@@ -100,7 +116,6 @@
       "hasComment": "Note"
     },
     "OMCreateOeuvre": {
-      "return": "Retour à la liste",
       "widthheight": "Largeur x hauteur",
       "file": "Fichier image de l'oeuvre. Formats acceptés : .png, .jpeg, .jpg, .webp",
       "available": "Disponible à l'acquisition ",
@@ -108,12 +123,22 @@
       "title": "Titre...",
       "submitBtnText": "Enregistrer le nouveau tableau",
       "oeuvreGivenToWho": "Offert à ",
+      "oeuvreGivenDate": "Date du don",
       "oeuvreSoldToWho": "Vendu à ",
+      "oeuvreSoldDate": "Date de la vente ",
+      "oeuvreSoldPrice": "Prix de vente ",
       "oeuvreReservedToWho": "Réservé par ",
+      "oeuvreReservedDate": "Date de la demande de réservation ",
+      "oeuvreReservedPrice": "Prix prévu ou convenu (ne rien entrer si vous prévoyez d'en faire don) ",
       "oeuvreGivenToSelection": "Suggestions de personnes connues (utilisateurs et contacts)",
       "noUserMatch": "Aucun utilisateur ni contact enregistré à ce nom.",
       "createNewContact": "Créer un nouveau contact ?",
-      "newContactSubmitBtnText": "Enregistrer ce nouveau contact"
+      "newContactSubmitBtnText": "Enregistrer ce nouveau contact",
+      "visibility": "Visible par les visiteurs ?",
+      "artistComment": "Votre commentaire sur l'oeuvre ",
+      "artistCommentPlaceHolder": "Ecrivez votre commentaire (254 caractères max)",
+      "noVisibilityCuzNoFile": "Il n'est pas possible de rendre visible une oeuvre sans fichier image.",
+      "createNewTechnique": "Créer une nouvelle technique ?"
     }
   },
   "ContactManagement": {

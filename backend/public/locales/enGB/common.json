@@ -1,0 +1,21 @@
+{
+    "info": {
+    "id": "id",
+    "email": "Email", 
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "address": "Address",
+    "postalCode": "Postal code",
+    "city": "City",
+    "phoneNumber": "Phone number {{number}}",
+    "accountDate": "Sign in date",
+    "userTypesId": "Status",
+    "unregistered": "Unregistered",
+    "password": "Password",
+    "passwordConfirmation": "Password confirmation"
+ },
+"usertypes": {
+        "1" : "User",
+        "2": "Administrator"
+}
+}
