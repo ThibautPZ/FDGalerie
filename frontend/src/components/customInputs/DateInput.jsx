@@ -50,8 +50,15 @@ export default function DateInput({
     "common:date",
     "formRegisterOptionsMessages"
   );
-  const { getValues, setValue, control, formState, watch, trigger } =
-    useFormContext();
+  const {
+    getValues,
+    setValue,
+    control,
+    formState,
+    watch,
+    trigger,
+    clearErrors,
+  } = useFormContext();
 
   const { resolvedLanguage } = translationInstance();
 
@@ -118,7 +125,6 @@ export default function DateInput({
 
   const checkInputAndCalendarSameValue = (calendarValue) => {
     const calendarValues = giveTimeUnitsFromDate(calendarValue);
-
     for (const [key, value] of inputValues) {
       if (calendarValues[key] !== value) {
         return tFormMsg(`${fieldName}.pattern`);
@@ -141,6 +147,7 @@ export default function DateInput({
 
   Object.assign(registerOptions, {
     validate: {
+      ...registerOptions.validate,
       inputDate: checkInputAndCalendarSameValue,
     },
   });
@@ -152,6 +159,9 @@ export default function DateInput({
 
   useEffect(() => {
     trigger(fieldName);
+    return () => {
+      clearErrors(fieldName);
+    };
   }, [day, month, year, dateValue]);
 
   return (
@@ -166,6 +176,7 @@ export default function DateInput({
         name={fieldName}
         control={control}
         rules={registerOptions}
+        disabled={isHidden}
         render={({ field: { name, ref } }) => (
           <DatePicker
             disabled={isDisabled}
